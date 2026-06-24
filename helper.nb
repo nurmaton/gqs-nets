@@ -1,0 +1,878 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     31485,        870]
+NotebookOptionsPosition[     30370,        840]
+NotebookOutlinePosition[     30824,        858]
+CellTagsIndexPosition[     30781,        855]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[StyleBox["Computational Companion to \
+\[OpenCurlyDoubleQuote]Generalized Quasi-Symmetric Nets: A Constructive \
+Approach to the Equimodular Elliptic Type of n \[Times] m Kokotsakis \
+Polyhedra\[CloseCurlyDoubleQuote] \[LongDash] Helper      ",
+ FontColor->GrayLevel[0]]], "Title",
+ CellChangeTimes->{{3.966492380935791*^9, 3.966492414880372*^9}, {
+   3.966492531146431*^9, 3.966492531964267*^9}, {3.966492565610737*^9, 
+   3.966492608743762*^9}, {3.966492644202476*^9, 3.9664927138515863`*^9}, 
+   3.966499885267489*^9, 3.966500691013364*^9, {3.969454850119801*^9, 
+   3.969454890352824*^9}, {3.969468411805489*^9, 3.96946843133973*^9}, {
+   3.991302761924779*^9, 
+   3.991302811212372*^9}},ExpressionUUID->"4057281e-effc-462e-8674-\
+11fe2eb542af"],
+
+Cell["\<\
+A. Nurmatov,  M. Skopenkov, F. Rist, J. Klein, D. L. Michels
+Tested on: Mathematica 14.0\
+\>", "Subtitle",
+ CellChangeTimes->{{3.96649912334977*^9, 3.966499126800029*^9}, 
+   3.9664998979603453`*^9, {3.966500698718814*^9, 3.966500709535983*^9}, {
+   3.969468165505995*^9, 
+   3.969468226226119*^9}},ExpressionUUID->"44d9d59b-3c80-48b3-8124-\
+c4dd94a2c7e4"],
+
+Cell[CellGroupData[{
+
+Cell["Section 1", "Chapter",
+ CellChangeTimes->{{3.969968657600996*^9, 3.969968670794138*^9}, {
+  3.991302816414959*^9, 
+  3.991302816515545*^9}},ExpressionUUID->"82af4c07-f876-4628-b5c6-\
+a065a8fd1e35"],
+
+Cell[CellGroupData[{
+
+Cell["Results of Section 1 is used in Lemma 1 (see paper)", "Subsection",
+ CellChangeTimes->{{3.9699686771291647`*^9, 3.9699686916789007`*^9}, {
+  3.991302827857836*^9, 
+  3.991302831945632*^9}},ExpressionUUID->"0676ce2f-0e28-477f-8386-\
+9db802dc2024"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "==="}], "*)"}], 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"PART", " ", "1"}], ":", "INITIALIZATION"}], "&"}], " ", 
+    "DOMAIN", " ", "ASSUMPTIONS"}], "*)"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "==="}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ClearAll", "[", 
+     RowBox[{
+     "\[Alpha]", ",", "\[Beta]", ",", "\[Gamma]", ",", "\[Delta]", ",", 
+      "\[Sigma]", ",", "\:1fb1", ",", "\[Beta]\:0304", ",", "\[Gamma]\:0304", 
+      ",", "\[Delta]\:0304", ",", "a", ",", "b", ",", "c", ",", "d", ",", "r",
+       ",", "s", ",", "f", ",", "M", ",", "assumptions", ",", "isTrueQ"}], 
+     "]"}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Core", " ", "angular", " ", "relationships"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Sigma]", "=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"\[Alpha]", "+", "\[Beta]", "+", "\[Gamma]", "+", "\[Delta]"}],
+        ")"}], "/", "2"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"\:1fb1", "=", 
+     RowBox[{"\[Sigma]", "-", "\[Alpha]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"\[Beta]\:0304", "=", 
+     RowBox[{"\[Sigma]", "-", "\[Beta]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"\[Gamma]\:0304", "=", 
+     RowBox[{"\[Sigma]", "-", "\[Gamma]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"\[Delta]\:0304", "=", 
+     RowBox[{"\[Sigma]", "-", "\[Delta]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Sign", " ", "tracking"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[CurlyEpsilon]", "=", 
+     RowBox[{
+      RowBox[{"Abs", "[", 
+       RowBox[{"Sin", "[", "\[Sigma]", "]"}], "]"}], "/", 
+      RowBox[{"Sin", "[", "\[Sigma]", "]"}]}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Geometric", " ", "domain", " ", "constraints"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"assumptions", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"0", "<", "\[Alpha]", "<", "Pi"}], ",", 
+       RowBox[{"0", "<", "\[Beta]", "<", "Pi"}], ",", 
+       RowBox[{"0", "<", "\[Gamma]", "<", "Pi"}], ",", 
+       RowBox[{"0", "<", "\[Delta]", "<", "Pi"}], ",", 
+       RowBox[{"0", "<", "\:1fb1", "<", "Pi"}], ",", 
+       RowBox[{"0", "<", "\[Beta]\:0304", "<", "Pi"}], ",", 
+       RowBox[{"0", "<", "\[Gamma]\:0304", "<", "Pi"}], ",", 
+       RowBox[{"0", "<", "\[Delta]\:0304", "<", "Pi"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "==="}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"PART", " ", "2"}], ":", 
+     RowBox[{"SYSTEM", " ", "VARIABLES"}]}], "*)"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "==="}], "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"a", "=", 
+     RowBox[{
+      RowBox[{"Sin", "[", "\[Alpha]", "]"}], "/", 
+      RowBox[{"Sin", "[", "\:1fb1", "]"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"b", "=", 
+     RowBox[{
+      RowBox[{"Sin", "[", "\[Beta]", "]"}], "/", 
+      RowBox[{"Sin", "[", "\[Beta]\:0304", "]"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"c", "=", 
+     RowBox[{
+      RowBox[{"Sin", "[", "\[Gamma]", "]"}], "/", 
+      RowBox[{"Sin", "[", "\[Gamma]\:0304", "]"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"d", "=", 
+     RowBox[{
+      RowBox[{"Sin", "[", "\[Delta]", "]"}], "/", 
+      RowBox[{"Sin", "[", "\[Delta]\:0304", "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"r", "=", 
+     RowBox[{"a", "*", "d"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"s", "=", 
+     RowBox[{"c", "*", "d"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"f", "=", 
+     RowBox[{"a", "*", "c"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"M", "=", 
+     RowBox[{"a", "*", "b", "*", "c", "*", "d"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "==="}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"PART", " ", "3"}], ":", 
+     RowBox[{"FORMULA", " ", "DEFINITIONS"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "==="}], "*)"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"--", 
+       RowBox[{"-", "Computational"}]}], " ", 
+      RowBox[{"Definitions", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"rhsOneMinusM", "=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Sin", "[", "\[Sigma]", "]"}], "*", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"\:1fb1", "-", "\[Beta]"}], "]"}], "*", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"\[Gamma]\:0304", "-", "\[Beta]"}], "]"}], "*", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"\[Delta]\:0304", "-", "\[Beta]"}], "]"}]}], ")"}], "/", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Sin", "[", "\:1fb1", "]"}], "*", 
+        RowBox[{"Sin", "[", "\[Beta]\:0304", "]"}], "*", 
+        RowBox[{"Sin", "[", "\[Gamma]\:0304", "]"}], "*", 
+        RowBox[{"Sin", "[", "\[Delta]\:0304", "]"}]}], ")"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"rhsRMinusOne", "=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Sin", "[", "\[Sigma]", "]"}], "*", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"\[Gamma]\:0304", "-", "\[Beta]"}], "]"}]}], ")"}], "/", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Sin", "[", "\:1fb1", "]"}], "*", 
+        RowBox[{"Sin", "[", "\[Delta]\:0304", "]"}]}], ")"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"rhsSMinusOne", "=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Sin", "[", "\[Sigma]", "]"}], "*", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"\:1fb1", "-", "\[Beta]"}], "]"}]}], ")"}], "/", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Sin", "[", "\[Gamma]\:0304", "]"}], "*", 
+        RowBox[{"Sin", "[", "\[Delta]\:0304", "]"}]}], ")"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"rhsOneMinusMOverf", "=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Sin", "[", "\[Sigma]", "]"}], "*", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"\[Delta]\:0304", "-", "\[Beta]"}], "]"}]}], ")"}], "/", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Sin", "[", "\[Beta]\:0304", "]"}], "*", 
+        RowBox[{"Sin", "[", "\[Delta]\:0304", "]"}]}], ")"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"rhsMainFormula", "=", 
+     RowBox[{
+      RowBox[{"\[CurlyEpsilon]", "*", 
+       RowBox[{"Sqrt", "[", 
+        RowBox[{"rhsOneMinusMOverf", "*", "rhsRMinusOne", "*", 
+         RowBox[{"rhsSMinusOne", "/", "rhsOneMinusM"}]}], "]"}], "*", 
+       RowBox[{"Sin", "[", "\[Delta]\:0304", "]"}]}], "/.", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Csc", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"1", "/", "2"}], " ", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "\[Alpha]"}], "-", "\[Beta]", "-", "\[Gamma]", 
+               "-", "\[Delta]"}], ")"}]}], "+", "\[Delta]"}], "]"}], "^", 
+          "2"}], "*", 
+         RowBox[{
+          RowBox[{"Sin", "[", 
+           RowBox[{
+            RowBox[{"1", "/", "2"}], " ", 
+            RowBox[{"(", 
+             RowBox[{
+             "\[Alpha]", "+", "\[Beta]", "+", "\[Gamma]", "+", "\[Delta]"}], 
+             ")"}]}], "]"}], "^", "2"}]}], "]"}], "->", 
+       RowBox[{
+        RowBox[{"Abs", "[", 
+         RowBox[{"Sin", "[", 
+          RowBox[{
+           RowBox[{"1", "/", "2"}], " ", 
+           RowBox[{"(", 
+            RowBox[{
+            "\[Alpha]", "+", "\[Beta]", "+", "\[Gamma]", "+", "\[Delta]"}], 
+            ")"}]}], "]"}], "]"}], "*", 
+        RowBox[{"Csc", "[", "\[Delta]\:0304", "]"}]}]}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"--", 
+       RowBox[{"-", "Visual"}]}], " ", 
+      RowBox[{"Definitions", "--"}]}], "-"}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"visOneMinusM", "=", 
+     RowBox[{"HoldForm", "[", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Sin", "[", "\[Sigma]", "]"}], "*", 
+         RowBox[{"Sin", "[", 
+          RowBox[{"\:1fb1", "-", "\[Beta]"}], "]"}], "*", 
+         RowBox[{"Sin", "[", 
+          RowBox[{"\[Gamma]\:0304", "-", "\[Beta]"}], "]"}], "*", 
+         RowBox[{"Sin", "[", 
+          RowBox[{"\[Delta]\:0304", "-", "\[Beta]"}], "]"}]}], ")"}], "/", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Sin", "[", "\:1fb1", "]"}], "*", 
+         RowBox[{"Sin", "[", "\[Beta]\:0304", "]"}], "*", 
+         RowBox[{"Sin", "[", "\[Gamma]\:0304", "]"}], "*", 
+         RowBox[{"Sin", "[", "\[Delta]\:0304", "]"}]}], ")"}]}], "]"}]}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"visRMinusOne", "=", 
+     RowBox[{"HoldForm", "[", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Sin", "[", "\[Sigma]", "]"}], "*", 
+         RowBox[{"Sin", "[", 
+          RowBox[{"\[Gamma]\:0304", "-", "\[Beta]"}], "]"}]}], ")"}], "/", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Sin", "[", "\:1fb1", "]"}], "*", 
+         RowBox[{"Sin", "[", "\[Delta]\:0304", "]"}]}], ")"}]}], "]"}]}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"visSMinusOne", "=", 
+     RowBox[{"HoldForm", "[", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Sin", "[", "\[Sigma]", "]"}], "*", 
+         RowBox[{"Sin", "[", 
+          RowBox[{"\:1fb1", "-", "\[Beta]"}], "]"}]}], ")"}], "/", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Sin", "[", "\[Gamma]\:0304", "]"}], "*", 
+         RowBox[{"Sin", "[", "\[Delta]\:0304", "]"}]}], ")"}]}], "]"}]}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"visOneMinusMOverf", "=", 
+     RowBox[{"HoldForm", "[", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Sin", "[", "\[Sigma]", "]"}], "*", 
+         RowBox[{"Sin", "[", 
+          RowBox[{"\[Delta]\:0304", "-", "\[Beta]"}], "]"}]}], ")"}], "/", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Sin", "[", "\[Beta]\:0304", "]"}], "*", 
+         RowBox[{"Sin", "[", "\[Delta]\:0304", "]"}]}], ")"}]}], "]"}]}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"visMainFormula", "=", 
+     RowBox[{"HoldForm", "[", 
+      RowBox[{"\[CurlyEpsilon]", "*", 
+       RowBox[{"Sqrt", "[", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"f", "-", "M"}], ")"}], "*", 
+           RowBox[{"(", 
+            RowBox[{"r", "-", "1"}], ")"}], "*", 
+           RowBox[{"(", 
+            RowBox[{"s", "-", "1"}], ")"}]}], ")"}], "/", 
+         RowBox[{"(", 
+          RowBox[{"f", "*", 
+           RowBox[{"(", 
+            RowBox[{"1", "-", "M"}], ")"}]}], ")"}]}], "]"}], "*", 
+       RowBox[{"Sin", "[", "\[Delta]\:0304", "]"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "==="}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"PART", " ", "4"}], ":", "VALIDATION"}], "&"}], " ", 
+     "REPORTING"}], "*)"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "==="}], "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Testing", " ", "function", " ", "evaluating", " ", "under", " ", 
+     "global", " ", "assumptions"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"isTrueQ", "[", 
+      RowBox[{"lhs_", ",", "rhs_"}], "]"}], ":=", 
+     RowBox[{"TrueQ", "[", 
+      RowBox[{"FullSimplify", "[", 
+       RowBox[{
+        RowBox[{"lhs", "==", "rhs"}], ",", 
+        RowBox[{"Assumptions", "->", "assumptions"}]}], "]"}], "]"}]}], ";"}],
+    "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Define", " ", "the", " ", "validation", " ", "suite"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"testSuite", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"\"\<Intermediate Formula 1\>\"", ",", 
+         RowBox[{"HoldForm", "[", 
+          RowBox[{"1", "-", "M"}], "]"}], ",", 
+         RowBox[{"1", "-", "M"}], ",", "visOneMinusM", ",", "rhsOneMinusM"}], 
+        "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"\"\<Intermediate Formula 2\>\"", ",", 
+         RowBox[{"HoldForm", "[", 
+          RowBox[{"r", "-", "1"}], "]"}], ",", 
+         RowBox[{"r", "-", "1"}], ",", "visRMinusOne", ",", "rhsRMinusOne"}], 
+        "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"\"\<Intermediate Formula 3\>\"", ",", 
+         RowBox[{"HoldForm", "[", 
+          RowBox[{"s", "-", "1"}], "]"}], ",", 
+         RowBox[{"s", "-", "1"}], ",", "visSMinusOne", ",", "rhsSMinusOne"}], 
+        "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"\"\<Intermediate Formula 4\>\"", ",", 
+         RowBox[{"HoldForm", "[", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"f", "-", "M"}], ")"}], "/", "f"}], "]"}], ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"f", "-", "M"}], ")"}], "/", "f"}], ",", 
+         "visOneMinusMOverf", ",", "rhsOneMinusMOverf"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"\"\<Main Formula Verification\>\"", ",", 
+         RowBox[{"HoldForm", "[", 
+          RowBox[{"Sin", "[", "\[Sigma]", "]"}], "]"}], ",", 
+         RowBox[{"Sin", "[", "\[Sigma]", "]"}], ",", "visMainFormula", ",", 
+         "rhsMainFormula"}], "}"}]}], "}"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Process", " ", "results", " ", "into", " ", "table", " ", "rows"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"tableRows", "=", 
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"#", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], ",", 
+          RowBox[{"Item", "[", 
+           RowBox[{
+            RowBox[{"TraditionalForm", "[", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], "]"}], ",", 
+            RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+          RowBox[{"Item", "[", 
+           RowBox[{
+            RowBox[{"TraditionalForm", "[", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "4", "]"}], "]"}], "]"}], ",", 
+            RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"isTrueQ", "[", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "3", "]"}], "]"}], ",", 
+              RowBox[{"#", "[", 
+               RowBox[{"[", "5", "]"}], "]"}]}], "]"}], ",", 
+            RowBox[{"Style", "[", 
+             RowBox[{"\"\<\[Checkmark] Valid\>\"", ",", 
+              RowBox[{"Darker", "[", "Green", "]"}], ",", "Bold"}], "]"}], 
+            ",", 
+            RowBox[{"Style", "[", 
+             RowBox[{"\"\<\[Cross] Failed\>\"", ",", "Red", ",", "Bold"}], 
+             "]"}]}], "]"}]}], "}"}], "&"}], ",", "testSuite"}], "]"}]}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Generate", " ", "the", " ", "Grid", " ", "output"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Grid", "[", 
+    RowBox[{
+     RowBox[{"Prepend", "[", 
+      RowBox[{"tableRows", ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<Description\>\"", ",", "\"\<Left Hand Side (LHS)\>\"", ",", 
+         "\"\<Right Hand Side (RHS)\>\"", ",", "\"\<Equality Status\>\""}], 
+        "}"}]}], "]"}], ",", 
+     RowBox[{"Frame", "->", "All"}], ",", 
+     RowBox[{"FrameStyle", "->", 
+      RowBox[{"Directive", "[", 
+       RowBox[{"Gray", ",", 
+        RowBox[{"Thickness", "[", "1", "]"}]}], "]"}]}], ",", 
+     RowBox[{"Alignment", "->", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"Left", ",", "Center", ",", "Center", ",", "Center"}], "}"}],
+         ",", "Center"}], "}"}]}], ",", 
+     RowBox[{"Spacings", "->", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", "2.5"}], "}"}]}], ",", 
+     RowBox[{"Background", "->", 
+      RowBox[{"{", 
+       RowBox[{"None", ",", 
+        RowBox[{"{", 
+         RowBox[{"1", "->", "LightGray"}], "}"}]}], "}"}]}], ",", 
+     RowBox[{"ItemStyle", "->", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Directive", "[", 
+         RowBox[{
+          RowBox[{"FontFamily", "->", "\"\<Helvetica\>\""}], ",", "12"}], 
+         "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", "->", 
+          RowBox[{"Directive", "[", 
+           RowBox[{"Bold", ",", "14"}], "]"}]}], "}"}]}], "}"}]}]}], "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.969968732406331*^9, 3.969968982046137*^9}, {
+   3.969969118864182*^9, 3.969969126580037*^9}, {3.969969267362104*^9, 
+   3.969969317240843*^9}, {3.969969352390086*^9, 3.96996940847661*^9}, {
+   3.9699694441149683`*^9, 3.969969542716807*^9}, {3.969969613275978*^9, 
+   3.969969722258361*^9}, {3.969969821272711*^9, 3.969969834892017*^9}, {
+   3.969969869054447*^9, 3.969969944946157*^9}, 3.991302871716565*^9, {
+   3.991302906616748*^9, 3.9913029900972223`*^9}, {3.9913030821928797`*^9, 
+   3.9913032311018343`*^9}, {3.991303313120123*^9, 3.99130334134906*^9}, {
+   3.9913033751226997`*^9, 3.9913035021098223`*^9}, {3.991303553339376*^9, 
+   3.9913036488090076`*^9}, {3.9913039655535383`*^9, 3.991303999766172*^9}, {
+   3.991304031378066*^9, 3.991304095161942*^9}, {3.9913041412564783`*^9, 
+   3.991304159328368*^9}, {3.9913043038492413`*^9, 3.991304353838703*^9}, {
+   3.991304473039859*^9, 3.9913044851650467`*^9}, {3.9913045442164392`*^9, 
+   3.99130454824004*^9}, {3.991304613873172*^9, 3.9913047231818523`*^9}, {
+   3.991304792605607*^9, 3.9913048459681892`*^9}, {3.991304890148031*^9, 
+   3.991304916413422*^9}, {3.991304961102584*^9, 3.99130500798015*^9}, {
+   3.991305086867608*^9, 3.991305179278857*^9}, 3.991305275451373*^9, 
+   3.991305422149881*^9, 3.991305587881465*^9, 3.9913058483013372`*^9, {
+   3.991305900368126*^9, 3.991305921833157*^9}, {3.991306001106153*^9, 
+   3.9913060134027853`*^9}, {3.9913061509102592`*^9, 3.9913061679224586`*^9}},
+ 
+ CellLabel->
+  "In[1197]:=",ExpressionUUID->"06e22bba-e675-4404-901e-523b40546b9d"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"Description\"\>", "\<\"Left Hand Side (LHS)\"\>", "\<\"Right Hand \
+Side (RHS)\"\>", "\<\"Equality Status\"\>"},
+    {"\<\"Intermediate Formula 1\"\>", 
+     ItemBox[
+      TagBox[
+       FormBox[
+        TagBox[
+         RowBox[{"1", "-", "M"}],
+         HoldForm],
+        TraditionalForm],
+       TraditionalForm,
+       Editable->True],
+      Alignment->Center,
+      StripOnInput->False], 
+     ItemBox[
+      TagBox[
+       FormBox[
+        TagBox[
+         FractionBox[
+          RowBox[{
+           RowBox[{"sin", "(", "\[Sigma]", ")"}], " ", 
+           RowBox[{"sin", "(", 
+            RowBox[{"\:1fb1", "-", "\[Beta]"}], ")"}], " ", 
+           RowBox[{"sin", "(", 
+            RowBox[{"\[Gamma]\:0304", "-", "\[Beta]"}], ")"}], " ", 
+           RowBox[{"sin", "(", 
+            RowBox[{"\[Delta]\:0304", "-", "\[Beta]"}], ")"}]}], 
+          RowBox[{
+           RowBox[{"sin", "(", "\:1fb1", ")"}], " ", 
+           RowBox[{"sin", "(", "\[Beta]\:0304", ")"}], " ", 
+           RowBox[{"sin", "(", "\[Gamma]\:0304", ")"}], " ", 
+           RowBox[{"sin", "(", "\[Delta]\:0304", ")"}]}]],
+         HoldForm],
+        TraditionalForm],
+       TraditionalForm,
+       Editable->True],
+      Alignment->Center,
+      StripOnInput->False], 
+     StyleBox["\<\"\[Checkmark] Valid\"\>",
+      StripOnInput->False,
+      LineColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      FrontFaceColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      BackFaceColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      GraphicsColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      FontWeight->Bold,
+      FontColor->RGBColor[0, 
+        Rational[2, 3], 0]]},
+    {"\<\"Intermediate Formula 2\"\>", 
+     ItemBox[
+      TagBox[
+       FormBox[
+        TagBox[
+         RowBox[{"r", "-", "1"}],
+         HoldForm],
+        TraditionalForm],
+       TraditionalForm,
+       Editable->True],
+      Alignment->Center,
+      StripOnInput->False], 
+     ItemBox[
+      TagBox[
+       FormBox[
+        TagBox[
+         FractionBox[
+          RowBox[{
+           RowBox[{"sin", "(", "\[Sigma]", ")"}], " ", 
+           RowBox[{"sin", "(", 
+            RowBox[{"\[Gamma]\:0304", "-", "\[Beta]"}], ")"}]}], 
+          RowBox[{
+           RowBox[{"sin", "(", "\:1fb1", ")"}], " ", 
+           RowBox[{"sin", "(", "\[Delta]\:0304", ")"}]}]],
+         HoldForm],
+        TraditionalForm],
+       TraditionalForm,
+       Editable->True],
+      Alignment->Center,
+      StripOnInput->False], 
+     StyleBox["\<\"\[Checkmark] Valid\"\>",
+      StripOnInput->False,
+      LineColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      FrontFaceColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      BackFaceColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      GraphicsColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      FontWeight->Bold,
+      FontColor->RGBColor[0, 
+        Rational[2, 3], 0]]},
+    {"\<\"Intermediate Formula 3\"\>", 
+     ItemBox[
+      TagBox[
+       FormBox[
+        TagBox[
+         RowBox[{"s", "-", "1"}],
+         HoldForm],
+        TraditionalForm],
+       TraditionalForm,
+       Editable->True],
+      Alignment->Center,
+      StripOnInput->False], 
+     ItemBox[
+      TagBox[
+       FormBox[
+        TagBox[
+         FractionBox[
+          RowBox[{
+           RowBox[{"sin", "(", "\[Sigma]", ")"}], " ", 
+           RowBox[{"sin", "(", 
+            RowBox[{"\:1fb1", "-", "\[Beta]"}], ")"}]}], 
+          RowBox[{
+           RowBox[{"sin", "(", "\[Gamma]\:0304", ")"}], " ", 
+           RowBox[{"sin", "(", "\[Delta]\:0304", ")"}]}]],
+         HoldForm],
+        TraditionalForm],
+       TraditionalForm,
+       Editable->True],
+      Alignment->Center,
+      StripOnInput->False], 
+     StyleBox["\<\"\[Checkmark] Valid\"\>",
+      StripOnInput->False,
+      LineColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      FrontFaceColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      BackFaceColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      GraphicsColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      FontWeight->Bold,
+      FontColor->RGBColor[0, 
+        Rational[2, 3], 0]]},
+    {"\<\"Intermediate Formula 4\"\>", 
+     ItemBox[
+      TagBox[
+       FormBox[
+        TagBox[
+         FractionBox[
+          RowBox[{"f", "-", "M"}], "f"],
+         HoldForm],
+        TraditionalForm],
+       TraditionalForm,
+       Editable->True],
+      Alignment->Center,
+      StripOnInput->False], 
+     ItemBox[
+      TagBox[
+       FormBox[
+        TagBox[
+         FractionBox[
+          RowBox[{
+           RowBox[{"sin", "(", "\[Sigma]", ")"}], " ", 
+           RowBox[{"sin", "(", 
+            RowBox[{"\[Delta]\:0304", "-", "\[Beta]"}], ")"}]}], 
+          RowBox[{
+           RowBox[{"sin", "(", "\[Beta]\:0304", ")"}], " ", 
+           RowBox[{"sin", "(", "\[Delta]\:0304", ")"}]}]],
+         HoldForm],
+        TraditionalForm],
+       TraditionalForm,
+       Editable->True],
+      Alignment->Center,
+      StripOnInput->False], 
+     StyleBox["\<\"\[Checkmark] Valid\"\>",
+      StripOnInput->False,
+      LineColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      FrontFaceColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      BackFaceColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      GraphicsColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      FontWeight->Bold,
+      FontColor->RGBColor[0, 
+        Rational[2, 3], 0]]},
+    {"\<\"Main Formula Verification\"\>", 
+     ItemBox[
+      TagBox[
+       FormBox[
+        TagBox[
+         RowBox[{"sin", "(", "\[Sigma]", ")"}],
+         HoldForm],
+        TraditionalForm],
+       TraditionalForm,
+       Editable->True],
+      Alignment->Center,
+      StripOnInput->False], 
+     ItemBox[
+      TagBox[
+       FormBox[
+        TagBox[
+         RowBox[{"\[CurlyEpsilon]", " ", 
+          SqrtBox[
+           FractionBox[
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"f", "-", "M"}], ")"}], " ", 
+             RowBox[{"(", 
+              RowBox[{"r", "-", "1"}], ")"}], " ", 
+             RowBox[{"(", 
+              RowBox[{"s", "-", "1"}], ")"}]}], 
+            RowBox[{"f", " ", 
+             RowBox[{"(", 
+              RowBox[{"1", "-", "M"}], ")"}]}]]], " ", 
+          RowBox[{"sin", "(", "\[Delta]\:0304", ")"}]}],
+         HoldForm],
+        TraditionalForm],
+       TraditionalForm,
+       Editable->True],
+      Alignment->Center,
+      StripOnInput->False], 
+     StyleBox["\<\"\[Checkmark] Valid\"\>",
+      StripOnInput->False,
+      LineColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      FrontFaceColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      BackFaceColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      GraphicsColor->RGBColor[0, 
+        Rational[2, 3], 0],
+      FontWeight->Bold,
+      FontColor->RGBColor[0, 
+        Rational[2, 3], 0]]}
+   },
+   AutoDelete->False,
+   FrameStyle->Directive[
+     GrayLevel[0.5], 
+     Thickness[1]],
+   GridBoxAlignment->{
+    "Columns" -> {Left, Center, Center, Center}, "Rows" -> {{Center}}},
+   GridBoxBackground->{
+    "Columns" -> {{None}}, "RowsIndexed" -> {1 -> GrayLevel[0.85]}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxItemStyle->{"Columns" -> {{
+        Directive[FontFamily -> "Helvetica", 12]}}, 
+     "RowsIndexed" -> {1 -> Directive[Bold, 14]}},
+   GridBoxSpacings->{"Columns" -> {{2}}, "Rows" -> {{2.5}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{{3.991304333724008*^9, 3.991304354288755*^9}, 
+   3.99130449214469*^9, 3.991304550856626*^9, {3.991304628314498*^9, 
+   3.991304723898294*^9}, 3.991304846906049*^9, {3.991304892264686*^9, 
+   3.991304922397975*^9}, {3.9913049620759993`*^9, 3.991304969330978*^9}, {
+   3.9913051061736298`*^9, 3.9913051803088303`*^9}, 3.991305278346416*^9, 
+   3.991305434759739*^9, 3.991305589116211*^9, {3.991305861529312*^9, 
+   3.991305864250873*^9}, 3.991305923202867*^9, 3.991306014037303*^9, {
+   3.9913061543055153`*^9, 3.9913061740986013`*^9}},
+ CellLabel->
+  "Out[1226]=",ExpressionUUID->"3a092d53-bcc3-4cb6-b72a-cbc5152bcf93"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.991304850792674*^9, 
+  3.9913048529675407`*^9}},ExpressionUUID->"a79a7266-feed-40e8-9fb6-\
+983fbe38740f"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1051, 868},
+WindowMargins->{{Automatic, -23}, {-12, Automatic}},
+PrintingCopies->1,
+PrintingPageRange->{1, Automatic},
+FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"3f829171-be5d-423b-b0b6-eef84583d7da"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 763, 12, 284, "Title",ExpressionUUID->"4057281e-effc-462e-8674-11fe2eb542af"],
+Cell[1346, 36, 366, 8, 85, "Subtitle",ExpressionUUID->"44d9d59b-3c80-48b3-8124-c4dd94a2c7e4"],
+Cell[CellGroupData[{
+Cell[1737, 48, 203, 4, 69, "Chapter",ExpressionUUID->"82af4c07-f876-4628-b5c6-a065a8fd1e35"],
+Cell[CellGroupData[{
+Cell[1965, 56, 252, 4, 54, "Subsection",ExpressionUUID->"0676ce2f-0e28-477f-8386-9db802dc2024"],
+Cell[CellGroupData[{
+Cell[2242, 64, 19838, 506, 1869, "Input",ExpressionUUID->"06e22bba-e675-4404-901e-523b40546b9d"],
+Cell[22083, 572, 8078, 257, 404, "Output",ExpressionUUID->"3a092d53-bcc3-4cb6-b72a-cbc5152bcf93"]
+}, Open  ]],
+Cell[30176, 832, 154, 3, 30, "Input",ExpressionUUID->"a79a7266-feed-40e8-9fb6-983fbe38740f"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
