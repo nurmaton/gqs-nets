@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     89255,       2562]
-NotebookOptionsPosition[     86657,       2502]
-NotebookOutlinePosition[     87111,       2520]
-CellTagsIndexPosition[     87068,       2517]
+NotebookDataLength[     76448,       2189]
+NotebookOptionsPosition[     74344,       2139]
+NotebookOutlinePosition[     74798,       2157]
+CellTagsIndexPosition[     74755,       2154]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -489,7 +489,7 @@ Cell[BoxData[
    3.995379166455435*^9, 3.995379245779936*^9, 3.995379729726905*^9, 
    3.995379774361*^9, 3.9953862107534513`*^9},
  CellLabel->
-  "In[113]:=",ExpressionUUID->"06e22bba-e675-4404-901e-523b40546b9d"],
+  "In[166]:=",ExpressionUUID->"06e22bba-e675-4404-901e-523b40546b9d"],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -631,9 +631,10 @@ Cell[BoxData[
    3.995378364658918*^9, 3.995378432493582*^9, 3.9953786635074*^9, 
    3.9953787636047707`*^9, {3.995379007717636*^9, 3.995379029360537*^9}, 
    3.995379167640765*^9, 3.995379247284561*^9, 3.9953797309641247`*^9, 
-   3.995379776327518*^9, {3.995386211803741*^9, 3.9953862158483553`*^9}},
+   3.995379776327518*^9, {3.995386211803741*^9, 3.9953862158483553`*^9}, 
+   3.995403158992824*^9},
  CellLabel->
-  "Out[125]=",ExpressionUUID->"7bb0e951-9f58-4f4a-89c7-5a0226837859"]
+  "Out[178]=",ExpressionUUID->"1226af3b-ee40-4183-b15f-b8788bc25c25"]
 }, Open  ]],
 
 Cell[BoxData[""], "Input",
@@ -995,7 +996,7 @@ Cell[BoxData[
    3.9953859143742247`*^9, 3.9953863291200657`*^9, 3.995393501166462*^9, {
    3.995393539150906*^9, 3.995393582388983*^9}},
  CellLabel->
-  "In[146]:=",ExpressionUUID->"7e2c8a0d-dd3b-4d0d-a43e-0a8119511b83"],
+  "In[179]:=",ExpressionUUID->"7e2c8a0d-dd3b-4d0d-a43e-0a8119511b83"],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -1320,9 +1321,9 @@ Cell[BoxData[
   "Grid"]], "Output",
  CellChangeTimes->{3.9953768384940643`*^9, 3.995377308889165*^9, 
   3.995379806407798*^9, 3.9953859162212553`*^9, 3.9953863347406073`*^9, 
-  3.995393587622549*^9},
+  3.995393587622549*^9, 3.995403167860207*^9},
  CellLabel->
-  "Out[155]=",ExpressionUUID->"3ccf7875-9315-4ac9-a1e9-aa78e5691c4e"]
+  "Out[188]=",ExpressionUUID->"7a4ced01-70a6-43ec-8f74-242ce6170e85"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
@@ -1330,384 +1331,19 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell["Section 3", "Chapter",
- CellChangeTimes->{{3.995387557055089*^9, 
-  3.9953875637917147`*^9}},ExpressionUUID->"93b8e3e5-1884-4030-ba6d-\
-701049c57e2d"],
-
-Cell[CellGroupData[{
-
-Cell["\<\
-Results of Section 3 are used in the proof of Remark 12 (see paper)\
-\>", "Subsection",
- CellChangeTimes->{{3.9953875837816267`*^9, 
-  3.9953875975046864`*^9}},ExpressionUUID->"6b4aeb93-6460-4694-bb63-\
-8ee82f2922e1"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"(*", " ", 
-   RowBox[{
-   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
-     "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
-  
-  RowBox[{"(*", 
-   RowBox[{
-    RowBox[{
-     RowBox[{
-      RowBox[{"PART", " ", "1"}], ":", "INITIALIZATION"}], "&"}], " ", 
-    "DOMAIN", " ", "ASSUMPTIONS"}], "*)"}], 
-  RowBox[{"(*", " ", 
-   RowBox[{
-   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
-     "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
-  
-  RowBox[{
-   RowBox[{
-    RowBox[{"ClearAll", "[", 
-     RowBox[{
-     "\[Alpha]", ",", "\[Beta]", ",", "\[Gamma]", ",", "\[Delta]", ",", 
-      "\[Sigma]", ",", "a", ",", "b", ",", "c", ",", "d", ",", "r", ",", "s", 
-      ",", "M", ",", "assumptions", ",", "isTrueQ", ",", "row", ",", 
-      "identities"}], "]"}], ";"}], "\n", 
-   RowBox[{
-    RowBox[{"\[Sigma]", "=", 
-     RowBox[{
-      RowBox[{"(", 
-       RowBox[{"\[Alpha]", "+", "\[Beta]", "+", "\[Gamma]", "+", "\[Delta]"}],
-        ")"}], "/", "2"}]}], ";"}], "\n", 
-   RowBox[{
-    RowBox[{"a", "=", 
-     RowBox[{
-      RowBox[{"Sin", "[", "\[Alpha]", "]"}], "/", 
-      RowBox[{"Sin", "[", 
-       RowBox[{"\[Sigma]", "-", "\[Alpha]"}], "]"}]}]}], ";", 
-    RowBox[{"b", "=", 
-     RowBox[{
-      RowBox[{"Sin", "[", "\[Beta]", "]"}], "/", 
-      RowBox[{"Sin", "[", 
-       RowBox[{"\[Sigma]", "-", "\[Beta]"}], "]"}]}]}], ";"}], "\n", 
-   RowBox[{
-    RowBox[{"c", "=", 
-     RowBox[{
-      RowBox[{"Sin", "[", "\[Gamma]", "]"}], "/", 
-      RowBox[{"Sin", "[", 
-       RowBox[{"\[Sigma]", "-", "\[Gamma]"}], "]"}]}]}], ";", 
-    RowBox[{"d", "=", 
-     RowBox[{
-      RowBox[{"Sin", "[", "\[Delta]", "]"}], "/", 
-      RowBox[{"Sin", "[", 
-       RowBox[{"\[Sigma]", "-", "\[Delta]"}], "]"}]}]}], ";"}], "\n", 
-   RowBox[{
-    RowBox[{"r", "=", 
-     RowBox[{"a", " ", "d"}]}], ";", 
-    RowBox[{"s", "=", 
-     RowBox[{"c", " ", "d"}]}], ";", 
-    RowBox[{"M", "=", 
-     RowBox[{"a", " ", "b", " ", "c", " ", "d"}]}], ";"}], "\n", 
-   RowBox[{"(*", 
-    RowBox[{"Domain", " ", 
-     RowBox[{"assumptions", ":", 
-      RowBox[{"the", " ", "flat", " ", "angles", " ", "lie", " ", "in", " ", 
-       RowBox[{"(", 
-        RowBox[{"0", ",", "Pi"}], ")"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
-   
-   RowBox[{
-    RowBox[{"assumptions", "=", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"0", "<", "\[Alpha]", "<", "Pi"}], ",", 
-       RowBox[{"0", "<", "\[Beta]", "<", "Pi"}], ",", 
-       RowBox[{"0", "<", "\[Gamma]", "<", "Pi"}], ",", 
-       RowBox[{"0", "<", "\[Delta]", "<", "Pi"}]}], "}"}]}], ";"}], "\n", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"isTrueQ", "[", 
-      RowBox[{"lhs_", ",", "rhs_"}], "]"}], ":=", 
-     RowBox[{"TrueQ", "[", 
-      RowBox[{"FullSimplify", "[", 
-       RowBox[{
-        RowBox[{"lhs", "==", "rhs"}], ",", 
-        RowBox[{"Assumptions", "->", "assumptions"}]}], "]"}], "]"}]}], ";"}],
-    "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
-      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
-    "\[IndentingNewLine]", 
-   RowBox[{"(*", 
-    RowBox[{
-     RowBox[{"PART", " ", "2"}], ":", 
-     RowBox[{"THE", " ", "TWO", " ", "CONVERSION", " ", "IDENTITIES"}]}], 
-    "*)"}], "\n", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
-      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
-    "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"identities", "=", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"\"\<Identity for sin(\[Alpha])\>\"", ",", 
-         RowBox[{"HoldForm", "[", 
-          RowBox[{"Sin", "[", "\[Alpha]", "]"}], "]"}], ",", 
-         RowBox[{"HoldForm", "[", 
-          RowBox[{
-           RowBox[{"(", 
-            RowBox[{"r", " ", 
-             RowBox[{
-              RowBox[{"Sin", "[", 
-               RowBox[{"\[Sigma]", "-", "\[Alpha]"}], "]"}], "/", 
-              RowBox[{"(", 
-               RowBox[{"s", " ", 
-                RowBox[{"Sin", "[", 
-                 RowBox[{"\[Sigma]", "-", "\[Gamma]"}], "]"}]}], ")"}]}]}], 
-            ")"}], " ", 
-           RowBox[{"Sin", "[", "\[Gamma]", "]"}]}], "]"}], ",", "isTrueQ"}], 
-        "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"\"\<Identity for sin(\[Beta])\>\"", ",", 
-         RowBox[{"HoldForm", "[", 
-          RowBox[{"Sin", "[", "\[Beta]", "]"}], "]"}], ",", 
-         RowBox[{"HoldForm", "[", 
-          RowBox[{
-           RowBox[{"(", 
-            RowBox[{"M", " ", 
-             RowBox[{
-              RowBox[{"Sin", "[", 
-               RowBox[{"\[Sigma]", "-", "\[Beta]"}], "]"}], "/", 
-              RowBox[{"(", 
-               RowBox[{"r", " ", "s", " ", 
-                RowBox[{"Sin", "[", 
-                 RowBox[{"\[Sigma]", "-", "\[Delta]"}], "]"}]}], ")"}]}]}], 
-            ")"}], " ", 
-           RowBox[{"Sin", "[", "\[Delta]", "]"}]}], "]"}], ",", "isTrueQ"}], 
-        "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
-      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
-    "\[IndentingNewLine]", 
-   RowBox[{"(*", 
-    RowBox[{
-     RowBox[{"PART", " ", "3"}], ":", 
-     RowBox[{"VERIFICATION", " ", "TABLE"}]}], "*)"}], "\n", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
-      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
-    "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"row", "[", 
-      RowBox[{"{", 
-       RowBox[{"desc_", ",", "lhs_", ",", "rhs_", ",", "test_"}], "}"}], 
-      "]"}], ":=", 
-     RowBox[{"{", 
-      RowBox[{"desc", ",", 
-       RowBox[{"Item", "[", 
-        RowBox[{
-         RowBox[{"TraditionalForm", "[", "lhs", "]"}], ",", 
-         RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
-       RowBox[{"Item", "[", 
-        RowBox[{
-         RowBox[{"TraditionalForm", "[", "rhs", "]"}], ",", 
-         RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
-       RowBox[{"If", "[", 
-        RowBox[{
-         RowBox[{"test", "[", 
-          RowBox[{
-           RowBox[{"ReleaseHold", "@", "lhs"}], ",", 
-           RowBox[{"ReleaseHold", "@", "rhs"}]}], "]"}], ",", 
-         RowBox[{"Style", "[", 
-          RowBox[{"\"\<Verified\>\"", ",", 
-           RowBox[{"Darker", "@", "Green"}], ",", "Bold"}], "]"}], ",", 
-         RowBox[{"Style", "[", 
-          RowBox[{"\"\<FAILED\>\"", ",", "Red", ",", "Bold"}], "]"}]}], 
-        "]"}]}], "}"}]}], ";"}], "\n", 
-   RowBox[{"Grid", "[", 
-    RowBox[{
-     RowBox[{"Join", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"Style", "[", 
-           RowBox[{"\"\<Description\>\"", ",", "Bold"}], "]"}], ",", 
-          RowBox[{"Style", "[", 
-           RowBox[{"\"\<Left Hand Side (LHS)\>\"", ",", "Bold"}], "]"}], ",", 
-          
-          RowBox[{"Style", "[", 
-           RowBox[{"\"\<Right Hand Side (RHS)\>\"", ",", "Bold"}], "]"}], ",", 
-          RowBox[{"Style", "[", 
-           RowBox[{"\"\<Equality Status\>\"", ",", "Bold"}], "]"}]}], "}"}], 
-        "}"}], ",", 
-       RowBox[{"row", "/@", "identities"}]}], "]"}], ",", 
-     RowBox[{"Frame", "->", "All"}], ",", 
-     RowBox[{"Background", "->", 
-      RowBox[{"{", 
-       RowBox[{"None", ",", 
-        RowBox[{"{", 
-         RowBox[{"1", "->", "LightGray"}], "}"}]}], "}"}]}], ",", 
-     RowBox[{"Spacings", "->", 
-      RowBox[{"{", 
-       RowBox[{"2", ",", "2.5"}], "}"}]}], ",", 
-     RowBox[{"Alignment", "->", 
-      RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"Left", ",", "Center", ",", "Center", ",", "Center"}], "}"}], 
-       "}"}]}], ",", 
-     RowBox[{"ItemStyle", "->", 
-      RowBox[{"Directive", "[", 
-       RowBox[{
-        RowBox[{"FontFamily", "->", "\"\<Helvetica\>\""}], ",", "12"}], 
-       "]"}]}]}], "]"}]}]}]], "Input",
- CellChangeTimes->{{3.995387947476172*^9, 3.99538794747847*^9}},
- CellLabel->
-  "In[136]:=",ExpressionUUID->"1686eed9-3626-4f40-b76c-0e26300ce83a"],
-
-Cell[BoxData[
- TagBox[GridBox[{
-    {
-     StyleBox["\<\"Description\"\>",
-      StripOnInput->False,
-      FontWeight->Bold], 
-     StyleBox["\<\"Left Hand Side (LHS)\"\>",
-      StripOnInput->False,
-      FontWeight->Bold], 
-     StyleBox["\<\"Right Hand Side (RHS)\"\>",
-      StripOnInput->False,
-      FontWeight->Bold], 
-     StyleBox["\<\"Equality Status\"\>",
-      StripOnInput->False,
-      FontWeight->Bold]},
-    {"\<\"Identity for sin(\[Alpha])\"\>", 
-     ItemBox[
-      TagBox[
-       FormBox[
-        TagBox[
-         RowBox[{"sin", "(", "\[Alpha]", ")"}],
-         HoldForm],
-        TraditionalForm],
-       TraditionalForm,
-       Editable->True],
-      Alignment->Center,
-      StripOnInput->False], 
-     ItemBox[
-      TagBox[
-       FormBox[
-        TagBox[
-         FractionBox[
-          RowBox[{
-           RowBox[{"(", 
-            RowBox[{"r", " ", 
-             RowBox[{"sin", "(", 
-              RowBox[{"\[Sigma]", "-", "\[Alpha]"}], ")"}]}], ")"}], " ", 
-           RowBox[{"sin", "(", "\[Gamma]", ")"}]}], 
-          RowBox[{"s", " ", 
-           RowBox[{"sin", "(", 
-            RowBox[{"\[Sigma]", "-", "\[Gamma]"}], ")"}]}]],
-         HoldForm],
-        TraditionalForm],
-       TraditionalForm,
-       Editable->True],
-      Alignment->Center,
-      StripOnInput->False], 
-     StyleBox["\<\"Verified\"\>",
-      StripOnInput->False,
-      LineColor->RGBColor[0, 
-        Rational[2, 3], 0],
-      FrontFaceColor->RGBColor[0, 
-        Rational[2, 3], 0],
-      BackFaceColor->RGBColor[0, 
-        Rational[2, 3], 0],
-      GraphicsColor->RGBColor[0, 
-        Rational[2, 3], 0],
-      FontWeight->Bold,
-      FontColor->RGBColor[0, 
-        Rational[2, 3], 0]]},
-    {"\<\"Identity for sin(\[Beta])\"\>", 
-     ItemBox[
-      TagBox[
-       FormBox[
-        TagBox[
-         RowBox[{"sin", "(", "\[Beta]", ")"}],
-         HoldForm],
-        TraditionalForm],
-       TraditionalForm,
-       Editable->True],
-      Alignment->Center,
-      StripOnInput->False], 
-     ItemBox[
-      TagBox[
-       FormBox[
-        TagBox[
-         FractionBox[
-          RowBox[{
-           RowBox[{"(", 
-            RowBox[{"M", " ", 
-             RowBox[{"sin", "(", 
-              RowBox[{"\[Sigma]", "-", "\[Beta]"}], ")"}]}], ")"}], " ", 
-           RowBox[{"sin", "(", "\[Delta]", ")"}]}], 
-          RowBox[{"r", " ", "s", " ", 
-           RowBox[{"sin", "(", 
-            RowBox[{"\[Sigma]", "-", "\[Delta]"}], ")"}]}]],
-         HoldForm],
-        TraditionalForm],
-       TraditionalForm,
-       Editable->True],
-      Alignment->Center,
-      StripOnInput->False], 
-     StyleBox["\<\"Verified\"\>",
-      StripOnInput->False,
-      LineColor->RGBColor[0, 
-        Rational[2, 3], 0],
-      FrontFaceColor->RGBColor[0, 
-        Rational[2, 3], 0],
-      BackFaceColor->RGBColor[0, 
-        Rational[2, 3], 0],
-      GraphicsColor->RGBColor[0, 
-        Rational[2, 3], 0],
-      FontWeight->Bold,
-      FontColor->RGBColor[0, 
-        Rational[2, 3], 0]]}
-   },
-   AutoDelete->False,
-   GridBoxAlignment->{"Columns" -> {Left, Center, Center, Center}},
-   GridBoxBackground->{
-    "Columns" -> {{None}}, "RowsIndexed" -> {1 -> GrayLevel[0.85]}},
-   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
-   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
-   GridBoxItemStyle->{"Columns" -> {{
-        Directive[FontFamily -> "Helvetica", 12]}}, "Rows" -> {{
-        Directive[FontFamily -> "Helvetica", 12]}}},
-   GridBoxSpacings->{"Columns" -> {{2}}, "Rows" -> {{2.5}}}],
-  "Grid"]], "Output",
- CellChangeTimes->{3.9953879482001667`*^9},
- CellLabel->
-  "Out[145]=",ExpressionUUID->"1e84bdff-21fd-42d9-8664-1193beb1b81a"]
-}, Open  ]]
-}, Open  ]]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Section 4", "Chapter",
- CellChangeTimes->{{3.995399550960454*^9, 
-  3.9953995526759453`*^9}},ExpressionUUID->"dd0503db-9366-4892-a71d-\
+ CellChangeTimes->{{3.995399550960454*^9, 3.9953995526759453`*^9}, {
+  3.995403149146965*^9, 
+  3.995403149214135*^9}},ExpressionUUID->"dd0503db-9366-4892-a71d-\
 c66fd0182520"],
 
 Cell[CellGroupData[{
 
 Cell["\<\
-Results of Section 4 are used in the proof of Lemma 13 (see paper)\
+Results of Section 3 are used in the proof of Lemma 13 (see paper)\
 \>", "Subsection",
  CellChangeTimes->{{3.9953995892318487`*^9, 3.995399607447639*^9}, {
-  3.995400563352467*^9, 
-  3.995400563992577*^9}},ExpressionUUID->"f24dd9cb-031b-4d58-a8ee-\
+  3.995400563352467*^9, 3.995400563992577*^9}, {3.995403150404605*^9, 
+  3.9954031504887133`*^9}},ExpressionUUID->"f24dd9cb-031b-4d58-a8ee-\
 2aa01d495633"],
 
 Cell[CellGroupData[{
@@ -2144,7 +1780,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.99539955501714*^9, 3.995399555020122*^9}, 
    3.99539982467577*^9},
  CellLabel->
-  "In[161]:=",ExpressionUUID->"bb6694ae-1c67-4ae0-8ef1-8d1b2d11ac0c"],
+  "In[189]:=",ExpressionUUID->"bb6694ae-1c67-4ae0-8ef1-8d1b2d11ac0c"],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -2492,9 +2128,10 @@ Cell[BoxData[
         Directive[FontFamily -> "Helvetica", 12]}}},
    GridBoxSpacings->{"Columns" -> {{2}}, "Rows" -> {{2.5}}}],
   "Grid"]], "Output",
- CellChangeTimes->{3.995399557274684*^9, 3.995399827695218*^9},
+ CellChangeTimes->{3.995399557274684*^9, 3.995399827695218*^9, 
+  3.995403172257806*^9},
  CellLabel->
-  "Out[165]=",ExpressionUUID->"04a3bf1b-7962-48ce-bdae-5a003b456538"]
+  "Out[193]=",ExpressionUUID->"f8a503ec-6d80-4613-a308-2dcd666fc930"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -2528,38 +2165,28 @@ Cell[CellGroupData[{
 Cell[1965, 56, 368, 7, 54, "Subsection",ExpressionUUID->"0676ce2f-0e28-477f-8386-9db802dc2024"],
 Cell[CellGroupData[{
 Cell[2358, 67, 16639, 424, 934, "Input",ExpressionUUID->"06e22bba-e675-4404-901e-523b40546b9d"],
-Cell[19000, 493, 4906, 142, 199, "Output",ExpressionUUID->"7bb0e951-9f58-4f4a-89c7-5a0226837859"]
+Cell[19000, 493, 4932, 143, 199, "Output",ExpressionUUID->"1226af3b-ee40-4183-b15f-b8788bc25c25"]
 }, Open  ]],
-Cell[23921, 638, 154, 3, 30, "Input",ExpressionUUID->"a79a7266-feed-40e8-9fb6-983fbe38740f"]
+Cell[23947, 639, 154, 3, 30, "Input",ExpressionUUID->"a79a7266-feed-40e8-9fb6-983fbe38740f"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[24124, 647, 154, 3, 69, "Chapter",ExpressionUUID->"f42a66f4-d51f-4e23-9755-886c913f8599"],
+Cell[24150, 648, 154, 3, 69, "Chapter",ExpressionUUID->"f42a66f4-d51f-4e23-9755-886c913f8599"],
 Cell[CellGroupData[{
-Cell[24303, 654, 370, 7, 54, "Subsection",ExpressionUUID->"1bcbc5cf-25c5-4947-9179-cd530599ad40"],
+Cell[24329, 655, 370, 7, 54, "Subsection",ExpressionUUID->"1bcbc5cf-25c5-4947-9179-cd530599ad40"],
 Cell[CellGroupData[{
-Cell[24698, 665, 12347, 332, 619, "Input",ExpressionUUID->"7e2c8a0d-dd3b-4d0d-a43e-0a8119511b83"],
-Cell[37048, 999, 9527, 325, 427, "Output",ExpressionUUID->"3ccf7875-9315-4ac9-a1e9-aa78e5691c4e"]
-}, Open  ]]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[46636, 1331, 156, 3, 69, "Chapter",ExpressionUUID->"93b8e3e5-1884-4030-ba6d-701049c57e2d"],
-Cell[CellGroupData[{
-Cell[46817, 1338, 227, 5, 54, "Subsection",ExpressionUUID->"6b4aeb93-6460-4694-bb63-8ee82f2922e1"],
-Cell[CellGroupData[{
-Cell[47069, 1347, 8309, 222, 535, "Input",ExpressionUUID->"1686eed9-3626-4f40-b76c-0e26300ce83a"],
-Cell[55381, 1571, 3677, 119, 187, "Output",ExpressionUUID->"1e84bdff-21fd-42d9-8664-1193beb1b81a"]
+Cell[24724, 666, 12347, 332, 619, "Input",ExpressionUUID->"7e2c8a0d-dd3b-4d0d-a43e-0a8119511b83"],
+Cell[37074, 1000, 9549, 325, 427, "Output",ExpressionUUID->"7a4ced01-70a6-43ec-8f74-242ce6170e85"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[59119, 1697, 156, 3, 69, "Chapter",ExpressionUUID->"dd0503db-9366-4892-a71d-c66fd0182520"],
+Cell[46684, 1332, 205, 4, 69, "Chapter",ExpressionUUID->"dd0503db-9366-4892-a71d-c66fd0182520"],
 Cell[CellGroupData[{
-Cell[59300, 1704, 273, 6, 54, "Subsection",ExpressionUUID->"f24dd9cb-031b-4d58-a8ee-2aa01d495633"],
+Cell[46914, 1340, 321, 6, 54, "Subsection",ExpressionUUID->"f24dd9cb-031b-4d58-a8ee-2aa01d495633"],
 Cell[CellGroupData[{
-Cell[59598, 1714, 16370, 432, 871, "Input",ExpressionUUID->"bb6694ae-1c67-4ae0-8ef1-8d1b2d11ac0c"],
-Cell[75971, 2148, 10634, 348, 340, "Output",ExpressionUUID->"04a3bf1b-7962-48ce-bdae-5a003b456538"]
+Cell[47260, 1350, 16370, 432, 871, "Input",ExpressionUUID->"bb6694ae-1c67-4ae0-8ef1-8d1b2d11ac0c"],
+Cell[63633, 1784, 10659, 349, 340, "Output",ExpressionUUID->"f8a503ec-6d80-4613-a308-2dcd666fc930"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
