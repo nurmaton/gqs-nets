@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    258759,       7120]
-NotebookOptionsPosition[    255014,       7047]
-NotebookOutlinePosition[    255468,       7065]
-CellTagsIndexPosition[    255425,       7062]
+NotebookDataLength[    383878,      10287]
+NotebookOptionsPosition[    379113,      10197]
+NotebookOutlinePosition[    379565,      10215]
+CellTagsIndexPosition[    379522,      10212]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -56,11 +56,11 @@ Cell[CellGroupData[{
 
 Cell["\<\
 Results of Section 1 are used in the proof of Lemmas 1-2 (see paper)\
-\>", "Subsection",
+\>", "Section",
  CellChangeTimes->{{3.9699686771291647`*^9, 3.9699686916789007`*^9}, {
   3.991302827857836*^9, 3.991302831945632*^9}, {3.993716521804757*^9, 
   3.993716546106215*^9}, {3.994619501789853*^9, 3.99461950237152*^9}, {
-  3.995691940651896*^9, 3.9956919408363323`*^9}, {3.995691980223728*^9, 
+  3.995691940651896*^9, 3.9956919408363333`*^9}, {3.995691980223728*^9, 
   3.995691981567308*^9}},ExpressionUUID->"0676ce2f-0e28-477f-8386-\
 9db802dc2024"],
 
@@ -901,7 +901,7 @@ Cell[CellGroupData[{
 
 Cell["\<\
 Results of Section 2 are used in the proof of Lemma 2 (see paper)\
-\>", "Subsection",
+\>", "Section",
  CellChangeTimes->{{3.995376455130608*^9, 3.995376472557577*^9}, {
    3.9953798802634983`*^9, 3.995379888005879*^9}, {3.995385996323822*^9, 
    3.9953859985572147`*^9}, {3.995393520328066*^9, 3.995393524061179*^9}, 
@@ -1807,7 +1807,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell["Section 3", "Chapter",
- CellChangeTimes->{{3.995399550960454*^9, 3.9953995526759458`*^9}, {
+ CellChangeTimes->{{3.995399550960454*^9, 3.995399552675946*^9}, {
   3.995403149146965*^9, 
   3.995403149214135*^9}},ExpressionUUID->"dd0503db-9366-4892-a71d-\
 c66fd0182520"],
@@ -1816,7 +1816,7 @@ Cell[CellGroupData[{
 
 Cell["\<\
 Results of Section 3 are used in the proof of Lemma 4 (see paper)\
-\>", "Subsection",
+\>", "Section",
  CellChangeTimes->{{3.9953995892318487`*^9, 3.995399607447639*^9}, {
   3.995400563352467*^9, 3.995400563992577*^9}, {3.995403150404605*^9, 
   3.9954031504887133`*^9}, {3.995692021482225*^9, 
@@ -2446,16 +2446,16 @@ Cell[CellGroupData[{
 
 Cell["Section 4", "Chapter",
  CellChangeTimes->{{3.996258840762689*^9, 
-  3.9962588443181334`*^9}},ExpressionUUID->"1f00ace1-9eaa-45bb-ab32-\
+  3.996258844318133*^9}},ExpressionUUID->"1f00ace1-9eaa-45bb-ab32-\
 969454332071"],
 
 Cell[CellGroupData[{
 
 Cell["\<\
 Results of Section 4 are used in the proof of Theorem 1 (see paper)\
-\>", "Subsection",
+\>", "Section",
  CellChangeTimes->{{3.996258852846649*^9, 
-  3.9962588817526207`*^9}},ExpressionUUID->"3bf78643-472a-4d85-9419-\
+  3.99625888175262*^9}},ExpressionUUID->"3bf78643-472a-4d85-9419-\
 9b4a4ab8b7a3"],
 
 Cell[CellGroupData[{
@@ -2504,7 +2504,7 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"Format", "[", 
       RowBox[{"chi", ",", "TraditionalForm"}], "]"}], "=", "\[Chi]"}], ";"}], 
-   "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"Standing", " ", 
@@ -2549,7 +2549,7 @@ Cell[BoxData[
      RowBox[{
      "so", " ", "they", " ", "cannot", " ", "evaluate", " ", "through", " ", 
       "symbols", " ", "defined", " ", "in", " ", "other", " ", 
-      RowBox[{"sections", "."}]}]}], "*)"}], "\n", 
+      RowBox[{"sections", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"standingOf", "[", 
@@ -2707,8 +2707,8 @@ Cell[BoxData[
           RowBox[{"{", 
            RowBox[{"12", ",", "12"}], "}"}], ",", 
           RowBox[{"{", 
-           RowBox[{"4", ",", "4"}], "}"}]}], "}"}]}]}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", 
+           RowBox[{"4", ",", "4"}], "}"}]}], "}"}]}]}], "]"}]}], ";"}], "\n", 
+   
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"Two", "-", 
@@ -2735,7 +2735,7 @@ Cell[BoxData[
         RowBox[{"1", "-", "M"}], ")"}], ".", "The"}], " ", "chip", " ", "is", 
       " ", "Verified", " ", "only", " ", "if", " ", "both", " ", "stages", 
       " ", 
-      RowBox[{"hold", "."}]}]}], "*)"}], "\n", 
+      RowBox[{"hold", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"caseCheck", "[", 
@@ -2861,8 +2861,7 @@ Cell[BoxData[
             RowBox[{"Lighter", "[", 
              RowBox[{"col", ",", "0.93"}], "]"}]}], ",", 
            RowBox[{"FrameMargins", "->", "12"}]}], "]"}], "]"}], ";", 
-        "\[IndentingNewLine]", "ok"}]}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", "ok"}]}], "]"}]}], ";"}], "\n", 
    RowBox[{"(*", " ", 
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
@@ -2878,7 +2877,7 @@ Cell[BoxData[
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
       "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
-    "\n", 
+    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"Print", "[", 
      RowBox[{"Panel", "[", 
@@ -2935,12 +2934,10 @@ Cell[BoxData[
                 "\"\< = 1, \[Ellipsis], 4,   \>\"", ",", 
                 RowBox[{"TraditionalForm", "[", 
                  RowBox[{"HoldForm", "[", 
-                  RowBox[{"\[Chi]", "\[Element]", 
+                  RowBox[{"\[Chi]", "\[Element]", " ", 
                    RowBox[{"{", 
-                    RowBox[{
-                    RowBox[{"+", "1"}], ",", 
-                    RowBox[{"-", "1"}]}], "}"}]}], "]"}], "]"}]}], "}"}], 
-              "]"}], ",", "13"}], "]"}], ",", "\"\<\>\"", ",", 
+                    RowBox[{"\[PlusMinus]", "1"}], "}"}]}], "]"}], "]"}]}], 
+               "}"}], "]"}], ",", "13"}], "]"}], ",", "\"\<\>\"", ",", 
            RowBox[{"Style", "[", 
             RowBox[{
              RowBox[{"Row", "[", 
@@ -2953,8 +2950,8 @@ some  \>\"", ",",
                 "\"\<, \>\"", ",", 
                 RowBox[{"Subscript", "[", 
                  RowBox[{"\"\<\[Zeta]\>\"", ",", "2"}], "]"}], ",", 
-                "\"\< \[Element] {+1, -1}):\>\""}], "}"}], "]"}], ",", "Bold",
-              ",", "14"}], "]"}], ",", 
+                "\"\< \[Element] {\[PlusMinus]1}):\>\""}], "}"}], "]"}], ",", 
+             "Bold", ",", "14"}], "]"}], ",", 
            RowBox[{"Row", "[", 
             RowBox[{"{", 
              RowBox[{
@@ -3018,8 +3015,7 @@ some  \>\"", ",",
        RowBox[{"Background", "->", 
         RowBox[{"RGBColor", "[", 
          RowBox[{"0.99", ",", "0.96", ",", "0.88"}], "]"}]}], ",", 
-       RowBox[{"FrameMargins", "->", "14"}]}], "]"}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+       RowBox[{"FrameMargins", "->", "14"}]}], "]"}], "]"}], ";"}], "\n", 
    RowBox[{"(*", " ", 
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
@@ -3033,10 +3029,10 @@ some  \>\"", ",",
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
       "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
-    "\n", 
+    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"results", "=", 
-     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -3068,7 +3064,7 @@ some  \>\"", ",",
      RowBox[{
       RowBox[{"so", " ", "chi"}], "=", 
       RowBox[{"si", "*", 
-       RowBox[{"sl", "."}]}]}]}], "*)"}], "\n", 
+       RowBox[{"sl", "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"Do", "[", 
      RowBox[{
@@ -3215,8 +3211,7 @@ some  \>\"", ",",
        RowBox[{"sl", ",", 
         RowBox[{"{", 
          RowBox[{"1", ",", 
-          RowBox[{"-", "1"}]}], "}"}]}], "}"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+          RowBox[{"-", "1"}]}], "}"}]}], "}"}]}], "]"}], ";"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -3239,7 +3234,7 @@ some  \>\"", ",",
         RowBox[{"(", 
          RowBox[{
          "no", " ", "sign", " ", "condition", " ", "is", " ", "consumed"}], 
-         ")"}], "."}]}]}]}], "*)"}], "\n", 
+         ")"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"AppendTo", "[", 
      RowBox[{"results", ",", 
@@ -3306,7 +3301,7 @@ some  \>\"", ",",
              RowBox[{"(", 
               RowBox[{
                RowBox[{"M", "/", "fl"}], "-", "1"}], ")"}]}], "]"}]}]}], 
-         "]"}]}], "]"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+         "]"}]}], "]"}]}], "]"}], ";"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -3350,7 +3345,7 @@ some  \>\"", ",",
       RowBox[{
        RowBox[{
         RowBox[{"-", "1"}], " ", "with", " ", "M"}], ">", "1."}]}]}], "*)"}], 
-   "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"fj3", "=", 
      RowBox[{
@@ -3492,8 +3487,7 @@ some  \>\"", ",",
        RowBox[{"c", ",", 
         RowBox[{"{", 
          RowBox[{"1", ",", 
-          RowBox[{"-", "1"}]}], "}"}]}], "}"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+          RowBox[{"-", "1"}]}], "}"}]}], "}"}]}], "]"}], ";"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -3550,7 +3544,7 @@ some  \>\"", ",",
           RowBox[{"1", "-", "M"}], ")"}], ".", "Four"}], " ", "branches", " ",
          "over", " ", "chi", " ", "and", " ", "the", " ", "regime", " ", "of",
          " ", 
-        RowBox[{"M", "."}]}]}]}]}], "*)"}], "\n", 
+        RowBox[{"M", "."}]}]}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"fj4", "=", 
      RowBox[{"M", " ", 
@@ -3729,8 +3723,7 @@ some  \>\"", ",",
        RowBox[{"s", ",", 
         RowBox[{"{", 
          RowBox[{"1", ",", 
-          RowBox[{"-", "1"}]}], "}"}]}], "}"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+          RowBox[{"-", "1"}]}], "}"}]}], "}"}]}], "]"}], ";"}], "\n", 
    RowBox[{"(*", " ", 
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
@@ -3742,7 +3735,7 @@ some  \>\"", ",",
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
       "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
-    "\n", 
+    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"Print", "[", 
      RowBox[{"Framed", "[", 
@@ -3775,11 +3768,12 @@ some  \>\"", ",",
     ";"}]}]}]], "Input",
  CellChangeTimes->{{3.996258029023388*^9, 3.99625802902769*^9}, 
    3.996258432936648*^9, 3.996258915338059*^9, 3.996259522964507*^9, 
-   3.996260200708662*^9, 3.996260597180975*^9, {3.9962612541708097`*^9, 
+   3.996260200708662*^9, 3.996260597180975*^9, {3.9962612541708093`*^9, 
    3.9962613002794237`*^9}, 3.996261447356401*^9, 3.996261623071581*^9, 
-   3.996262500051488*^9, 3.996262780522572*^9},
+   3.996262500051488*^9, 3.996262780522572*^9, {3.9964247148413877`*^9, 
+   3.9964247477700577`*^9}, {3.996424888483235*^9, 3.996424902363895*^9}},
  CellLabel->
-  "In[281]:=",ExpressionUUID->"cd4cf647-c849-47fc-ba7e-009bf22c4649"],
+  "In[167]:=",ExpressionUUID->"cd4cf647-c849-47fc-ba7e-009bf22c4649"],
 
 Cell[CellGroupData[{
 
@@ -3840,10 +3834,8 @@ Cell[BoxData[
            TagBox[
             RowBox[{"\[Chi]", "\[Element]", 
               RowBox[{"{", 
-                RowBox[{
-                  RowBox[{"+", "1"}], ",", 
-                  RowBox[{"-", "1"}]}], "}"}]}], HoldForm], TraditionalForm], 
-          TraditionalForm, Editable -> True]},
+                RowBox[{"\[PlusMinus]", "1"}], "}"}]}], HoldForm], 
+           TraditionalForm], TraditionalForm, Editable -> True]},
         "RowDefault"],
        StripOnInput->False,
        FontSize->13]},
@@ -3854,7 +3846,8 @@ Cell[BoxData[
         "\"The identity we want to verify for all cases below (for some  \"", 
          
          SubscriptBox["\"\[Zeta]\"", "1"], "\", \"", 
-         SubscriptBox["\"\[Zeta]\"", "2"], "\" \[Element] {+1, -1}):\""},
+         SubscriptBox["\"\[Zeta]\"", "2"], 
+         "\" \[Element] {\[PlusMinus]1}):\""},
         "RowDefault"],
        StripOnInput->False,
        FontSize->14,
@@ -3913,13 +3906,15 @@ Cell[BoxData[
    "Column"],
   Background->RGBColor[0.99, 0.96, 0.88],
   FrameMargins->14]], "Print",
- CellChangeTimes->{3.996258436439488*^9, 3.9962589178671827`*^9, 
-  3.996259525484254*^9, 3.996260202529284*^9, 3.9962606118817577`*^9, 
-  3.996261307867468*^9, 3.9962614493413973`*^9, 3.996261624970481*^9, 
-  3.9962625010637417`*^9, 3.996262782550426*^9},
+ CellChangeTimes->{
+  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+   3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
+   3.9964249041437197`*^9}},
  CellLabel->
   "During evaluation of \
-In[281]:=",ExpressionUUID->"fa0dc21b-642b-435a-a8ee-1dae20e5f942"],
+In[167]:=",ExpressionUUID->"7a9ca961-82be-4292-b0a7-9030d858c364"],
 
 Cell[BoxData[
  PanelBox[
@@ -4174,13 +4169,15 @@ Cell[BoxData[
    "Column"],
   Background->RGBColor[0.937, 0.9510000000000001, 0.9790000000000001],
   FrameMargins->12]], "Print",
- CellChangeTimes->{3.996258436439488*^9, 3.9962589178671827`*^9, 
-  3.996259525484254*^9, 3.996260202529284*^9, 3.9962606118817577`*^9, 
-  3.996261307867468*^9, 3.9962614493413973`*^9, 3.996261624970481*^9, 
-  3.9962625010637417`*^9, 3.9962627825533323`*^9},
+ CellChangeTimes->{
+  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+   3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
+   3.996424904146674*^9}},
  CellLabel->
   "During evaluation of \
-In[281]:=",ExpressionUUID->"99372c1b-7f60-45c5-9b36-971f017ed15e"],
+In[167]:=",ExpressionUUID->"11edd2da-c824-4fd4-a8f0-7522d84cf1d5"],
 
 Cell[BoxData[
  PanelBox[
@@ -4437,13 +4434,15 @@ Cell[BoxData[
    "Column"],
   Background->RGBColor[0.937, 0.9510000000000001, 0.9790000000000001],
   FrameMargins->12]], "Print",
- CellChangeTimes->{3.996258436439488*^9, 3.9962589178671827`*^9, 
-  3.996259525484254*^9, 3.996260202529284*^9, 3.9962606118817577`*^9, 
-  3.996261307867468*^9, 3.9962614493413973`*^9, 3.996261624970481*^9, 
-  3.9962625010637417`*^9, 3.9962627825578003`*^9},
+ CellChangeTimes->{
+  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+   3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
+   3.996424904151835*^9}},
  CellLabel->
   "During evaluation of \
-In[281]:=",ExpressionUUID->"0fdbc717-b647-4a15-8294-4986b5ddf087"],
+In[167]:=",ExpressionUUID->"83863315-8fcc-4783-9404-2177385f293e"],
 
 Cell[BoxData[
  PanelBox[
@@ -4699,13 +4698,15 @@ Cell[BoxData[
    "Column"],
   Background->RGBColor[0.937, 0.9510000000000001, 0.9790000000000001],
   FrameMargins->12]], "Print",
- CellChangeTimes->{3.996258436439488*^9, 3.9962589178671827`*^9, 
-  3.996259525484254*^9, 3.996260202529284*^9, 3.9962606118817577`*^9, 
-  3.996261307867468*^9, 3.9962614493413973`*^9, 3.996261624970481*^9, 
-  3.9962625010637417`*^9, 3.996262782561967*^9},
+ CellChangeTimes->{
+  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+   3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
+   3.996424904155971*^9}},
  CellLabel->
   "During evaluation of \
-In[281]:=",ExpressionUUID->"b987286e-2d7c-4911-bb03-a82857d359f0"],
+In[167]:=",ExpressionUUID->"06ad2886-39d7-49d5-af5f-6642c5752c31"],
 
 Cell[BoxData[
  PanelBox[
@@ -4963,13 +4964,15 @@ Cell[BoxData[
    "Column"],
   Background->RGBColor[0.937, 0.9510000000000001, 0.9790000000000001],
   FrameMargins->12]], "Print",
- CellChangeTimes->{3.996258436439488*^9, 3.9962589178671827`*^9, 
-  3.996259525484254*^9, 3.996260202529284*^9, 3.9962606118817577`*^9, 
-  3.996261307867468*^9, 3.9962614493413973`*^9, 3.996261624970481*^9, 
-  3.9962625010637417`*^9, 3.9962627825659857`*^9},
+ CellChangeTimes->{
+  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+   3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
+   3.996424904160129*^9}},
  CellLabel->
   "During evaluation of \
-In[281]:=",ExpressionUUID->"a8f4692b-c789-4e67-9468-a00b7c0a6852"],
+In[167]:=",ExpressionUUID->"540d2d1f-593a-480c-a485-39c95eeead83"],
 
 Cell[BoxData[
  PanelBox[
@@ -5204,13 +5207,15 @@ Cell[BoxData[
    "Column"],
   Background->RGBColor[0.9685, 0.9475, 0.9790000000000001],
   FrameMargins->12]], "Print",
- CellChangeTimes->{3.996258436439488*^9, 3.9962589178671827`*^9, 
-  3.996259525484254*^9, 3.996260202529284*^9, 3.9962606118817577`*^9, 
-  3.996261307867468*^9, 3.9962614493413973`*^9, 3.996261624970481*^9, 
-  3.9962625010637417`*^9, 3.996262782569736*^9},
+ CellChangeTimes->{
+  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+   3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
+   3.996424904164559*^9}},
  CellLabel->
   "During evaluation of \
-In[281]:=",ExpressionUUID->"855e08bc-fa65-4c32-a10f-ed96211b4533"],
+In[167]:=",ExpressionUUID->"d8e13178-f611-41d4-9a2f-c15b9cc8f4a7"],
 
 Cell[BoxData[
  PanelBox[
@@ -5529,13 +5534,15 @@ Cell[BoxData[
    "Column"],
   Background->RGBColor[0.93, 0.9650000000000001, 0.9650000000000001],
   FrameMargins->12]], "Print",
- CellChangeTimes->{3.996258436439488*^9, 3.9962589178671827`*^9, 
-  3.996259525484254*^9, 3.996260202529284*^9, 3.9962606118817577`*^9, 
-  3.996261307867468*^9, 3.9962614493413973`*^9, 3.996261624970481*^9, 
-  3.9962625010637417`*^9, 3.99626278257295*^9},
+ CellChangeTimes->{
+  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+   3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
+   3.996424904168749*^9}},
  CellLabel->
   "During evaluation of \
-In[281]:=",ExpressionUUID->"ff5aa9e9-3409-4422-b04d-af5ef66dcc7a"],
+In[167]:=",ExpressionUUID->"8f9c9ed0-8b0f-4b9d-af0a-2762a9b4135c"],
 
 Cell[BoxData[
  PanelBox[
@@ -5854,13 +5861,15 @@ Cell[BoxData[
    "Column"],
   Background->RGBColor[0.93, 0.9650000000000001, 0.9650000000000001],
   FrameMargins->12]], "Print",
- CellChangeTimes->{3.996258436439488*^9, 3.9962589178671827`*^9, 
-  3.996259525484254*^9, 3.996260202529284*^9, 3.9962606118817577`*^9, 
-  3.996261307867468*^9, 3.9962614493413973`*^9, 3.996261624970481*^9, 
-  3.9962625010637417`*^9, 3.996262782666602*^9},
+ CellChangeTimes->{
+  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+   3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
+   3.996424904172867*^9}},
  CellLabel->
   "During evaluation of \
-In[281]:=",ExpressionUUID->"fe3e0147-c5e9-4ef3-b19b-ec21d6c28944"],
+In[167]:=",ExpressionUUID->"cb05c3a5-6309-4705-ab9a-dabeb00ae9b1"],
 
 Cell[BoxData[
  PanelBox[
@@ -6144,13 +6153,15 @@ Cell[BoxData[
    "Column"],
   Background->RGBColor[0.9825, 0.9545, 0.9335],
   FrameMargins->12]], "Print",
- CellChangeTimes->{3.996258436439488*^9, 3.9962589178671827`*^9, 
-  3.996259525484254*^9, 3.996260202529284*^9, 3.9962606118817577`*^9, 
-  3.996261307867468*^9, 3.9962614493413973`*^9, 3.996261624970481*^9, 
-  3.9962625010637417`*^9, 3.9962627826753263`*^9},
+ CellChangeTimes->{
+  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+   3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
+   3.996424904176626*^9}},
  CellLabel->
   "During evaluation of \
-In[281]:=",ExpressionUUID->"3f869816-e038-4acc-a7a5-eb1ece0b54d1"],
+In[167]:=",ExpressionUUID->"8395b4cd-20bc-4054-8ff6-722d818c7458"],
 
 Cell[BoxData[
  PanelBox[
@@ -6431,13 +6442,15 @@ Cell[BoxData[
    "Column"],
   Background->RGBColor[0.9825, 0.9545, 0.9335],
   FrameMargins->12]], "Print",
- CellChangeTimes->{3.996258436439488*^9, 3.9962589178671827`*^9, 
-  3.996259525484254*^9, 3.996260202529284*^9, 3.9962606118817577`*^9, 
-  3.996261307867468*^9, 3.9962614493413973`*^9, 3.996261624970481*^9, 
-  3.9962625010637417`*^9, 3.996262782679414*^9},
+ CellChangeTimes->{
+  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+   3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
+   3.9964249041853867`*^9}},
  CellLabel->
   "During evaluation of \
-In[281]:=",ExpressionUUID->"7aa7bf71-8d33-4c9d-8a77-8c7119b33cd1"],
+In[167]:=",ExpressionUUID->"ba58deee-453e-488f-ac06-3dc0b868d402"],
 
 Cell[BoxData[
  PanelBox[
@@ -6718,13 +6731,15 @@ Cell[BoxData[
    "Column"],
   Background->RGBColor[0.9825, 0.9545, 0.9335],
   FrameMargins->12]], "Print",
- CellChangeTimes->{3.996258436439488*^9, 3.9962589178671827`*^9, 
-  3.996259525484254*^9, 3.996260202529284*^9, 3.9962606118817577`*^9, 
-  3.996261307867468*^9, 3.9962614493413973`*^9, 3.996261624970481*^9, 
-  3.9962625010637417`*^9, 3.996262782682644*^9},
+ CellChangeTimes->{
+  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+   3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
+   3.9964249041899567`*^9}},
  CellLabel->
   "During evaluation of \
-In[281]:=",ExpressionUUID->"d1b32bcc-63c0-4cf0-af59-dbe13312dd46"],
+In[167]:=",ExpressionUUID->"807f23d4-f3de-4ca1-9dbc-f36e5f39177a"],
 
 Cell[BoxData[
  PanelBox[
@@ -7008,13 +7023,15 @@ Cell[BoxData[
    "Column"],
   Background->RGBColor[0.9825, 0.9545, 0.9335],
   FrameMargins->12]], "Print",
- CellChangeTimes->{3.996258436439488*^9, 3.9962589178671827`*^9, 
-  3.996259525484254*^9, 3.996260202529284*^9, 3.9962606118817577`*^9, 
-  3.996261307867468*^9, 3.9962614493413973`*^9, 3.996261624970481*^9, 
-  3.9962625010637417`*^9, 3.996262782685822*^9},
+ CellChangeTimes->{
+  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+   3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
+   3.99642490419319*^9}},
  CellLabel->
   "During evaluation of \
-In[281]:=",ExpressionUUID->"e22f3904-fee2-42c7-95c4-3007b5b87bd4"],
+In[167]:=",ExpressionUUID->"46fe3f37-f023-4d43-b95e-31e8375a7d46"],
 
 Cell[BoxData[
  FrameBox[
@@ -7032,13 +7049,3146 @@ Cell[BoxData[
   FrameStyle->None,
   RoundingRadius->10,
   StripOnInput->False]], "Print",
- CellChangeTimes->{3.996258436439488*^9, 3.9962589178671827`*^9, 
-  3.996259525484254*^9, 3.996260202529284*^9, 3.9962606118817577`*^9, 
-  3.996261307867468*^9, 3.9962614493413973`*^9, 3.996261624970481*^9, 
-  3.9962625010637417`*^9, 3.996262782688594*^9},
+ CellChangeTimes->{
+  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+   3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
+   3.996424904196005*^9}},
  CellLabel->
   "During evaluation of \
-In[281]:=",ExpressionUUID->"571c4dd0-5671-4ee9-b694-f3f24c42198b"]
+In[167]:=",ExpressionUUID->"97ec215a-961b-4206-ab0a-583b56ad7786"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Section 5", "Chapter",
+ CellChangeTimes->{{3.996424278778163*^9, 3.9964242810286694`*^9}, {
+  3.996424488617942*^9, 
+  3.996424488745859*^9}},ExpressionUUID->"df85d0c7-d7b2-4fff-9586-\
+4569686faae4"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Results of Section 5 are used in the proof of Remark 5 (see paper)\
+\>", "Section",
+ CellChangeTimes->{
+  3.996424366475745*^9, {3.996424439000201*^9, 3.996424445803897*^9}, {
+   3.9964244904737*^9, 
+   3.996424490556273*^9}},ExpressionUUID->"d110af2e-7237-4df4-9a71-\
+cb8790813994"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+  
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"PART", " ", "1"}], ":", "INITIALIZATION"}], "*)"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+  
+  RowBox[{
+   RowBox[{
+    RowBox[{"ClearAll", "[", 
+     RowBox[{
+     "gi", ",", "gj", ",", "k", ",", "kp", ",", "ei", ",", "ej", ",", "xi", 
+      ",", "h1of", ",", "h2of", ",", "h3of", ",", "baseAssum", ",", 
+      "wConfigs", ",", "ePairs", ",", "dirForward", ",", "dirBackward", ",", 
+      "branchOK", ",", "smallChip", ",", "statusChip", ",", "panelH", ",", 
+      "resultsAll", ",", "condOf", ",", "vars", ",", "hsym", ",", "stmtOf"}], 
+     "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Format", "[", 
+      RowBox[{"gi", ",", "TraditionalForm"}], "]"}], "=", 
+     RowBox[{"Subscript", "[", 
+      RowBox[{"g", ",", "i"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Format", "[", 
+      RowBox[{"gj", ",", "TraditionalForm"}], "]"}], "=", 
+     RowBox[{"Subscript", "[", 
+      RowBox[{"g", ",", "j"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Format", "[", 
+      RowBox[{"kp", ",", "TraditionalForm"}], "]"}], "=", 
+     RowBox[{"k", "'"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"statusChip", "[", "True", "]"}], ":=", 
+     RowBox[{"Framed", "[", 
+      RowBox[{
+       RowBox[{"Style", "[", 
+        RowBox[{"\"\<Verified\>\"", ",", "Bold", ",", "White", ",", "13"}], 
+        "]"}], ",", 
+       RowBox[{"Background", "->", 
+        RowBox[{"RGBColor", "[", 
+         RowBox[{"0.13", ",", "0.55", ",", "0.13"}], "]"}]}], ",", 
+       RowBox[{"FrameStyle", "->", "None"}], ",", 
+       RowBox[{"RoundingRadius", "->", "7"}], ",", 
+       RowBox[{"FrameMargins", "->", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"12", ",", "12"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"4", ",", "4"}], "}"}]}], "}"}]}]}], "]"}]}], ";"}], "\n", 
+   
+   RowBox[{
+    RowBox[{
+     RowBox[{"statusChip", "[", "False", "]"}], ":=", 
+     RowBox[{"Framed", "[", 
+      RowBox[{
+       RowBox[{"Style", "[", 
+        RowBox[{"\"\<Failed\>\"", ",", "Bold", ",", "White", ",", "13"}], 
+        "]"}], ",", 
+       RowBox[{"Background", "->", 
+        RowBox[{"RGBColor", "[", 
+         RowBox[{"0.82", ",", "0.10", ",", "0.10"}], "]"}]}], ",", 
+       RowBox[{"FrameStyle", "->", "None"}], ",", 
+       RowBox[{"RoundingRadius", "->", "7"}], ",", 
+       RowBox[{"FrameMargins", "->", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"12", ",", "12"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"4", ",", "4"}], "}"}]}], "}"}]}]}], "]"}]}], ";"}], "\n", 
+   
+   RowBox[{
+    RowBox[{
+     RowBox[{"smallChip", "[", "True", "]"}], ":=", 
+     RowBox[{"Style", "[", 
+      RowBox[{"\"\<\[CheckmarkedBox]\>\"", ",", "14", ",", 
+       RowBox[{"RGBColor", "[", 
+        RowBox[{"0.13", ",", "0.55", ",", "0.13"}], "]"}]}], "]"}]}], ";"}], 
+   "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"smallChip", "[", "False", "]"}], ":=", 
+     RowBox[{"Style", "[", 
+      RowBox[{"\"\<\[Times]\>\"", ",", "14", ",", "Bold", ",", 
+       RowBox[{"RGBColor", "[", 
+        RowBox[{"0.82", ",", "0.10", ",", "0.10"}], "]"}]}], "]"}]}], ";"}], 
+   "\n", 
+   RowBox[{
+    RowBox[{"vars", "=", 
+     RowBox[{"{", 
+      RowBox[{"gi", ",", "gj", ",", "k", ",", "kp"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"The", " ", "three", " ", 
+       RowBox[{"h", "'"}], "s", " ", "in", " ", "the", " ", "case", " ", 
+       RowBox[{"k", "^", "2"}]}], "!=", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"gi", "^", "2"}], "-", "1"}], ")"}], 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"gj", "^", "2"}], "-", "1"}], ")"}]}]}], ",", 
+     RowBox[{
+     "with", " ", "xi", " ", "a", " ", "numeric", " ", "sign", " ", "per", 
+      " ", 
+      RowBox[{"branch", "."}]}]}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"h1of", "[", 
+      RowBox[{"e1_", ",", "e2_", ",", "x_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"e1", " ", "gj", " ", 
+         RowBox[{"Sqrt", "[", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"gi", "^", "2"}], "-", "1"}], ")"}], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"gj", "^", "2"}], "-", 
+             RowBox[{"kp", "^", "2"}]}], ")"}], " ", "x"}], "]"}]}], "+", 
+        RowBox[{"e2", " ", "gi", " ", 
+         RowBox[{"Sqrt", "[", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"gj", "^", "2"}], "-", "1"}], ")"}], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"gi", "^", "2"}], "-", 
+             RowBox[{"kp", "^", "2"}]}], ")"}], " ", "x"}], "]"}]}]}], ")"}], 
+      "/", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"k", "^", "2"}], "-", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"gi", "^", "2"}], "-", "1"}], ")"}], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"gj", "^", "2"}], "-", "1"}], ")"}]}]}], ")"}]}]}], ";"}], 
+   "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"h2of", "[", 
+      RowBox[{"e1_", ",", "e2_", ",", "x_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Sqrt", "[", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"gi", "^", "2"}], "-", 
+            RowBox[{"kp", "^", "2"}]}], ")"}], " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"gj", "^", "2"}], "-", 
+            RowBox[{"kp", "^", "2"}]}], ")"}], " ", "x"}], "]"}], "+", 
+        RowBox[{"e1", " ", "e2", " ", "gi", " ", "gj", " ", 
+         RowBox[{"Sqrt", "[", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"gi", "^", "2"}], "-", "1"}], ")"}], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"gj", "^", "2"}], "-", "1"}], ")"}], " ", "x"}], 
+          "]"}]}]}], ")"}], "/", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"k", "^", "2"}], "-", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"gi", "^", "2"}], "-", "1"}], ")"}], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"gj", "^", "2"}], "-", "1"}], ")"}]}]}], ")"}]}]}], ";"}], 
+   "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"h3of", "[", 
+      RowBox[{"e1_", ",", "e2_", ",", "x_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"k", "^", "2"}], " ", "gi", " ", "gj"}], "+", 
+        RowBox[{"e1", " ", "e2", " ", "x", " ", 
+         RowBox[{"Sqrt", "[", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"gi", "^", "2"}], "-", "1"}], ")"}], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"gi", "^", "2"}], "-", 
+             RowBox[{"kp", "^", "2"}]}], ")"}], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"gj", "^", "2"}], "-", "1"}], ")"}], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"gj", "^", "2"}], "-", 
+             RowBox[{"kp", "^", "2"}]}], ")"}]}], "]"}]}]}], ")"}], "/", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"k", "^", "2"}], "-", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"gi", "^", "2"}], "-", "1"}], ")"}], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"gj", "^", "2"}], "-", "1"}], ")"}]}]}], ")"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Standing", " ", 
+      RowBox[{"assumptions", ":", "k"}]}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"k", "'"}], " ", "with", " ", 
+        RowBox[{
+         RowBox[{"k", "'"}], "^", "2"}]}], "=", 
+       RowBox[{"1", "-", 
+        RowBox[{"k", "^", "2"}]}]}], ";", 
+      RowBox[{"the", " ", "case", " ", "guard"}], ";", 
+      RowBox[{"window", " ", "assumptions", " ", "added", " ", "per", " ", 
+       RowBox[{"branch", "."}]}]}]}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"baseAssum", "=", 
+     RowBox[{
+      RowBox[{"0", "<", "k", "<", "1"}], "&&", 
+      RowBox[{"kp", ">", "0"}], "&&", 
+      RowBox[{
+       RowBox[{"kp", "^", "2"}], "==", 
+       RowBox[{"1", "-", 
+        RowBox[{"k", "^", "2"}]}]}], "&&", 
+      RowBox[{
+       RowBox[{"k", "^", "2"}], "!=", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"gi", "^", "2"}], "-", "1"}], ")"}], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"gj", "^", "2"}], "-", "1"}], ")"}]}]}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"wConfigs", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\), \
+\\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (1, \[Infinity])\>\"", 
+         ",", 
+         RowBox[{
+          RowBox[{"gi", ">", "1"}], "&&", 
+          RowBox[{"gj", ">", "1"}]}], ",", "1"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\) \[Element] (1, \
+\[Infinity]), \\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (0, k')\>\
+\"", ",", 
+         RowBox[{
+          RowBox[{"gi", ">", "1"}], "&&", 
+          RowBox[{"0", "<", "gj", "<", "kp"}]}], ",", 
+         RowBox[{"-", "1"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\) \[Element] (0, k'), \
+\\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (1, \[Infinity])\>\"", 
+         ",", 
+         RowBox[{
+          RowBox[{"0", "<", "gi", "<", "kp"}], "&&", 
+          RowBox[{"gj", ">", "1"}]}], ",", 
+         RowBox[{"-", "1"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\), \
+\\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (0, k')\>\"", ",", 
+         RowBox[{
+          RowBox[{"0", "<", "gi", "<", "kp"}], "&&", 
+          RowBox[{"0", "<", "gj", "<", "kp"}]}], ",", "1"}], "}"}]}], "}"}]}],
+     ";"}], "\n", 
+   RowBox[{
+    RowBox[{"ePairs", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"1", ",", "1"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", 
+         RowBox[{"-", "1"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "1"}], ",", 
+         RowBox[{"-", "1"}]}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Two", "-", 
+      RowBox[{"directional", " ", "branch", " ", 
+       RowBox[{"check", ":", 
+        RowBox[{
+        "no", " ", "zero", " ", "off", " ", "the", " ", "condition", " ", 
+         "locus"}]}]}]}], ",", 
+     RowBox[{"and", " ", "no", " ", "nonzero", " ", "value", " ", "on", " ", 
+      RowBox[{"it", ".", "A"}], " ", "condition", " ", "False", " ", "means", 
+      " ", "the", " ", "claim", " ", "on", " ", "this", " ", "branch", " ", 
+      "is", " ", "pure", " ", 
+      RowBox[{"nonvanishing", "."}]}]}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"dirForward", "[", 
+      RowBox[{"h_", ",", "cond_", ",", "assum_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"Reduce", "[", 
+       RowBox[{
+        RowBox[{"assum", "&&", 
+         RowBox[{"h", "==", "0"}], "&&", 
+         RowBox[{"!", "cond"}]}], ",", "vars", ",", "Reals"}], "]"}], "===", 
+      "False"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"dirBackward", "[", 
+      RowBox[{"h_", ",", "cond_", ",", "assum_"}], "]"}], ":=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"cond", "===", "False"}], ",", "True", ",", 
+       RowBox[{
+        RowBox[{"Reduce", "[", 
+         RowBox[{
+          RowBox[{"assum", "&&", "cond", "&&", 
+           RowBox[{"h", "!=", "0"}]}], ",", "vars", ",", "Reals"}], "]"}], "===",
+         "False"}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"branchOK", "[", 
+      RowBox[{"h_", ",", "cond_", ",", "assum_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"dirForward", "[", 
+       RowBox[{"h", ",", "cond", ",", "assum"}], "]"}], "&&", 
+      RowBox[{"dirBackward", "[", 
+       RowBox[{"h", ",", "cond", ",", "assum"}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Per", "-", 
+      RowBox[{
+      "branch", " ", "condition", " ", "of", " ", "each", " ", "claim"}]}], 
+     ";", 
+     RowBox[{"False", " ", "encodes", " ", 
+      RowBox[{"\"\<never vanishes\>\"", "."}]}]}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"condOf", "[", 
+      RowBox[{"1", ",", "e1_", ",", "e2_"}], "]"}], ":=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"e1", "==", 
+        RowBox[{"-", "e2"}]}], ",", 
+       RowBox[{"gi", "==", "gj"}], ",", "False"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"condOf", "[", 
+      RowBox[{"2", ",", "e1_", ",", "e2_"}], "]"}], ":=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"e1", "==", 
+        RowBox[{"-", "e2"}]}], ",", 
+       RowBox[{
+        RowBox[{"gi", " ", "gj"}], "==", "kp"}], ",", "False"}], "]"}]}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"condOf", "[", 
+      RowBox[{"3", ",", "e1_", ",", "e2_"}], "]"}], ":=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"e1", "==", "e2"}], ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"k", "^", "2"}], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"gi", "^", "2"}], "+", 
+           RowBox[{"gj", "^", "2"}]}], ")"}]}], "==", 
+        RowBox[{
+         RowBox[{"k", "^", "2"}], "-", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"gi", "^", "2"}], "-", "1"}], ")"}], " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"gj", "^", "2"}], "-", "1"}], ")"}]}]}]}], ",", "False"}],
+       "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"hsym", "[", "n_", "]"}], ":=", 
+     RowBox[{"Subscript", "[", 
+      RowBox[{"\"\<h\>\"", ",", 
+       RowBox[{"\"\<ij\>\"", "<>", 
+        RowBox[{"ToString", "[", "n", "]"}]}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"stmtOf", "[", 
+      RowBox[{"n_", ",", "e1_", ",", "e2_"}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"c", "=", 
+         RowBox[{"condOf", "[", 
+          RowBox[{"n", ",", "e1", ",", "e2"}], "]"}]}], "}"}], ",", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"c", "===", "False"}], ",", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"hsym", "[", "n", "]"}], ",", "\"\< \[NotEqual] 0\>\""}], 
+           "}"}], "]"}], ",", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"hsym", "[", "n", "]"}], ",", 
+            "\"\< = 0  \[DoubleLeftRightArrow]  \>\"", ",", 
+            RowBox[{"TraditionalForm", "[", "c", "]"}]}], "}"}], "]"}]}], 
+        "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"PART", " ", "2"}], ":", 
+     RowBox[{
+     "THE", " ", "QUANTITIES", " ", "AND", " ", "THE", " ", "CLAIMS", " ", 
+      "TO", " ", "TEST"}]}], "*)"}], 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
+    "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"Panel", "[", 
+      RowBox[{
+       RowBox[{"Column", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Style", "[", 
+            RowBox[{
+            "\"\<The quantities under test, in the case \
+\\!\\(\\*SuperscriptBox[\\(k\\), \\(2\\)]\\) \[NotEqual] \
+(\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(i\\), \\(2\\)]\\) - \
+1)(\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(j\\), \\(2\\)]\\) - 1):\>\"", ",", 
+             "Bold", ",", "14"}], "]"}], ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{
+             RowBox[{"TraditionalForm", "[", 
+              RowBox[{"HoldForm", "[", 
+               RowBox[{
+                RowBox[{"Subscript", "[", 
+                 RowBox[{"h", ",", "ij1"}], "]"}], "==", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"e", ",", "i"}], "]"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], " ", 
+                    RowBox[{"Sqrt", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}], "-", 
+                    RowBox[{
+                    RowBox[{"k", "'"}], "^", "2"}]}], ")"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"\[Xi]", ",", "ij"}], "]"}]}], "]"}]}], "+", 
+                   RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"e", ",", "j"}], "]"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], " ", 
+                    RowBox[{"Sqrt", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "-", 
+                    RowBox[{
+                    RowBox[{"k", "'"}], "^", "2"}]}], ")"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"\[Xi]", ",", "ij"}], "]"}]}], "]"}]}]}], ")"}], 
+                 "/", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"k", "^", "2"}], "-", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}]}]}], ")"}]}]}], "]"}], "]"}], ",", "14"}], "]"}], 
+           ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{
+             RowBox[{"TraditionalForm", "[", 
+              RowBox[{"HoldForm", "[", 
+               RowBox[{
+                RowBox[{"Subscript", "[", 
+                 RowBox[{"h", ",", "ij2"}], "]"}], "==", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"Sqrt", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "-", 
+                    RowBox[{
+                    RowBox[{"k", "'"}], "^", "2"}]}], ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}], "-", 
+                    RowBox[{
+                    RowBox[{"k", "'"}], "^", "2"}]}], ")"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"\[Xi]", ",", "ij"}], "]"}]}], "]"}], "+", 
+                   RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"e", ",", "i"}], "]"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"e", ",", "j"}], "]"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], " ", 
+                    RowBox[{"Sqrt", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"\[Xi]", ",", "ij"}], "]"}]}], "]"}]}]}], ")"}], 
+                 "/", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"k", "^", "2"}], "-", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}]}]}], ")"}]}]}], "]"}], "]"}], ",", "14"}], "]"}], 
+           ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{
+             RowBox[{"TraditionalForm", "[", 
+              RowBox[{"HoldForm", "[", 
+               RowBox[{
+                RowBox[{"Subscript", "[", 
+                 RowBox[{"h", ",", "ij3"}], "]"}], "==", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"k", "^", "2"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}]}], "+", 
+                   RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"e", ",", "i"}], "]"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"e", ",", "j"}], "]"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"\[Xi]", ",", "ij"}], "]"}], " ", 
+                    RowBox[{"Sqrt", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "-", 
+                    RowBox[{
+                    RowBox[{"k", "'"}], "^", "2"}]}], ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}], "-", 
+                    RowBox[{
+                    RowBox[{"k", "'"}], "^", "2"}]}], ")"}]}], "]"}]}]}], 
+                  ")"}], "/", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"k", "^", "2"}], "-", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}]}]}], ")"}]}]}], "]"}], "]"}], ",", "14"}], "]"}], 
+           ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{
+            "\"\<and, in the case \\!\\(\\*SuperscriptBox[\\(k\\), \
+\\(2\\)]\\) = (\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(i\\), \\(2\\)]\\) - 1)(\
+\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(j\\), \\(2\\)]\\) - 1) with \
+\\!\\(\\*SubscriptBox[\\(e\\), \\(i\\)]\\) = -\\!\\(\\*SubscriptBox[\\(e\\), \
+\\(j\\)]\\):\>\"", ",", "Bold", ",", "14"}], "]"}], ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{
+             RowBox[{"Row", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"TraditionalForm", "[", 
+                 RowBox[{"HoldForm", "[", 
+                  RowBox[{
+                   RowBox[{"Subscript", "[", 
+                    RowBox[{"h", ",", "ij1"}], "]"}], "==", 
+                   RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"e", ",", "i"}], "]"}], " ", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "-", 
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{"2", " ", "k", " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}]}], ")"}]}]}]}], "]"}], 
+                 "]"}], ",", "\"\<    \>\"", ",", 
+                RowBox[{"TraditionalForm", "[", 
+                 RowBox[{"HoldForm", "[", 
+                  RowBox[{
+                   RowBox[{"Subscript", "[", 
+                    RowBox[{"h", ",", "ij2"}], "]"}], "==", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], " ", 
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}]}], "-", 
+                    RowBox[{
+                    RowBox[{"k", "'"}], "^", "2"}]}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"2", " ", "k", " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}]}], ")"}]}]}], "]"}], "]"}],
+                 ",", "\"\<    \>\"", ",", 
+                RowBox[{"TraditionalForm", "[", 
+                 RowBox[{"HoldForm", "[", 
+                  RowBox[{
+                   RowBox[{"Subscript", "[", 
+                    RowBox[{"h", ",", "ij3"}], "]"}], "==", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "+", 
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{"2", " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}]}], ")"}]}]}], "]"}], 
+                 "]"}]}], "}"}], "]"}], ",", "14"}], "]"}], ",", "\"\<\>\"", 
+           ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<Standing Hypotheses:\>\"", ",", "Bold", ",", "14"}], 
+            "]"}], ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{
+             RowBox[{"Row", "[", 
+              RowBox[{"{", 
+               RowBox[{"\"\<k \[Element] (0, 1),   \>\"", ",", 
+                RowBox[{"TraditionalForm", "[", 
+                 RowBox[{"HoldForm", "[", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"k", "'"}], "^", "2"}], "==", 
+                   RowBox[{"1", "-", 
+                    RowBox[{"k", "^", "2"}]}]}], "]"}], "]"}], ",", 
+                "\"\<,   \>\"", ",", 
+                RowBox[{"TraditionalForm", "[", 
+                 RowBox[{"HoldForm", "[", 
+                  RowBox[{"Subscript", "[", 
+                   RowBox[{"g", ",", "i"}], "]"}], "]"}], "]"}], ",", 
+                "\"\<, \>\"", ",", 
+                RowBox[{"TraditionalForm", "[", 
+                 RowBox[{"HoldForm", "[", 
+                  RowBox[{"Subscript", "[", 
+                   RowBox[{"g", ",", "j"}], "]"}], "]"}], "]"}], ",", 
+                "\"\< \[Element] (0, k') \[Union] (1, \[Infinity]),   \>\"", 
+                ",", 
+                RowBox[{"TraditionalForm", "[", 
+                 RowBox[{"HoldForm", "[", 
+                  RowBox[{"Subscript", "[", 
+                   RowBox[{"e", ",", "i"}], "]"}], "]"}], "]"}], ",", 
+                "\"\<, \>\"", ",", 
+                RowBox[{"TraditionalForm", "[", 
+                 RowBox[{"HoldForm", "[", 
+                  RowBox[{"Subscript", "[", 
+                   RowBox[{"e", ",", "j"}], "]"}], "]"}], "]"}], ",", 
+                "\"\< \[Element] {\[PlusMinus]1},   \>\"", ",", 
+                RowBox[{"TraditionalForm", "[", 
+                 RowBox[{"HoldForm", "[", 
+                  RowBox[{
+                   RowBox[{"Subscript", "[", 
+                    RowBox[{"\[Xi]", ",", "ij"}], "]"}], "==", 
+                   RowBox[{"Sign", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}]}], "]"}]}], "]"}], "]"}]}], "}"}], "]"}], ",", 
+             "13"}], "]"}], ",", "\"\<\>\"", ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{
+            "\"\<The claims we test (over all window configurations of \\!\\(\
+\\*SubscriptBox[\\(g\\), \\(i\\)]\\), \\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\
+\\) and all \\!\\(\\*SubscriptBox[\\(e\\), \\(i\\)]\\), \
+\\!\\(\\*SubscriptBox[\\(e\\), \\(j\\)]\\), in both directions):\>\"", ",", 
+             "Bold", ",", "14"}], "]"}], ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{
+             RowBox[{"TraditionalForm", "[", 
+              RowBox[{"HoldForm", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Subscript", "[", 
+                  RowBox[{"h", ",", "ij1"}], "]"}], "==", "0"}], 
+                "\[Equivalent]", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Subscript", "[", 
+                   RowBox[{"g", ",", "i"}], "]"}], "==", 
+                  RowBox[{"Subscript", "[", 
+                   RowBox[{"g", ",", "j"}], "]"}]}], "&&", 
+                 RowBox[{
+                  RowBox[{"Subscript", "[", 
+                   RowBox[{"e", ",", "i"}], "]"}], "==", 
+                  RowBox[{"-", 
+                   RowBox[{"Subscript", "[", 
+                    RowBox[{"e", ",", "j"}], "]"}]}]}]}]}], "]"}], "]"}], ",",
+              "15"}], "]"}], ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{
+             RowBox[{"TraditionalForm", "[", 
+              RowBox[{"HoldForm", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Subscript", "[", 
+                  RowBox[{"h", ",", "ij2"}], "]"}], "==", "0"}], 
+                "\[Equivalent]", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], " ", 
+                   RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}]}], "==", 
+                  RowBox[{"k", "'"}]}], "&&", 
+                 RowBox[{
+                  RowBox[{"Subscript", "[", 
+                   RowBox[{"e", ",", "i"}], "]"}], "==", 
+                  RowBox[{"-", 
+                   RowBox[{"Subscript", "[", 
+                    RowBox[{"e", ",", "j"}], "]"}]}]}]}]}], "]"}], "]"}], ",",
+              "15"}], "]"}], ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{
+             RowBox[{"TraditionalForm", "[", 
+              RowBox[{"HoldForm", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Subscript", "[", 
+                  RowBox[{"h", ",", "ij3"}], "]"}], "==", "0"}], 
+                "\[Equivalent]", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"k", "^", "2"}], " ", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "+", 
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}]}], ")"}]}], "==", 
+                  RowBox[{
+                   RowBox[{"k", "^", "2"}], "-", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}], "-", "1"}], 
+                    ")"}]}]}]}], "&&", 
+                 RowBox[{
+                  RowBox[{"Subscript", "[", 
+                   RowBox[{"e", ",", "i"}], "]"}], "==", 
+                  RowBox[{"Subscript", "[", 
+                   RowBox[{"e", ",", "j"}], "]"}]}]}]}], "]"}], "]"}], ",", 
+             "15"}], "]"}]}], "}"}], ",", 
+         RowBox[{"Spacings", "->", "1.1"}]}], "]"}], ",", 
+       RowBox[{"Background", "->", 
+        RowBox[{"RGBColor", "[", 
+         RowBox[{"0.99", ",", "0.96", ",", "0.88"}], "]"}]}], ",", 
+       RowBox[{"FrameMargins", "->", "14"}]}], "]"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"PART", " ", "3"}], ":", 
+     RowBox[{
+      RowBox[{"CASE", " ", 
+       RowBox[{"k", "^", "2"}]}], "!=", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"gi", "^", "2"}], "-", "1"}], ")"}], 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"gj", "^", "2"}], "-", "1"}], ")"}]}]}]}], "*)"}], 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
+    "\n", 
+   RowBox[{
+    RowBox[{"resultsAll", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"panelH", "[", 
+      RowBox[{"n_", ",", "hfun_", ",", "col_", ",", "title_"}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"grid", ",", "ok", ",", "headRow", ",", "stmtRow"}], "}"}], 
+       ",", 
+       RowBox[{
+        RowBox[{"grid", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"branchOK", "[", 
+            RowBox[{
+             RowBox[{"hfun", "[", 
+              RowBox[{
+               RowBox[{"ep", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], ",", 
+               RowBox[{"ep", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], ",", 
+               RowBox[{"w", "[", 
+                RowBox[{"[", "3", "]"}], "]"}]}], "]"}], ",", 
+             RowBox[{"condOf", "[", 
+              RowBox[{"n", ",", 
+               RowBox[{"ep", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], ",", 
+               RowBox[{"ep", "[", 
+                RowBox[{"[", "2", "]"}], "]"}]}], "]"}], ",", 
+             RowBox[{"baseAssum", "&&", 
+              RowBox[{"w", "[", 
+               RowBox[{"[", "2", "]"}], "]"}]}]}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"w", ",", "wConfigs"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"ep", ",", "ePairs"}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"ok", "=", 
+         RowBox[{"And", "@@", 
+          RowBox[{"Flatten", "[", "grid", "]"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"resultsAll", ",", "ok"}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"headRow", "=", 
+         RowBox[{"Prepend", "[", 
+          RowBox[{
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{"\"\<(\>\"", ",", 
+                  RowBox[{"ep", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}], ",", "\"\<, \>\"", ",", 
+                  RowBox[{"ep", "[", 
+                   RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<)\>\""}], "}"}], 
+                "]"}], ",", "12", ",", "Bold"}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"ep", ",", "ePairs"}], "}"}]}], "]"}], ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{
+            "\"\<(\\!\\(\\*SubscriptBox[\\(e\\), \\(i\\)]\\), \
+\\!\\(\\*SubscriptBox[\\(e\\), \\(j\\)]\\)) \[RightArrow]\>\"", ",", "12", 
+             ",", 
+             RowBox[{"GrayLevel", "[", "0.3", "]"}]}], "]"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"stmtRow", "=", 
+         RowBox[{"Prepend", "[", 
+          RowBox[{
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{
+               RowBox[{"stmtOf", "[", 
+                RowBox[{"n", ",", 
+                 RowBox[{"ep", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], ",", 
+                 RowBox[{"ep", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}]}], "]"}], ",", "11", ",", 
+               RowBox[{"GrayLevel", "[", "0.25", "]"}]}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"ep", ",", "ePairs"}], "}"}]}], "]"}], ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<tested \[RightArrow]\>\"", ",", "11", ",", 
+             RowBox[{"GrayLevel", "[", "0.3", "]"}]}], "]"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{"Panel", "[", 
+          RowBox[{
+           RowBox[{"Column", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{"title", ",", "Bold", ",", "15", ",", "col"}], 
+                   "]"}], ",", 
+                  RowBox[{"Spacer", "[", "20", "]"}], ",", 
+                  RowBox[{"statusChip", "[", "ok", "]"}]}], "}"}], "]"}], ",", 
+               RowBox[{"Grid", "[", 
+                RowBox[{
+                 RowBox[{"Join", "[", 
+                  RowBox[{
+                   RowBox[{"{", "headRow", "}"}], ",", 
+                   RowBox[{"{", "stmtRow", "}"}], ",", 
+                   RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"Prepend", "[", 
+                    RowBox[{
+                    RowBox[{"smallChip", "/@", 
+                    RowBox[{"grid", "[", 
+                    RowBox[{"[", "iw", "]"}], "]"}]}], ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"wConfigs", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"iw", ",", "1"}], "]"}], "]"}], ",", "12", ",", 
+                    RowBox[{"GrayLevel", "[", "0.3", "]"}]}], "]"}]}], "]"}], 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{"iw", ",", "4"}], "}"}]}], "]"}]}], "]"}], ",", 
+                 RowBox[{"Alignment", "->", "Left"}], ",", 
+                 RowBox[{"Spacings", "->", 
+                  RowBox[{"{", 
+                   RowBox[{"2", ",", "0.7"}], "}"}]}]}], "]"}]}], "}"}], ",", 
+             
+             RowBox[{"Spacings", "->", "1"}]}], "]"}], ",", 
+           RowBox[{"Background", "->", 
+            RowBox[{"Lighter", "[", 
+             RowBox[{"col", ",", "0.93"}], "]"}]}], ",", 
+           RowBox[{"FrameMargins", "->", "12"}]}], "]"}], "]"}], ";"}]}], 
+      "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"panelH", "[", 
+     RowBox[{"1", ",", "h1of", ",", 
+      RowBox[{"RGBColor", "[", 
+       RowBox[{"0.10", ",", "0.30", ",", "0.70"}], "]"}], ",", 
+      "\"\<First claim  (case \\!\\(\\*SuperscriptBox[\\(k\\), \\(2\\)]\\) \
+\[NotEqual] (\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(i\\), \
+\\(2\\)]\\)-1)(\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(j\\), \
+\\(2\\)]\\)-1)):\>\""}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"panelH", "[", 
+     RowBox[{"2", ",", "h2of", ",", 
+      RowBox[{"RGBColor", "[", 
+       RowBox[{"0.55", ",", "0.25", ",", "0.70"}], "]"}], ",", 
+      "\"\<Second claim  (case \\!\\(\\*SuperscriptBox[\\(k\\), \\(2\\)]\\) \
+\[NotEqual] (\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(i\\), \
+\\(2\\)]\\)-1)(\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(j\\), \
+\\(2\\)]\\)-1)):\>\""}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"panelH", "[", 
+     RowBox[{"3", ",", "h3of", ",", 
+      RowBox[{"RGBColor", "[", 
+       RowBox[{"0.00", ",", "0.50", ",", "0.50"}], "]"}], ",", 
+      "\"\<Third claim  (case \\!\\(\\*SuperscriptBox[\\(k\\), \\(2\\)]\\) \
+\[NotEqual] (\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(i\\), \
+\\(2\\)]\\)-1)(\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(j\\), \
+\\(2\\)]\\)-1)):\>\""}], "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"PART", " ", "4"}], ":", 
+      RowBox[{
+       RowBox[{"CASE", " ", 
+        RowBox[{"k", "^", "2"}]}], "==", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"gi", "^", "2"}], "-", "1"}], ")"}], 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"gj", "^", "2"}], "-", "1"}], ")"}], " ", "WITH", " ", 
+        "ei"}]}]}], "=", 
+     RowBox[{"-", "ej"}]}], "*)"}], 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
+    "\n", 
+   RowBox[{
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "assum7", ",", "ok1", ",", "ok2", ",", "ok3", ",", "ok4", ",", "ok"}], 
+       "}"}], ",", 
+      RowBox[{
+       RowBox[{"assum7", "=", 
+        RowBox[{
+         RowBox[{"0", "<", "k", "<", "1"}], "&&", 
+         RowBox[{"kp", ">", "0"}], "&&", 
+         RowBox[{
+          RowBox[{"kp", "^", "2"}], "==", 
+          RowBox[{"1", "-", 
+           RowBox[{"k", "^", "2"}]}]}], "&&", 
+         RowBox[{
+          RowBox[{"k", "^", "2"}], "==", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"gi", "^", "2"}], "-", "1"}], ")"}], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"gj", "^", "2"}], "-", "1"}], ")"}]}]}], "&&", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"gi", ">", "1"}], "&&", 
+             RowBox[{"gj", ">", "1"}]}], ")"}], "||", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"0", "<", "gi", "<", "kp"}], "&&", 
+             RowBox[{"0", "<", "gj", "<", "kp"}]}], ")"}]}], ")"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"ok1", "=", 
+        RowBox[{"And", "@@", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"branchOK", "[", 
+            RowBox[{
+             RowBox[{"e1", " ", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"gi", "^", "2"}], "-", 
+                 RowBox[{"gj", "^", "2"}]}], ")"}], "/", 
+               RowBox[{"(", 
+                RowBox[{"2", " ", "k", " ", "gi", " ", "gj"}], ")"}]}]}], ",", 
+             RowBox[{"gi", "==", "gj"}], ",", "assum7"}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"e1", ",", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", 
+               RowBox[{"-", "1"}]}], "}"}]}], "}"}]}], "]"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"ok2", "=", 
+        RowBox[{"branchOK", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"gi", "^", "2"}], " ", 
+              RowBox[{"gj", "^", "2"}]}], "-", 
+             RowBox[{"kp", "^", "2"}]}], ")"}], "/", 
+           RowBox[{"(", 
+            RowBox[{"2", " ", "k", " ", "gi", " ", "gj"}], ")"}]}], ",", 
+          RowBox[{
+           RowBox[{"gi", " ", "gj"}], "==", "kp"}], ",", "assum7"}], "]"}]}], 
+       ";", "\[IndentingNewLine]", 
+       RowBox[{"ok3", "=", 
+        RowBox[{
+         RowBox[{"Reduce", "[", 
+          RowBox[{
+           RowBox[{"assum7", "&&", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"gi", "^", "2"}], "+", 
+                RowBox[{"gj", "^", "2"}]}], ")"}], "/", 
+              RowBox[{"(", 
+               RowBox[{"2", " ", "gi", " ", "gj"}], ")"}]}], "==", "0"}]}], 
+           ",", "vars", ",", "Reals"}], "]"}], "===", "False"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"ok4", "=", 
+        RowBox[{
+         RowBox[{"Reduce", "[", 
+          RowBox[{
+           RowBox[{"assum7", "&&", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"k", "^", "2"}], " ", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"gi", "^", "2"}], "+", 
+                RowBox[{"gj", "^", "2"}]}], ")"}]}], "==", 
+             RowBox[{
+              RowBox[{"k", "^", "2"}], "-", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"gi", "^", "2"}], "-", "1"}], ")"}], " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"gj", "^", "2"}], "-", "1"}], ")"}]}]}]}]}], ",", 
+           "vars", ",", "Reals"}], "]"}], "===", "False"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"ok", "=", 
+        RowBox[{"ok1", "&&", "ok2", "&&", "ok3", "&&", "ok4"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"resultsAll", ",", "ok"}], "]"}], ";", "\[IndentingNewLine]", 
+       
+       RowBox[{"Print", "[", 
+        RowBox[{"Panel", "[", 
+         RowBox[{
+          RowBox[{"Column", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Row", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Style", "[", 
+                  RowBox[{
+                  "\"\<Case \\!\\(\\*SuperscriptBox[\\(k\\), \\(2\\)]\\) = \
+(\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(i\\), \
+\\(2\\)]\\)-1)(\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(j\\), \\(2\\)]\\)-1), \
+with \\!\\(\\*SubscriptBox[\\(e\\), \\(i\\)]\\) = -\\!\\(\\*SubscriptBox[\\(e\
+\\), \\(j\\)]\\):\>\"", ",", "Bold", ",", "15", ",", 
+                   RowBox[{"RGBColor", "[", 
+                    RowBox[{"0.75", ",", "0.35", ",", "0.05"}], "]"}]}], 
+                  "]"}], ",", 
+                 RowBox[{"Spacer", "[", "20", "]"}], ",", 
+                 RowBox[{"statusChip", "[", "ok", "]"}]}], "}"}], "]"}], ",", 
+              
+              RowBox[{"Column", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"TraditionalForm", "[", 
+                    RowBox[{"HoldForm", "[", 
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"h", ",", "ij1"}], "]"}], "==", 
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"e", ",", "i"}], "]"}], " ", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "-", 
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{"2", " ", "k", " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}]}], ")"}]}]}]}], "]"}], 
+                    "]"}], ",", "\"\<:   \>\"", ",", 
+                    RowBox[{"hsym", "[", "1", "]"}], ",", 
+                    "\"\< = 0  \[DoubleLeftRightArrow]  \>\"", ",", 
+                    RowBox[{"TraditionalForm", "[", 
+                    RowBox[{"HoldForm", "[", 
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "==", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}]}], "]"}], "]"}], ",", 
+                    "\"\<   \>\"", ",", 
+                    RowBox[{"smallChip", "[", "ok1", "]"}]}], "}"}], "]"}], 
+                    ",", "13"}], "]"}], ",", 
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"TraditionalForm", "[", 
+                    RowBox[{"HoldForm", "[", 
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"h", ",", "ij2"}], "]"}], "==", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], " ", 
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}]}], "-", 
+                    RowBox[{
+                    RowBox[{"k", "'"}], "^", "2"}]}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"2", " ", "k", " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}]}], ")"}]}]}], "]"}], "]"}],
+                     ",", "\"\<:   \>\"", ",", 
+                    RowBox[{"hsym", "[", "2", "]"}], ",", 
+                    "\"\< = 0  \[DoubleLeftRightArrow]  \>\"", ",", 
+                    RowBox[{"TraditionalForm", "[", 
+                    RowBox[{"HoldForm", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}]}], "==", 
+                    RowBox[{"k", "'"}]}], "]"}], "]"}], ",", "\"\<   \>\"", 
+                    ",", 
+                    RowBox[{"smallChip", "[", "ok2", "]"}]}], "}"}], "]"}], 
+                    ",", "13"}], "]"}], ",", 
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"TraditionalForm", "[", 
+                    RowBox[{"HoldForm", "[", 
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"h", ",", "ij3"}], "]"}], "==", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], "^", "2"}], "+", 
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}], "^", "2"}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{"2", " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "i"}], "]"}], " ", 
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"g", ",", "j"}], "]"}]}], ")"}]}]}], "]"}], "]"}],
+                     ",", "\"\< \[GreaterEqual] 1,  so  \>\"", ",", 
+                    RowBox[{"hsym", "[", "3", "]"}], ",", 
+                    "\"\< \[NotEqual] 0   \>\"", ",", 
+                    RowBox[{"smallChip", "[", "ok3", "]"}]}], "}"}], "]"}], 
+                    ",", "13"}], "]"}], ",", 
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    "\"\<condition of the third claim unsatisfiable here   \>\
+\"", ",", 
+                    RowBox[{"smallChip", "[", "ok4", "]"}]}], "}"}], "]"}], 
+                    ",", "13"}], "]"}]}], "}"}], ",", 
+                RowBox[{"Spacings", "->", "0.8"}]}], "]"}]}], "}"}], ",", 
+            RowBox[{"Spacings", "->", "1"}]}], "]"}], ",", 
+          RowBox[{"Background", "->", 
+           RowBox[{"Lighter", "[", 
+            RowBox[{
+             RowBox[{"RGBColor", "[", 
+              RowBox[{"0.75", ",", "0.35", ",", "0.05"}], "]"}], ",", 
+             "0.93"}], "]"}]}], ",", 
+          RowBox[{"FrameMargins", "->", "12"}]}], "]"}], "]"}], ";"}]}], 
+     "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"PART", " ", "5"}], ":", "SUMMARY"}], "*)"}], 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
+    "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"Framed", "[", 
+      RowBox[{
+       RowBox[{"Style", "[", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"And", "@@", "resultsAll"}], ",", 
+           "\"\<ALL CLAIMS VERIFIED\>\"", ",", "\"\<SOME CLAIMS FAILED\>\""}],
+           "]"}], ",", "Bold", ",", "White", ",", "16"}], "]"}], ",", 
+       RowBox[{"Background", "->", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"And", "@@", "resultsAll"}], ",", 
+          RowBox[{"RGBColor", "[", 
+           RowBox[{"0.13", ",", "0.55", ",", "0.13"}], "]"}], ",", 
+          RowBox[{"RGBColor", "[", 
+           RowBox[{"0.82", ",", "0.10", ",", "0.10"}], "]"}]}], "]"}]}], ",", 
+       
+       RowBox[{"FrameStyle", "->", "None"}], ",", 
+       RowBox[{"RoundingRadius", "->", "10"}], ",", 
+       RowBox[{"FrameMargins", "->", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"18", ",", "18"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"8", ",", "8"}], "}"}]}], "}"}]}]}], "]"}], "]"}], 
+    ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.9964245155910482`*^9, 3.996424515593677*^9}, 
+   3.99642486011943*^9, {3.9964249123372602`*^9, 3.9964249640694857`*^9}, {
+   3.996424999195395*^9, 3.996425044237541*^9}, {3.9964250811024323`*^9, 
+   3.996425098117571*^9}, 3.996425488467286*^9, 3.996425801304987*^9},
+ CellLabel->
+  "In[126]:=",ExpressionUUID->"99e92cc5-4fc0-41eb-85e6-3d84e1cdfec1"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ PanelBox[
+  TagBox[GridBox[{
+     {
+      StyleBox["\<\"The quantities under test, in the case \
+\\!\\(\\*SuperscriptBox[\\(k\\), \\(2\\)]\\) \[NotEqual] \
+(\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(i\\), \\(2\\)]\\) - \
+1)(\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(j\\), \\(2\\)]\\) - 1):\"\>",
+       StripOnInput->False,
+       FontSize->14,
+       FontWeight->Bold]},
+     {
+      StyleBox[
+       TagBox[
+        FormBox[
+         TagBox[
+          RowBox[{
+           SubscriptBox["h", "ij1"], "\[LongEqual]", 
+           FractionBox[
+            RowBox[{
+             RowBox[{
+              SubscriptBox["e", "i"], " ", 
+              SubscriptBox["g", "j"], " ", 
+              SqrtBox[
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{
+                  SubsuperscriptBox["g", "i", "2"], "-", "1"}], ")"}], " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  SubsuperscriptBox["g", "j", "2"], "-", 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    SuperscriptBox["k", "\[Prime]",
+                    MultilineFunction->None], ")"}], "2"]}], ")"}], " ", 
+                SubscriptBox["\[Xi]", "ij"]}]]}], "+", 
+             RowBox[{
+              SubscriptBox["e", "j"], " ", 
+              SubscriptBox["g", "i"], " ", 
+              SqrtBox[
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{
+                  SubsuperscriptBox["g", "j", "2"], "-", "1"}], ")"}], " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  SubsuperscriptBox["g", "i", "2"], "-", 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    SuperscriptBox["k", "\[Prime]",
+                    MultilineFunction->None], ")"}], "2"]}], ")"}], " ", 
+                SubscriptBox["\[Xi]", "ij"]}]]}]}], 
+            RowBox[{
+             SuperscriptBox["k", "2"], "-", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                SubsuperscriptBox["g", "i", "2"], "-", "1"}], ")"}], " ", 
+              RowBox[{"(", 
+               RowBox[{
+                SubsuperscriptBox["g", "j", "2"], "-", "1"}], ")"}]}]}]]}],
+          HoldForm],
+         TraditionalForm],
+        TraditionalForm,
+        Editable->True],
+       StripOnInput->False,
+       FontSize->14]},
+     {
+      StyleBox[
+       TagBox[
+        FormBox[
+         TagBox[
+          RowBox[{
+           SubscriptBox["h", "ij2"], "\[LongEqual]", 
+           FractionBox[
+            RowBox[{
+             SqrtBox[
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 SubsuperscriptBox["g", "i", "2"], "-", 
+                 SuperscriptBox[
+                  RowBox[{"(", 
+                   SuperscriptBox["k", "\[Prime]",
+                    MultilineFunction->None], ")"}], "2"]}], ")"}], " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 SubsuperscriptBox["g", "j", "2"], "-", 
+                 SuperscriptBox[
+                  RowBox[{"(", 
+                   SuperscriptBox["k", "\[Prime]",
+                    MultilineFunction->None], ")"}], "2"]}], ")"}], " ", 
+               SubscriptBox["\[Xi]", "ij"]}]], "+", 
+             RowBox[{
+              SubscriptBox["e", "i"], " ", 
+              SubscriptBox["e", "j"], " ", 
+              SubscriptBox["g", "i"], " ", 
+              SubscriptBox["g", "j"], " ", 
+              SqrtBox[
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{
+                  SubsuperscriptBox["g", "i", "2"], "-", "1"}], ")"}], " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  SubsuperscriptBox["g", "j", "2"], "-", "1"}], ")"}], " ", 
+                SubscriptBox["\[Xi]", "ij"]}]]}]}], 
+            RowBox[{
+             SuperscriptBox["k", "2"], "-", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                SubsuperscriptBox["g", "i", "2"], "-", "1"}], ")"}], " ", 
+              RowBox[{"(", 
+               RowBox[{
+                SubsuperscriptBox["g", "j", "2"], "-", "1"}], ")"}]}]}]]}],
+          HoldForm],
+         TraditionalForm],
+        TraditionalForm,
+        Editable->True],
+       StripOnInput->False,
+       FontSize->14]},
+     {
+      StyleBox[
+       TagBox[
+        FormBox[
+         TagBox[
+          RowBox[{
+           SubscriptBox["h", "ij3"], "\[LongEqual]", 
+           FractionBox[
+            RowBox[{
+             RowBox[{
+              SuperscriptBox["k", "2"], " ", 
+              SubscriptBox["g", "i"], " ", 
+              SubscriptBox["g", "j"]}], "+", 
+             RowBox[{
+              SubscriptBox["e", "i"], " ", 
+              SubscriptBox["e", "j"], " ", 
+              SubscriptBox["\[Xi]", "ij"], " ", 
+              SqrtBox[
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{
+                  SubsuperscriptBox["g", "i", "2"], "-", "1"}], ")"}], " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  SubsuperscriptBox["g", "i", "2"], "-", 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    SuperscriptBox["k", "\[Prime]",
+                    MultilineFunction->None], ")"}], "2"]}], ")"}], " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  SubsuperscriptBox["g", "j", "2"], "-", "1"}], ")"}], " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  SubsuperscriptBox["g", "j", "2"], "-", 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    SuperscriptBox["k", "\[Prime]",
+                    MultilineFunction->None], ")"}], "2"]}], ")"}]}]]}]}], 
+            RowBox[{
+             SuperscriptBox["k", "2"], "-", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                SubsuperscriptBox["g", "i", "2"], "-", "1"}], ")"}], " ", 
+              RowBox[{"(", 
+               RowBox[{
+                SubsuperscriptBox["g", "j", "2"], "-", "1"}], ")"}]}]}]]}],
+          HoldForm],
+         TraditionalForm],
+        TraditionalForm,
+        Editable->True],
+       StripOnInput->False,
+       FontSize->14]},
+     {
+      StyleBox["\<\"and, in the case \\!\\(\\*SuperscriptBox[\\(k\\), \
+\\(2\\)]\\) = (\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(i\\), \\(2\\)]\\) - 1)(\
+\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(j\\), \\(2\\)]\\) - 1) with \
+\\!\\(\\*SubscriptBox[\\(e\\), \\(i\\)]\\) = -\\!\\(\\*SubscriptBox[\\(e\\), \
+\\(j\\)]\\):\"\>",
+       StripOnInput->False,
+       FontSize->14,
+       FontWeight->Bold]},
+     {
+      StyleBox[
+       TemplateBox[{
+         TagBox[
+          FormBox[
+           TagBox[
+            RowBox[{
+              SubscriptBox["h", "ij1"], "\[LongEqual]", 
+              FractionBox[
+               RowBox[{
+                 SubscriptBox["e", "i"], " ", 
+                 RowBox[{"(", 
+                   RowBox[{
+                    SubsuperscriptBox["g", "i", "2"], "-", 
+                    SubsuperscriptBox["g", "j", "2"]}], ")"}]}], 
+               RowBox[{"2", " ", "k", " ", 
+                 SubscriptBox["g", "i"], " ", 
+                 SubscriptBox["g", "j"]}]]}], HoldForm], TraditionalForm], 
+          TraditionalForm, Editable -> True], "\"    \"", 
+         TagBox[
+          FormBox[
+           TagBox[
+            RowBox[{
+              SubscriptBox["h", "ij2"], "\[LongEqual]", 
+              FractionBox[
+               RowBox[{
+                 RowBox[{
+                   SubsuperscriptBox["g", "i", "2"], " ", 
+                   SubsuperscriptBox["g", "j", "2"]}], "-", 
+                 SuperscriptBox[
+                  RowBox[{"(", 
+                    SuperscriptBox[
+                    "k", "\[Prime]", MultilineFunction -> None], ")"}], 
+                  "2"]}], 
+               RowBox[{"2", " ", "k", " ", 
+                 SubscriptBox["g", "i"], " ", 
+                 SubscriptBox["g", "j"]}]]}], HoldForm], TraditionalForm], 
+          TraditionalForm, Editable -> True], "\"    \"", 
+         TagBox[
+          FormBox[
+           TagBox[
+            RowBox[{
+              SubscriptBox["h", "ij3"], "\[LongEqual]", 
+              FractionBox[
+               RowBox[{
+                 SubsuperscriptBox["g", "i", "2"], "+", 
+                 SubsuperscriptBox["g", "j", "2"]}], 
+               RowBox[{"2", " ", 
+                 SubscriptBox["g", "i"], " ", 
+                 SubscriptBox["g", "j"]}]]}], HoldForm], TraditionalForm], 
+          TraditionalForm, Editable -> True]},
+        "RowDefault"],
+       StripOnInput->False,
+       FontSize->14]},
+     {"\<\"\"\>"},
+     {
+      StyleBox["\<\"Standing Hypotheses:\"\>",
+       StripOnInput->False,
+       FontSize->14,
+       FontWeight->Bold]},
+     {
+      StyleBox[
+       TemplateBox[{"\"k \[Element] (0, 1),   \"", 
+         TagBox[
+          FormBox[
+           TagBox[
+            RowBox[{
+              SuperscriptBox[
+               RowBox[{"(", 
+                 SuperscriptBox["k", "\[Prime]", MultilineFunction -> None], 
+                 ")"}], "2"], "\[LongEqual]", 
+              RowBox[{"1", "-", 
+                SuperscriptBox["k", "2"]}]}], HoldForm], TraditionalForm], 
+          TraditionalForm, Editable -> True], "\",   \"", 
+         TagBox[
+          FormBox[
+           TagBox[
+            SubscriptBox["g", "i"], HoldForm], TraditionalForm], 
+          TraditionalForm, Editable -> True], "\", \"", 
+         TagBox[
+          FormBox[
+           TagBox[
+            SubscriptBox["g", "j"], HoldForm], TraditionalForm], 
+          TraditionalForm, Editable -> True], 
+         "\" \[Element] (0, k') \[Union] (1, \[Infinity]),   \"", 
+         TagBox[
+          FormBox[
+           TagBox[
+            SubscriptBox["e", "i"], HoldForm], TraditionalForm], 
+          TraditionalForm, Editable -> True], "\", \"", 
+         TagBox[
+          FormBox[
+           TagBox[
+            SubscriptBox["e", "j"], HoldForm], TraditionalForm], 
+          TraditionalForm, Editable -> True], 
+         "\" \[Element] {\[PlusMinus]1},   \"", 
+         TagBox[
+          FormBox[
+           TagBox[
+            RowBox[{
+              SubscriptBox["\[Xi]", "ij"], "\[LongEqual]", 
+              TemplateBox[{
+                RowBox[{
+                  RowBox[{"(", 
+                    RowBox[{
+                    SubsuperscriptBox["g", "i", "2"], "-", "1"}], ")"}], " ", 
+                  
+                  RowBox[{"(", 
+                    RowBox[{
+                    SubsuperscriptBox["g", "j", "2"], "-", "1"}], ")"}]}]}, 
+               "Sign"]}], HoldForm], TraditionalForm], TraditionalForm, 
+          Editable -> True]},
+        "RowDefault"],
+       StripOnInput->False,
+       FontSize->13]},
+     {"\<\"\"\>"},
+     {
+      StyleBox["\<\"The claims we test (over all window configurations of \\!\
+\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\), \\!\\(\\*SubscriptBox[\\(g\\), \
+\\(j\\)]\\) and all \\!\\(\\*SubscriptBox[\\(e\\), \\(i\\)]\\), \
+\\!\\(\\*SubscriptBox[\\(e\\), \\(j\\)]\\), in both directions):\"\>",
+       StripOnInput->False,
+       FontSize->14,
+       FontWeight->Bold]},
+     {
+      StyleBox[
+       TagBox[
+        FormBox[
+         TagBox[
+          RowBox[{
+           RowBox[{
+            SubscriptBox["h", "ij1"], "\[LongEqual]", "0"}], "\[Equivalent]", 
+           
+           RowBox[{
+            RowBox[{
+             SubscriptBox["g", "i"], "\[LongEqual]", 
+             SubscriptBox["g", "j"]}], "\[And]", 
+            RowBox[{
+             SubscriptBox["e", "i"], "\[LongEqual]", 
+             RowBox[{"-", 
+              SubscriptBox["e", "j"]}]}]}]}],
+          HoldForm],
+         TraditionalForm],
+        TraditionalForm,
+        Editable->True],
+       StripOnInput->False,
+       FontSize->15]},
+     {
+      StyleBox[
+       TagBox[
+        FormBox[
+         TagBox[
+          RowBox[{
+           RowBox[{
+            SubscriptBox["h", "ij2"], "\[LongEqual]", "0"}], "\[Equivalent]", 
+           
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              SubscriptBox["g", "i"], " ", 
+              SubscriptBox["g", "j"]}], "\[LongEqual]", 
+             SuperscriptBox["k", "\[Prime]",
+              MultilineFunction->None]}], "\[And]", 
+            RowBox[{
+             SubscriptBox["e", "i"], "\[LongEqual]", 
+             RowBox[{"-", 
+              SubscriptBox["e", "j"]}]}]}]}],
+          HoldForm],
+         TraditionalForm],
+        TraditionalForm,
+        Editable->True],
+       StripOnInput->False,
+       FontSize->15]},
+     {
+      StyleBox[
+       TagBox[
+        FormBox[
+         TagBox[
+          RowBox[{
+           RowBox[{
+            SubscriptBox["h", "ij3"], "\[LongEqual]", "0"}], "\[Equivalent]", 
+           
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              SuperscriptBox["k", "2"], " ", 
+              RowBox[{"(", 
+               RowBox[{
+                SubsuperscriptBox["g", "i", "2"], "+", 
+                SubsuperscriptBox["g", "j", "2"]}], ")"}]}], "\[LongEqual]", 
+             RowBox[{
+              SuperscriptBox["k", "2"], "-", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 SubsuperscriptBox["g", "i", "2"], "-", "1"}], ")"}], " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 SubsuperscriptBox["g", "j", "2"], "-", "1"}], ")"}]}]}]}], 
+            "\[And]", 
+            RowBox[{
+             SubscriptBox["e", "i"], "\[LongEqual]", 
+             SubscriptBox["e", "j"]}]}]}],
+          HoldForm],
+         TraditionalForm],
+        TraditionalForm,
+        Editable->True],
+       StripOnInput->False,
+       FontSize->15]}
+    },
+    DefaultBaseStyle->"Column",
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+    GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{1.1}}}],
+   "Column"],
+  Background->RGBColor[0.99, 0.96, 0.88],
+  FrameMargins->14]], "Print",
+ CellChangeTimes->{
+  3.996424517763301*^9, {3.996424792312271*^9, 3.996424803025097*^9}, 
+   3.996424864336781*^9, {3.996424912968025*^9, 3.996424931034382*^9}, 
+   3.996424966561833*^9, {3.996425010821087*^9, 3.99642504665536*^9}, {
+   3.996425083773233*^9, 3.996425100211473*^9}, 3.996425490701056*^9, 
+   3.99642580348363*^9},
+ CellLabel->
+  "During evaluation of \
+In[126]:=",ExpressionUUID->"9143d2d9-0844-41d2-9382-c8208a18d6d6"],
+
+Cell[BoxData[
+ PanelBox[
+  TagBox[GridBox[{
+     {
+      TemplateBox[{
+        StyleBox[
+        "\"First claim  (case \\!\\(\\*SuperscriptBox[\\(k\\), \\(2\\)]\\) \
+\[NotEqual] (\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(i\\), \
+\\(2\\)]\\)-1)(\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(j\\), \
+\\(2\\)]\\)-1)):\"", Bold, 15, 
+         RGBColor[0.1, 0.3, 0.7], StripOnInput -> False], 
+        TemplateBox[{20}, "Spacer1"], 
+        FrameBox[
+         StyleBox["\"Verified\"", Bold, 
+          GrayLevel[1], 13, StripOnInput -> False], Background -> 
+         RGBColor[0.13, 0.55, 0.13], FrameStyle -> None, RoundingRadius -> 7, 
+         FrameMargins -> {{12, 12}, {4, 4}}, StripOnInput -> False]},
+       "RowDefault"]},
+     {
+      TagBox[GridBox[{
+         {
+          
+          StyleBox["\<\"(\\!\\(\\*SubscriptBox[\\(e\\), \\(i\\)]\\), \
+\\!\\(\\*SubscriptBox[\\(e\\), \\(j\\)]\\)) \[RightArrow]\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->12,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox[
+           TemplateBox[{"\"(\"", "1", "\", \"", "1", "\")\""},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->12,
+           FontWeight->Bold], 
+          StyleBox[
+           TemplateBox[{"\"(\"", "1", "\", \"", 
+             RowBox[{"-", "1"}], "\")\""},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->12,
+           FontWeight->Bold], 
+          StyleBox[
+           TemplateBox[{"\"(\"", 
+             RowBox[{"-", "1"}], "\", \"", "1", "\")\""},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->12,
+           FontWeight->Bold], 
+          StyleBox[
+           TemplateBox[{"\"(\"", 
+             RowBox[{"-", "1"}], "\", \"", 
+             RowBox[{"-", "1"}], "\")\""},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->12,
+           FontWeight->Bold]},
+         {
+          StyleBox["\<\"tested \[RightArrow]\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->11,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox[
+           TemplateBox[{
+             SubscriptBox["\"h\"", "\"ij1\""], "\" \[NotEqual] 0\""},
+            "RowDefault"],
+           StripOnInput->False,
+           LineColor->GrayLevel[0.25],
+           FrontFaceColor->GrayLevel[0.25],
+           BackFaceColor->GrayLevel[0.25],
+           GraphicsColor->GrayLevel[0.25],
+           FontSize->11,
+           FontColor->GrayLevel[0.25]], 
+          StyleBox[
+           TemplateBox[{
+             SubscriptBox["\"h\"", "\"ij1\""], 
+             "\" = 0  \[DoubleLeftRightArrow]  \"", 
+             TagBox[
+              FormBox[
+               RowBox[{
+                 FormBox[
+                  SubscriptBox["g", "i"], TraditionalForm], "\[LongEqual]", 
+                 FormBox[
+                  SubscriptBox["g", "j"], TraditionalForm]}], 
+               TraditionalForm], TraditionalForm, Editable -> True]},
+            "RowDefault"],
+           StripOnInput->False,
+           LineColor->GrayLevel[0.25],
+           FrontFaceColor->GrayLevel[0.25],
+           BackFaceColor->GrayLevel[0.25],
+           GraphicsColor->GrayLevel[0.25],
+           FontSize->11,
+           FontColor->GrayLevel[0.25]], 
+          StyleBox[
+           TemplateBox[{
+             SubscriptBox["\"h\"", "\"ij1\""], 
+             "\" = 0  \[DoubleLeftRightArrow]  \"", 
+             TagBox[
+              FormBox[
+               RowBox[{
+                 FormBox[
+                  SubscriptBox["g", "i"], TraditionalForm], "\[LongEqual]", 
+                 FormBox[
+                  SubscriptBox["g", "j"], TraditionalForm]}], 
+               TraditionalForm], TraditionalForm, Editable -> True]},
+            "RowDefault"],
+           StripOnInput->False,
+           LineColor->GrayLevel[0.25],
+           FrontFaceColor->GrayLevel[0.25],
+           BackFaceColor->GrayLevel[0.25],
+           GraphicsColor->GrayLevel[0.25],
+           FontSize->11,
+           FontColor->GrayLevel[0.25]], 
+          StyleBox[
+           TemplateBox[{
+             SubscriptBox["\"h\"", "\"ij1\""], "\" \[NotEqual] 0\""},
+            "RowDefault"],
+           StripOnInput->False,
+           LineColor->GrayLevel[0.25],
+           FrontFaceColor->GrayLevel[0.25],
+           BackFaceColor->GrayLevel[0.25],
+           GraphicsColor->GrayLevel[0.25],
+           FontSize->11,
+           FontColor->GrayLevel[0.25]]},
+         {
+          
+          StyleBox["\<\"\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\), \
+\\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (1, \[Infinity])\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->12,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]]},
+         {
+          
+          StyleBox["\<\"\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\) \[Element] \
+(1, \[Infinity]), \\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (0, \
+k')\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->12,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]]},
+         {
+          
+          StyleBox["\<\"\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\) \[Element] \
+(0, k'), \\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (1, \
+\[Infinity])\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->12,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]]},
+         {
+          
+          StyleBox["\<\"\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\), \
+\\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (0, k')\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->12,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]]}
+        },
+        AutoDelete->False,
+        GridBoxAlignment->{"Columns" -> {{Left}}},
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxSpacings->{"Columns" -> {{2}}, "Rows" -> {{0.7}}}],
+       "Grid"]}
+    },
+    DefaultBaseStyle->"Column",
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+    GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{1}}}],
+   "Column"],
+  Background->RGBColor[0.937, 0.9510000000000001, 0.9790000000000001],
+  FrameMargins->12]], "Print",
+ CellChangeTimes->{
+  3.996424517763301*^9, {3.996424792312271*^9, 3.996424803025097*^9}, 
+   3.996424864336781*^9, {3.996424912968025*^9, 3.996424931034382*^9}, 
+   3.996424966561833*^9, {3.996425010821087*^9, 3.99642504665536*^9}, {
+   3.996425083773233*^9, 3.996425100211473*^9}, 3.996425490701056*^9, 
+   3.9964258038328876`*^9},
+ CellLabel->
+  "During evaluation of \
+In[126]:=",ExpressionUUID->"d24d6ace-3aad-4e45-92a1-b12ac948b8fb"],
+
+Cell[BoxData[
+ PanelBox[
+  TagBox[GridBox[{
+     {
+      TemplateBox[{
+        StyleBox[
+        "\"Second claim  (case \\!\\(\\*SuperscriptBox[\\(k\\), \\(2\\)]\\) \
+\[NotEqual] (\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(i\\), \
+\\(2\\)]\\)-1)(\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(j\\), \
+\\(2\\)]\\)-1)):\"", Bold, 15, 
+         RGBColor[0.55, 0.25, 0.7], StripOnInput -> False], 
+        TemplateBox[{20}, "Spacer1"], 
+        FrameBox[
+         StyleBox["\"Verified\"", Bold, 
+          GrayLevel[1], 13, StripOnInput -> False], Background -> 
+         RGBColor[0.13, 0.55, 0.13], FrameStyle -> None, RoundingRadius -> 7, 
+         FrameMargins -> {{12, 12}, {4, 4}}, StripOnInput -> False]},
+       "RowDefault"]},
+     {
+      TagBox[GridBox[{
+         {
+          
+          StyleBox["\<\"(\\!\\(\\*SubscriptBox[\\(e\\), \\(i\\)]\\), \
+\\!\\(\\*SubscriptBox[\\(e\\), \\(j\\)]\\)) \[RightArrow]\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->12,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox[
+           TemplateBox[{"\"(\"", "1", "\", \"", "1", "\")\""},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->12,
+           FontWeight->Bold], 
+          StyleBox[
+           TemplateBox[{"\"(\"", "1", "\", \"", 
+             RowBox[{"-", "1"}], "\")\""},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->12,
+           FontWeight->Bold], 
+          StyleBox[
+           TemplateBox[{"\"(\"", 
+             RowBox[{"-", "1"}], "\", \"", "1", "\")\""},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->12,
+           FontWeight->Bold], 
+          StyleBox[
+           TemplateBox[{"\"(\"", 
+             RowBox[{"-", "1"}], "\", \"", 
+             RowBox[{"-", "1"}], "\")\""},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->12,
+           FontWeight->Bold]},
+         {
+          StyleBox["\<\"tested \[RightArrow]\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->11,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox[
+           TemplateBox[{
+             SubscriptBox["\"h\"", "\"ij2\""], "\" \[NotEqual] 0\""},
+            "RowDefault"],
+           StripOnInput->False,
+           LineColor->GrayLevel[0.25],
+           FrontFaceColor->GrayLevel[0.25],
+           BackFaceColor->GrayLevel[0.25],
+           GraphicsColor->GrayLevel[0.25],
+           FontSize->11,
+           FontColor->GrayLevel[0.25]], 
+          StyleBox[
+           TemplateBox[{
+             SubscriptBox["\"h\"", "\"ij2\""], 
+             "\" = 0  \[DoubleLeftRightArrow]  \"", 
+             TagBox[
+              FormBox[
+               RowBox[{
+                 RowBox[{
+                   FormBox[
+                    SubscriptBox["g", "i"], TraditionalForm], " ", 
+                   FormBox[
+                    SubscriptBox["g", "j"], TraditionalForm]}], 
+                 "\[LongEqual]", 
+                 FormBox[
+                  SuperscriptBox["k", "\[Prime]", MultilineFunction -> None], 
+                  TraditionalForm]}], TraditionalForm], TraditionalForm, 
+              Editable -> True]},
+            "RowDefault"],
+           StripOnInput->False,
+           LineColor->GrayLevel[0.25],
+           FrontFaceColor->GrayLevel[0.25],
+           BackFaceColor->GrayLevel[0.25],
+           GraphicsColor->GrayLevel[0.25],
+           FontSize->11,
+           FontColor->GrayLevel[0.25]], 
+          StyleBox[
+           TemplateBox[{
+             SubscriptBox["\"h\"", "\"ij2\""], 
+             "\" = 0  \[DoubleLeftRightArrow]  \"", 
+             TagBox[
+              FormBox[
+               RowBox[{
+                 RowBox[{
+                   FormBox[
+                    SubscriptBox["g", "i"], TraditionalForm], " ", 
+                   FormBox[
+                    SubscriptBox["g", "j"], TraditionalForm]}], 
+                 "\[LongEqual]", 
+                 FormBox[
+                  SuperscriptBox["k", "\[Prime]", MultilineFunction -> None], 
+                  TraditionalForm]}], TraditionalForm], TraditionalForm, 
+              Editable -> True]},
+            "RowDefault"],
+           StripOnInput->False,
+           LineColor->GrayLevel[0.25],
+           FrontFaceColor->GrayLevel[0.25],
+           BackFaceColor->GrayLevel[0.25],
+           GraphicsColor->GrayLevel[0.25],
+           FontSize->11,
+           FontColor->GrayLevel[0.25]], 
+          StyleBox[
+           TemplateBox[{
+             SubscriptBox["\"h\"", "\"ij2\""], "\" \[NotEqual] 0\""},
+            "RowDefault"],
+           StripOnInput->False,
+           LineColor->GrayLevel[0.25],
+           FrontFaceColor->GrayLevel[0.25],
+           BackFaceColor->GrayLevel[0.25],
+           GraphicsColor->GrayLevel[0.25],
+           FontSize->11,
+           FontColor->GrayLevel[0.25]]},
+         {
+          
+          StyleBox["\<\"\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\), \
+\\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (1, \[Infinity])\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->12,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]]},
+         {
+          
+          StyleBox["\<\"\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\) \[Element] \
+(1, \[Infinity]), \\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (0, \
+k')\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->12,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]]},
+         {
+          
+          StyleBox["\<\"\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\) \[Element] \
+(0, k'), \\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (1, \
+\[Infinity])\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->12,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]]},
+         {
+          
+          StyleBox["\<\"\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\), \
+\\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (0, k')\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->12,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]]}
+        },
+        AutoDelete->False,
+        GridBoxAlignment->{"Columns" -> {{Left}}},
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxSpacings->{"Columns" -> {{2}}, "Rows" -> {{0.7}}}],
+       "Grid"]}
+    },
+    DefaultBaseStyle->"Column",
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+    GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{1}}}],
+   "Column"],
+  Background->RGBColor[0.9685, 0.9475, 0.9790000000000001],
+  FrameMargins->12]], "Print",
+ CellChangeTimes->{
+  3.996424517763301*^9, {3.996424792312271*^9, 3.996424803025097*^9}, 
+   3.996424864336781*^9, {3.996424912968025*^9, 3.996424931034382*^9}, 
+   3.996424966561833*^9, {3.996425010821087*^9, 3.99642504665536*^9}, {
+   3.996425083773233*^9, 3.996425100211473*^9}, 3.996425490701056*^9, 
+   3.996425804101512*^9},
+ CellLabel->
+  "During evaluation of \
+In[126]:=",ExpressionUUID->"403742fb-4542-4f09-a42f-abfb0e662714"],
+
+Cell[BoxData[
+ PanelBox[
+  TagBox[GridBox[{
+     {
+      TemplateBox[{
+        StyleBox[
+        "\"Third claim  (case \\!\\(\\*SuperscriptBox[\\(k\\), \\(2\\)]\\) \
+\[NotEqual] (\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(i\\), \
+\\(2\\)]\\)-1)(\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(j\\), \
+\\(2\\)]\\)-1)):\"", Bold, 15, 
+         RGBColor[0., 0.5, 0.5], StripOnInput -> False], 
+        TemplateBox[{20}, "Spacer1"], 
+        FrameBox[
+         StyleBox["\"Verified\"", Bold, 
+          GrayLevel[1], 13, StripOnInput -> False], Background -> 
+         RGBColor[0.13, 0.55, 0.13], FrameStyle -> None, RoundingRadius -> 7, 
+         FrameMargins -> {{12, 12}, {4, 4}}, StripOnInput -> False]},
+       "RowDefault"]},
+     {
+      TagBox[GridBox[{
+         {
+          
+          StyleBox["\<\"(\\!\\(\\*SubscriptBox[\\(e\\), \\(i\\)]\\), \
+\\!\\(\\*SubscriptBox[\\(e\\), \\(j\\)]\\)) \[RightArrow]\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->12,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox[
+           TemplateBox[{"\"(\"", "1", "\", \"", "1", "\")\""},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->12,
+           FontWeight->Bold], 
+          StyleBox[
+           TemplateBox[{"\"(\"", "1", "\", \"", 
+             RowBox[{"-", "1"}], "\")\""},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->12,
+           FontWeight->Bold], 
+          StyleBox[
+           TemplateBox[{"\"(\"", 
+             RowBox[{"-", "1"}], "\", \"", "1", "\")\""},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->12,
+           FontWeight->Bold], 
+          StyleBox[
+           TemplateBox[{"\"(\"", 
+             RowBox[{"-", "1"}], "\", \"", 
+             RowBox[{"-", "1"}], "\")\""},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->12,
+           FontWeight->Bold]},
+         {
+          StyleBox["\<\"tested \[RightArrow]\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->11,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox[
+           TemplateBox[{
+             SubscriptBox["\"h\"", "\"ij3\""], 
+             "\" = 0  \[DoubleLeftRightArrow]  \"", 
+             TagBox[
+              FormBox[
+               RowBox[{
+                 RowBox[{
+                   SuperscriptBox["k", "2"], " ", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    FormBox[
+                    SubscriptBox["g", "i"], TraditionalForm], "2"], "+", 
+                    SuperscriptBox[
+                    FormBox[
+                    SubscriptBox["g", "j"], TraditionalForm], "2"]}], ")"}]}],
+                  "\[LongEqual]", 
+                 RowBox[{
+                   SuperscriptBox["k", "2"], "-", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    FormBox[
+                    SubscriptBox["g", "i"], TraditionalForm], "2"], "-", 
+                    "1"}], ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    FormBox[
+                    SubscriptBox["g", "j"], TraditionalForm], "2"], "-", 
+                    "1"}], ")"}]}]}]}], TraditionalForm], TraditionalForm, 
+              Editable -> True]},
+            "RowDefault"],
+           StripOnInput->False,
+           LineColor->GrayLevel[0.25],
+           FrontFaceColor->GrayLevel[0.25],
+           BackFaceColor->GrayLevel[0.25],
+           GraphicsColor->GrayLevel[0.25],
+           FontSize->11,
+           FontColor->GrayLevel[0.25]], 
+          StyleBox[
+           TemplateBox[{
+             SubscriptBox["\"h\"", "\"ij3\""], "\" \[NotEqual] 0\""},
+            "RowDefault"],
+           StripOnInput->False,
+           LineColor->GrayLevel[0.25],
+           FrontFaceColor->GrayLevel[0.25],
+           BackFaceColor->GrayLevel[0.25],
+           GraphicsColor->GrayLevel[0.25],
+           FontSize->11,
+           FontColor->GrayLevel[0.25]], 
+          StyleBox[
+           TemplateBox[{
+             SubscriptBox["\"h\"", "\"ij3\""], "\" \[NotEqual] 0\""},
+            "RowDefault"],
+           StripOnInput->False,
+           LineColor->GrayLevel[0.25],
+           FrontFaceColor->GrayLevel[0.25],
+           BackFaceColor->GrayLevel[0.25],
+           GraphicsColor->GrayLevel[0.25],
+           FontSize->11,
+           FontColor->GrayLevel[0.25]], 
+          StyleBox[
+           TemplateBox[{
+             SubscriptBox["\"h\"", "\"ij3\""], 
+             "\" = 0  \[DoubleLeftRightArrow]  \"", 
+             TagBox[
+              FormBox[
+               RowBox[{
+                 RowBox[{
+                   SuperscriptBox["k", "2"], " ", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    FormBox[
+                    SubscriptBox["g", "i"], TraditionalForm], "2"], "+", 
+                    SuperscriptBox[
+                    FormBox[
+                    SubscriptBox["g", "j"], TraditionalForm], "2"]}], ")"}]}],
+                  "\[LongEqual]", 
+                 RowBox[{
+                   SuperscriptBox["k", "2"], "-", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    FormBox[
+                    SubscriptBox["g", "i"], TraditionalForm], "2"], "-", 
+                    "1"}], ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    FormBox[
+                    SubscriptBox["g", "j"], TraditionalForm], "2"], "-", 
+                    "1"}], ")"}]}]}]}], TraditionalForm], TraditionalForm, 
+              Editable -> True]},
+            "RowDefault"],
+           StripOnInput->False,
+           LineColor->GrayLevel[0.25],
+           FrontFaceColor->GrayLevel[0.25],
+           BackFaceColor->GrayLevel[0.25],
+           GraphicsColor->GrayLevel[0.25],
+           FontSize->11,
+           FontColor->GrayLevel[0.25]]},
+         {
+          
+          StyleBox["\<\"\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\), \
+\\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (1, \[Infinity])\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->12,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]]},
+         {
+          
+          StyleBox["\<\"\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\) \[Element] \
+(1, \[Infinity]), \\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (0, \
+k')\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->12,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]]},
+         {
+          
+          StyleBox["\<\"\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\) \[Element] \
+(0, k'), \\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (1, \
+\[Infinity])\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->12,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]]},
+         {
+          
+          StyleBox["\<\"\\!\\(\\*SubscriptBox[\\(g\\), \\(i\\)]\\), \
+\\!\\(\\*SubscriptBox[\\(g\\), \\(j\\)]\\) \[Element] (0, k')\"\>",
+           StripOnInput->False,
+           LineColor->GrayLevel[0.3],
+           FrontFaceColor->GrayLevel[0.3],
+           BackFaceColor->GrayLevel[0.3],
+           GraphicsColor->GrayLevel[0.3],
+           FontSize->12,
+           FontColor->GrayLevel[0.3]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]], 
+          StyleBox["\<\"\[CheckmarkedBox]\"\>",
+           StripOnInput->False,
+           LineColor->RGBColor[0.13, 0.55, 0.13],
+           FrontFaceColor->RGBColor[0.13, 0.55, 0.13],
+           BackFaceColor->RGBColor[0.13, 0.55, 0.13],
+           GraphicsColor->RGBColor[0.13, 0.55, 0.13],
+           FontSize->14,
+           FontColor->RGBColor[0.13, 0.55, 0.13]]}
+        },
+        AutoDelete->False,
+        GridBoxAlignment->{"Columns" -> {{Left}}},
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxSpacings->{"Columns" -> {{2}}, "Rows" -> {{0.7}}}],
+       "Grid"]}
+    },
+    DefaultBaseStyle->"Column",
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+    GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{1}}}],
+   "Column"],
+  Background->RGBColor[0.93, 0.9650000000000001, 0.9650000000000001],
+  FrameMargins->12]], "Print",
+ CellChangeTimes->{
+  3.996424517763301*^9, {3.996424792312271*^9, 3.996424803025097*^9}, 
+   3.996424864336781*^9, {3.996424912968025*^9, 3.996424931034382*^9}, 
+   3.996424966561833*^9, {3.996425010821087*^9, 3.99642504665536*^9}, {
+   3.996425083773233*^9, 3.996425100211473*^9}, 3.996425490701056*^9, 
+   3.996425804977275*^9},
+ CellLabel->
+  "During evaluation of \
+In[126]:=",ExpressionUUID->"a705a209-fd3f-404f-9613-090dfeb3447a"],
+
+Cell[BoxData[
+ PanelBox[
+  TagBox[GridBox[{
+     {
+      TemplateBox[{
+        StyleBox[
+        "\"Case \\!\\(\\*SuperscriptBox[\\(k\\), \\(2\\)]\\) = \
+(\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(i\\), \
+\\(2\\)]\\)-1)(\\!\\(\\*SubsuperscriptBox[\\(g\\), \\(j\\), \\(2\\)]\\)-1), \
+with \\!\\(\\*SubscriptBox[\\(e\\), \\(i\\)]\\) = -\\!\\(\\*SubscriptBox[\\(e\
+\\), \\(j\\)]\\):\"", Bold, 15, 
+         RGBColor[0.75, 0.35, 0.05], StripOnInput -> False], 
+        TemplateBox[{20}, "Spacer1"], 
+        FrameBox[
+         StyleBox["\"Verified\"", Bold, 
+          GrayLevel[1], 13, StripOnInput -> False], Background -> 
+         RGBColor[0.13, 0.55, 0.13], FrameStyle -> None, RoundingRadius -> 7, 
+         FrameMargins -> {{12, 12}, {4, 4}}, StripOnInput -> False]},
+       "RowDefault"]},
+     {
+      TagBox[GridBox[{
+         {
+          StyleBox[
+           TemplateBox[{
+             TagBox[
+              FormBox[
+               TagBox[
+                RowBox[{
+                  SubscriptBox["h", "ij1"], "\[LongEqual]", 
+                  FractionBox[
+                   RowBox[{
+                    SubscriptBox["e", "i"], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    SubsuperscriptBox["g", "i", "2"], "-", 
+                    SubsuperscriptBox["g", "j", "2"]}], ")"}]}], 
+                   RowBox[{"2", " ", "k", " ", 
+                    SubscriptBox["g", "i"], " ", 
+                    SubscriptBox["g", "j"]}]]}], HoldForm], TraditionalForm], 
+              TraditionalForm, Editable -> True], "\":   \"", 
+             SubscriptBox["\"h\"", "\"ij1\""], 
+             "\" = 0  \[DoubleLeftRightArrow]  \"", 
+             TagBox[
+              FormBox[
+               TagBox[
+                RowBox[{
+                  SubscriptBox["g", "i"], "\[LongEqual]", 
+                  SubscriptBox["g", "j"]}], HoldForm], TraditionalForm], 
+              TraditionalForm, Editable -> True], "\"   \"", 
+             StyleBox["\"\[CheckmarkedBox]\"", 14, 
+              RGBColor[0.13, 0.55, 0.13], StripOnInput -> False]},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->13]},
+         {
+          StyleBox[
+           TemplateBox[{
+             TagBox[
+              FormBox[
+               TagBox[
+                RowBox[{
+                  SubscriptBox["h", "ij2"], "\[LongEqual]", 
+                  FractionBox[
+                   RowBox[{
+                    RowBox[{
+                    SubsuperscriptBox["g", "i", "2"], " ", 
+                    SubsuperscriptBox["g", "j", "2"]}], "-", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    SuperscriptBox[
+                    "k", "\[Prime]", MultilineFunction -> None], ")"}], 
+                    "2"]}], 
+                   RowBox[{"2", " ", "k", " ", 
+                    SubscriptBox["g", "i"], " ", 
+                    SubscriptBox["g", "j"]}]]}], HoldForm], TraditionalForm], 
+              TraditionalForm, Editable -> True], "\":   \"", 
+             SubscriptBox["\"h\"", "\"ij2\""], 
+             "\" = 0  \[DoubleLeftRightArrow]  \"", 
+             TagBox[
+              FormBox[
+               TagBox[
+                RowBox[{
+                  RowBox[{
+                    SubscriptBox["g", "i"], " ", 
+                    SubscriptBox["g", "j"]}], "\[LongEqual]", 
+                  SuperscriptBox[
+                  "k", "\[Prime]", MultilineFunction -> None]}], HoldForm], 
+               TraditionalForm], TraditionalForm, Editable -> True], 
+             "\"   \"", 
+             StyleBox["\"\[CheckmarkedBox]\"", 14, 
+              RGBColor[0.13, 0.55, 0.13], StripOnInput -> False]},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->13]},
+         {
+          StyleBox[
+           TemplateBox[{
+             TagBox[
+              FormBox[
+               TagBox[
+                RowBox[{
+                  SubscriptBox["h", "ij3"], "\[LongEqual]", 
+                  FractionBox[
+                   RowBox[{
+                    SubsuperscriptBox["g", "i", "2"], "+", 
+                    SubsuperscriptBox["g", "j", "2"]}], 
+                   RowBox[{"2", " ", 
+                    SubscriptBox["g", "i"], " ", 
+                    SubscriptBox["g", "j"]}]]}], HoldForm], TraditionalForm], 
+              TraditionalForm, Editable -> True], 
+             "\" \[GreaterEqual] 1,  so  \"", 
+             SubscriptBox["\"h\"", "\"ij3\""], "\" \[NotEqual] 0   \"", 
+             StyleBox["\"\[CheckmarkedBox]\"", 14, 
+              RGBColor[0.13, 0.55, 0.13], StripOnInput -> False]},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->13]},
+         {
+          StyleBox[
+           
+           TemplateBox[{
+            "\"condition of the third claim unsatisfiable here   \"", 
+             StyleBox["\"\[CheckmarkedBox]\"", 14, 
+              RGBColor[0.13, 0.55, 0.13], StripOnInput -> False]},
+            "RowDefault"],
+           StripOnInput->False,
+           FontSize->13]}
+        },
+        DefaultBaseStyle->"Column",
+        GridBoxAlignment->{"Columns" -> {{Left}}},
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.8}}}],
+       "Column"]}
+    },
+    DefaultBaseStyle->"Column",
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+    GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{1}}}],
+   "Column"],
+  Background->RGBColor[0.9825, 0.9545, 0.9335],
+  FrameMargins->12]], "Print",
+ CellChangeTimes->{
+  3.996424517763301*^9, {3.996424792312271*^9, 3.996424803025097*^9}, 
+   3.996424864336781*^9, {3.996424912968025*^9, 3.996424931034382*^9}, 
+   3.996424966561833*^9, {3.996425010821087*^9, 3.99642504665536*^9}, {
+   3.996425083773233*^9, 3.996425100211473*^9}, 3.996425490701056*^9, 
+   3.996425805004652*^9},
+ CellLabel->
+  "During evaluation of \
+In[126]:=",ExpressionUUID->"67fb5c06-21ec-473f-a3ec-95806001f65f"],
+
+Cell[BoxData[
+ FrameBox[
+  StyleBox["\<\"ALL CLAIMS VERIFIED\"\>",
+   StripOnInput->False,
+   LineColor->GrayLevel[1],
+   FrontFaceColor->GrayLevel[1],
+   BackFaceColor->GrayLevel[1],
+   GraphicsColor->GrayLevel[1],
+   FontSize->16,
+   FontWeight->Bold,
+   FontColor->GrayLevel[1]],
+  Background->RGBColor[0.13, 0.55, 0.13],
+  FrameMargins->{{18, 18}, {8, 8}},
+  FrameStyle->None,
+  RoundingRadius->10,
+  StripOnInput->False]], "Print",
+ CellChangeTimes->{
+  3.996424517763301*^9, {3.996424792312271*^9, 3.996424803025097*^9}, 
+   3.996424864336781*^9, {3.996424912968025*^9, 3.996424931034382*^9}, 
+   3.996424966561833*^9, {3.996425010821087*^9, 3.99642504665536*^9}, {
+   3.996425083773233*^9, 3.996425100211473*^9}, 3.996425490701056*^9, 
+   3.996425805007217*^9},
+ CellLabel->
+  "During evaluation of \
+In[126]:=",ExpressionUUID->"459b432f-49be-4274-b571-f8100bf4e2b2"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -7046,7 +10196,7 @@ In[281]:=",ExpressionUUID->"571c4dd0-5671-4ee9-b694-f3f24c42198b"]
 }, Open  ]]
 },
 WindowSize->{1051, 868},
-WindowMargins->{{Automatic, 12}, {-137, Automatic}},
+WindowMargins->{{Automatic, 26}, {-3, Automatic}},
 PrintingCopies->1,
 PrintingPageRange->{1, Automatic},
 FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
@@ -7070,53 +10220,70 @@ Cell[1346, 36, 366, 8, 85, "Subtitle",ExpressionUUID->"44d9d59b-3c80-48b3-8124-c
 Cell[CellGroupData[{
 Cell[1737, 48, 203, 4, 69, "Chapter",ExpressionUUID->"82af4c07-f876-4628-b5c6-a065a8fd1e35"],
 Cell[CellGroupData[{
-Cell[1965, 56, 468, 8, 54, "Subsection",ExpressionUUID->"0676ce2f-0e28-477f-8386-9db802dc2024"],
+Cell[1965, 56, 465, 8, 67, "Section",ExpressionUUID->"0676ce2f-0e28-477f-8386-9db802dc2024"],
 Cell[CellGroupData[{
-Cell[2458, 68, 15914, 409, 766, "Input",ExpressionUUID->"06e22bba-e675-4404-901e-523b40546b9d"],
-Cell[18375, 479, 12283, 408, 480, "Output",ExpressionUUID->"6017d847-96b7-45f7-b999-5498461bd850"]
+Cell[2455, 68, 15914, 409, 766, "Input",ExpressionUUID->"06e22bba-e675-4404-901e-523b40546b9d"],
+Cell[18372, 479, 12283, 408, 457, "Output",ExpressionUUID->"6017d847-96b7-45f7-b999-5498461bd850"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[30719, 894, 154, 3, 69, "Chapter",ExpressionUUID->"f42a66f4-d51f-4e23-9755-886c913f8599"],
+Cell[30716, 894, 154, 3, 69, "Chapter",ExpressionUUID->"f42a66f4-d51f-4e23-9755-886c913f8599"],
 Cell[CellGroupData[{
-Cell[30898, 901, 394, 7, 54, "Subsection",ExpressionUUID->"1bcbc5cf-25c5-4947-9179-cd530599ad40"],
+Cell[30895, 901, 391, 7, 67, "Section",ExpressionUUID->"1bcbc5cf-25c5-4947-9179-cd530599ad40"],
 Cell[CellGroupData[{
-Cell[31317, 912, 18378, 486, 997, "Input",ExpressionUUID->"7e2c8a0d-dd3b-4d0d-a43e-0a8119511b83"],
-Cell[49698, 1400, 12262, 401, 341, "Output",ExpressionUUID->"d5ba11c4-d230-40cc-a8c5-4c9a923c94c0"]
+Cell[31311, 912, 18378, 486, 997, "Input",ExpressionUUID->"7e2c8a0d-dd3b-4d0d-a43e-0a8119511b83"],
+Cell[49692, 1400, 12262, 401, 341, "Output",ExpressionUUID->"d5ba11c4-d230-40cc-a8c5-4c9a923c94c0"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[62021, 1808, 205, 4, 69, "Chapter",ExpressionUUID->"dd0503db-9366-4892-a71d-c66fd0182520"],
+Cell[62015, 1808, 203, 4, 69, "Chapter",ExpressionUUID->"dd0503db-9366-4892-a71d-c66fd0182520"],
 Cell[CellGroupData[{
-Cell[62251, 1816, 368, 7, 54, "Subsection",ExpressionUUID->"f24dd9cb-031b-4d58-a8ee-2aa01d495633"],
+Cell[62243, 1816, 365, 7, 67, "Section",ExpressionUUID->"f24dd9cb-031b-4d58-a8ee-2aa01d495633"],
 Cell[CellGroupData[{
-Cell[62644, 1827, 16575, 451, 997, "Input",ExpressionUUID->"bb6694ae-1c67-4ae0-8ef1-8d1b2d11ac0c"],
-Cell[79222, 2280, 4866, 159, 217, "Output",ExpressionUUID->"510bf495-86e9-45db-a84d-f16246a587a9"]
+Cell[62633, 1827, 16575, 451, 997, "Input",ExpressionUUID->"bb6694ae-1c67-4ae0-8ef1-8d1b2d11ac0c"],
+Cell[79211, 2280, 4866, 159, 217, "Output",ExpressionUUID->"510bf495-86e9-45db-a84d-f16246a587a9"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[84149, 2446, 156, 3, 69, "Chapter",ExpressionUUID->"1f00ace1-9eaa-45bb-ab32-969454332071"],
+Cell[84138, 2446, 154, 3, 69, "Chapter",ExpressionUUID->"1f00ace1-9eaa-45bb-ab32-969454332071"],
 Cell[CellGroupData[{
-Cell[84330, 2453, 225, 5, 54, "Subsection",ExpressionUUID->"3bf78643-472a-4d85-9419-9b4a4ab8b7a3"],
+Cell[84317, 2453, 219, 5, 67, "Section",ExpressionUUID->"3bf78643-472a-4d85-9419-9b4a4ab8b7a3"],
 Cell[CellGroupData[{
-Cell[84580, 2462, 51416, 1319, 2740, "Input",ExpressionUUID->"cd4cf647-c849-47fc-ba7e-009bf22c4649"],
+Cell[84561, 2462, 51443, 1313, 2719, "Input",ExpressionUUID->"cd4cf647-c849-47fc-ba7e-009bf22c4649"],
 Cell[CellGroupData[{
-Cell[136021, 3785, 4991, 136, 166, "Print",ExpressionUUID->"fa0dc21b-642b-435a-a8ee-1dae20e5f942"],
-Cell[141015, 3923, 9526, 259, 199, "Print",ExpressionUUID->"99372c1b-7f60-45c5-9b36-971f017ed15e"],
-Cell[150544, 4184, 9584, 261, 199, "Print",ExpressionUUID->"0fdbc717-b647-4a15-8294-4986b5ddf087"],
-Cell[160131, 4447, 9570, 260, 202, "Print",ExpressionUUID->"b987286e-2d7c-4911-bb03-a82857d359f0"],
-Cell[169704, 4709, 9598, 262, 202, "Print",ExpressionUUID->"a8f4692b-c789-4e67-9468-a00b7c0a6852"],
-Cell[179305, 4973, 8831, 239, 232, "Print",ExpressionUUID->"855e08bc-fa65-4c32-a10f-ed96211b4533"],
-Cell[188139, 5214, 12011, 323, 287, "Print",ExpressionUUID->"ff5aa9e9-3409-4422-b04d-af5ef66dcc7a"],
-Cell[200153, 5539, 12028, 323, 287, "Print",ExpressionUUID->"fe3e0147-c5e9-4ef3-b19b-ec21d6c28944"],
-Cell[212184, 5864, 10559, 288, 277, "Print",ExpressionUUID->"3f869816-e038-4acc-a7a5-eb1ece0b54d1"],
-Cell[222746, 6154, 10404, 285, 270, "Print",ExpressionUUID->"7aa7bf71-8d33-4c9d-8a77-8c7119b33cd1"],
-Cell[233153, 6441, 10420, 285, 270, "Print",ExpressionUUID->"d1b32bcc-63c0-4cf0-af59-dbe13312dd46"],
-Cell[243576, 6728, 10573, 288, 277, "Print",ExpressionUUID->"e22f3904-fee2-42c7-95c4-3007b5b87bd4"],
-Cell[254152, 7018, 798, 22, 49, "Print",ExpressionUUID->"571c4dd0-5671-4ee9-b694-f3f24c42198b"]
+Cell[136029, 3779, 5029, 137, 166, "Print",ExpressionUUID->"7a9ca961-82be-4292-b0a7-9030d858c364"],
+Cell[141061, 3918, 9604, 261, 199, "Print",ExpressionUUID->"11edd2da-c824-4fd4-a8f0-7522d84cf1d5"],
+Cell[150668, 4181, 9662, 263, 199, "Print",ExpressionUUID->"83863315-8fcc-4783-9404-2177385f293e"],
+Cell[160333, 4446, 9650, 262, 199, "Print",ExpressionUUID->"06ad2886-39d7-49d5-af5f-6642c5752c31"],
+Cell[169986, 4710, 9676, 264, 199, "Print",ExpressionUUID->"540d2d1f-593a-480c-a485-39c95eeead83"],
+Cell[179665, 4976, 8911, 241, 232, "Print",ExpressionUUID->"d8e13178-f611-41d4-9a2f-c15b9cc8f4a7"],
+Cell[188579, 5219, 12092, 325, 287, "Print",ExpressionUUID->"8f9c9ed0-8b0f-4b9d-af0a-2762a9b4135c"],
+Cell[200674, 5546, 12108, 325, 287, "Print",ExpressionUUID->"cb05c3a5-6309-4705-ab9a-dabeb00ae9b1"],
+Cell[212785, 5873, 10637, 290, 277, "Print",ExpressionUUID->"8395b4cd-20bc-4054-8ff6-722d818c7458"],
+Cell[223425, 6165, 10486, 287, 270, "Print",ExpressionUUID->"ba58deee-453e-488f-ac06-3dc0b868d402"],
+Cell[233914, 6454, 10502, 287, 270, "Print",ExpressionUUID->"807f23d4-f3de-4ca1-9dbc-f36e5f39177a"],
+Cell[244419, 6743, 10652, 290, 277, "Print",ExpressionUUID->"46fe3f37-f023-4d43-b95e-31e8375a7d46"],
+Cell[255074, 7035, 878, 24, 49, "Print",ExpressionUUID->"97ec215a-961b-4206-ab0a-583b56ad7786"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[256025, 7067, 205, 4, 69, "Chapter",ExpressionUUID->"df85d0c7-d7b2-4fff-9586-4569686faae4"],
+Cell[CellGroupData[{
+Cell[256255, 7075, 293, 7, 67, "Section",ExpressionUUID->"d110af2e-7237-4df4-9a71-cb8790813994"],
+Cell[CellGroupData[{
+Cell[256573, 7086, 58515, 1475, 3559, "Input",ExpressionUUID->"99e92cc5-4fc0-41eb-85e6-3d84e1cdfec1"],
+Cell[CellGroupData[{
+Cell[315113, 8565, 14471, 410, 510, "Print",ExpressionUUID->"9143d2d9-0844-41d2-9382-c8208a18d6d6"],
+Cell[329587, 8977, 13469, 326, 200, "Print",ExpressionUUID->"d24d6ace-3aad-4e45-92a1-b12ac948b8fb"],
+Cell[343059, 9305, 13859, 336, 201, "Print",ExpressionUUID->"403742fb-4542-4f09-a42f-abfb0e662714"],
+Cell[356921, 9643, 15173, 370, 204, "Print",ExpressionUUID->"a705a209-fd3f-404f-9613-090dfeb3447a"],
+Cell[372097, 10015, 6075, 149, 220, "Print",ExpressionUUID->"67fb5c06-21ec-473f-a3ec-95806001f65f"],
+Cell[378175, 10166, 874, 24, 49, "Print",ExpressionUUID->"459b432f-49be-4274-b571-f8100bf4e2b2"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
