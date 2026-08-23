@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    383878,      10287]
-NotebookOptionsPosition[    379113,      10197]
-NotebookOutlinePosition[    379565,      10215]
-CellTagsIndexPosition[    379522,      10212]
+NotebookDataLength[    403758,      10762]
+NotebookOptionsPosition[    398988,      10672]
+NotebookOutlinePosition[    399441,      10690]
+CellTagsIndexPosition[    399398,      10687]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -2504,7 +2504,7 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"Format", "[", 
       RowBox[{"chi", ",", "TraditionalForm"}], "]"}], "=", "\[Chi]"}], ";"}], 
-   "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"Standing", " ", 
@@ -2539,17 +2539,34 @@ Cell[BoxData[
          " ", "enumerated", " ", "explicitly"}]}]}]}], ",", 
      RowBox[{
       RowBox[{
-      "so", " ", "every", " ", "square", " ", "root", " ", "reaching", " ", 
-       "the", " ", "kernel", " ", "has", " ", "a", " ", "sign"}], "-", 
-      RowBox[{"determined", " ", 
-       RowBox[{"radicand", ".", "All"}], " ", "display"}], "-", 
+       RowBox[{
+       "so", " ", "every", " ", "square", " ", "root", " ", "reaching", " ", 
+        "the", " ", "kernel", " ", "has", " ", "a", " ", "sign"}], "-", 
+       RowBox[{"determined", " ", 
+        RowBox[{"radicand", ".", 
+         RowBox[{"Parametrization", ":", 
+          RowBox[{
+          "the", " ", "first", " ", "term", " ", "of", " ", "the", " ", 
+           "identity", " ", "carries", " ", "zeta1", " ", "alone"}]}]}]}]}], 
+      ";", 
       RowBox[{
-      "only", " ", "rows", " ", "are", " ", "wrapped", " ", "in", " ", 
-       "HoldForm"}]}], ",", 
+       RowBox[{
+       "in", " ", "every", " ", "case", " ", "the", " ", "verifying", " ", 
+        "choice", " ", "is", " ", "zeta1"}], "=", 
+       RowBox[{
+        RowBox[{"chi", " ", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+           "the", " ", "value", " ", "of", " ", "chi", " ", "on", " ", "the", 
+            " ", "branch"}], ")"}], ".", "All"}], " ", "display"}], "-", 
+        RowBox[{
+        "only", " ", "rows", " ", "are", " ", "wrapped", " ", "in", " ", 
+         "HoldForm"}]}]}]}], ",", 
      RowBox[{
      "so", " ", "they", " ", "cannot", " ", "evaluate", " ", "through", " ", 
       "symbols", " ", "defined", " ", "in", " ", "other", " ", 
-      RowBox[{"sections", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"sections", "."}]}]}], "*)"}], "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"standingOf", "[", 
@@ -2611,7 +2628,7 @@ Cell[BoxData[
       "zeta1_", ",", "zeta2_", ",", "chiv_", ",", "fjE_", ",", "fmE_"}], 
       "]"}], ":=", 
      RowBox[{
-      RowBox[{"zeta1", " ", "chiv", " ", "M", " ", 
+      RowBox[{"zeta1", " ", "M", " ", 
        RowBox[{"Sqrt", "[", 
         RowBox[{
          RowBox[{"(", 
@@ -2707,8 +2724,8 @@ Cell[BoxData[
           RowBox[{"{", 
            RowBox[{"12", ",", "12"}], "}"}], ",", 
           RowBox[{"{", 
-           RowBox[{"4", ",", "4"}], "}"}]}], "}"}]}]}], "]"}]}], ";"}], "\n", 
-   
+           RowBox[{"4", ",", "4"}], "}"}]}], "}"}]}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"Two", "-", 
@@ -2735,7 +2752,7 @@ Cell[BoxData[
         RowBox[{"1", "-", "M"}], ")"}], ".", "The"}], " ", "chip", " ", "is", 
       " ", "Verified", " ", "only", " ", "if", " ", "both", " ", "stages", 
       " ", 
-      RowBox[{"hold", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"hold", "."}]}]}], "*)"}], "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"caseCheck", "[", 
@@ -2803,11 +2820,15 @@ Cell[BoxData[
                     RowBox[{"\"\< with   \>\"", ",", 
                     RowBox[{"Subscript", "[", 
                     RowBox[{"\"\<\[Zeta]\>\"", ",", "1"}], "]"}], ",", 
-                    "\"\< = \>\"", ",", "zeta1", ",", "\"\<,   \>\"", ",", 
+                    "\"\< = \>\"", ",", 
+                    RowBox[{"TraditionalForm", "[", "zeta1", "]"}], ",", 
+                    "\"\<,   \>\"", ",", 
                     RowBox[{"Subscript", "[", 
                     RowBox[{"\"\<\[Zeta]\>\"", ",", "2"}], "]"}], ",", 
-                    "\"\< = \>\"", ",", "zeta2"}], "}"}], "]"}], ",", "Bold", 
-                    ",", "13"}], "]"}], ",", 
+                    "\"\< = \>\"", ",", 
+                    RowBox[{"TraditionalForm", "[", "zeta2", "]"}]}], "}"}], 
+                    "]"}], ",", "Bold", ",", "13"}], "]"}], ",", 
+                  "\[IndentingNewLine]", 
                   RowBox[{"Spacer", "[", "24", "]"}], ",", "branchRow"}], 
                  "}"}], "]"}], ",", 
                RowBox[{"propEq", "[", 
@@ -2934,7 +2955,7 @@ Cell[BoxData[
                 "\"\< = 1, \[Ellipsis], 4,   \>\"", ",", 
                 RowBox[{"TraditionalForm", "[", 
                  RowBox[{"HoldForm", "[", 
-                  RowBox[{"\[Chi]", "\[Element]", " ", 
+                  RowBox[{"\[Chi]", "\[Element]", 
                    RowBox[{"{", 
                     RowBox[{"\[PlusMinus]", "1"}], "}"}]}], "]"}], "]"}]}], 
                "}"}], "]"}], ",", "13"}], "]"}], ",", "\"\<\>\"", ",", 
@@ -2963,8 +2984,7 @@ some  \>\"", ",",
                    RowBox[{
                     RowBox[{
                     RowBox[{"Subscript", "[", 
-                    RowBox[{"\[Zeta]", ",", "1"}], "]"}], " ", "\[Chi]", " ", 
-                    "M", " ", 
+                    RowBox[{"\[Zeta]", ",", "1"}], "]"}], " ", "M", " ", 
                     RowBox[{"Sqrt", "[", 
                     RowBox[{"Product", "[", 
                     RowBox[{
@@ -3048,12 +3068,15 @@ some  \>\"", ",",
         RowBox[{"(", 
          RowBox[{"fl", "-", "1"}], ")"}]}], ">", "0"}], ";", 
       RowBox[{"zeta1", "=", 
-       RowBox[{"zeta2", "=", 
+       RowBox[{"chi", "=", 
+        RowBox[{"si", "*", "sl", " ", "per", " ", "branch"}]}]}]}], ",", 
+     RowBox[{
+      RowBox[{"zeta2", "=", 
+       RowBox[{
         RowBox[{
-         RowBox[{
-         "1.", "The", " ", "four", " ", "branches", " ", "enumerate", " ", 
-          "the", " ", "signs", " ", "of", " ", "fi"}], "-", 
-         RowBox[{"1", " ", "and", " ", "fl"}], "-", "1"}]}]}], ";", 
+        "1.", "The", " ", "four", " ", "branches", " ", "enumerate", " ", 
+         "the", " ", "signs", " ", "of", " ", "fi"}], "-", 
+        RowBox[{"1", " ", "and", " ", "fl"}], "-", "1"}]}], ";", 
       RowBox[{
        RowBox[{"by", " ", "the", " ", "standing", " ", "pair"}], "-", 
        "products"}]}], ",", 
@@ -3105,8 +3128,8 @@ some  \>\"", ",",
                   RowBox[{
                    RowBox[{"Subscript", "[", 
                     RowBox[{"f", ",", "l"}], "]"}], "-", "1"}], ")"}]}], ">", 
-                "0"}], "]"}], "]"}]}], "}"}], "]"}], ",", "1", ",", "1", ",", 
-          
+                "0"}], "]"}], "]"}]}], "}"}], "]"}], ",", 
+          RowBox[{"si", " ", "sl"}], ",", "1", ",", 
           RowBox[{"Style", "[", 
            RowBox[{
             RowBox[{"Row", "[", 
@@ -3121,7 +3144,9 @@ some  \>\"", ",",
                  RowBox[{"fl", "-", "1"}], "]"}], "]"}], ",", "\"\<) = \>\"", 
                ",", "sl", ",", "\"\<  \[LongRightArrow]  \[Chi] = \>\"", ",", 
                
-               RowBox[{"si", " ", "sl"}]}], "}"}], "]"}], ",", "13", ",", 
+               RowBox[{"si", " ", "sl"}], ",", 
+               "\"\<,  so  \\!\\(\\*SubscriptBox[\\(\[Zeta]\\), \\(1\\)]\\) = \
+\[Chi]\>\""}], "}"}], "]"}], ",", "13", ",", 
             RowBox[{"GrayLevel", "[", "0.3", "]"}]}], "]"}], ",", 
           RowBox[{"si", " ", "sl"}], ",", "fi", ",", "fl", ",", 
           RowBox[{
@@ -3228,13 +3253,16 @@ some  \>\"", ",",
       RowBox[{"fm", "=", 
        RowBox[{"M", "/", "fl"}]}], ";", 
       RowBox[{"zeta1", "=", 
-       RowBox[{"zeta2", "=", "1"}]}], ";", 
-      RowBox[{"chi", " ", "stays", " ", "symbolic", " ", 
+       RowBox[{"chi", 
+        RowBox[{"(", "symbolic", ")"}]}]}]}], ",", 
+     RowBox[{
+      RowBox[{"zeta2", "=", "1"}], ";", 
+      RowBox[{
        RowBox[{
-        RowBox[{"(", 
-         RowBox[{
-         "no", " ", "sign", " ", "condition", " ", "is", " ", "consumed"}], 
-         ")"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+       "no", " ", "sign", " ", "condition", " ", "is", " ", "consumed", " ", 
+        "and", " ", "the", " ", "two", " ", "chi"}], "-", 
+       RowBox[{"dressed", " ", "terms", " ", "cancel", " ", 
+        RowBox[{"syntactically", "."}]}]}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"AppendTo", "[", 
      RowBox[{"results", ",", 
@@ -3262,9 +3290,14 @@ some  \>\"", ",",
                 RowBox[{"f", ",", "l"}], "]"}], " ", 
                RowBox[{"Subscript", "[", 
                 RowBox[{"f", ",", "m"}], "]"}]}], "==", "M"}], "]"}], "]"}]}],
-           "}"}], "]"}], ",", "1", ",", "1", ",", 
+           "}"}], "]"}], ",", "chi", ",", "1", ",", 
         RowBox[{"Style", "[", 
-         RowBox[{"\"\<single symbolic branch\>\"", ",", "13", ",", 
+         RowBox[{
+          RowBox[{"Row", "[", 
+           RowBox[{
+           "{", "\"\<single symbolic branch,  \
+\\!\\(\\*SubscriptBox[\\(\[Zeta]\\), \\(1\\)]\\) = \[Chi]\>\"", "}"}], "]"}], 
+          ",", "13", ",", 
           RowBox[{"GrayLevel", "[", "0.3", "]"}]}], "]"}], ",", "chi", ",", 
         RowBox[{"M", "/", "fi"}], ",", 
         RowBox[{"M", "/", "fl"}], ",", "True", ",", 
@@ -3332,14 +3365,15 @@ some  \>\"", ",",
         RowBox[{"(", 
          RowBox[{"1", "-", "M"}], ")"}]}], ">", "0"}], ";", 
       RowBox[{"zeta1", "=", 
-       RowBox[{"zeta2", "=", 
+       RowBox[{"chi", "=", 
+        RowBox[{"c", " ", "per", " ", "branch"}]}]}]}], ",", 
+     RowBox[{"zeta2", "=", 
+      RowBox[{
+       RowBox[{"1.", "Two", " ", 
+        RowBox[{"branches", ":", "chi"}]}], "=", 
+       RowBox[{
         RowBox[{
-         RowBox[{"1.", "Two", " ", 
-          RowBox[{"branches", ":", "chi"}]}], "=", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"+", "1"}], " ", "with", " ", "M"}], "<", "1"}]}]}]}]}], 
-     ",", 
+         RowBox[{"+", "1"}], " ", "with", " ", "M"}], "<", "1"}]}]}], ",", 
      RowBox[{
       RowBox[{"and", " ", "chi"}], "=", 
       RowBox[{
@@ -3405,7 +3439,7 @@ some  \>\"", ",",
                 RowBox[{"\[Chi]", " ", 
                  RowBox[{"(", 
                   RowBox[{"1", "-", "M"}], ")"}]}], ">", "0"}], "]"}], 
-              "]"}]}], "}"}], "]"}], ",", "1", ",", "1", ",", 
+              "]"}]}], "}"}], "]"}], ",", "c", ",", "1", ",", 
           RowBox[{"Style", "[", 
            RowBox[{
             RowBox[{"Row", "[", 
@@ -3415,7 +3449,9 @@ some  \>\"", ",",
                RowBox[{"If", "[", 
                 RowBox[{
                  RowBox[{"c", "==", "1"}], ",", "\"\<M < 1\>\"", ",", 
-                 "\"\<M > 1\>\""}], "]"}]}], "}"}], "]"}], ",", "13", ",", 
+                 "\"\<M > 1\>\""}], "]"}], ",", 
+               "\"\<,  so  \\!\\(\\*SubscriptBox[\\(\[Zeta]\\), \\(1\\)]\\) = \
+\[Chi]\>\""}], "}"}], "]"}], ",", "13", ",", 
             RowBox[{"GrayLevel", "[", "0.3", "]"}]}], "]"}], ",", "c", ",", 
           "fj3", ",", "fm3", ",", 
           RowBox[{"If", "[", 
@@ -3519,7 +3555,9 @@ some  \>\"", ",",
           RowBox[{"fl", "-", "1"}], ")"}], "/", 
          RowBox[{"(", 
           RowBox[{"fl", "-", "M"}], ")"}]}]}]}], ";", 
-      RowBox[{"zeta1", "=", "1"}]}], ",", 
+      RowBox[{"zeta1", "=", 
+       RowBox[{"chi", "=", 
+        RowBox[{"c", " ", "per", " ", "branch"}]}]}]}], ",", 
      RowBox[{
       RowBox[{"and", " ", "zeta2"}], "=", 
       RowBox[{
@@ -3534,17 +3572,25 @@ some  \>\"", ",",
         RowBox[{"(", 
          RowBox[{"1", "-", "M"}], ")"}]}], "<", "0"}]}], ",", 
      RowBox[{
-      RowBox[{"encoded", " ", "as", " ", "zeta2"}], "=", 
       RowBox[{
+       RowBox[{"encoded", " ", "as", " ", "zeta2"}], "=", 
        RowBox[{
-        RowBox[{"-", "c"}], "*", "s", " ", "with", " ", "s"}], "=", 
-       RowBox[{"sign", 
         RowBox[{
-         RowBox[{"(", 
-          RowBox[{"1", "-", "M"}], ")"}], ".", "Four"}], " ", "branches", " ",
-         "over", " ", "chi", " ", "and", " ", "the", " ", "regime", " ", "of",
-         " ", 
-        RowBox[{"M", "."}]}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+         RowBox[{"-", "c"}], "*", "s", " ", "with", " ", "s"}], "=", 
+        RowBox[{"sign", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"1", "-", "M"}], ")"}], ".", "Four"}], " ", "branches", 
+         " ", "over", " ", "chi", " ", "and", " ", "the", " ", "regime", " ", 
+         "of", " ", "M"}]}]}], ";", 
+      RowBox[{
+       RowBox[{"the", " ", "collapse", " ", "row", " ", "uses", " ", "per"}], 
+       "-", 
+       RowBox[{
+       "branch", " ", "literal", " ", "templates", " ", "so", " ", "the", " ",
+         "cancelling", " ", "pair", " ", "of", " ", "square"}], "-", 
+       RowBox[{"root", " ", "terms", " ", "is", " ", 
+        RowBox[{"shown", "."}]}]}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"fj4", "=", 
      RowBox[{"M", " ", 
@@ -3603,7 +3649,7 @@ some  \>\"", ",",
                   RowBox[{"f", ",", "l"}], "]"}], " ", 
                  RowBox[{"Subscript", "[", 
                   RowBox[{"f", ",", "m"}], "]"}]}]}], "]"}], "]"}]}], "}"}], 
-           "]"}], ",", "1", ",", 
+           "]"}], ",", "c", ",", 
           RowBox[{
            RowBox[{"-", "c"}], " ", "s"}], ",", 
           RowBox[{"Style", "[", 
@@ -3622,7 +3668,9 @@ some  \>\"", ",",
                  RowBox[{
                   RowBox[{"c", " ", "s"}], "==", "1"}], ",", 
                  "\"\<\[Chi](1-M) > 0\>\"", ",", "\"\<\[Chi](1-M) < 0\>\""}], 
-                "]"}]}], "}"}], "]"}], ",", "13", ",", 
+                "]"}], ",", 
+               "\"\<,  \\!\\(\\*SubscriptBox[\\(\[Zeta]\\), \\(1\\)]\\) = \
+\[Chi]\>\""}], "}"}], "]"}], ",", "13", ",", 
             RowBox[{"GrayLevel", "[", "0.3", "]"}]}], "]"}], ",", "c", ",", 
           "fj4", ",", "fm4", ",", 
           RowBox[{"If", "[", 
@@ -3663,57 +3711,106 @@ some  \>\"", ",",
                  RowBox[{"(", 
                   RowBox[{"1", "-", "M"}], ")"}]}], "<", "0"}], "]"}], "]"}], 
              ",", "\"\<)\>\""}], "}"}], "]"}], ",", 
-          RowBox[{
+          RowBox[{"If", "[", 
            RowBox[{
-            RowBox[{"HoldForm", "[", "#", "]"}], "&"}], "@", 
-           RowBox[{"(", 
             RowBox[{
-             RowBox[{"c", " ", "s", " ", 
-              RowBox[{"(", 
-               RowBox[{"1", "-", "M"}], ")"}], " ", 
-              RowBox[{"Sqrt", "[", 
-               RowBox[{"fi", " ", 
-                RowBox[{"(", 
-                 RowBox[{"M", " ", 
-                  RowBox[{
-                   RowBox[{"(", 
+             RowBox[{"c", " ", "s"}], "==", "1"}], ",", 
+            RowBox[{"HoldForm", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"1", "-", "M"}], ")"}], " ", 
+               RowBox[{"Sqrt", "[", 
+                RowBox[{"fi", " ", 
+                 RowBox[{"(", 
+                  RowBox[{"M", " ", 
+                   RowBox[{
+                    RowBox[{"(", 
                     RowBox[{"fi", "-", "1"}], ")"}], "/", 
-                   RowBox[{"(", 
+                    RowBox[{"(", 
                     RowBox[{"fi", "-", "M"}], ")"}]}]}], ")"}], " ", "fl", 
-                " ", 
-                RowBox[{"(", 
-                 RowBox[{"M", " ", 
-                  RowBox[{
-                   RowBox[{"(", 
+                 " ", 
+                 RowBox[{"(", 
+                  RowBox[{"M", " ", 
+                   RowBox[{
+                    RowBox[{"(", 
                     RowBox[{"fl", "-", "1"}], ")"}], "/", 
-                   RowBox[{"(", 
+                    RowBox[{"(", 
                     RowBox[{"fl", "-", "M"}], ")"}]}]}], ")"}]}], "]"}]}], 
-             "-", 
-             RowBox[{"c", " ", "s", " ", 
-              RowBox[{"(", 
-               RowBox[{"1", "-", "M"}], ")"}], " ", 
-              RowBox[{"Sqrt", "[", 
-               RowBox[{"fi", " ", 
-                RowBox[{"(", 
-                 RowBox[{"M", " ", 
-                  RowBox[{
-                   RowBox[{"(", 
+              "-", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"1", "-", "M"}], ")"}], " ", 
+               RowBox[{"Sqrt", "[", 
+                RowBox[{"fi", " ", 
+                 RowBox[{"(", 
+                  RowBox[{"M", " ", 
+                   RowBox[{
+                    RowBox[{"(", 
                     RowBox[{"fi", "-", "1"}], ")"}], "/", 
-                   RowBox[{"(", 
+                    RowBox[{"(", 
                     RowBox[{"fi", "-", "M"}], ")"}]}]}], ")"}], " ", "fl", 
-                " ", 
-                RowBox[{"(", 
-                 RowBox[{"M", " ", 
-                  RowBox[{
-                   RowBox[{"(", 
+                 " ", 
+                 RowBox[{"(", 
+                  RowBox[{"M", " ", 
+                   RowBox[{
+                    RowBox[{"(", 
                     RowBox[{"fl", "-", "1"}], ")"}], "/", 
-                   RowBox[{"(", 
+                    RowBox[{"(", 
                     RowBox[{"fl", "-", "M"}], ")"}]}]}], ")"}]}], "]"}]}], 
-             "+", 
-             RowBox[{"M", " ", 
-              RowBox[{"(", 
-               RowBox[{"1", "-", "M"}], ")"}]}]}], ")"}]}]}], "]"}]}], "]"}], 
-      ",", 
+              "+", 
+              RowBox[{"M", " ", 
+               RowBox[{"(", 
+                RowBox[{"1", "-", "M"}], ")"}]}]}], "]"}], ",", 
+            RowBox[{"HoldForm", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", 
+                RowBox[{"(", 
+                 RowBox[{"1", "-", "M"}], ")"}]}], " ", 
+               RowBox[{"Sqrt", "[", 
+                RowBox[{"fi", " ", 
+                 RowBox[{"(", 
+                  RowBox[{"M", " ", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"fi", "-", "1"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"fi", "-", "M"}], ")"}]}]}], ")"}], " ", "fl", 
+                 " ", 
+                 RowBox[{"(", 
+                  RowBox[{"M", " ", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"fl", "-", "1"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"fl", "-", "M"}], ")"}]}]}], ")"}]}], "]"}]}], 
+              "+", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"1", "-", "M"}], ")"}], " ", 
+               RowBox[{"Sqrt", "[", 
+                RowBox[{"fi", " ", 
+                 RowBox[{"(", 
+                  RowBox[{"M", " ", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"fi", "-", "1"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"fi", "-", "M"}], ")"}]}]}], ")"}], " ", "fl", 
+                 " ", 
+                 RowBox[{"(", 
+                  RowBox[{"M", " ", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"fl", "-", "1"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"fl", "-", "M"}], ")"}]}]}], ")"}]}], "]"}]}], 
+              "+", 
+              RowBox[{"M", " ", 
+               RowBox[{"(", 
+                RowBox[{"1", "-", "M"}], ")"}]}]}], "]"}]}], "]"}]}], "]"}]}],
+        "]"}], ",", 
       RowBox[{"{", 
        RowBox[{"c", ",", 
         RowBox[{"{", 
@@ -3768,12 +3865,14 @@ some  \>\"", ",",
     ";"}]}]}]], "Input",
  CellChangeTimes->{{3.996258029023388*^9, 3.99625802902769*^9}, 
    3.996258432936648*^9, 3.996258915338059*^9, 3.996259522964507*^9, 
-   3.996260200708662*^9, 3.996260597180975*^9, {3.9962612541708093`*^9, 
+   3.996260200708662*^9, 3.996260597180975*^9, {3.996261254170809*^9, 
    3.9962613002794237`*^9}, 3.996261447356401*^9, 3.996261623071581*^9, 
-   3.996262500051488*^9, 3.996262780522572*^9, {3.9964247148413877`*^9, 
-   3.9964247477700577`*^9}, {3.996424888483235*^9, 3.996424902363895*^9}},
- CellLabel->
-  "In[167]:=",ExpressionUUID->"cd4cf647-c849-47fc-ba7e-009bf22c4649"],
+   3.996262500051488*^9, 3.996262780522572*^9, {3.996424714841388*^9, 
+   3.9964247477700586`*^9}, {3.996424888483235*^9, 3.996424902363895*^9}, 
+   3.9964452224127283`*^9, {3.996445819123968*^9, 3.996445844070373*^9}, {
+   3.996445895263438*^9, 3.996445896875965*^9}, {3.996446206419051*^9, 
+   3.996446210880208*^9}},
+ CellLabel->"In[64]:=",ExpressionUUID->"cd4cf647-c849-47fc-ba7e-009bf22c4649"],
 
 Cell[CellGroupData[{
 
@@ -3861,8 +3960,7 @@ Cell[BoxData[
             RowBox[{
               RowBox[{
                 RowBox[{
-                  SubscriptBox["\[Zeta]", "1"], " ", "\[Chi]", " ", "M", " ", 
-                  
+                  SubscriptBox["\[Zeta]", "1"], " ", "M", " ", 
                   SqrtBox[
                    RowBox[{
                     UnderoverscriptBox["\[Product]", 
@@ -3907,14 +4005,15 @@ Cell[BoxData[
   Background->RGBColor[0.99, 0.96, 0.88],
   FrameMargins->14]], "Print",
  CellChangeTimes->{
-  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+  3.996258436439488*^9, 3.996258917867182*^9, 3.996259525484254*^9, 
    3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
-   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
-   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
-   3.9964249041437197`*^9}},
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637403`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.996424892989014*^9, 
+   3.996424904143719*^9}, 3.996445224629903*^9, 3.996445854049367*^9, 
+   3.996445899586302*^9, 3.9964462204139547`*^9},
  CellLabel->
   "During evaluation of \
-In[167]:=",ExpressionUUID->"7a9ca961-82be-4292-b0a7-9030d858c364"],
+In[64]:=",ExpressionUUID->"85239622-e96f-461f-a147-728f939350ef"],
 
 Cell[BoxData[
  PanelBox[
@@ -3962,9 +4061,14 @@ Cell[BoxData[
          RGBColor[0.72, 0.45, 0.02], StripOnInput -> False], 
         StyleBox[
          TemplateBox[{"\" with   \"", 
-           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", "1", "\",   \"", 
-           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", "1"}, "RowDefault"], 
-         Bold, 13, StripOnInput -> False], 
+           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", 
+           TagBox[
+            FormBox["1", TraditionalForm], TraditionalForm, Editable -> True],
+            "\",   \"", 
+           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", 
+           TagBox[
+            FormBox["1", TraditionalForm], TraditionalForm, Editable -> 
+            True]}, "RowDefault"], Bold, 13, StripOnInput -> False], 
         TemplateBox[{24}, "Spacer1"], 
         StyleBox[
          TemplateBox[{"\"branch:  sign(\"", 
@@ -3983,8 +4087,9 @@ Cell[BoxData[
                 FormBox[
                  SubscriptBox["f", "l"], TraditionalForm], "-", "1"}], 
               HoldForm], TraditionalForm], TraditionalForm, Editable -> True],
-            "\") = \"", "1", "\"  \[LongRightArrow]  \[Chi] = \"", "1"}, 
-          "RowDefault"], 13, 
+            "\") = \"", "1", "\"  \[LongRightArrow]  \[Chi] = \"", "1", 
+           "\",  so  \\!\\(\\*SubscriptBox[\\(\[Zeta]\\), \\(1\\)]\\) = \
+\[Chi]\""}, "RowDefault"], 13, 
          GrayLevel[0.3], StripOnInput -> False]},
        "RowDefault"]},
      {
@@ -4170,14 +4275,15 @@ Cell[BoxData[
   Background->RGBColor[0.937, 0.9510000000000001, 0.9790000000000001],
   FrameMargins->12]], "Print",
  CellChangeTimes->{
-  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+  3.996258436439488*^9, 3.996258917867182*^9, 3.996259525484254*^9, 
    3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
-   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
-   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
-   3.996424904146674*^9}},
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637403`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.996424892989014*^9, 
+   3.996424904143719*^9}, 3.996445224629903*^9, 3.996445854049367*^9, 
+   3.996445899586302*^9, 3.996446220417082*^9},
  CellLabel->
   "During evaluation of \
-In[167]:=",ExpressionUUID->"11edd2da-c824-4fd4-a8f0-7522d84cf1d5"],
+In[64]:=",ExpressionUUID->"dda92fef-cbd2-487b-a90a-4c59f78cda5f"],
 
 Cell[BoxData[
  PanelBox[
@@ -4225,9 +4331,15 @@ Cell[BoxData[
          RGBColor[0.72, 0.45, 0.02], StripOnInput -> False], 
         StyleBox[
          TemplateBox[{"\" with   \"", 
-           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", "1", "\",   \"", 
-           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", "1"}, "RowDefault"], 
-         Bold, 13, StripOnInput -> False], 
+           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", 
+           TagBox[
+            FormBox[
+             RowBox[{"-", "1"}], TraditionalForm], TraditionalForm, Editable -> 
+            True], "\",   \"", 
+           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", 
+           TagBox[
+            FormBox["1", TraditionalForm], TraditionalForm, Editable -> 
+            True]}, "RowDefault"], Bold, 13, StripOnInput -> False], 
         TemplateBox[{24}, "Spacer1"], 
         StyleBox[
          TemplateBox[{"\"branch:  sign(\"", 
@@ -4248,7 +4360,9 @@ Cell[BoxData[
               HoldForm], TraditionalForm], TraditionalForm, Editable -> True],
             "\") = \"", 
            RowBox[{"-", "1"}], "\"  \[LongRightArrow]  \[Chi] = \"", 
-           RowBox[{"-", "1"}]}, "RowDefault"], 13, 
+           RowBox[{"-", "1"}], 
+           "\",  so  \\!\\(\\*SubscriptBox[\\(\[Zeta]\\), \\(1\\)]\\) = \
+\[Chi]\""}, "RowDefault"], 13, 
          GrayLevel[0.3], StripOnInput -> False]},
        "RowDefault"]},
      {
@@ -4435,14 +4549,15 @@ Cell[BoxData[
   Background->RGBColor[0.937, 0.9510000000000001, 0.9790000000000001],
   FrameMargins->12]], "Print",
  CellChangeTimes->{
-  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+  3.996258436439488*^9, 3.996258917867182*^9, 3.996259525484254*^9, 
    3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
-   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
-   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
-   3.996424904151835*^9}},
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637403`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.996424892989014*^9, 
+   3.996424904143719*^9}, 3.996445224629903*^9, 3.996445854049367*^9, 
+   3.996445899586302*^9, 3.9964462204216347`*^9},
  CellLabel->
   "During evaluation of \
-In[167]:=",ExpressionUUID->"83863315-8fcc-4783-9404-2177385f293e"],
+In[64]:=",ExpressionUUID->"8451f374-45f0-40fc-a172-ba5bbf885a7b"],
 
 Cell[BoxData[
  PanelBox[
@@ -4490,9 +4605,15 @@ Cell[BoxData[
          RGBColor[0.72, 0.45, 0.02], StripOnInput -> False], 
         StyleBox[
          TemplateBox[{"\" with   \"", 
-           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", "1", "\",   \"", 
-           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", "1"}, "RowDefault"], 
-         Bold, 13, StripOnInput -> False], 
+           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", 
+           TagBox[
+            FormBox[
+             RowBox[{"-", "1"}], TraditionalForm], TraditionalForm, Editable -> 
+            True], "\",   \"", 
+           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", 
+           TagBox[
+            FormBox["1", TraditionalForm], TraditionalForm, Editable -> 
+            True]}, "RowDefault"], Bold, 13, StripOnInput -> False], 
         TemplateBox[{24}, "Spacer1"], 
         StyleBox[
          TemplateBox[{"\"branch:  sign(\"", 
@@ -4513,7 +4634,9 @@ Cell[BoxData[
                  SubscriptBox["f", "l"], TraditionalForm], "-", "1"}], 
               HoldForm], TraditionalForm], TraditionalForm, Editable -> True],
             "\") = \"", "1", "\"  \[LongRightArrow]  \[Chi] = \"", 
-           RowBox[{"-", "1"}]}, "RowDefault"], 13, 
+           RowBox[{"-", "1"}], 
+           "\",  so  \\!\\(\\*SubscriptBox[\\(\[Zeta]\\), \\(1\\)]\\) = \
+\[Chi]\""}, "RowDefault"], 13, 
          GrayLevel[0.3], StripOnInput -> False]},
        "RowDefault"]},
      {
@@ -4699,14 +4822,15 @@ Cell[BoxData[
   Background->RGBColor[0.937, 0.9510000000000001, 0.9790000000000001],
   FrameMargins->12]], "Print",
  CellChangeTimes->{
-  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+  3.996258436439488*^9, 3.996258917867182*^9, 3.996259525484254*^9, 
    3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
-   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
-   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
-   3.996424904155971*^9}},
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637403`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.996424892989014*^9, 
+   3.996424904143719*^9}, 3.996445224629903*^9, 3.996445854049367*^9, 
+   3.996445899586302*^9, 3.996446220425623*^9},
  CellLabel->
   "During evaluation of \
-In[167]:=",ExpressionUUID->"06ad2886-39d7-49d5-af5f-6642c5752c31"],
+In[64]:=",ExpressionUUID->"b7c50aa9-d08a-4f28-828b-81d47e2344b7"],
 
 Cell[BoxData[
  PanelBox[
@@ -4754,9 +4878,14 @@ Cell[BoxData[
          RGBColor[0.72, 0.45, 0.02], StripOnInput -> False], 
         StyleBox[
          TemplateBox[{"\" with   \"", 
-           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", "1", "\",   \"", 
-           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", "1"}, "RowDefault"], 
-         Bold, 13, StripOnInput -> False], 
+           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", 
+           TagBox[
+            FormBox["1", TraditionalForm], TraditionalForm, Editable -> True],
+            "\",   \"", 
+           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", 
+           TagBox[
+            FormBox["1", TraditionalForm], TraditionalForm, Editable -> 
+            True]}, "RowDefault"], Bold, 13, StripOnInput -> False], 
         TemplateBox[{24}, "Spacer1"], 
         StyleBox[
          TemplateBox[{"\"branch:  sign(\"", 
@@ -4777,8 +4906,9 @@ Cell[BoxData[
                  SubscriptBox["f", "l"], TraditionalForm], "-", "1"}], 
               HoldForm], TraditionalForm], TraditionalForm, Editable -> True],
             "\") = \"", 
-           RowBox[{"-", "1"}], "\"  \[LongRightArrow]  \[Chi] = \"", "1"}, 
-          "RowDefault"], 13, 
+           RowBox[{"-", "1"}], "\"  \[LongRightArrow]  \[Chi] = \"", "1", 
+           "\",  so  \\!\\(\\*SubscriptBox[\\(\[Zeta]\\), \\(1\\)]\\) = \
+\[Chi]\""}, "RowDefault"], 13, 
          GrayLevel[0.3], StripOnInput -> False]},
        "RowDefault"]},
      {
@@ -4965,14 +5095,15 @@ Cell[BoxData[
   Background->RGBColor[0.937, 0.9510000000000001, 0.9790000000000001],
   FrameMargins->12]], "Print",
  CellChangeTimes->{
-  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+  3.996258436439488*^9, 3.996258917867182*^9, 3.996259525484254*^9, 
    3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
-   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
-   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
-   3.996424904160129*^9}},
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637403`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.996424892989014*^9, 
+   3.996424904143719*^9}, 3.996445224629903*^9, 3.996445854049367*^9, 
+   3.996445899586302*^9, 3.99644622042941*^9},
  CellLabel->
   "During evaluation of \
-In[167]:=",ExpressionUUID->"540d2d1f-593a-480c-a485-39c95eeead83"],
+In[64]:=",ExpressionUUID->"fe747427-5768-4b7b-80bd-3822647df073"],
 
 Cell[BoxData[
  PanelBox[
@@ -5010,11 +5141,20 @@ Cell[BoxData[
          RGBColor[0.72, 0.45, 0.02], StripOnInput -> False], 
         StyleBox[
          TemplateBox[{"\" with   \"", 
-           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", "1", "\",   \"", 
-           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", "1"}, "RowDefault"], 
-         Bold, 13, StripOnInput -> False], 
+           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", 
+           TagBox[
+            FormBox[
+             FormBox["\[Chi]", TraditionalForm], TraditionalForm], 
+            TraditionalForm, Editable -> True], "\",   \"", 
+           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", 
+           TagBox[
+            FormBox["1", TraditionalForm], TraditionalForm, Editable -> 
+            True]}, "RowDefault"], Bold, 13, StripOnInput -> False], 
         TemplateBox[{24}, "Spacer1"], 
-        StyleBox["\"single symbolic branch\"", 13, 
+        StyleBox[
+         TemplateBox[{
+          "\"single symbolic branch,  \\!\\(\\*SubscriptBox[\\(\[Zeta]\\), \
+\\(1\\)]\\) = \[Chi]\""}, "RowDefault"], 13, 
          GrayLevel[0.3], StripOnInput -> False]},
        "RowDefault"]},
      {
@@ -5208,14 +5348,15 @@ Cell[BoxData[
   Background->RGBColor[0.9685, 0.9475, 0.9790000000000001],
   FrameMargins->12]], "Print",
  CellChangeTimes->{
-  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+  3.996258436439488*^9, 3.996258917867182*^9, 3.996259525484254*^9, 
    3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
-   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
-   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
-   3.996424904164559*^9}},
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637403`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.996424892989014*^9, 
+   3.996424904143719*^9}, 3.996445224629903*^9, 3.996445854049367*^9, 
+   3.996445899586302*^9, 3.996446220433105*^9},
  CellLabel->
   "During evaluation of \
-In[167]:=",ExpressionUUID->"d8e13178-f611-41d4-9a2f-c15b9cc8f4a7"],
+In[64]:=",ExpressionUUID->"960720d7-8423-4078-a13d-ab4568380f91"],
 
 Cell[BoxData[
  PanelBox[
@@ -5269,13 +5410,20 @@ Cell[BoxData[
          RGBColor[0.72, 0.45, 0.02], StripOnInput -> False], 
         StyleBox[
          TemplateBox[{"\" with   \"", 
-           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", "1", "\",   \"", 
-           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", "1"}, "RowDefault"], 
-         Bold, 13, StripOnInput -> False], 
+           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", 
+           TagBox[
+            FormBox["1", TraditionalForm], TraditionalForm, Editable -> True],
+            "\",   \"", 
+           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", 
+           TagBox[
+            FormBox["1", TraditionalForm], TraditionalForm, Editable -> 
+            True]}, "RowDefault"], Bold, 13, StripOnInput -> False], 
         TemplateBox[{24}, "Spacer1"], 
         StyleBox[
-         TemplateBox[{"\"branch:  \[Chi] = \"", "1", "\",  \"", "\"M < 1\""}, 
-          "RowDefault"], 13, 
+         TemplateBox[{
+          "\"branch:  \[Chi] = \"", "1", "\",  \"", "\"M < 1\"", 
+           "\",  so  \\!\\(\\*SubscriptBox[\\(\[Zeta]\\), \\(1\\)]\\) = \
+\[Chi]\""}, "RowDefault"], 13, 
          GrayLevel[0.3], StripOnInput -> False]},
        "RowDefault"]},
      {
@@ -5535,14 +5683,15 @@ Cell[BoxData[
   Background->RGBColor[0.93, 0.9650000000000001, 0.9650000000000001],
   FrameMargins->12]], "Print",
  CellChangeTimes->{
-  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+  3.996258436439488*^9, 3.996258917867182*^9, 3.996259525484254*^9, 
    3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
-   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
-   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
-   3.996424904168749*^9}},
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637403`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.996424892989014*^9, 
+   3.996424904143719*^9}, 3.996445224629903*^9, 3.996445854049367*^9, 
+   3.996445899586302*^9, 3.9964462204362593`*^9},
  CellLabel->
   "During evaluation of \
-In[167]:=",ExpressionUUID->"8f9c9ed0-8b0f-4b9d-af0a-2762a9b4135c"],
+In[64]:=",ExpressionUUID->"991e9853-7716-4504-b84a-d5f8608c9e73"],
 
 Cell[BoxData[
  PanelBox[
@@ -5596,13 +5745,21 @@ Cell[BoxData[
          RGBColor[0.72, 0.45, 0.02], StripOnInput -> False], 
         StyleBox[
          TemplateBox[{"\" with   \"", 
-           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", "1", "\",   \"", 
-           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", "1"}, "RowDefault"], 
-         Bold, 13, StripOnInput -> False], 
+           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", 
+           TagBox[
+            FormBox[
+             RowBox[{"-", "1"}], TraditionalForm], TraditionalForm, Editable -> 
+            True], "\",   \"", 
+           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", 
+           TagBox[
+            FormBox["1", TraditionalForm], TraditionalForm, Editable -> 
+            True]}, "RowDefault"], Bold, 13, StripOnInput -> False], 
         TemplateBox[{24}, "Spacer1"], 
         StyleBox[
          TemplateBox[{"\"branch:  \[Chi] = \"", 
-           RowBox[{"-", "1"}], "\",  \"", "\"M > 1\""}, "RowDefault"], 13, 
+           RowBox[{"-", "1"}], "\",  \"", "\"M > 1\"", 
+           "\",  so  \\!\\(\\*SubscriptBox[\\(\[Zeta]\\), \\(1\\)]\\) = \
+\[Chi]\""}, "RowDefault"], 13, 
          GrayLevel[0.3], StripOnInput -> False]},
        "RowDefault"]},
      {
@@ -5862,14 +6019,15 @@ Cell[BoxData[
   Background->RGBColor[0.93, 0.9650000000000001, 0.9650000000000001],
   FrameMargins->12]], "Print",
  CellChangeTimes->{
-  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+  3.996258436439488*^9, 3.996258917867182*^9, 3.996259525484254*^9, 
    3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
-   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
-   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
-   3.996424904172867*^9}},
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637403`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.996424892989014*^9, 
+   3.996424904143719*^9}, 3.996445224629903*^9, 3.996445854049367*^9, 
+   3.996445899586302*^9, 3.996446220439999*^9},
  CellLabel->
   "During evaluation of \
-In[167]:=",ExpressionUUID->"cb05c3a5-6309-4705-ab9a-dabeb00ae9b1"],
+In[64]:=",ExpressionUUID->"8c9030ec-13c9-47c9-b122-31473c5322c0"],
 
 Cell[BoxData[
  PanelBox[
@@ -5918,16 +6076,22 @@ Cell[BoxData[
          RGBColor[0.72, 0.45, 0.02], StripOnInput -> False], 
         StyleBox[
          TemplateBox[{"\" with   \"", 
-           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", "1", "\",   \"", 
+           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", 
+           TagBox[
+            FormBox["1", TraditionalForm], TraditionalForm, Editable -> True],
+            "\",   \"", 
            SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", 
-           RowBox[{"-", "1"}]}, "RowDefault"], Bold, 13, StripOnInput -> 
-         False], 
+           TagBox[
+            FormBox[
+             RowBox[{"-", "1"}], TraditionalForm], TraditionalForm, Editable -> 
+            True]}, "RowDefault"], Bold, 13, StripOnInput -> False], 
         TemplateBox[{24}, "Spacer1"], 
         StyleBox[
          TemplateBox[{
           "\"branch:  \[Chi] = \"", "1", "\",  \"", "\"M < 1\"", 
-           "\"  \[LongRightArrow]  \"", "\"\[Chi](1-M) > 0\""}, "RowDefault"],
-          13, 
+           "\"  \[LongRightArrow]  \"", "\"\[Chi](1-M) > 0\"", 
+           "\",  \\!\\(\\*SubscriptBox[\\(\[Zeta]\\), \\(1\\)]\\) = \
+\[Chi]\""}, "RowDefault"], 13, 
          GrayLevel[0.3], StripOnInput -> False]},
        "RowDefault"]},
      {
@@ -6083,8 +6247,79 @@ Cell[BoxData[
             RowBox[{
               TagBox[
                RowBox[{
-                 RowBox[{"(", 
-                   RowBox[{"1", "-", "M"}], ")"}], " ", "M"}], HoldForm], 
+                 RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"1", "-", "M"}], ")"}], " ", 
+                   SqrtBox[
+                    FractionBox[
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}], " ", 
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}]}], 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "M"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "M"}], 
+                    ")"}]}]]]}], "-", 
+                 RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"1", "-", "M"}], ")"}], " ", 
+                   SqrtBox[
+                    FractionBox[
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}], " ", 
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}]}], 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "M"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "M"}], 
+                    ")"}]}]]]}], "+", 
+                 RowBox[{"M", " ", 
+                   RowBox[{"(", 
+                    RowBox[{"1", "-", "M"}], ")"}]}]}], HoldForm], 
               "\[LongEqual]", 
               RowBox[{
                 RowBox[{"(", 
@@ -6154,14 +6389,15 @@ Cell[BoxData[
   Background->RGBColor[0.9825, 0.9545, 0.9335],
   FrameMargins->12]], "Print",
  CellChangeTimes->{
-  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+  3.996258436439488*^9, 3.996258917867182*^9, 3.996259525484254*^9, 
    3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
-   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
-   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
-   3.996424904176626*^9}},
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637403`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.996424892989014*^9, 
+   3.996424904143719*^9}, 3.996445224629903*^9, 3.996445854049367*^9, 
+   3.996445899586302*^9, 3.9964462204466257`*^9},
  CellLabel->
   "During evaluation of \
-In[167]:=",ExpressionUUID->"8395b4cd-20bc-4054-8ff6-722d818c7458"],
+In[64]:=",ExpressionUUID->"7ab4a139-af8c-4d74-a959-7a8cd5247e81"],
 
 Cell[BoxData[
  PanelBox[
@@ -6210,15 +6446,21 @@ Cell[BoxData[
          RGBColor[0.72, 0.45, 0.02], StripOnInput -> False], 
         StyleBox[
          TemplateBox[{"\" with   \"", 
-           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", "1", "\",   \"", 
-           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", "1"}, "RowDefault"], 
-         Bold, 13, StripOnInput -> False], 
+           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", 
+           TagBox[
+            FormBox["1", TraditionalForm], TraditionalForm, Editable -> True],
+            "\",   \"", 
+           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", 
+           TagBox[
+            FormBox["1", TraditionalForm], TraditionalForm, Editable -> 
+            True]}, "RowDefault"], Bold, 13, StripOnInput -> False], 
         TemplateBox[{24}, "Spacer1"], 
         StyleBox[
          TemplateBox[{
           "\"branch:  \[Chi] = \"", "1", "\",  \"", "\"M > 1\"", 
-           "\"  \[LongRightArrow]  \"", "\"\[Chi](1-M) < 0\""}, "RowDefault"],
-          13, 
+           "\"  \[LongRightArrow]  \"", "\"\[Chi](1-M) < 0\"", 
+           "\",  \\!\\(\\*SubscriptBox[\\(\[Zeta]\\), \\(1\\)]\\) = \
+\[Chi]\""}, "RowDefault"], 13, 
          GrayLevel[0.3], StripOnInput -> False]},
        "RowDefault"]},
      {
@@ -6372,8 +6614,80 @@ Cell[BoxData[
             RowBox[{
               TagBox[
                RowBox[{
-                 RowBox[{"(", 
-                   RowBox[{"1", "-", "M"}], ")"}], " ", "M"}], HoldForm], 
+                 RowBox[{
+                   RowBox[{"-", 
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", "M"}], ")"}]}], " ", 
+                   SqrtBox[
+                    FractionBox[
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}], " ", 
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}]}], 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "M"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "M"}], 
+                    ")"}]}]]]}], "+", 
+                 RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"1", "-", "M"}], ")"}], " ", 
+                   SqrtBox[
+                    FractionBox[
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}], " ", 
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}]}], 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "M"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "M"}], 
+                    ")"}]}]]]}], "+", 
+                 RowBox[{"M", " ", 
+                   RowBox[{"(", 
+                    RowBox[{"1", "-", "M"}], ")"}]}]}], HoldForm], 
               "\[LongEqual]", 
               RowBox[{
                 RowBox[{"(", 
@@ -6443,14 +6757,15 @@ Cell[BoxData[
   Background->RGBColor[0.9825, 0.9545, 0.9335],
   FrameMargins->12]], "Print",
  CellChangeTimes->{
-  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+  3.996258436439488*^9, 3.996258917867182*^9, 3.996259525484254*^9, 
    3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
-   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
-   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
-   3.9964249041853867`*^9}},
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637403`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.996424892989014*^9, 
+   3.996424904143719*^9}, 3.996445224629903*^9, 3.996445854049367*^9, 
+   3.996445899586302*^9, 3.996446220451621*^9},
  CellLabel->
   "During evaluation of \
-In[167]:=",ExpressionUUID->"ba58deee-453e-488f-ac06-3dc0b868d402"],
+In[64]:=",ExpressionUUID->"0c22aaa2-ad06-40e5-ba91-7cf0dccf4327"],
 
 Cell[BoxData[
  PanelBox[
@@ -6499,15 +6814,22 @@ Cell[BoxData[
          RGBColor[0.72, 0.45, 0.02], StripOnInput -> False], 
         StyleBox[
          TemplateBox[{"\" with   \"", 
-           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", "1", "\",   \"", 
-           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", "1"}, "RowDefault"], 
-         Bold, 13, StripOnInput -> False], 
+           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", 
+           TagBox[
+            FormBox[
+             RowBox[{"-", "1"}], TraditionalForm], TraditionalForm, Editable -> 
+            True], "\",   \"", 
+           SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", 
+           TagBox[
+            FormBox["1", TraditionalForm], TraditionalForm, Editable -> 
+            True]}, "RowDefault"], Bold, 13, StripOnInput -> False], 
         TemplateBox[{24}, "Spacer1"], 
         StyleBox[
          TemplateBox[{"\"branch:  \[Chi] = \"", 
            RowBox[{"-", "1"}], "\",  \"", "\"M < 1\"", 
-           "\"  \[LongRightArrow]  \"", "\"\[Chi](1-M) < 0\""}, "RowDefault"],
-          13, 
+           "\"  \[LongRightArrow]  \"", "\"\[Chi](1-M) < 0\"", 
+           "\",  \\!\\(\\*SubscriptBox[\\(\[Zeta]\\), \\(1\\)]\\) = \
+\[Chi]\""}, "RowDefault"], 13, 
          GrayLevel[0.3], StripOnInput -> False]},
        "RowDefault"]},
      {
@@ -6661,8 +6983,80 @@ Cell[BoxData[
             RowBox[{
               TagBox[
                RowBox[{
-                 RowBox[{"(", 
-                   RowBox[{"1", "-", "M"}], ")"}], " ", "M"}], HoldForm], 
+                 RowBox[{
+                   RowBox[{"-", 
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", "M"}], ")"}]}], " ", 
+                   SqrtBox[
+                    FractionBox[
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}], " ", 
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}]}], 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "M"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "M"}], 
+                    ")"}]}]]]}], "+", 
+                 RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"1", "-", "M"}], ")"}], " ", 
+                   SqrtBox[
+                    FractionBox[
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}], " ", 
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}]}], 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "M"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "M"}], 
+                    ")"}]}]]]}], "+", 
+                 RowBox[{"M", " ", 
+                   RowBox[{"(", 
+                    RowBox[{"1", "-", "M"}], ")"}]}]}], HoldForm], 
               "\[LongEqual]", 
               RowBox[{
                 RowBox[{"(", 
@@ -6732,14 +7126,15 @@ Cell[BoxData[
   Background->RGBColor[0.9825, 0.9545, 0.9335],
   FrameMargins->12]], "Print",
  CellChangeTimes->{
-  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+  3.996258436439488*^9, 3.996258917867182*^9, 3.996259525484254*^9, 
    3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
-   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
-   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
-   3.9964249041899567`*^9}},
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637403`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.996424892989014*^9, 
+   3.996424904143719*^9}, 3.996445224629903*^9, 3.996445854049367*^9, 
+   3.996445899586302*^9, 3.996446220455755*^9},
  CellLabel->
   "During evaluation of \
-In[167]:=",ExpressionUUID->"807f23d4-f3de-4ca1-9dbc-f36e5f39177a"],
+In[64]:=",ExpressionUUID->"75256de5-d97d-4ce3-96e2-6b9ab9aeaeb6"],
 
 Cell[BoxData[
  PanelBox[
@@ -6788,16 +7183,23 @@ Cell[BoxData[
          RGBColor[0.72, 0.45, 0.02], StripOnInput -> False], 
         StyleBox[
          TemplateBox[{"\" with   \"", 
-           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", "1", "\",   \"", 
+           SubscriptBox["\"\[Zeta]\"", "1"], "\" = \"", 
+           TagBox[
+            FormBox[
+             RowBox[{"-", "1"}], TraditionalForm], TraditionalForm, Editable -> 
+            True], "\",   \"", 
            SubscriptBox["\"\[Zeta]\"", "2"], "\" = \"", 
-           RowBox[{"-", "1"}]}, "RowDefault"], Bold, 13, StripOnInput -> 
-         False], 
+           TagBox[
+            FormBox[
+             RowBox[{"-", "1"}], TraditionalForm], TraditionalForm, Editable -> 
+            True]}, "RowDefault"], Bold, 13, StripOnInput -> False], 
         TemplateBox[{24}, "Spacer1"], 
         StyleBox[
          TemplateBox[{"\"branch:  \[Chi] = \"", 
            RowBox[{"-", "1"}], "\",  \"", "\"M > 1\"", 
-           "\"  \[LongRightArrow]  \"", "\"\[Chi](1-M) > 0\""}, "RowDefault"],
-          13, 
+           "\"  \[LongRightArrow]  \"", "\"\[Chi](1-M) > 0\"", 
+           "\",  \\!\\(\\*SubscriptBox[\\(\[Zeta]\\), \\(1\\)]\\) = \
+\[Chi]\""}, "RowDefault"], 13, 
          GrayLevel[0.3], StripOnInput -> False]},
        "RowDefault"]},
      {
@@ -6953,8 +7355,79 @@ Cell[BoxData[
             RowBox[{
               TagBox[
                RowBox[{
-                 RowBox[{"(", 
-                   RowBox[{"1", "-", "M"}], ")"}], " ", "M"}], HoldForm], 
+                 RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"1", "-", "M"}], ")"}], " ", 
+                   SqrtBox[
+                    FractionBox[
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}], " ", 
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}]}], 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "M"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "M"}], 
+                    ")"}]}]]]}], "-", 
+                 RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"1", "-", "M"}], ")"}], " ", 
+                   SqrtBox[
+                    FractionBox[
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}], " ", 
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"M", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "1"}], 
+                    ")"}]}], ")"}]}], 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "i"], TraditionalForm], "-", "M"}], 
+                    ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    FormBox[
+                    SubscriptBox["f", "l"], TraditionalForm], "-", "M"}], 
+                    ")"}]}]]]}], "+", 
+                 RowBox[{"M", " ", 
+                   RowBox[{"(", 
+                    RowBox[{"1", "-", "M"}], ")"}]}]}], HoldForm], 
               "\[LongEqual]", 
               RowBox[{
                 RowBox[{"(", 
@@ -7024,14 +7497,15 @@ Cell[BoxData[
   Background->RGBColor[0.9825, 0.9545, 0.9335],
   FrameMargins->12]], "Print",
  CellChangeTimes->{
-  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+  3.996258436439488*^9, 3.996258917867182*^9, 3.996259525484254*^9, 
    3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
-   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
-   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
-   3.99642490419319*^9}},
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637403`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.996424892989014*^9, 
+   3.996424904143719*^9}, 3.996445224629903*^9, 3.996445854049367*^9, 
+   3.996445899586302*^9, 3.996446220478548*^9},
  CellLabel->
   "During evaluation of \
-In[167]:=",ExpressionUUID->"46fe3f37-f023-4d43-b95e-31e8375a7d46"],
+In[64]:=",ExpressionUUID->"d559e4a5-2fbb-42da-b745-4143bc2e9cf3"],
 
 Cell[BoxData[
  FrameBox[
@@ -7050,14 +7524,15 @@ Cell[BoxData[
   RoundingRadius->10,
   StripOnInput->False]], "Print",
  CellChangeTimes->{
-  3.996258436439488*^9, 3.9962589178671823`*^9, 3.996259525484254*^9, 
+  3.996258436439488*^9, 3.996258917867182*^9, 3.996259525484254*^9, 
    3.996260202529284*^9, 3.9962606118817577`*^9, 3.996261307867468*^9, 
-   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637407`*^9, 
-   3.996262782550426*^9, 3.996424758467853*^9, {3.9964248929890137`*^9, 
-   3.996424904196005*^9}},
+   3.9962614493413973`*^9, 3.996261624970481*^9, 3.9962625010637403`*^9, 
+   3.996262782550426*^9, 3.996424758467853*^9, {3.996424892989014*^9, 
+   3.996424904143719*^9}, 3.996445224629903*^9, 3.996445854049367*^9, 
+   3.996445899586302*^9, 3.996446220484111*^9},
  CellLabel->
   "During evaluation of \
-In[167]:=",ExpressionUUID->"97ec215a-961b-4206-ab0a-583b56ad7786"]
+In[64]:=",ExpressionUUID->"d210d8c2-f6ae-4f80-9fa9-02dafd187f20"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -10196,7 +10671,7 @@ In[126]:=",ExpressionUUID->"459b432f-49be-4274-b571-f8100bf4e2b2"]
 }, Open  ]]
 },
 WindowSize->{1051, 868},
-WindowMargins->{{Automatic, 26}, {-3, Automatic}},
+WindowMargins->{{Automatic, 14}, {-15, Automatic}},
 PrintingCopies->1,
 PrintingPageRange->{1, Automatic},
 FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
@@ -10252,38 +10727,38 @@ Cell[84138, 2446, 154, 3, 69, "Chapter",ExpressionUUID->"1f00ace1-9eaa-45bb-ab32
 Cell[CellGroupData[{
 Cell[84317, 2453, 219, 5, 67, "Section",ExpressionUUID->"3bf78643-472a-4d85-9419-9b4a4ab8b7a3"],
 Cell[CellGroupData[{
-Cell[84561, 2462, 51443, 1313, 2719, "Input",ExpressionUUID->"cd4cf647-c849-47fc-ba7e-009bf22c4649"],
+Cell[84561, 2462, 55520, 1412, 2950, "Input",ExpressionUUID->"cd4cf647-c849-47fc-ba7e-009bf22c4649"],
 Cell[CellGroupData[{
-Cell[136029, 3779, 5029, 137, 166, "Print",ExpressionUUID->"7a9ca961-82be-4292-b0a7-9030d858c364"],
-Cell[141061, 3918, 9604, 261, 199, "Print",ExpressionUUID->"11edd2da-c824-4fd4-a8f0-7522d84cf1d5"],
-Cell[150668, 4181, 9662, 263, 199, "Print",ExpressionUUID->"83863315-8fcc-4783-9404-2177385f293e"],
-Cell[160333, 4446, 9650, 262, 199, "Print",ExpressionUUID->"06ad2886-39d7-49d5-af5f-6642c5752c31"],
-Cell[169986, 4710, 9676, 264, 199, "Print",ExpressionUUID->"540d2d1f-593a-480c-a485-39c95eeead83"],
-Cell[179665, 4976, 8911, 241, 232, "Print",ExpressionUUID->"d8e13178-f611-41d4-9a2f-c15b9cc8f4a7"],
-Cell[188579, 5219, 12092, 325, 287, "Print",ExpressionUUID->"8f9c9ed0-8b0f-4b9d-af0a-2762a9b4135c"],
-Cell[200674, 5546, 12108, 325, 287, "Print",ExpressionUUID->"cb05c3a5-6309-4705-ab9a-dabeb00ae9b1"],
-Cell[212785, 5873, 10637, 290, 277, "Print",ExpressionUUID->"8395b4cd-20bc-4054-8ff6-722d818c7458"],
-Cell[223425, 6165, 10486, 287, 270, "Print",ExpressionUUID->"ba58deee-453e-488f-ac06-3dc0b868d402"],
-Cell[233914, 6454, 10502, 287, 270, "Print",ExpressionUUID->"807f23d4-f3de-4ca1-9dbc-f36e5f39177a"],
-Cell[244419, 6743, 10652, 290, 277, "Print",ExpressionUUID->"46fe3f37-f023-4d43-b95e-31e8375a7d46"],
-Cell[255074, 7035, 878, 24, 49, "Print",ExpressionUUID->"97ec215a-961b-4206-ab0a-583b56ad7786"]
+Cell[140106, 3878, 5082, 137, 166, "Print",ExpressionUUID->"85239622-e96f-461f-a147-728f939350ef"],
+Cell[145191, 4017, 9969, 268, 202, "Print",ExpressionUUID->"dda92fef-cbd2-487b-a90a-4c59f78cda5f"],
+Cell[155163, 4287, 10070, 272, 202, "Print",ExpressionUUID->"8451f374-45f0-40fc-a172-ba5bbf885a7b"],
+Cell[165236, 4561, 10056, 271, 202, "Print",ExpressionUUID->"b7c50aa9-d08a-4f28-828b-81d47e2344b7"],
+Cell[175295, 4834, 10040, 271, 202, "Print",ExpressionUUID->"fe747427-5768-4b7b-80bd-3822647df073"],
+Cell[185338, 5107, 9359, 251, 232, "Print",ExpressionUUID->"960720d7-8423-4078-a13d-ab4568380f91"],
+Cell[194700, 5360, 12470, 333, 287, "Print",ExpressionUUID->"991e9853-7716-4504-b84a-d5f8608c9e73"],
+Cell[207173, 5695, 12514, 334, 287, "Print",ExpressionUUID->"8c9030ec-13c9-47c9-b122-31473c5322c0"],
+Cell[219690, 6031, 13828, 368, 300, "Print",ExpressionUUID->"7ab4a139-af8c-4d74-a959-7a8cd5247e81"],
+Cell[233521, 6401, 13707, 366, 293, "Print",ExpressionUUID->"0c22aaa2-ad06-40e5-ba91-7cf0dccf4327"],
+Cell[247231, 6769, 13753, 367, 293, "Print",ExpressionUUID->"75256de5-d97d-4ce3-96e2-6b9ab9aeaeb6"],
+Cell[260987, 7138, 13872, 369, 300, "Print",ExpressionUUID->"d559e4a5-2fbb-42da-b745-4143bc2e9cf3"],
+Cell[274862, 7509, 965, 25, 49, "Print",ExpressionUUID->"d210d8c2-f6ae-4f80-9fa9-02dafd187f20"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[256025, 7067, 205, 4, 69, "Chapter",ExpressionUUID->"df85d0c7-d7b2-4fff-9586-4569686faae4"],
+Cell[275900, 7542, 205, 4, 69, "Chapter",ExpressionUUID->"df85d0c7-d7b2-4fff-9586-4569686faae4"],
 Cell[CellGroupData[{
-Cell[256255, 7075, 293, 7, 67, "Section",ExpressionUUID->"d110af2e-7237-4df4-9a71-cb8790813994"],
+Cell[276130, 7550, 293, 7, 67, "Section",ExpressionUUID->"d110af2e-7237-4df4-9a71-cb8790813994"],
 Cell[CellGroupData[{
-Cell[256573, 7086, 58515, 1475, 3559, "Input",ExpressionUUID->"99e92cc5-4fc0-41eb-85e6-3d84e1cdfec1"],
+Cell[276448, 7561, 58515, 1475, 3559, "Input",ExpressionUUID->"99e92cc5-4fc0-41eb-85e6-3d84e1cdfec1"],
 Cell[CellGroupData[{
-Cell[315113, 8565, 14471, 410, 510, "Print",ExpressionUUID->"9143d2d9-0844-41d2-9382-c8208a18d6d6"],
-Cell[329587, 8977, 13469, 326, 200, "Print",ExpressionUUID->"d24d6ace-3aad-4e45-92a1-b12ac948b8fb"],
-Cell[343059, 9305, 13859, 336, 201, "Print",ExpressionUUID->"403742fb-4542-4f09-a42f-abfb0e662714"],
-Cell[356921, 9643, 15173, 370, 204, "Print",ExpressionUUID->"a705a209-fd3f-404f-9613-090dfeb3447a"],
-Cell[372097, 10015, 6075, 149, 220, "Print",ExpressionUUID->"67fb5c06-21ec-473f-a3ec-95806001f65f"],
-Cell[378175, 10166, 874, 24, 49, "Print",ExpressionUUID->"459b432f-49be-4274-b571-f8100bf4e2b2"]
+Cell[334988, 9040, 14471, 410, 510, "Print",ExpressionUUID->"9143d2d9-0844-41d2-9382-c8208a18d6d6"],
+Cell[349462, 9452, 13469, 326, 200, "Print",ExpressionUUID->"d24d6ace-3aad-4e45-92a1-b12ac948b8fb"],
+Cell[362934, 9780, 13859, 336, 201, "Print",ExpressionUUID->"403742fb-4542-4f09-a42f-abfb0e662714"],
+Cell[376796, 10118, 15173, 370, 204, "Print",ExpressionUUID->"a705a209-fd3f-404f-9613-090dfeb3447a"],
+Cell[391972, 10490, 6075, 149, 220, "Print",ExpressionUUID->"67fb5c06-21ec-473f-a3ec-95806001f65f"],
+Cell[398050, 10641, 874, 24, 49, "Print",ExpressionUUID->"459b432f-49be-4274-b571-f8100bf4e2b2"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
