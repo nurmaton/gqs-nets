@@ -1,0 +1,84 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      2413,         76]
+NotebookOptionsPosition[      1714,         55]
+NotebookOutlinePosition[      2113,         71]
+CellTagsIndexPosition[      2070,         68]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[StyleBox["Computational Companion to \
+\[OpenCurlyDoubleQuote]Generalized Quasi-Symmetric Nets: A Constructive \
+Approach to the Equimodular Elliptic Type of n \[Times] m Kokotsakis \
+Polyhedra\[CloseCurlyDoubleQuote] \[LongDash] Examples Helper",
+ FontColor->GrayLevel[0]]], "Title",
+ CellFrame->{{0, 0}, {0, 0}},
+ CellChangeTimes->{{3.997601844439443*^9, 3.997601860602584*^9}, {
+  3.9976019161648903`*^9, 
+  3.997601928469757*^9}},ExpressionUUID->"8b60e9e9-9a55-47eb-bd6c-\
+f6e9bab36fab"],
+
+Cell["\<\
+A. Nurmatov,  M. Skopenkov, F. Rist, J. Klein, D. L. Michels
+Tested on: Mathematica 14.0\
+\>", "Subtitle",
+ CellChangeTimes->{
+  3.9976019421608353`*^9},ExpressionUUID->"c8865190-191b-417d-baf5-\
+c3cc7c2b700d"],
+
+Cell[CellGroupData[{
+
+Cell["Section 1", "Chapter",
+ CellChangeTimes->{{3.9976019501411867`*^9, 
+  3.997601951519889*^9}},ExpressionUUID->"9b18a15d-d937-43e6-9679-\
+4383abc7fbc9"],
+
+Cell["Results of Section 1 are used in Examples Chapter", "Section",
+ CellChangeTimes->{{3.997601968993947*^9, 
+  3.997601995297443*^9}},ExpressionUUID->"8a0d9708-354c-41e3-84f1-\
+2394dba1a57b"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{808, 812},
+WindowMargins->{{Automatic, 309}, {Automatic, 3.5}},
+FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"acd67d17-8f73-4a7c-9af0-3d72fdc90c11"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 505, 9, 408, "Title",ExpressionUUID->"8b60e9e9-9a55-47eb-bd6c-f6e9bab36fab"],
+Cell[1088, 33, 220, 6, 85, "Subtitle",ExpressionUUID->"c8865190-191b-417d-baf5-c3cc7c2b700d"],
+Cell[CellGroupData[{
+Cell[1333, 43, 156, 3, 69, "Chapter",ExpressionUUID->"9b18a15d-d937-43e6-9679-4383abc7fbc9"],
+Cell[1492, 48, 194, 3, 67, "Section",ExpressionUUID->"8a0d9708-354c-41e3-84f1-2394dba1a57b"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
