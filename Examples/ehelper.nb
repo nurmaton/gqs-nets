@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    930463,      22468]
-NotebookOptionsPosition[    928010,      22418]
-NotebookOutlinePosition[    928405,      22434]
-CellTagsIndexPosition[    928362,      22431]
+NotebookDataLength[    900889,      21783]
+NotebookOptionsPosition[    898432,      21733]
+NotebookOutlinePosition[    898831,      21749]
+CellTagsIndexPosition[    898788,      21746]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -22,13 +22,13 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[TextData[StyleBox["Computational Companion to \
 \[OpenCurlyDoubleQuote]Generalized Quasi-Symmetric Nets: A Constructive \
-Approach to the Equimodular Elliptic Type of n \[Times] m Kokotsakis \
+Approach to the Equimodular Elliptic Type of m \[Times] n Kokotsakis \
 Polyhedra\[CloseCurlyDoubleQuote] \[LongDash] Examples Helper",
  FontColor->GrayLevel[0]]], "Title",
  CellFrame->{{0, 0}, {0, 0}},
  CellChangeTimes->{{3.997601844439443*^9, 3.997601860602584*^9}, {
-  3.9976019161648903`*^9, 
-  3.997601928469757*^9}},ExpressionUUID->"8b60e9e9-9a55-47eb-bd6c-\
+  3.9976019161648903`*^9, 3.997601928469757*^9}, {3.997634741159213*^9, 
+  3.997634743022771*^9}},ExpressionUUID->"8b60e9e9-9a55-47eb-bd6c-\
 f6e9bab36fab"],
 
 Cell["\<\
@@ -82,14 +82,13 @@ Cell[BoxData[
       "colFour", ",", "colTest", ",", "eightRef", ",", "fourRef", ",", 
       "eqName", ",", "resultsAll", ",", "pairs", ",", "kinds", ",", "prodId", 
       ",", "quotId", ",", "prodIdInv", ",", "quotIdInv", ",", "convProd", ",",
-       "convQuot", ",", "convQuotInv", ",", "posChk", ",", "recipOK", ",", 
-      "sym", ",", "eqRatio1", ",", "eqRatio2", ",", "sqEq1", ",", "sqEq2", 
-      ",", "eqRow", ",", "eqRowP", ",", "eqRowS", ",", "eqFour", ",", 
-      "systemLines", ",", "bullet", ",", "idProd", ",", "idQuot", ",", 
-      "idProdInv", ",", "idQuotInv", ",", "idConvProd", ",", "idConvQuot", 
-      ",", "idConvQuotInv", ",", "posLine", ",", "tagOf", ",", "braceGrp", 
-      ",", "condBlock", ",", "ratioExpr", ",", "pairLbl"}], "]"}], ";"}], 
-   "\n", 
+       "convQuot", ",", "convQuotInv", ",", "posChk", ",", "sym", ",", 
+      "eqRatio1", ",", "eqRatio2", ",", "sqEq1", ",", "sqEq2", ",", "eqRow", 
+      ",", "eqRowS", ",", "eqFour", ",", "systemLines", ",", "bullet", ",", 
+      "idProd", ",", "idQuot", ",", "idProdInv", ",", "idQuotInv", ",", 
+      "idConvProd", ",", "idConvQuot", ",", "idConvQuotInv", ",", "posLine", 
+      ",", "tagOf", ",", "braceGrp", ",", "condBlock", ",", "ratioExpr", ",", 
+      "pairLbl"}], "]"}], ";"}], "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"statusChip", "[", "True", "]"}], ":=", 
@@ -261,14 +260,10 @@ Cell[BoxData[
       RowBox[{
       "each", " ", "passage", " ", "from", " ", "an", " ", "equation", " ", 
        "between", " ", "squares", " ", "to", " ", "the", " ", "equation", " ",
-        "between", " ", "the", " ", "quantities"}]}], ",", 
-     RowBox[{
-     "and", " ", "the", " ", "passage", " ", "to", " ", "the", " ", 
-      "reciprocal", " ", "form", " ", "of", " ", "an", " ", "equation"}], ",", 
-     RowBox[{
-     "are", " ", "decided", " ", "by", " ", "Reduce", " ", "over", " ", "the",
-       " ", "positive", " ", 
-      RowBox[{"reals", "."}]}]}], "*)"}], "\n", 
+        "between", " ", "the", " ", "quantities", " ", "is", " ", "decided", 
+       " ", "by", " ", "Reduce", " ", "over", " ", "the", " ", "positive", 
+       " ", 
+       RowBox[{"reals", "."}]}]}]}], "*)"}], "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"chkR", "[", 
@@ -603,36 +598,6 @@ Cell[BoxData[
                RowBox[{"L", "==", "Rr"}], ")"}]}], "]"}]}], "]"}], "]"}], "===",
           "True"}]}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
-    RowBox[{"recipOK", ":", 
-     RowBox[{
-     "an", " ", "equation", " ", "between", " ", "positive", " ", "numbers", 
-      " ", "is", " ", "equivalent", " ", "to", " ", "the", " ", "equation", 
-      " ", "between", " ", "their", " ", 
-      RowBox[{"reciprocals", "."}]}]}], "*)"}], "\n", 
-   RowBox[{
-    RowBox[{"recipOK", "=", 
-     RowBox[{"Module", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"xx", ",", "yy"}], "}"}], ",", 
-       RowBox[{
-        RowBox[{"Reduce", "[", 
-         RowBox[{"ForAll", "[", 
-          RowBox[{
-           RowBox[{"{", 
-            RowBox[{"xx", ",", "yy"}], "}"}], ",", 
-           RowBox[{
-            RowBox[{"xx", ">", "0"}], "&&", 
-            RowBox[{"yy", ">", "0"}]}], ",", 
-           RowBox[{
-            RowBox[{"(", 
-             RowBox[{"xx", "==", "yy"}], ")"}], "\[Equivalent]", 
-            RowBox[{"(", 
-             RowBox[{
-              RowBox[{"1", "/", "xx"}], "==", 
-              RowBox[{"1", "/", "yy"}]}], ")"}]}]}], "]"}], "]"}], "===", 
-        "True"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
-   RowBox[{"(*", 
     RowBox[{
      RowBox[{
       RowBox[{
@@ -874,18 +839,13 @@ Cell[BoxData[
      RowBox[{
       RowBox[{"(", 
        RowBox[{"3", ",", "4"}], ")"}], ";", 
-      RowBox[{"eqRowP", ":", 
+      RowBox[{"eqRowS", ":", 
        RowBox[{"those", " ", "of", " ", "the", " ", "pairs", " ", 
         RowBox[{"(", 
          RowBox[{"2", ",", "3"}], ")"}]}]}]}], ",", 
      RowBox[{
-      RowBox[{
-       RowBox[{"(", 
-        RowBox[{"4", ",", "1"}], ")"}], " ", "as", " ", "given"}], ";", 
-      RowBox[{"eqRowS", ":", 
-       RowBox[{
-       "the", " ", "same", " ", "in", " ", "the", " ", "reciprocal", " ", 
-        "form", " ", "used", " ", "in", " ", "the", " ", "reduction"}]}], ";", 
+      RowBox[{"(", 
+       RowBox[{"4", ",", "1"}], ")"}], ";", 
       RowBox[{"eqFour", ":", 
        RowBox[{
         RowBox[{"equations", " ", 
@@ -944,57 +904,6 @@ Cell[BoxData[
             RowBox[{
              RowBox[{"Sin", "[", "bm", "]"}], " ", 
              RowBox[{"Sin", "[", "gm", "]"}]}], ")"}]}]}]}], "]"}]}], "]"}]}],
-     ";"}], "\n", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"eqRowP", "[", 
-      RowBox[{"k_", ",", "l_", ",", "m_"}], "]"}], ":=", 
-     RowBox[{"With", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"al", "=", 
-          RowBox[{"sym", "[", 
-           RowBox[{"k", ",", "\[Alpha]", ",", "l"}], "]"}]}], ",", 
-         RowBox[{"bl", "=", 
-          RowBox[{"sym", "[", 
-           RowBox[{"k", ",", "\[Beta]", ",", "l"}], "]"}]}], ",", 
-         RowBox[{"gl", "=", 
-          RowBox[{"sym", "[", 
-           RowBox[{"k", ",", "\[Gamma]", ",", "l"}], "]"}]}], ",", 
-         RowBox[{"dl", "=", 
-          RowBox[{"sym", "[", 
-           RowBox[{"k", ",", "\[Delta]", ",", "l"}], "]"}]}], ",", 
-         RowBox[{"am", "=", 
-          RowBox[{"sym", "[", 
-           RowBox[{"k", ",", "\[Alpha]", ",", "m"}], "]"}]}], ",", 
-         RowBox[{"bm", "=", 
-          RowBox[{"sym", "[", 
-           RowBox[{"k", ",", "\[Beta]", ",", "m"}], "]"}]}], ",", 
-         RowBox[{"gm", "=", 
-          RowBox[{"sym", "[", 
-           RowBox[{"k", ",", "\[Gamma]", ",", "m"}], "]"}]}], ",", 
-         RowBox[{"dm", "=", 
-          RowBox[{"sym", "[", 
-           RowBox[{"k", ",", "\[Delta]", ",", "m"}], "]"}]}]}], "}"}], ",", 
-       RowBox[{"HoldForm", "[", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"Sin", "[", "al", "]"}], " ", 
-          RowBox[{
-           RowBox[{"Sin", "[", "bl", "]"}], "/", 
-           RowBox[{"(", 
-            RowBox[{
-             RowBox[{"Sin", "[", "gl", "]"}], " ", 
-             RowBox[{"Sin", "[", "dl", "]"}]}], ")"}]}]}], "==", 
-         RowBox[{
-          RowBox[{"Sin", "[", "am", "]"}], " ", 
-          RowBox[{
-           RowBox[{"Sin", "[", "bm", "]"}], "/", 
-           RowBox[{"(", 
-            RowBox[{
-             RowBox[{"Sin", "[", "gm", "]"}], " ", 
-             RowBox[{"Sin", "[", "dm", "]"}]}], ")"}]}]}]}], "]"}]}], "]"}]}],
      ";"}], "\n", 
    RowBox[{
     RowBox[{
@@ -1980,8 +1889,8 @@ from \>\"", ",", "eightRef", ",", "\"\< :\>\""}], "}"}], "]"}], ",", "13",
           RowBox[{"(", 
            RowBox[{"And", "@@", "idOK"}], ")"}], "&&", 
           RowBox[{"(", 
-           RowBox[{"And", "@@", "convOK"}], ")"}], "&&", "okPos", "&&", 
-          "recipOK"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"And", "@@", "convOK"}], ")"}], "&&", "okPos"}]}], ";", 
+        "\[IndentingNewLine]", 
         RowBox[{"usedU", "=", 
          RowBox[{"If", "[", 
           RowBox[{
@@ -2045,45 +1954,16 @@ and (4, 1) from \>\"", ",", "eightRef", ",", "\"\< by equation \>\"", ",",
             RowBox[{"Join", "[", 
              RowBox[{
               RowBox[{"{", 
-               RowBox[{
-                RowBox[{"Style", "[", 
-                 RowBox[{
-                  RowBox[{"Row", "[", 
-                   RowBox[{"{", 
-                    RowBox[{
-                    "\"\<Condition \>\"", ",", "condName", ",", 
+               RowBox[{"Style", "[", 
+                RowBox[{
+                 RowBox[{"Row", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                   "\"\<Condition \>\"", ",", "condName", ",", 
                     "\"\< uses equations \>\"", ",", "eqUs", ",", 
                     "\"\< and \>\"", ",", "eqBs", ",", "\"\< from \>\"", ",", 
                     "fourRef", ",", "\"\<.\>\""}], "}"}], "]"}], ",", "13"}], 
-                 "]"}], ",", 
-                RowBox[{"Style", "[", 
-                 RowBox[{
-                  RowBox[{"Row", "[", 
-                   RowBox[{"{", 
-                    RowBox[{
-                    "\"\<The equations of the pairs (2, 3) and (4, 1) from \>\
-\"", ",", "eightRef", ",", 
-                    "\"\< are used in the equivalent reciprocal form   \>\"", 
-                    ",", 
-                    RowBox[{"TraditionalForm", "[", 
-                    RowBox[{"eqRowS", "[", 
-                    RowBox[{"0", ",", "2", ",", "3"}], "]"}], "]"}], ",", 
-                    "\"\< ,   \>\"", ",", 
-                    RowBox[{"TraditionalForm", "[", 
-                    RowBox[{"eqRowS", "[", 
-                    RowBox[{"1", ",", "2", ",", "3"}], "]"}], "]"}], ",", 
-                    "\"\< ,   \>\"", ",", 
-                    RowBox[{"TraditionalForm", "[", 
-                    RowBox[{"eqRowS", "[", 
-                    RowBox[{"0", ",", "4", ",", "1"}], "]"}], "]"}], ",", 
-                    "\"\< ,   \>\"", ",", 
-                    RowBox[{"TraditionalForm", "[", 
-                    RowBox[{"eqRowS", "[", 
-                    RowBox[{"1", ",", "4", ",", "1"}], "]"}], "]"}], ",", 
-                    "\"\< ,  because both sides of each of them are positive  \
- \>\"", ",", 
-                    RowBox[{"smallChip", "[", "recipOK", "]"}]}], "}"}], 
-                   "]"}], ",", "13"}], "]"}]}], "}"}], ",", "idRows", ",", 
+                "]"}], "}"}], ",", "idRows", ",", 
               RowBox[{"{", 
                RowBox[{
                 RowBox[{"Style", "[", 
@@ -2339,11 +2219,11 @@ gives back the equation of that pair from \>\"", ",", "eightRef", ",",
                  RowBox[{"{", 
                   RowBox[{
                    RowBox[{"TraditionalForm", "[", 
-                    RowBox[{"eqRowP", "[", 
+                    RowBox[{"eqRowS", "[", 
                     RowBox[{"0", ",", "2", ",", "3"}], "]"}], "]"}], ",", 
                    "\"\<,   \>\"", ",", 
                    RowBox[{"TraditionalForm", "[", 
-                    RowBox[{"eqRowP", "[", 
+                    RowBox[{"eqRowS", "[", 
                     RowBox[{"1", ",", "2", ",", "3"}], "]"}], "]"}]}], "}"}], 
                  "]"}], ",", "13", ",", "colEight"}], "]"}]}], "}"}], "]"}], 
            ",", 
@@ -2377,11 +2257,11 @@ gives back the equation of that pair from \>\"", ",", "eightRef", ",",
                  RowBox[{"{", 
                   RowBox[{
                    RowBox[{"TraditionalForm", "[", 
-                    RowBox[{"eqRowP", "[", 
+                    RowBox[{"eqRowS", "[", 
                     RowBox[{"0", ",", "4", ",", "1"}], "]"}], "]"}], ",", 
                    "\"\<,   \>\"", ",", 
                    RowBox[{"TraditionalForm", "[", 
-                    RowBox[{"eqRowP", "[", 
+                    RowBox[{"eqRowS", "[", 
                     RowBox[{"1", ",", "4", ",", "1"}], "]"}], "]"}]}], "}"}], 
                  "]"}], ",", "13", ",", "colEight"}], "]"}]}], "}"}], "]"}], 
            ",", 
@@ -2797,12 +2677,11 @@ sides, at the indices 1 and 2, are those of \>\"", ",",
     ";"}]}]}]], "Input",
  CellChangeTimes->{{3.997606988944981*^9, 3.997606988947443*^9}, 
    3.997607242129466*^9, 3.99760795594053*^9, 3.997609067611448*^9, 
-   3.997610955206784*^9, 3.9976112280043797`*^9, 3.997611864800877*^9, 
+   3.997610955206784*^9, 3.99761122800438*^9, 3.997611864800877*^9, 
    3.997611963466967*^9, 3.997612005108707*^9, 3.997612237671259*^9, 
    3.997620595512349*^9, {3.997621414695266*^9, 3.997621443172617*^9}, 
-   3.997621577234271*^9, 3.997632900202753*^9},
- CellLabel->
-  "In[594]:=",ExpressionUUID->"bbc6bb1f-1e75-4c19-9a4c-8b4dd6041648"],
+   3.997621577234271*^9, 3.997632900202753*^9, 3.997905809032585*^9},
+ CellLabel->"In[1]:=",ExpressionUUID->"bbc6bb1f-1e75-4c19-9a4c-8b4dd6041648"],
 
 Cell[CellGroupData[{
 
@@ -3011,25 +2890,25 @@ Cell[BoxData[
                 FractionBox[
                  RowBox[{
                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "2"], ")"}], " ", 
-                   RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "2"], ")"}]}], 
-                 RowBox[{
-                   RowBox[{"sin", "(", 
                     SubscriptBox["\[Gamma]", "2"], ")"}], " ", 
                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "2"], ")"}]}]], "\[LongEqual]", 
-                FractionBox[
+                    SubscriptBox["\[Delta]", "2"], ")"}]}], 
                  RowBox[{
                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "3"], ")"}], " ", 
+                    SubscriptBox["\[Alpha]", "2"], ")"}], " ", 
                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "3"], ")"}]}], 
+                    SubscriptBox["\[Beta]", "2"], ")"}]}]], "\[LongEqual]", 
+                FractionBox[
                  RowBox[{
                    RowBox[{"sin", "(", 
                     SubscriptBox["\[Gamma]", "3"], ")"}], " ", 
                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "3"], ")"}]}]]}], HoldForm], 
+                    SubscriptBox["\[Delta]", "3"], ")"}]}], 
+                 RowBox[{
+                   RowBox[{"sin", "(", 
+                    SubscriptBox["\[Alpha]", "3"], ")"}], " ", 
+                   RowBox[{"sin", "(", 
+                    SubscriptBox["\[Beta]", "3"], ")"}]}]]}], HoldForm], 
              TraditionalForm], TraditionalForm, Editable -> True], "\",   \"", 
            TagBox[
             FormBox[
@@ -3039,35 +2918,35 @@ Cell[BoxData[
                  RowBox[{
                    RowBox[{"sin", "(", 
                     OverscriptBox[
-                    SubscriptBox["\[Alpha]", "2"], "_"], ")"}], " ", 
-                   RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "2"], "_"], ")"}]}], 
-                 RowBox[{
-                   RowBox[{"sin", "(", 
-                    OverscriptBox[
                     SubscriptBox["\[Gamma]", "2"], "_"], ")"}], " ", 
                    RowBox[{"sin", "(", 
                     OverscriptBox[
-                    SubscriptBox["\[Delta]", "2"], "_"], ")"}]}]], 
-                "\[LongEqual]", 
-                FractionBox[
+                    SubscriptBox["\[Delta]", "2"], "_"], ")"}]}], 
                  RowBox[{
                    RowBox[{"sin", "(", 
                     OverscriptBox[
-                    SubscriptBox["\[Alpha]", "3"], "_"], ")"}], " ", 
+                    SubscriptBox["\[Alpha]", "2"], "_"], ")"}], " ", 
                    RowBox[{"sin", "(", 
                     OverscriptBox[
-                    SubscriptBox["\[Beta]", "3"], "_"], ")"}]}], 
+                    SubscriptBox["\[Beta]", "2"], "_"], ")"}]}]], 
+                "\[LongEqual]", 
+                FractionBox[
                  RowBox[{
                    RowBox[{"sin", "(", 
                     OverscriptBox[
                     SubscriptBox["\[Gamma]", "3"], "_"], ")"}], " ", 
                    RowBox[{"sin", "(", 
                     OverscriptBox[
-                    SubscriptBox["\[Delta]", "3"], "_"], ")"}]}]]}], 
-              HoldForm], TraditionalForm], TraditionalForm, Editable -> 
-            True]}, "RowDefault"], 13, 
+                    SubscriptBox["\[Delta]", "3"], "_"], ")"}]}], 
+                 RowBox[{
+                   RowBox[{"sin", "(", 
+                    OverscriptBox[
+                    SubscriptBox["\[Alpha]", "3"], "_"], ")"}], " ", 
+                   RowBox[{"sin", "(", 
+                    OverscriptBox[
+                    SubscriptBox["\[Beta]", "3"], "_"], ")"}]}]]}], HoldForm],
+              TraditionalForm], TraditionalForm, Editable -> True]}, 
+          "RowDefault"], 13, 
          RGBColor[0.9, 0.55, 0.05], StripOnInput -> False]},
        "RowDefault"]},
      {
@@ -3159,25 +3038,25 @@ Cell[BoxData[
                 FractionBox[
                  RowBox[{
                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "4"], ")"}], " ", 
-                   RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "4"], ")"}]}], 
-                 RowBox[{
-                   RowBox[{"sin", "(", 
                     SubscriptBox["\[Gamma]", "4"], ")"}], " ", 
                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "4"], ")"}]}]], "\[LongEqual]", 
-                FractionBox[
+                    SubscriptBox["\[Delta]", "4"], ")"}]}], 
                  RowBox[{
                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "1"], ")"}], " ", 
+                    SubscriptBox["\[Alpha]", "4"], ")"}], " ", 
                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "1"], ")"}]}], 
+                    SubscriptBox["\[Beta]", "4"], ")"}]}]], "\[LongEqual]", 
+                FractionBox[
                  RowBox[{
                    RowBox[{"sin", "(", 
                     SubscriptBox["\[Gamma]", "1"], ")"}], " ", 
                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "1"], ")"}]}]]}], HoldForm], 
+                    SubscriptBox["\[Delta]", "1"], ")"}]}], 
+                 RowBox[{
+                   RowBox[{"sin", "(", 
+                    SubscriptBox["\[Alpha]", "1"], ")"}], " ", 
+                   RowBox[{"sin", "(", 
+                    SubscriptBox["\[Beta]", "1"], ")"}]}]]}], HoldForm], 
              TraditionalForm], TraditionalForm, Editable -> True], "\",   \"", 
            TagBox[
             FormBox[
@@ -3187,35 +3066,35 @@ Cell[BoxData[
                  RowBox[{
                    RowBox[{"sin", "(", 
                     OverscriptBox[
-                    SubscriptBox["\[Alpha]", "4"], "_"], ")"}], " ", 
-                   RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "4"], "_"], ")"}]}], 
-                 RowBox[{
-                   RowBox[{"sin", "(", 
-                    OverscriptBox[
                     SubscriptBox["\[Gamma]", "4"], "_"], ")"}], " ", 
                    RowBox[{"sin", "(", 
                     OverscriptBox[
-                    SubscriptBox["\[Delta]", "4"], "_"], ")"}]}]], 
-                "\[LongEqual]", 
-                FractionBox[
+                    SubscriptBox["\[Delta]", "4"], "_"], ")"}]}], 
                  RowBox[{
                    RowBox[{"sin", "(", 
                     OverscriptBox[
-                    SubscriptBox["\[Alpha]", "1"], "_"], ")"}], " ", 
+                    SubscriptBox["\[Alpha]", "4"], "_"], ")"}], " ", 
                    RowBox[{"sin", "(", 
                     OverscriptBox[
-                    SubscriptBox["\[Beta]", "1"], "_"], ")"}]}], 
+                    SubscriptBox["\[Beta]", "4"], "_"], ")"}]}]], 
+                "\[LongEqual]", 
+                FractionBox[
                  RowBox[{
                    RowBox[{"sin", "(", 
                     OverscriptBox[
                     SubscriptBox["\[Gamma]", "1"], "_"], ")"}], " ", 
                    RowBox[{"sin", "(", 
                     OverscriptBox[
-                    SubscriptBox["\[Delta]", "1"], "_"], ")"}]}]]}], 
-              HoldForm], TraditionalForm], TraditionalForm, Editable -> 
-            True]}, "RowDefault"], 13, 
+                    SubscriptBox["\[Delta]", "1"], "_"], ")"}]}], 
+                 RowBox[{
+                   RowBox[{"sin", "(", 
+                    OverscriptBox[
+                    SubscriptBox["\[Alpha]", "1"], "_"], ")"}], " ", 
+                   RowBox[{"sin", "(", 
+                    OverscriptBox[
+                    SubscriptBox["\[Beta]", "1"], "_"], ")"}]}]]}], HoldForm],
+              TraditionalForm], TraditionalForm, Editable -> True]}, 
+          "RowDefault"], 13, 
          RGBColor[0.9, 0.55, 0.05], StripOnInput -> False]},
        "RowDefault"]},
      {
@@ -4987,15 +4866,15 @@ the second column only for (iii), in the first column only for (iv).\""},
   Background->RGBColor[0.99, 0.96, 0.88],
   FrameMargins->14]], "Print",
  CellChangeTimes->{
-  3.997606990829932*^9, 3.9976072439125648`*^9, 3.997607958138528*^9, 
+  3.997606990829932*^9, 3.997607243912565*^9, 3.997607958138528*^9, 
    3.997609070004689*^9, 3.997610957132004*^9, 3.997611229223465*^9, 
    3.997611866960421*^9, {3.997611987597142*^9, 3.997612006121243*^9}, 
    3.997612241146412*^9, 3.997620597458164*^9, {3.997621416934678*^9, 
    3.997621451222249*^9}, 3.997621492899561*^9, 3.997621578273341*^9, 
-   3.9976329020993557`*^9},
+   3.997632902099356*^9, 3.9979058123231783`*^9},
  CellLabel->
   "During evaluation of \
-In[594]:=",ExpressionUUID->"9158582c-d70e-4853-8c6a-0aa2625417c6"],
+In[1]:=",ExpressionUUID->"5eac53c6-ad0f-4182-8adb-45caa740f004"],
 
 Cell[BoxData[
  PanelBox[
@@ -5028,149 +4907,6 @@ Cell[BoxData[
               RGBColor[0.8, 0.25, 0.05], StripOnInput -> False], "\" from \"", 
              StyleBox["\"the four equations\"", Bold, 
               RGBColor[0.8, 0.25, 0.05], StripOnInput -> False], "\".\""},
-            "RowDefault"],
-           StripOnInput->False,
-           FontSize->13]},
-         {
-          StyleBox[
-           
-           TemplateBox[{
-            "\"The equations of the pairs (2, 3) and (4, 1) from \"", 
-             StyleBox["\"the eight equations\"", Bold, 
-              RGBColor[0.9, 0.55, 0.05], StripOnInput -> False], 
-             "\" are used in the equivalent reciprocal form   \"", 
-             TagBox[
-              FormBox[
-               TagBox[
-                RowBox[{
-                  FractionBox[
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "2"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "2"], ")"}]}], 
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "2"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "2"], ")"}]}]], "\[LongEqual]", 
-                  FractionBox[
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "3"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "3"], ")"}]}], 
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "3"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "3"], ")"}]}]]}], HoldForm], 
-               TraditionalForm], TraditionalForm, Editable -> True], 
-             "\" ,   \"", 
-             TagBox[
-              FormBox[
-               TagBox[
-                RowBox[{
-                  FractionBox[
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "2"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "2"], "_"], ")"}]}], 
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "2"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "2"], "_"], ")"}]}]], 
-                  "\[LongEqual]", 
-                  FractionBox[
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "3"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "3"], "_"], ")"}]}], 
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "3"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "3"], "_"], ")"}]}]]}], HoldForm],
-                TraditionalForm], TraditionalForm, Editable -> True], 
-             "\" ,   \"", 
-             TagBox[
-              FormBox[
-               TagBox[
-                RowBox[{
-                  FractionBox[
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "4"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "4"], ")"}]}], 
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "4"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "4"], ")"}]}]], "\[LongEqual]", 
-                  FractionBox[
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "1"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "1"], ")"}]}], 
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "1"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "1"], ")"}]}]]}], HoldForm], 
-               TraditionalForm], TraditionalForm, Editable -> True], 
-             "\" ,   \"", 
-             TagBox[
-              FormBox[
-               TagBox[
-                RowBox[{
-                  FractionBox[
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "4"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "4"], "_"], ")"}]}], 
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "4"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "4"], "_"], ")"}]}]], 
-                  "\[LongEqual]", 
-                  FractionBox[
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "1"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "1"], "_"], ")"}]}], 
-                   RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "1"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "1"], "_"], ")"}]}]]}], HoldForm],
-                TraditionalForm], TraditionalForm, Editable -> True], 
-             "\" ,  because both sides of each of them are positive   \"", 
-             StyleBox["\"\[CheckmarkedBox]\"", 14, 
-              RGBColor[0.13, 0.55, 0.13], StripOnInput -> False]},
             "RowDefault"],
            StripOnInput->False,
            FontSize->13]},
@@ -6405,15 +6141,15 @@ the equation of that pair from \"",
   Background->RGBColor[0.937, 0.9510000000000001, 0.9790000000000001],
   FrameMargins->12]], "Print",
  CellChangeTimes->{
-  3.997606990829932*^9, 3.9976072439125648`*^9, 3.997607958138528*^9, 
+  3.997606990829932*^9, 3.997607243912565*^9, 3.997607958138528*^9, 
    3.997609070004689*^9, 3.997610957132004*^9, 3.997611229223465*^9, 
    3.997611866960421*^9, {3.997611987597142*^9, 3.997612006121243*^9}, 
    3.997612241146412*^9, 3.997620597458164*^9, {3.997621416934678*^9, 
    3.997621451222249*^9}, 3.997621492899561*^9, 3.997621578273341*^9, 
-   3.99763290211965*^9},
+   3.997632902099356*^9, 3.997905812780999*^9},
  CellLabel->
   "During evaluation of \
-In[594]:=",ExpressionUUID->"cc708c8f-dcf5-4c31-8e33-67577b2104b5"],
+In[1]:=",ExpressionUUID->"24f774b5-e209-4392-9ef1-93c197aeb83c"],
 
 Cell[BoxData[
  PanelBox[
@@ -6473,146 +6209,6 @@ indices 1 and 2, are those of \"",
                "\" from \"", 
                StyleBox["\"the four equations\"", Bold, 
                 RGBColor[0.8, 0.25, 0.05], StripOnInput -> False], "\".\""}, 
-              "RowDefault"], 13, StripOnInput -> False]}, {
-            StyleBox[
-             
-             TemplateBox[{
-              "\"The equations of the pairs (2, 3) and (4, 1) from \"", 
-               StyleBox["\"the eight equations\"", Bold, 
-                RGBColor[0.9, 0.55, 0.05], StripOnInput -> False], 
-               "\" are used in the equivalent reciprocal form   \"", 
-               TagBox[
-                FormBox[
-                 TagBox[
-                  RowBox[{
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "2"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "2"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "2"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "2"], ")"}]}]], "\[LongEqual]", 
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "3"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "3"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "3"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "3"], ")"}]}]]}], HoldForm], 
-                 TraditionalForm], TraditionalForm, Editable -> True], 
-               "\" ,   \"", 
-               TagBox[
-                FormBox[
-                 TagBox[
-                  RowBox[{
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "2"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "2"], "_"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "2"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "2"], "_"], ")"}]}]], 
-                    "\[LongEqual]", 
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "3"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "3"], "_"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "3"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "3"], "_"], ")"}]}]]}], HoldForm],
-                  TraditionalForm], TraditionalForm, Editable -> True], 
-               "\" ,   \"", 
-               TagBox[
-                FormBox[
-                 TagBox[
-                  RowBox[{
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "4"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "4"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "4"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "4"], ")"}]}]], "\[LongEqual]", 
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "1"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "1"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "1"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "1"], ")"}]}]]}], HoldForm], 
-                 TraditionalForm], TraditionalForm, Editable -> True], 
-               "\" ,   \"", 
-               TagBox[
-                FormBox[
-                 TagBox[
-                  RowBox[{
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "4"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "4"], "_"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "4"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "4"], "_"], ")"}]}]], 
-                    "\[LongEqual]", 
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "1"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "1"], "_"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "1"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "1"], "_"], ")"}]}]]}], HoldForm],
-                  TraditionalForm], TraditionalForm, Editable -> True], 
-               "\" ,  because both sides of each of them are positive   \"", 
-               StyleBox["\"\[CheckmarkedBox]\"", 14, 
-                RGBColor[0.13, 0.55, 0.13], StripOnInput -> False]}, 
               "RowDefault"], 13, StripOnInput -> False]}, {
             StyleBox["\"For  i = 1, 2 :\"", 13, StripOnInput -> False]}, {
             StyleBox[
@@ -8059,146 +7655,6 @@ back the equation of that pair from \"",
                 RGBColor[0.8, 0.25, 0.05], StripOnInput -> False], "\".\""}, 
               "RowDefault"], 13, StripOnInput -> False]}, {
             StyleBox[
-             
-             TemplateBox[{
-              "\"The equations of the pairs (2, 3) and (4, 1) from \"", 
-               StyleBox["\"the eight equations\"", Bold, 
-                RGBColor[0.9, 0.55, 0.05], StripOnInput -> False], 
-               "\" are used in the equivalent reciprocal form   \"", 
-               TagBox[
-                FormBox[
-                 TagBox[
-                  RowBox[{
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "2"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "2"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "2"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "2"], ")"}]}]], "\[LongEqual]", 
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "3"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "3"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "3"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "3"], ")"}]}]]}], HoldForm], 
-                 TraditionalForm], TraditionalForm, Editable -> True], 
-               "\" ,   \"", 
-               TagBox[
-                FormBox[
-                 TagBox[
-                  RowBox[{
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "2"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "2"], "_"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "2"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "2"], "_"], ")"}]}]], 
-                    "\[LongEqual]", 
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "3"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "3"], "_"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "3"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "3"], "_"], ")"}]}]]}], HoldForm],
-                  TraditionalForm], TraditionalForm, Editable -> True], 
-               "\" ,   \"", 
-               TagBox[
-                FormBox[
-                 TagBox[
-                  RowBox[{
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "4"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "4"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "4"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "4"], ")"}]}]], "\[LongEqual]", 
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "1"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "1"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "1"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "1"], ")"}]}]]}], HoldForm], 
-                 TraditionalForm], TraditionalForm, Editable -> True], 
-               "\" ,   \"", 
-               TagBox[
-                FormBox[
-                 TagBox[
-                  RowBox[{
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "4"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "4"], "_"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "4"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "4"], "_"], ")"}]}]], 
-                    "\[LongEqual]", 
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "1"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "1"], "_"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "1"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "1"], "_"], ")"}]}]]}], HoldForm],
-                  TraditionalForm], TraditionalForm, Editable -> True], 
-               "\" ,  because both sides of each of them are positive   \"", 
-               StyleBox["\"\[CheckmarkedBox]\"", 14, 
-                RGBColor[0.13, 0.55, 0.13], StripOnInput -> False]}, 
-              "RowDefault"], 13, StripOnInput -> False]}, {
-            StyleBox[
             "\"For  i = 1, 2, 3, 4 :\"", 13, StripOnInput -> False]}, {
             StyleBox[
              TemplateBox[{
@@ -9475,146 +8931,6 @@ back the equation of that pair from \"",
                StyleBox["\"the four equations\"", Bold, 
                 RGBColor[0.8, 0.25, 0.05], StripOnInput -> False], "\".\""}, 
               "RowDefault"], 13, StripOnInput -> False]}, {
-            StyleBox[
-             
-             TemplateBox[{
-              "\"The equations of the pairs (2, 3) and (4, 1) from \"", 
-               StyleBox["\"the eight equations\"", Bold, 
-                RGBColor[0.9, 0.55, 0.05], StripOnInput -> False], 
-               "\" are used in the equivalent reciprocal form   \"", 
-               TagBox[
-                FormBox[
-                 TagBox[
-                  RowBox[{
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "2"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "2"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "2"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "2"], ")"}]}]], "\[LongEqual]", 
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "3"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "3"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "3"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "3"], ")"}]}]]}], HoldForm], 
-                 TraditionalForm], TraditionalForm, Editable -> True], 
-               "\" ,   \"", 
-               TagBox[
-                FormBox[
-                 TagBox[
-                  RowBox[{
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "2"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "2"], "_"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "2"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "2"], "_"], ")"}]}]], 
-                    "\[LongEqual]", 
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "3"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "3"], "_"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "3"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "3"], "_"], ")"}]}]]}], HoldForm],
-                  TraditionalForm], TraditionalForm, Editable -> True], 
-               "\" ,   \"", 
-               TagBox[
-                FormBox[
-                 TagBox[
-                  RowBox[{
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "4"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "4"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "4"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "4"], ")"}]}]], "\[LongEqual]", 
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Gamma]", "1"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Delta]", "1"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Alpha]", "1"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    SubscriptBox["\[Beta]", "1"], ")"}]}]]}], HoldForm], 
-                 TraditionalForm], TraditionalForm, Editable -> True], 
-               "\" ,   \"", 
-               TagBox[
-                FormBox[
-                 TagBox[
-                  RowBox[{
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "4"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "4"], "_"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "4"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "4"], "_"], ")"}]}]], 
-                    "\[LongEqual]", 
-                    FractionBox[
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Gamma]", "1"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Delta]", "1"], "_"], ")"}]}], 
-                    RowBox[{
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Alpha]", "1"], "_"], ")"}], " ", 
-                    RowBox[{"sin", "(", 
-                    OverscriptBox[
-                    SubscriptBox["\[Beta]", "1"], "_"], ")"}]}]]}], HoldForm],
-                  TraditionalForm], TraditionalForm, Editable -> True], 
-               "\" ,  because both sides of each of them are positive   \"", 
-               StyleBox["\"\[CheckmarkedBox]\"", 14, 
-                RGBColor[0.13, 0.55, 0.13], StripOnInput -> False]}, 
-              "RowDefault"], 13, StripOnInput -> False]}, {
             StyleBox["\"For  i = 1, 2 :\"", 13, StripOnInput -> False]}, {
             StyleBox[
              TemplateBox[{
@@ -10847,15 +10163,15 @@ back the equation of that pair from \"",
   Background->RGBColor[0.9685, 0.9475, 0.9790000000000001],
   FrameMargins->12]], "Print",
  CellChangeTimes->{
-  3.997606990829932*^9, 3.9976072439125648`*^9, 3.997607958138528*^9, 
+  3.997606990829932*^9, 3.997607243912565*^9, 3.997607958138528*^9, 
    3.997609070004689*^9, 3.997610957132004*^9, 3.997611229223465*^9, 
    3.997611866960421*^9, {3.997611987597142*^9, 3.997612006121243*^9}, 
    3.997612241146412*^9, 3.997620597458164*^9, {3.997621416934678*^9, 
    3.997621451222249*^9}, 3.997621492899561*^9, 3.997621578273341*^9, 
-   3.997632902205267*^9},
+   3.997632902099356*^9, 3.9979058128675413`*^9},
  CellLabel->
   "During evaluation of \
-In[594]:=",ExpressionUUID->"56677f71-5105-438f-8c85-c6b50e04a4e9"],
+In[1]:=",ExpressionUUID->"1ee004e5-c8b0-4021-b071-70d0b5db901b"],
 
 Cell[BoxData[
  FrameBox[
@@ -10874,15 +10190,15 @@ Cell[BoxData[
   RoundingRadius->10,
   StripOnInput->False]], "Print",
  CellChangeTimes->{
-  3.997606990829932*^9, 3.9976072439125648`*^9, 3.997607958138528*^9, 
+  3.997606990829932*^9, 3.997607243912565*^9, 3.997607958138528*^9, 
    3.997609070004689*^9, 3.997610957132004*^9, 3.997611229223465*^9, 
    3.997611866960421*^9, {3.997611987597142*^9, 3.997612006121243*^9}, 
    3.997612241146412*^9, 3.997620597458164*^9, {3.997621416934678*^9, 
    3.997621451222249*^9}, 3.997621492899561*^9, 3.997621578273341*^9, 
-   3.997632902282298*^9},
+   3.997632902099356*^9, 3.9979058129287558`*^9},
  CellLabel->
   "During evaluation of \
-In[594]:=",ExpressionUUID->"ba977a4e-dae6-4719-9888-93cd75a3493e"]
+In[1]:=",ExpressionUUID->"3adb8c31-bace-40fe-b7d4-5a06da38e382"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -10897,10 +10213,10 @@ Cell["Section 2", "Chapter",
 
 Cell[CellGroupData[{
 
-Cell["Results of Section 2 are used in the proof of Lemma 15", "Section",
- CellChangeTimes->{{3.9976230911756163`*^9, 3.997623102443283*^9}, {
-  3.997623132942586*^9, 
-  3.997623137131782*^9}},ExpressionUUID->"7e6bf9fa-4f44-417a-83ea-\
+Cell["Results of Section 2 are used in the proof of Lemma 16", "Section",
+ CellChangeTimes->{{3.9976230911756167`*^9, 3.997623102443283*^9}, {
+  3.997623132942586*^9, 3.997623137131782*^9}, {3.997905982168127*^9, 
+  3.9979059827056026`*^9}},ExpressionUUID->"7e6bf9fa-4f44-417a-83ea-\
 30ded3137953"],
 
 Cell[CellGroupData[{
@@ -11000,7 +10316,7 @@ Cell[BoxData[
     RowBox[{"bullet", "=", 
      RowBox[{"Style", "[", 
       RowBox[{"\"\<\[FilledSmallSquare]  \>\"", ",", "12", ",", "colTest"}], 
-      "]"}]}], ";"}], "\[IndentingNewLine]", 
+      "]"}]}], ";"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -11028,7 +10344,7 @@ Cell[BoxData[
      RowBox[{
      "by", " ", "TrigReduce", " ", "or", " ", "TrigExpand", " ", "followed", 
       " ", "by", " ", 
-      RowBox[{"Simplify", "."}]}]}], "*)"}], "\n", 
+      RowBox[{"Simplify", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"X", "=", 
      RowBox[{"{", 
@@ -11920,10 +11236,10 @@ Cell[BoxData[
          RowBox[{"\[Pi]", "-", 
           RowBox[{"Subscript", "[", 
            RowBox[{"\[Gamma]", ",", "4"}], "]"}]}]}], "]"}]}], "}"}]}], ";"}],
-    "\[IndentingNewLine]", 
+    "\n", 
    RowBox[{"(*", 
     RowBox[{"Display", " ", 
-     RowBox[{"helpers", "."}]}], "*)"}], "\n", 
+     RowBox[{"helpers", "."}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"quadDisp", "[", "k_", "]"}], ":=", 
@@ -12085,7 +11401,7 @@ Cell[BoxData[
          RowBox[{"k", "-", "1"}], "]"}], "]"}]}], "]"}]}], ";"}], "\n", 
    RowBox[{
     RowBox[{"resultsAll", "=", 
-     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
    RowBox[{"(*", " ", 
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
@@ -12098,7 +11414,7 @@ Cell[BoxData[
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
       "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
-    "\n", 
+    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"Print", "[", 
      RowBox[{"Panel", "[", 
@@ -12796,8 +12112,7 @@ has been verified by a symbolic computation at that point;  a  \>\"", ",",
        RowBox[{"Background", "->", 
         RowBox[{"RGBColor", "[", 
          RowBox[{"0.99", ",", "0.96", ",", "0.88"}], "]"}]}], ",", 
-       RowBox[{"FrameMargins", "->", "14"}]}], "]"}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+       RowBox[{"FrameMargins", "->", "14"}]}], "]"}], "]"}], ";"}], "\n", 
    RowBox[{"(*", " ", 
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
@@ -12810,11 +12125,11 @@ has been verified by a symbolic computation at that point;  a  \>\"", ",",
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
       "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
-    "\n", 
+    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"ClearAll", "[", 
      RowBox[{"congrOneQ", ",", "comboDisp", ",", "sgnStr"}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{"(*", 
     RowBox[{"congrOneQ", ":", 
      RowBox[{
@@ -12826,7 +12141,7 @@ has been verified by a symbolic computation at that point;  a  \>\"", ",",
       RowBox[{
        RowBox[{"-", "delta"}], " ", "by", " ", "an", " ", "integer", " ", 
        "multiple", " ", "of", " ", "2", " ", 
-       RowBox[{"pi", "."}]}]}]}], "*)"}], "\n", 
+       RowBox[{"pi", "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"congrOneQ", "[", 
@@ -13228,7 +12543,7 @@ has been verified by a symbolic computation at that point;  a  \>\"", ",",
            RowBox[{"Lighter", "[", 
             RowBox[{"col", ",", "0.93"}], "]"}]}], ",", 
           RowBox[{"FrameMargins", "->", "12"}]}], "]"}], "]"}], ";"}]}], 
-     "]"}], ";"}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\n", 
    RowBox[{"(*", " ", 
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
@@ -13241,7 +12556,7 @@ has been verified by a symbolic computation at that point;  a  \>\"", ",",
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
       "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
-    "\n", 
+    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"Module", "[", 
      RowBox[{
@@ -13459,7 +12774,7 @@ give Claim 2.\>\""}], "}"}], "]"}], ",", "13"}], "]"}], "}"}]}], "]"}], ",",
            RowBox[{"Lighter", "[", 
             RowBox[{"col", ",", "0.93"}], "]"}]}], ",", 
           RowBox[{"FrameMargins", "->", "12"}]}], "]"}], "]"}], ";"}]}], 
-     "]"}], ";"}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\n", 
    RowBox[{"(*", " ", 
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
@@ -13472,7 +12787,7 @@ give Claim 2.\>\""}], "}"}], "]"}], ",", "13"}], "]"}], "}"}]}], "]"}], ",",
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
       "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
-    "\n", 
+    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"Module", "[", 
      RowBox[{
@@ -13938,7 +13253,7 @@ by Claim 2, it follows from the last two identities that  \>\"", ",",
            RowBox[{"Lighter", "[", 
             RowBox[{"col", ",", "0.93"}], "]"}]}], ",", 
           RowBox[{"FrameMargins", "->", "12"}]}], "]"}], "]"}], ";"}]}], 
-     "]"}], ";"}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\n", 
    RowBox[{"(*", " ", 
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
@@ -13951,7 +13266,7 @@ by Claim 2, it follows from the last two identities that  \>\"", ",",
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
       "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
-    "\n", 
+    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"Module", "[", 
      RowBox[{
@@ -14163,7 +13478,7 @@ the sine ratios.\>\"", ",", "Bold", ",", "13"}], "]"}]}], "}"}], ",",
            RowBox[{"Lighter", "[", 
             RowBox[{"col", ",", "0.93"}], "]"}]}], ",", 
           RowBox[{"FrameMargins", "->", "12"}]}], "]"}], "]"}], ";"}]}], 
-     "]"}], ";"}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\n", 
    RowBox[{"(*", " ", 
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
@@ -14176,7 +13491,7 @@ the sine ratios.\>\"", ",", "Bold", ",", "13"}], "]"}]}], "}"}], ",",
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
       "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
-    "\n", 
+    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"Module", "[", 
      RowBox[{
@@ -14745,7 +14060,7 @@ the sine ratios;  M  is the common value of Claim 4.\>\"", ",", "Bold", ",",
            RowBox[{"Lighter", "[", 
             RowBox[{"col", ",", "0.93"}], "]"}]}], ",", 
           RowBox[{"FrameMargins", "->", "12"}]}], "]"}], "]"}], ";"}]}], 
-     "]"}], ";"}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\n", 
    RowBox[{"(*", " ", 
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
@@ -14757,7 +14072,7 @@ the sine ratios;  M  is the common value of Claim 4.\>\"", ",", "Bold", ",",
     RowBox[{
     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
       "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
-    "\n", 
+    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"Print", "[", 
      RowBox[{"Framed", "[", 
@@ -14791,7 +14106,7 @@ the sine ratios;  M  is the common value of Claim 4.\>\"", ",", "Bold", ",",
  CellChangeTimes->{{3.997627562330945*^9, 3.99762756233318*^9}, 
    3.997628866466346*^9, 3.9976289632274837`*^9, 3.997628998386778*^9, 
    3.997631707781328*^9, {3.997631917826832*^9, 3.997631937970394*^9}, {
-   3.9976319716300983`*^9, 3.997631972165387*^9}, 3.9976332210517406`*^9},
+   3.997631971630099*^9, 3.997631972165387*^9}, 3.9976332210517406`*^9},
  CellLabel->
   "In[651]:=",ExpressionUUID->"d087aee7-4910-4932-801b-23d664a60723"],
 
@@ -22417,7 +21732,7 @@ In[651]:=",ExpressionUUID->"93cd14ff-e4ba-46c1-b19a-20741a988441"]
 }, Open  ]]
 },
 WindowSize->{808, 812},
-WindowMargins->{{Automatic, 0}, {1, Automatic}},
+WindowMargins->{{Automatic, 100}, {Automatic, 0.5}},
 FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"acd67d17-8f73-4a7c-9af0-3d72fdc90c11"
@@ -22434,37 +21749,37 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 505, 9, 408, "Title",ExpressionUUID->"8b60e9e9-9a55-47eb-bd6c-f6e9bab36fab"],
-Cell[1088, 33, 220, 6, 85, "Subtitle",ExpressionUUID->"c8865190-191b-417d-baf5-c3cc7c2b700d"],
+Cell[580, 22, 551, 9, 408, "Title",ExpressionUUID->"8b60e9e9-9a55-47eb-bd6c-f6e9bab36fab"],
+Cell[1134, 33, 220, 6, 85, "Subtitle",ExpressionUUID->"c8865190-191b-417d-baf5-c3cc7c2b700d"],
 Cell[CellGroupData[{
-Cell[1333, 43, 154, 3, 69, "Chapter",ExpressionUUID->"9b18a15d-d937-43e6-9679-4383abc7fbc9"],
+Cell[1379, 43, 154, 3, 69, "Chapter",ExpressionUUID->"9b18a15d-d937-43e6-9679-4383abc7fbc9"],
 Cell[CellGroupData[{
-Cell[1512, 50, 245, 4, 67, "Section",ExpressionUUID->"8a0d9708-354c-41e3-84f1-2394dba1a57b"],
+Cell[1558, 50, 245, 4, 67, "Section",ExpressionUUID->"8a0d9708-354c-41e3-84f1-2394dba1a57b"],
 Cell[CellGroupData[{
-Cell[1782, 58, 110460, 2746, 8494, "Input",ExpressionUUID->"bbc6bb1f-1e75-4c19-9a4c-8b4dd6041648"],
+Cell[1828, 58, 105549, 2625, 8116, "Input",ExpressionUUID->"bbc6bb1f-1e75-4c19-9a4c-8b4dd6041648"],
 Cell[CellGroupData[{
-Cell[112267, 2808, 88784, 2189, 1760, "Print",ExpressionUUID->"9158582c-d70e-4853-8c6a-0aa2625417c6"],
-Cell[201054, 4999, 58520, 1416, 1674, "Print",ExpressionUUID->"cc708c8f-dcf5-4c31-8e33-67577b2104b5"],
-Cell[259577, 6417, 196333, 4440, 5882, "Print",ExpressionUUID->"56677f71-5105-438f-8c85-c6b50e04a4e9"],
-Cell[455913, 10859, 943, 25, 49, "Print",ExpressionUUID->"ba977a4e-dae6-4719-9888-93cd75a3493e"]
+Cell[107402, 2687, 88796, 2189, 1760, "Print",ExpressionUUID->"5eac53c6-ad0f-4182-8adb-45caa740f004"],
+Cell[196201, 4878, 52382, 1273, 1535, "Print",ExpressionUUID->"24f774b5-e209-4392-9ef1-93c197aeb83c"],
+Cell[248586, 6153, 177684, 4020, 5465, "Print",ExpressionUUID->"1ee004e5-c8b0-4021-b071-70d0b5db901b"],
+Cell[426273, 10175, 963, 25, 49, "Print",ExpressionUUID->"3adb8c31-bace-40fe-b7d4-5a06da38e382"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[456929, 10892, 154, 3, 69, "Chapter",ExpressionUUID->"a1b897ba-4cd4-4436-b067-0af134b9a612"],
+Cell[427309, 10208, 154, 3, 69, "Chapter",ExpressionUUID->"a1b897ba-4cd4-4436-b067-0af134b9a612"],
 Cell[CellGroupData[{
-Cell[457108, 10899, 250, 4, 67, "Section",ExpressionUUID->"7e6bf9fa-4f44-417a-83ea-30ded3137953"],
+Cell[427488, 10215, 298, 4, 67, "Section",ExpressionUUID->"7e6bf9fa-4f44-417a-83ea-30ded3137953"],
 Cell[CellGroupData[{
-Cell[457383, 10907, 164032, 3888, 12190, "Input",ExpressionUUID->"d087aee7-4910-4932-801b-23d664a60723"],
+Cell[427811, 10223, 164026, 3887, 12169, "Input",ExpressionUUID->"d087aee7-4910-4932-801b-23d664a60723"],
 Cell[CellGroupData[{
-Cell[621440, 14799, 36876, 949, 1010, "Print",ExpressionUUID->"6fde55b3-2f0c-4925-a7f0-4c9d0371b67b"],
-Cell[658319, 15750, 178738, 4333, 3373, "Print",ExpressionUUID->"21ceccf3-76e9-4ff3-a8d7-3545ecc54b74"],
-Cell[837060, 20085, 38369, 943, 1041, "Print",ExpressionUUID->"9de73675-da07-4d6c-96d9-ca767f5392e9"],
-Cell[875432, 21030, 12849, 321, 415, "Print",ExpressionUUID->"ea7bcefe-28ca-4a4d-b56f-4ccb2ce5af56"],
-Cell[888284, 21353, 19581, 526, 848, "Print",ExpressionUUID->"8c8731e5-1487-4e8f-ab02-47617861579b"],
-Cell[907868, 21881, 19327, 507, 703, "Print",ExpressionUUID->"f1cec13c-1fcf-4276-b1ba-09b39e04af0e"],
-Cell[927198, 22390, 748, 21, 49, "Print",ExpressionUUID->"93cd14ff-e4ba-46c1-b19a-20741a988441"]
+Cell[591862, 14114, 36876, 949, 1010, "Print",ExpressionUUID->"6fde55b3-2f0c-4925-a7f0-4c9d0371b67b"],
+Cell[628741, 15065, 178738, 4333, 3373, "Print",ExpressionUUID->"21ceccf3-76e9-4ff3-a8d7-3545ecc54b74"],
+Cell[807482, 19400, 38369, 943, 1041, "Print",ExpressionUUID->"9de73675-da07-4d6c-96d9-ca767f5392e9"],
+Cell[845854, 20345, 12849, 321, 415, "Print",ExpressionUUID->"ea7bcefe-28ca-4a4d-b56f-4ccb2ce5af56"],
+Cell[858706, 20668, 19581, 526, 848, "Print",ExpressionUUID->"8c8731e5-1487-4e8f-ab02-47617861579b"],
+Cell[878290, 21196, 19327, 507, 703, "Print",ExpressionUUID->"f1cec13c-1fcf-4276-b1ba-09b39e04af0e"],
+Cell[897620, 21705, 748, 21, 49, "Print",ExpressionUUID->"93cd14ff-e4ba-46c1-b19a-20741a988441"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
