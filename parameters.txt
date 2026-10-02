@@ -10,6 +10,10 @@ To reproduce a picture:
   4. switch Shadow off and Hidden on or off, and press PNG;
   5. turn the saved picture by the angle given (gqs.py has no camera roll).
 
+The pictures in the paper are Blender renders of the same nets, exported by gqs.py
+with the OBJ button and shown with a soft ground shadow; the PNG of step 4 gives the
+same net, position and view in gqs.py's own drawing style.
+
 Notation: BASE_ANGLES_DEG = (alpha_1, beta_1, gamma_1, delta_1) in degrees, BASE_KN = (kappa_0, nu_0), ROW_TYPES[nu] = rho_nu,
 SIGNS = (e_1, e_2, e_3, e_4), E0 = e_0.
 
