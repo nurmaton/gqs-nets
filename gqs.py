@@ -1,18 +1,20 @@
-# Interactive visualization of flexible m x n GQS-nets assembled from 3 x 3 GQS-nets
-# (companion to "Kokotsakis polyhedra and GQS-nets"; generalizes the 3 x 3 visualization of
-#  A. Nurmatov, D. L. Michels, "Quasi-symmetric nets: a constructive approach to the equimodular elliptic type of
-#  Kokotsakis polyhedra", Computer-Aided Design 199 (2026) 104102, referred to below as "the CAD paper").
+# Interactive visualization of flexible m x n nets assembled from 3 x 3 GQS-nets.
 #
-# Input: base flat angles (alpha, beta, gamma, delta) in degrees at the vertex A_1 of the base 3 x 3 block,
-#        the net size m x n, the position of the base block, and the relation type ('a'..'d', see RELATION_TEXT) of each row of blocks.
-# The flat angles of the whole net are assembled from the base block by the relations between the flat angles of
-# adjacent blocks; the dihedral angles are given by the explicit flexion formulas (one flexion per block, the sign
-# patterns chosen consistently); the net is built in
-# space with planar convex faces by the construction of the appendix of the CAD paper, face by face, and drawn with a
-# slider for the dihedral angle theta_1 of the base block (t = cot(theta_1/2) is the flexion parameter of the formulas).
+# Input: the flat angles (alpha_1, beta_1, gamma_1, delta_1) in degrees at the vertex A_1 of the base 3 x 3 block, the one with the
+#        central face F_{kappa_0 nu_0}; the net size m x n; the position (kappa_0, nu_0) of the base block; the type ('a'..'d', see
+#        RELATION_TEXT) of each row of blocks; the signs (e1, e2, e3, e4) of every block and the sign e0 of the base block.
+# The flat angles of the whole net are assembled from the base block by the relations between the flat angles of adjacent
+# blocks; the dihedral angles are given by the explicit flexion formulas, with the same signs (e1, e2, e3, e4) for every block,
+# (1, -1, 1, -1) or (1, -1, -1, 1). The base block is taken at the parameter t and the sign e0; then the other blocks of its row,
+# and then those of every column, are each realized from a realized neighbour with the parameter and the sign for which the two
+# agree on their common faces (in the numbering of the pair: the same parameter, and signs related by a factor +-1), and every
+# two blocks with common faces are checked to agree. The central faces have their sides closed row by row (the first left side
+# of each row large enough for all sides to be positive), the other faces are convex with short edges to the boundary, and the
+# net is built in space face by face and drawn with a slider for the dihedral angle theta_1 of the base block
+# (t = cot(theta_1/2) is the flexion parameter of the formulas).
 #
-# Dihedral angles are oriented interior dihedral angles: pi when adjacent faces are coplanar, positive when the face
-# bends towards the side of the normal of the central face (Bricard variables cot(theta/2)).
+# Dihedral angles are oriented: -pi (equivalently +pi; angles are compared modulo 2 pi) when adjacent faces are coplanar,
+# positive when the face bends towards the side of the normal of the central face (Bricard variables cot(theta/2)).
 # Requires numpy and matplotlib only.
 
 import math, itertools, sys, json, re, textwrap, os, shutil, glob
@@ -28,7 +30,7 @@ for _stream in (sys.stdout, sys.stderr):                                    # th
     except Exception: pass
 import matplotlib.pyplot as plt
 matplotlib.rcParams['mathtext.fontset'] = 'cm'          # LaTeX-like indices and symbols in all labels
-from matplotlib.widgets import Slider, TextBox
+from matplotlib.widgets import Slider, TextBox as _TextBox
 from matplotlib.collections import PolyCollection
 from matplotlib.patches import FancyBboxPatch, Rectangle
 from matplotlib.path import Path
@@ -40,50 +42,68 @@ PI = math.pi
 # ============================================================================================
 # 1. PARAMETERS
 # ============================================================================================
-BASE_ANGLES_DEG = (60.0, 80.0, 120.0, 60.0)   # (alpha_1, beta_1, gamma_1, delta_1) of the base block
-M_FACES, N_FACES = 5, 5                        # the net has M_FACES x N_FACES faces F_ij, i < M_FACES, j < N_FACES
-BASE_KN = (2, 2)                               # central face F_{kappa nu} of the base block (1 <= kappa <= M-2, 1 <= nu <= N-2)
-ROW_SYSTEMS = {1: 'c', 2: 'a', 3: 'b'}         # relation type ('a'..'d', see RELATION_TEXT) of the row of 3 x 3 blocks with central faces F_{. nu},
-                                               # nu = 1 .. N_FACES-2 (rows not listed get the type of the base row)
-BASE_SIGNS = (1, -1, 1, -1)                    # signs (e1,e2,e3,e4) of the flexion of the base block
-BLOCK_SIGNS = {}                               # optional: prescribed sign patterns of other blocks {(kappa, nu): (e1,e2,e3,e4)}; the rest follow (Params dialog)
-E0 = 1                                         # branch of the base flexion
+BASE_ANGLES_DEG = (60.0, 80.0, 120.0, 60.0)   # (alpha_1, beta_1, gamma_1, delta_1) at the vertex A_1 of the base block
+M_FACES, N_FACES = 5, 5                        # m x n: the net has the faces F_ij, 0 <= i < m = M_FACES, 0 <= j < n = N_FACES
+MAX_MN = 60                                    # the largest m and n accepted (here and in Params)
+MAX_FACES = 400                                # ... and the largest m n: the startup builds ~200 configurations, ~1 min of CPU at 400 faces (10 x 26: ~35 s)
+BASE_KN = (2, 2)                               # (kappa_0, nu_0): the base block has the central face F_{kappa_0 nu_0} (1 <= kappa_0 <= m-2, 1 <= nu_0 <= n-2)
+ROW_TYPES = {1: 'c', 2: 'a', 3: 'b'}           # type ('a'..'d', see RELATION_TEXT) of the row of 3 x 3 blocks with central faces F_{. nu},
+                                               # nu = 1 .. n-2 (rows not listed get the type of the row nu_0)
+SIGN_PATTERNS = ((1, -1, 1, -1), (1, -1, -1, 1))   # the two choices of the signs (e1, e2, e3, e4)
+SIGNS = (1, -1, 1, -1)                         # the signs of the flexion of every block (Params)
+E0 = 1                                         # the sign e0 = +1 or -1 of the base block (Params)
 BASE_EDGE = 1.0                                # length of the edge V_{kappa+1,nu} V_{kappa nu} of the base central face
-SHOW_SHADOW = True
+SHOW_SHADOW = True                             # soft ground shadow (button Shadow)
 LIGHT_FRAME = 'studio'                         # 'eye': a flashlight in the viewer's hand (shadow behind the net: floor from above, ceiling from below);
                                                # 'top': the sun at the top of the screen (shadow always straight below the net on the screen);
                                                # 'studio': the original setup (shading light attached to the viewer, shadow on the room's floor);
                                                # 'world': the sun at noon fixed in space (vertical footprint on the floor);
                                                # 'room': a photo studio: the lamps are fixed in the room and only the photographer moves; the net stands on
-                                               #         its base face F_kn on an invisible stand (see ROOM_*). Buttons Eye | Top | Studio | World | Room                             # soft ground shadow (button Shadow)
+                                               #         its base face F_kn on an invisible stand (see ROOM_*). Buttons Eye | Top | Studio | World | Room
 ROOM_LAMP_VIEW = (30.0, -60.0)                 # 'room': the lamps are set up for this view (elev, azim) and stay there
 ROOM_CLEARANCE, ROOM_MIN_HEIGHT = 0.06, 0.25   # 'room': the stand keeps the floor this far under the deepest point of the whole flexion, at least this high (net sizes)
 FOCAL_LENGTH = 0.4                             # perspective strength (matplotlib focal length; smaller = stronger; None = orthographic)
 NSUB = 8                                       # each face is split into NSUB x NSUB pieces for the painter's depth sorting
 LIGHT_FACES = 150                              # nets with more faces are drawn in the light mode (plain depth sorting, no hidden lines, no intersection test)
 STRIP_CHOICES = 8                              # alternatives per boundary face in the backtracking construction of the boundary strips
+STRIP_BUDGET = 400                             # attach3 attempts per strip in that backtracking; when they are used up, the strip is built in 'apex' mode
 LIVE_PEN_FACES = 49                            # nets with at most this many faces (7 x 7) get the self-intersection test also while the slider is dragged;
                                                # larger nets (up to LIGHT_FACES) get it when the slider is released
+CACHE_SIZE = 1000                              # configurations remembered per half of the slider (one per 1e-6 of t; ~13 KB each for 5 x 5, ~55 KB for 10 x 10)
+                                               # besides the sampling grids, which are always kept; beyond it the oldest are dropped (and rebuilt when needed)
 SAVE_FULL_WINDOW = False                       # buttons SVG/PNG: False = the picture only (cropped, no panels/controls), True = the whole window
 PNG_DPI = 300                                  # resolution of the saved PNG
 MOTION_FRAMES = 120                            # frames of the motion saved by the OBJ-sequence button (self-intersecting ones are skipped)
+CHECK_TOL = 1e-8                               # a saved Motion frame must pass every check from its vertices within this tolerance (edge lengths: times the
+                                               # longest edge; angles: at least 1e-10 x longest/shortest edge, the rounding level of nets with short edges)
 BLENDER_PATH = ""                             # the Blender binary for the Render button. Empty: found automatically ('blender' on the PATH, then the usual
-                                               # install folders on macOS, Windows and Linux, newest version first). Set it to pin a particular binary,
-                                               # e.g. "/Applications/Blender 4.2.app/Contents/MacOS/Blender" or r"C:\\Tools\\blender\\blender.exe".
+                                               # install folders on macOS, Windows and Linux, newest version first). Set it to pin a particular binary (one that is not
+                                               # found is reported, no other is used), e.g. "/Applications/Blender 4.2.app/Contents/MacOS/Blender" or r"C:\Tools\blender\blender.exe".
 def find_blender():
-    """the Blender binary: BLENDER_PATH, else 'blender' on the PATH, else the usual install locations (newest version first)"""
-    if BLENDER_PATH and os.path.isfile(BLENDER_PATH): return BLENDER_PATH
-    for name in ([BLENDER_PATH] if BLENDER_PATH else []) + ['blender', 'blender.exe']:
+    """the Blender binary: BLENDER_PATH (None when it is set but not found: no other install is used then), else 'blender' on the PATH,
+    else the usual install locations (newest version first: the version in the app's Info.plist on macOS, else in the folder name)"""
+    if BLENDER_PATH: return BLENDER_PATH if os.path.isfile(BLENDER_PATH) else shutil.which(BLENDER_PATH)
+    for name in ('blender', 'blender.exe'):
         found = shutil.which(name)
         if found: return found
-    patterns = [r'C:\\Program Files\\Blender Foundation\\Blender*\\blender.exe', os.path.expanduser(r'~\\AppData\\Local\\Programs\\Blender Foundation\\Blender*\\blender.exe'),
+    patterns = [r'C:\Program Files\Blender Foundation\Blender*\blender.exe', os.path.expanduser(r'~\AppData\Local\Programs\Blender Foundation\Blender*\blender.exe'),
                 '/Applications/Blender*.app/Contents/MacOS/Blender', os.path.expanduser('~/Applications/Blender*.app/Contents/MacOS/Blender'),
                 '/usr/bin/blender', '/usr/local/bin/blender', '/snap/bin/blender', '/opt/blender*/blender', os.path.expanduser('~/blender*/blender'),
                 '/var/lib/flatpak/exports/bin/org.blender.Blender', os.path.expanduser('~/.local/share/flatpak/exports/bin/org.blender.Blender')]
     hits = [h for pat in patterns for h in glob.glob(pat) if os.path.isfile(h)]
-    return sorted(hits, key=lambda h: [int(x) for x in re.findall(r'\d+', h)] or [0])[-1] if hits else None
+    def version(h):                                                             # (5, 2, 1); () when unknown (ranks last). Not the digits of the whole path:
+        v = ''                                                                  # the usual 'Blender.app' has none, and a user name may have some
+        if h.endswith('.app/Contents/MacOS/Blender'):
+            try:
+                import plistlib
+                with open(os.path.join(os.path.dirname(os.path.dirname(h)), 'Info.plist'), 'rb') as fh: v = str(plistlib.load(fh).get('CFBundleShortVersionString', ''))
+            except Exception: pass
+        if not re.search(r'\d', v):                                            # else the Blender folder's name: 'Blender 4.2', 'blender-4.2.1-linux-x64'
+            v = next((mm.group() for c in reversed(re.split(r'[\\/]', h)[:-1]) if 'blender' in c.lower() for mm in [re.search(r'\d+(\.\d+)*', c)] if mm), '')
+        return tuple(int(x) for x in re.findall(r'\d+', v)[:3])
+    return sorted(hits, key=version)[-1] if hits else None
 RENDER_SAMPLES, RENDER_ENGINE, RENDER_SIZE = 256, "cycles", "1920x1080"   # options passed to render_net.py
-SHOW_SLIDER_CURVE = False                      # True: draw theta_1..theta_4 of the base block along t beside the slider
+SHOW_SLIDER_CURVE = False                      # True: draw theta_1..theta_4 of the base block against theta_1 beside the slider (at the height of the track)
 
 # ============================================================================================
 # 2. FLAT ANGLES OF THE NET (the four relation types and the assembly of adjacent blocks)
@@ -102,7 +122,7 @@ def block_from_vertex1(q1, reltype):
 def wrap_math(text, width):
     """wrap a text with $...$ mathtext spans to 'width' characters per line: spaces inside the spans are removed first (mathtext ignores
     them), so that a span is never split; existing line breaks are kept."""
-    def squeeze(mt): return mt.group(0).replace(" ", "")
+    def squeeze(mt): return re.sub(r"(\\[A-Za-z]+) +(?=[A-Za-z])", r"\1{}", mt.group(0)).replace(" ", "")   # '\leq M' -> '\leq{}M', not '\leqM'
     out = []
     for para in text.split("\n"):
         para = re.sub(r"\$[^$]*\$", squeeze, para)
@@ -111,10 +131,16 @@ def wrap_math(text, width):
 
 def angle_problem(angs_deg, tol_deg=1e-6):
     """None if the base angles satisfy the hypotheses; otherwise a sentence naming the violated one:
+    (0) alpha, beta, gamma, delta lie in (0, 180) degrees;
     (1) no signed sum alpha +- beta +- gamma +- delta is 0 modulo 360 degrees (elliptic type);
-    (2) the barred numbers sigma - alpha, ..., sigma - delta lie in (0, 180) degrees, sigma = (alpha + beta + gamma + delta)/2."""
-    al, be, ga, de = angs_deg
-    names = [r"$\alpha_1$", r"$\beta_1$", r"$\gamma_1$", r"$\delta_1$"]
+    (2) sigma - alpha, ..., sigma - delta lie in (0, 180) degrees, sigma = (alpha + beta + gamma + delta)/2."""
+    try:
+        from numbers import Real
+        if not all(isinstance(a, Real) for a in angs_deg): raise TypeError        # ('60' would pass float() but not the formulas)
+        al, be, ga, de = map(float, angs_deg)
+    except (TypeError, ValueError): return "the flat angles must be four numbers, in degrees; here %r" % (angs_deg,)   # (a typo in BASE_ANGLES_DEG)
+    bad = [nm + " = %g" % a for nm, a in zip((r"$\alpha_1$", r"$\beta_1$", r"$\gamma_1$", r"$\delta_1$"), (al, be, ga, de)) if not 0 < a < 180]
+    if bad: return "the flat angles must lie strictly between 0 and 180 degrees; here " + ", ".join(bad)   # (the same words as the Params dialog)
     for sb, sg, sd in itertools.product((1, -1), repeat=3):
         v = (al + sb*be + sg*ga + sd*de) % 360.0
         if min(v, 360.0 - v) < tol_deg:
@@ -124,44 +150,52 @@ def angle_problem(angs_deg, tol_deg=1e-6):
     bars = [sig - al, sig - be, sig - ga, sig - de]
     bad = [(nm, b) for nm, b in zip([r"$\bar\alpha_1$", r"$\bar\beta_1$", r"$\bar\gamma_1$", r"$\bar\delta_1$"], bars) if not (tol_deg < b < 180 - tol_deg)]
     if bad:
-        return ("the barred numbers must lie in (0°, 180°); here " + ", ".join("%s = %.1f°" % (nm, b) for nm, b in bad)
-                + r"  ($\sigma_1 = %.1f^\circ$, $\bar\alpha_1 = \sigma_1 - \alpha_1$, ...)" % sig)   # the degree sign must not be inside mathtext (it renders as a gamma)
-    # (3) the modulus M = a_1 b_1 c_1 d_1 must differ from 1: u = 1 - M = 0 is excluded by the theorem (the elliptic modulus
-    #     degenerates, the phase shifts have no meaning); nets within numerical distance of it get no flexion, which is correct
-    M = vdata(*[math.radians(a) for a in angs_deg])['M']
+        return (r"$\bar\alpha_1 = \sigma_1 - \alpha_1$, $\bar\beta_1 = \sigma_1 - \beta_1$, $\bar\gamma_1 = \sigma_1 - \gamma_1$, $\bar\delta_1 = \sigma_1 - \delta_1$ "
+                r"with $\sigma_1 = (\alpha_1 + \beta_1 + \gamma_1 + \delta_1)/2$ must lie in (0°, 180°); here $\sigma_1$ = %.1f°, " % sig
+                + ", ".join("%s = %g°" % (nm, b) for nm, b in bad))   # the degree sign must not be inside mathtext (it renders as a gamma)
+    # (3) M = a_1 b_1 c_1 d_1 differs from 1 for angles of elliptic type; numerically close to 1 (u = 1 - M almost 0) the elliptic
+    #     data degenerate, and such angles, close to violating (1), get no flexion
+    M = vdata(*[math.radians(a) for a in (al, be, ga, de)])['M']
     if abs(1 - M) < 1e-5:
-        return (r"$M = a_1 b_1 c_1 d_1$ = %.7f is too close to 1: the block sits at the boundary of the equimodular elliptic type "
-                r"($u = 1 - M = 0$ is excluded by the theorem), no flexion is computed; change one of the angles" % M)
+        return (r"$M = a_1 b_1 c_1 d_1$ = %.7f is numerically too close to 1 (angles of elliptic type give $M \neq 1$, and these are "
+                r"close to violating it); change one of the angles" % M)
     return None
 
-def check_parameters(m, n, base_kn, row_systems, verbose=True):
-    """clear messages for the usual mistakes: net too small, base block out of range, rows without a relation type."""
+def check_parameters(m, n, base_kn, row_types, verbose=True):
+    """clear messages for the usual mistakes: sizes that are not whole numbers, net too small or too large, base block out of range or not a
+    pair of whole numbers, rows without a relation type."""
+    def whole(v): return isinstance(v, (int, np.integer)) and not isinstance(v, bool)
+    assert whole(m) and whole(n), "M_FACES and N_FACES must be whole numbers, like 5 (found %r and %r)" % (m, n)
     assert m >= 3 and n >= 3, "M_FACES and N_FACES must be at least 3 (the net must contain a 3 x 3 block)"
+    assert m <= MAX_MN and n <= MAX_MN and m*n <= MAX_FACES, ("M_FACES and N_FACES must be at most MAX_MN = %d, and M_FACES x N_FACES at most MAX_FACES = %d "
+                                                               "(found %d x %d): a larger net takes minutes to start" % (MAX_MN, MAX_FACES, m, n))
+    assert isinstance(base_kn, tuple) and len(base_kn) == 2 and all(map(whole, base_kn)), "BASE_KN must be a pair of whole numbers, like (2, 2) (found %r)" % (base_kn,)
     k0, n0 = base_kn
     assert 1 <= k0 <= m - 2 and 1 <= n0 <= n - 2, "BASE_KN = (kappa, nu) must satisfy 1 <= kappa <= M_FACES-2 and 1 <= nu <= N_FACES-2"
-    assert n0 in row_systems, "ROW_SYSTEMS must contain the row of the base block"
-    rows = dict(row_systems)
+    assert isinstance(row_types, dict), "ROW_TYPES must be a dict {row: type}, like {1: 'c', 2: 'a', 3: 'b'} (found %r)" % (row_types,)
+    assert n0 in row_types, "ROW_TYPES must contain the row of the base block"
+    rows = dict(row_types)
     missing = [nu for nu in range(1, n - 1) if nu not in rows]
     for nu in missing: rows[nu] = rows[n0]
-    if missing and verbose: print("ROW_SYSTEMS: rows %s not given, using the relation type '%s' of the base row for them" % (missing, rows[n0]))
-    for nu, r in rows.items(): assert r in RELATION, "ROW_SYSTEMS: unknown relation type %r (use 'a', 'b', 'c' or 'd')" % (r,)
+    if missing and verbose: print("ROW_TYPES: rows %s not given, using the type '%s' of the row of the base block for them" % (missing, rows[n0]))
+    for nu, r in rows.items(): assert isinstance(r, str) and r in RELATION, "ROW_TYPES: unknown relation type %r (use 'a', 'b', 'c' or 'd')" % (r,)
     return rows
 
-def assemble_net(base_deg, m, n, base_kn, row_systems):
+def assemble_net(base_deg, m, n, base_kn, row_types):
     """quadruples of all 3 x 3 blocks (kappa, nu) of the m x n net, propagated from the base block by the relations between the flat angles of adjacent blocks."""
     q1 = tuple(math.radians(x) for x in base_deg)
     k0, n0 = base_kn
-    sub = {base_kn: block_from_vertex1(q1, row_systems[n0])}
+    sub = {base_kn: block_from_vertex1(q1, row_types[n0])}
     rev = lambda q: (q[3], q[2], q[1], q[0])          # (delta, gamma, beta, alpha)
     sw  = lambda q: (q[1], q[0], q[3], q[2])          # (beta, alpha, delta, gamma)
     # vertical propagation along the column kappa = k0
     for nu in range(n0 + 1, n - 1):
         prev = sub[(k0, nu - 1)]
-        sub[(k0, nu)] = block_from_vertex1(rev(prev[4]), row_systems[nu])
+        sub[(k0, nu)] = block_from_vertex1(rev(prev[4]), row_types[nu])
         assert np.allclose(sub[(k0, nu)][2], rev(prev[3]))
     for nu in range(n0 - 1, 0, -1):
         nxt = sub[(k0, nu + 1)]
-        q4 = rev(nxt[1]); q1 = RELATION[row_systems[nu]](q4)
+        q4 = rev(nxt[1]); q1 = RELATION[row_types[nu]](q4)
         sub[(k0, nu)] = {1: q1, 2: compl(q1), 3: compl(q4), 4: q4}
         assert np.allclose(sub[(k0, nu)][3], rev(nxt[2]))
     # horizontal propagation in every row
@@ -236,11 +270,14 @@ def jacobi_real(u, m):
     sn = math.sin(phi); cn = math.cos(phi)
     return sn, cn, math.sqrt(max(1 - m*sn*sn, 0.0))
 
+def _bricard_hom(c): return (0.0, math.copysign(1.0, c)) if math.isinf(c) else (1.0, c)   # cot(theta/2) = c1/c0: +-inf (a folded crease) is (0, +-1)
+
 def bricard_P(v, X, Y):
-    """P_i(X, Y) of Bricard's equations for the vertex data v."""
-    ab, bb, gb, db = v['bars']; be, s = v['be'], v['sig']
-    return (math.sin(db)*math.sin(db-be)*X*X*Y*Y + math.sin(ab)*math.sin(ab-be)*X*X + math.sin(gb)*math.sin(gb-be)*Y*Y
-            - 2*math.sin(v['al'])*math.sin(v['ga'])*X*Y + math.sin(s)*math.sin(bb))
+    """P_i(X, Y) of Bricard's equations for the vertex data v, in homogeneous form P X0^2 Y0^2 (X = X1/X0, Y = Y1/Y0, see
+    _bricard_hom): for finite X, Y the same value; an infinite X or Y (a folded crease) gives the limit P/X^2 or P/Y^2, not inf or NaN."""
+    ab, bb, gb, db = v['bars']; be, s = v['be'], v['sig']; (X0, X1), (Y0, Y1) = _bricard_hom(X), _bricard_hom(Y)
+    return (math.sin(db)*math.sin(db-be)*X1*X1*Y1*Y1 + math.sin(ab)*math.sin(ab-be)*X1*X1*Y0*Y0 + math.sin(gb)*math.sin(gb-be)*X0*X0*Y1*Y1
+            - 2*math.sin(v['al'])*math.sin(v['ga'])*X0*X1*Y0*Y1 + math.sin(s)*math.sin(bb)*X0*X0*Y0*Y0)
 
 def sgn(a): return 1.0 if a > 0 else (-1.0 if a < 0 else 0.0)
 def rsqrt(a, tol=1e-9):
@@ -248,33 +285,114 @@ def rsqrt(a, tol=1e-9):
     if a < -tol*(1 + abs(a)): raise ValueError("negative radicand")
     return math.sqrt(max(a, 0.0))
 
-def thmain_formulas(x1, x3, y1, y2, z1, z2, z3, u, eps, e, e0, t):
+FLEX_T_INF = 1e50           # |t| above this (t = +-inf included: theta_1 = 0) the flexion formulas are evaluated in s = 1/t
+FLEX_REMOVABLE = 1e-5       # a denominator of the formulas below this fraction of its terms: near a removable 0/0 (see _flex_quotient)
+FLEX_AGREE = 1e-12          # ... where the conjugate form replaces the formula as written if the two differ by more than this (radians)
+FLEX_ULP = sys.float_info.epsilon  # machine epsilon 2^-52 (the ulp of 1.0; the unit roundoff is half of it)
+FLEX_NOCANCEL = 1e-3        # ... provided the conjugate (or poly) is at least this fraction of its terms: it does not cancel itself
+FLEX_END_ULPS = 8           # a factor of D(t) = (x1 t^2 - 1)(1 - u x1 t^2) within this many ulps of its terms of 0 is 0: t is an end of I (a branch point)
+
+def _cot_gap(c1, c2):
+    """the distance of the angles theta = 2 acot(c) of two values c of cot(theta/2) (+-inf: theta = 0)."""
+    d = abs(math.atan2(1.0, c1) - math.atan2(1.0, c2))
+    return 2*min(d, PI - d)
+
+def _flex_quotient(k, num, conj, c_terms, lead, d, d_terms, poly, p_terms):
+    """the value k*num/(lead*d) of one of the flexion formulas, with its limits where d = 0. On the curve num*conj = lead*d*poly
+    (conj: num with the other sign of its square root, c_terms: the size of its two terms), so where d = 0 the formula of one
+    sign e0 has a pole (num != 0: cot = +-inf, the crease is folded, theta = 0) and that of the other a removable 0/0 (at a branch
+    point both). Near such a point (d below FLEX_REMOVABLE of the size d_terms of its terms) rounding in num and d spoils num/d
+    unless it is a pole; the same value is also k*poly/conj, and that one is taken when the two differ by more than FLEX_AGREE
+    in angle (where the two agree within FLEX_AGREE, num/d is kept to the last bit), provided the conjugate does not
+    cancel, or num cancels too while poly does not (p_terms: the size of its terms). On the pole side (num does not cancel, conj
+    does) num/d is the accurate one and is kept. The second case covers a double zero: where the first term of the
+    numerator vanishes identically (U of a block with H2 H3 = 0, then U = k Q/dU and dU pU = -Q^2, so dU ~ D), num, conj and d
+    all vanish at a branch point; there num/d is rounding noise over rounding noise, while tan(theta/2) = conj/(k poly) is
+    accurate to rounding (conj -> 0: the crease is folded at the branch point)."""
+    den = lead*d
+    if abs(d) <= FLEX_REMOVABLE*d_terms and (abs(conj) >= FLEX_NOCANCEL*c_terms or (abs(num) < FLEX_NOCANCEL*c_terms and abs(poly) >= FLEX_NOCANCEL*p_terms)):
+        alt = k*poly/conj if conj != 0 else math.copysign(math.inf, k*poly)
+        if den == 0 or _cot_gap(k*num/den, alt) > FLEX_AGREE: return alt
+    if den == 0 and num != 0: return math.copysign(math.inf, k*num)*math.copysign(1.0, den)
+    return k*num/den
+
+def _flex_checked(*vals):
+    """the values of thmain_formulas; NaN (no limit, e.g. an inf/inf) is no configuration."""
+    if any(v != v for v in vals): raise ValueError("the flexion formulas give no number here")
+    return vals
+
+def thmain_formulas(x1, x3, y1, y2, z1, z2, z3, u, eps, e, e0, t, root=None, linear=False):
     """the explicit flexion formulas: (cot theta_1/2, cot theta_2/2, cot theta_3/2, cot theta_4/2) = (Z, W_2, U, W_1) at the parameter
-    t = Z, for the sign pattern e = (e1, e2, e3, e4) and the branch e0 = +-1; eps = (eps_1, eps_2, eps_3, eps_4)."""
+    t = Z, for the signs e = (e1, e2, e3, e4) and the sign e0 = +-1; eps = (eps_1, eps_2, eps_3, eps_4).
+    The sign e0 enters only through the signed root r = e0 sqrt(x1 D) (sqrt(u y z D) = sqrt(u y z/x1) sqrt(x1 D)): with root = r
+    given it replaces e0 sqrt(x1 D) (near a branch point, D ~ 0, r tells the configuration and t hardly does), and linear=True
+    returns, instead of W2, U, W1, their coefficients (n0, n1, d): cot = (n0 + n1 r)/d.
+    Where the formulas as written divide by zero they give the limit (see _flex_quotient): a pole is cot = +-inf (theta = 0, a
+    folded crease; case (c) at t = 0: theta_3 = 0), a removable 0/0 its value. For |t| > FLEX_T_INF, t = +-inf included (theta_1 = 0),
+    numerators and denominators are divided by t^2 and evaluated in s = 1/t (r then stands for e0 sqrt(x1 D)/t^2; no overflow in
+    t^4 or D; the terms odd in t vanish in the limit, so t = +inf and t = -inf give the same angles for the same e0).
+    At an end of the admissible set (D = 0, a branch point: both signs e0 give the same configuration) rounding can leave t just
+    outside, x1 D < 0, where the radicands are negative beyond the tolerance of rsqrt when the other factor of D is large (e.g. t
+    = 1/sqrt(u x1) computed in floating point with |u| small): a factor that is 0 up to FLEX_END_ULPS ulps of its terms makes
+    D = 0 there (inside I, x1 D >= 0, nothing changes)."""
     e1, e2, e3, e4 = e
-    D = (x1*t*t - 1)*(1 - u*x1*t*t)
-    W2 = eps[1]*(t*rsqrt(u*x1*y2*(1 + z2)*(1 + u*z2)) + e0*e2*rsqrt(u*y2*z2*D))/(y2*u*(z2 + x1*t*t))
-    W1 = eps[0]*(t*rsqrt(u*x1*y1*(1 + z1)*(1 + u*z1)) - e0*e1*rsqrt(u*y1*z1*D))/(y1*u*(z1 + x1*t*t))
+    far = not abs(t) <= FLEX_T_INF
+    if not far:
+        D = (x1*t*t - 1)*(1 - u*x1*t*t)
+        if x1*D < 0 and min(abs(x1*t*t - 1)/(abs(x1*t*t) + 1), abs(1 - u*x1*t*t)/(1 + abs(u*x1*t*t))) <= FLEX_END_ULPS*FLEX_ULP: D = 0.0
+        T = x1*t*t
+        a, dW2, dW1 = t, z2 + x1*t*t, z1 + x1*t*t                                          # W = eps (a A +- B)/(y u dW)
+        dW2_terms, dW1_terms, pW2, pW1 = abs(z2) + abs(T), abs(z1) + abs(T), 1 + u*z2*T, 1 + u*z1*T   # (aA + B)(aA - B) = u y dW pW
+        pW2_terms, pW1_terms = 1 + abs(u*z2*T), 1 + abs(u*z1*T)
+    else:
+        s = 1/t; D = (x1 - s*s)*(s*s - u*x1)                                                  # D/t^4
+        a, dW2, dW1 = s, z2*s*s + x1, z1*s*s + x1
+        dW2_terms, dW1_terms, pW2, pW1 = abs(z2*s*s) + abs(x1), abs(z1*s*s) + abs(x1), s*s + u*z2*x1, s*s + u*z1*x1
+        pW2_terms, pW1_terms = s*s + abs(u*z2*x1), s*s + abs(u*z1*x1)
+    A2, A1 = a*rsqrt(u*x1*y2*(1 + z2)*(1 + u*z2)), a*rsqrt(u*x1*y1*(1 + z1)*(1 + u*z1))
+    if linear: c2, c1 = e2*rsqrt(u*y2*z2/x1), e1*rsqrt(u*y1*z1/x1)                          # B = c r
+    elif root is None: B2, B1 = e0*e2*rsqrt(u*y2*z2*D), e0*e1*rsqrt(u*y1*z1*D)
+    else: B2, B1 = e2*rsqrt(u*y2*z2/x1)*root, e1*rsqrt(u*y1*z1/x1)*root
+    if not linear:
+        W2 = _flex_quotient(eps[1], A2 + B2, A2 - B2, abs(A2) + abs(B2), y2*u, dW2, dW2_terms, pW2, pW2_terms)
+        W1 = _flex_quotient(eps[0], A1 - B1, A1 + B1, abs(A1) + abs(B1), y1*u, dW1, dW1_terms, pW1, pW1_terms)
     if abs(u*z2*z3 - 1) > 1e-9:                                                                    # case (a)
         den = u*z2*z3 - 1
         H1 = (abs(z2)*rsqrt(z3*(1 + z3)*(1 + u*z3)) + e2*e3*abs(z3)*rsqrt(z2*(1 + z2)*(1 + u*z2)))/den
         H2 = (abs(z2*z3)*rsqrt((1 + u*z2)*(1 + u*z3)) + e2*e3*rsqrt(z2*z3*(1 + z2)*(1 + z3)))/den
         H3 = (u*rsqrt(z2*z3*(1 + z2)*(1 + z3))*sgn(z2*z3) + e2*e3*rsqrt((1 + u*z2)*(1 + u*z3)))/den
+        if e2 == -e3 and abs(den) < 1e-3:                                                           # near case (b): each H = (a - b)/den with a - b ~ den, so
+            p = z2*z3                                                                               # H = (a^2 - b^2)/((a + b) den), a^2 - b^2 = den*(...) cancelled
+            a1, b1 = abs(z2)*rsqrt(z3*(1 + z3)*(1 + u*z3)), abs(z3)*rsqrt(z2*(1 + z2)*(1 + u*z2))
+            a2, b2 = abs(p)*rsqrt((1 + u*z2)*(1 + u*z3)), rsqrt(p*(1 + z2)*(1 + z3))
+            a3, b3 = u*rsqrt(p*(1 + z2)*(1 + z3))*sgn(p), rsqrt((1 + u*z2)*(1 + u*z3))
+            if a1 + b1 > 0: H1 = p*(z3 - z2)/(a1 + b1)
+            if a2 + b2 > 0: H2 = p*(z2 + z3 + 1 + u*p)/(a2 + b2)
+            if a3 > 0: H3 = (u*(z2 + z3) + u*p + 1)/(a3 + b3)                                       # (a3 < 0: a3 - b3 does not cancel)
     elif e2 == -e3:                                                                                 # case (b)
         rt = 2*rsqrt(z2*z3*(1 + z2)*(1 + z3))
         H1 = z2*z3*(z3 - z2)/rt; H2 = z2*z3*(z2 + z3 + 2)/rt; H3 = (z2 + z3 + 2*z2*z3)*sgn(z2*z3)/rt
-    else:                                                                                           # case (c)
-        U = eps[1]*eps[2]*rsqrt(z2*z3/(x1*x3))*sgn(y2)/t
-        return t, W2, U, W1
-    U = eps[1]*eps[2]*sgn(z2)*rsqrt(z2*z3/(x1*x3))*(abs(x1)*H2*H3*t + e0*e2*H1*rsqrt(x1*D))/(z2*z3 + u*x1*H1*H1*t*t)
-    return t, W2, U, W1
+    else:                                                                                           # case (c): U = k/t
+        k = eps[1]*eps[2]*rsqrt(z2*z3/(x1*x3))*sgn(y2)
+        if linear: return t, (eps[1]*A2, eps[1]*c2, y2*u*dW2), ((k*s, 0.0, 1.0) if far else (k, 0.0, t)), (eps[0]*A1, -eps[0]*c1, y1*u*dW1)
+        if far: return _flex_checked(t, W2, k*s, W1)                                                 # U -> 0: theta_3 = pi
+        U = k/t if t != 0 else math.copysign(math.inf, k)*math.copysign(1.0, t)                    # t = 0: theta_3 = 0
+        return _flex_checked(t, W2, U, W1)
+    k = eps[1]*eps[2]*sgn(z2)*rsqrt(z2*z3/(x1*x3))                                                  # U = k (P + Q)/dU
+    if not far: P, dU, dU_terms, pU = abs(x1)*H2*H3*t, z2*z3 + u*x1*H1*H1*t*t, abs(z2*z3) + abs(u*x1*H1*H1*t*t), x1*(H1*H1 + z2*z3*T)/(z2*z3)
+    else: P, dU, dU_terms, pU = abs(x1)*H2*H3*s, z2*z3*s*s + u*x1*H1*H1, abs(z2*z3*s*s) + abs(u*x1*H1*H1), x1*(H1*H1*s*s + z2*z3*x1)/(z2*z3)
+    if linear: return t, (eps[1]*A2, eps[1]*c2, y2*u*dW2), (k*P, k*e2*H1, dU), (eps[0]*A1, -eps[0]*c1, y1*u*dW1)
+    pU_terms = abs(x1)*(H1*H1 + abs(z2*z3*T))/abs(z2*z3) if not far else abs(x1)*(H1*H1*s*s + abs(z2*z3*x1))/abs(z2*z3)
+    Q = e0*e2*H1*rsqrt(x1*D) if root is None else e2*H1*root
+    U = _flex_quotient(k, P + Q, P - Q, abs(P) + abs(Q), 1.0, dU, dU_terms, pU, pU_terms)           # (P + Q)(P - Q) = dU pU
+    return _flex_checked(t, W2, U, W1)
 
 def admissible_range(x, u):
-    """the admissible set I(x) = {t : x D(x, t) >= 0} as a list of intervals (t > 0 half; the set is symmetric in t)."""
+    """the admissible set I(x) = {t : x D(x, t) > 0} as a list of intervals (t > 0 half; the set is symmetric in t)."""
     if x > 0 and u > 0: return [(1/math.sqrt(x), 1/math.sqrt(u*x))] if u < 1 else [(1/math.sqrt(x), math.inf)]
     if x > 0 and u < 0: return [(1/math.sqrt(x), math.inf)]
     if x < 0 and u < 0: return [(0.0, 1/math.sqrt(u*x))]
-    return [(0.0, math.inf)]                    # x < 0, u > 0: x D >= 0 for every t
+    return [(0.0, math.inf)]                    # x < 0, u > 0: x D > 0 for every t
 
 class Block:
     """a 3 x 3 block (Kokotsakis polyhedron): vertex data, elliptic data and the explicit flexions."""
@@ -284,9 +402,10 @@ class Block:
         self.q = quads
         self.v = {i: vdata(*quads[i]) for i in range(1, 5)}
         M = self.v[1]['M']
-        assert max(abs(self.v[i]['M'] - M) for i in range(1, 5)) < 1e-9, "not equimodular"
-        assert abs(self.v[1]['r'] - self.v[2]['r']) < 1e-9 and abs(self.v[3]['r'] - self.v[4]['r']) < 1e-9, "amplitudes at common vertices do not match"
-        assert abs(self.v[1]['s'] - self.v[4]['s']) < 1e-9 and abs(self.v[2]['s'] - self.v[3]['s']) < 1e-9, "amplitudes at common vertices do not match"
+        close = lambda a, b: abs(a - b) < 1e-9*max(1.0, abs(a), abs(b))       # relative: M, r, s are large (~ 1/barred angle) when a barred angle is small
+        assert all(close(self.v[i]['M'], M) for i in range(1, 5)), "not equimodular"
+        assert close(self.v[1]['r'], self.v[2]['r']) and close(self.v[3]['r'], self.v[4]['r']), "amplitudes at common vertices do not match"
+        assert close(self.v[1]['s'], self.v[4]['s']) and close(self.v[2]['s'], self.v[3]['s']), "amplitudes at common vertices do not match"
         self.M = M; self.u = 1 - M
         self.x = {i: 1/(self.v[i]['r'] - 1) for i in range(1, 5)}
         self.y = {i: 1/(self.v[i]['s'] - 1) for i in range(1, 5)}
@@ -297,7 +416,6 @@ class Block:
         self.kk, self.kp = math.sqrt(self.k2), math.sqrt(1 - self.k2)
         self.K, self.Kp = ellipK(self.k2), ellipK(1 - self.k2)
         self.t = {i: self.phase(i) for i in range(1, 5)}       # phase shifts t_i = mu K + i y, 0 < y < K'
-        self._witnesses = None
 
     _phase_cache = {}
     def phase(self, i):
@@ -324,18 +442,6 @@ class Block:
         Block._phase_cache[key] = complex(mu*self.K, (lo + hi)/2)
         return Block._phase_cache[key]
 
-    def in_lattice(self, z, tol=1e-9):
-        """z in Lambda = {4K m + 2iK' n} (M < 1) or {4K m + (2K + 2iK') n} (M > 1)."""
-        if self.M < 1: a, b = z.real/(4*self.K), z.imag/(2*self.Kp)
-        else: b = z.imag/(2*self.Kp); a = (z.real - 2*self.K*b)/(4*self.K)
-        return abs(a - round(a)) < tol and abs(b - round(b)) < tol
-
-    def fourth_sign(self, e1, e2, e3):
-        """e_4 from the sign condition e_1 t_1 + e_2 t_2 + e_3 t_3 + e_4 t_4 in Lambda; 0 if neither sign works."""
-        for e4 in (1, -1):
-            if self.in_lattice(e1*self.t[1] + e2*self.t[2] + e3*self.t[3] + e4*self.t[4]): return e4
-        return 0
-
     def lattice_string(self):
         return r"$\{4K\,m + 2\mathrm{i}K'\,n\}$" if self.M < 1 else r"$\{4K\,m + (2K + 2\mathrm{i}K')\,n\}$"
 
@@ -361,14 +467,15 @@ class Block:
         return (x[idx[0]], x[idx[2]], y[idx[0]], y[idx[1]], self.z[idx[0]], self.z[idx[1]], self.z[idx[2]],
                 tuple(self.eps[i - 1] for i in idx), idx)
 
-    def cots(self, e, e0, t, shift=0):
-        """{i: cot(theta_i/2)} from the flexion formulas with the parameter t = cot(theta_{1+shift}/2) and the branch e0."""
+    def cots(self, e, e0, t, shift=0, root=None, linear=False):
+        """{i: cot(theta_i/2)} from the flexion formulas with the parameter t = cot(theta_{1+shift}/2) and the sign e0 (or the signed
+        root e0 sqrt(x1 D) in that numbering, root; linear=True: {i: (n0, n1, d)} for the three other angles, see thmain_formulas)."""
         x1, x3, y1, y2, z1, z2, z3, eps, idx = self.shifted_data(shift)
         es = tuple(e[i - 1] for i in idx)
-        vals = thmain_formulas(x1, x3, y1, y2, z1, z2, z3, self.u, eps, es, e0, t)
-        return {idx[j]: vals[j] for j in range(4)}
+        vals = thmain_formulas(x1, x3, y1, y2, z1, z2, z3, self.u, eps, es, e0, t, root, linear)
+        return {idx[j]: vals[j] for j in range(1 if linear else 0, 4)}
 
-    def angles_from_cots(self, c): return {i: (2*math.atan(1/c[i]) if c[i] != 0 else PI) for i in range(1, 5)}   # cot theta/2 = 0: theta = 180 degrees
+    def angles_from_cots(self, c): return {i: (2*math.atan(1/c[i]) if c[i] != 0 else PI) for i in range(1, 5)}   # cot theta/2 = 0: theta = 180 degrees (the paper's -pi, the same flat edge: kept +pi so that theta_1 -> 180 as t -> 0+ on the slider; angles are compared modulo 2 pi, angle_gap); cot = +-inf (a pole of the formulas, a folded crease): 1/c = +-0, theta = 0
 
     def admissible(self, shift=0):
         """I(x_1), I(y_2), I(x_3), I(y_4) for shift = 0, 1, 2, 3."""
@@ -382,67 +489,23 @@ class Block:
     def bricard_relative(self, c):
         """the residual of Bricard's equations relative to the size of their terms: near the boundary of the elliptic type
         (M close to 1) the data x_i, y_i, z_i and the cotangents are large and the terms reach 1e4 .. 1e6, so an absolute
-        residual of 1e-8 is rounding there, not a violation."""
+        residual of 1e-8 is rounding there, not a violation. An infinite cot (a folded crease) enters through the limit equation
+        (see bricard_P)."""
         Z, W2, U, W1 = c[1], c[2], c[3], c[4]; worst = 0.0
         for v, X, Y in ((self.v[1], Z, W1), (self.v[2], Z, W2), (self.v[3], U, W2), (self.v[4], U, W1)):
-            ab, bb, gb, db = v['bars']; be, s = v['be'], v['sig']
-            terms = (math.sin(db)*math.sin(db-be)*X*X*Y*Y, math.sin(ab)*math.sin(ab-be)*X*X, math.sin(gb)*math.sin(gb-be)*Y*Y,
-                     -2*math.sin(v['al'])*math.sin(v['ga'])*X*Y, math.sin(s)*math.sin(bb))
+            ab, bb, gb, db = v['bars']; be, s = v['be'], v['sig']; (X0, X1), (Y0, Y1) = _bricard_hom(X), _bricard_hom(Y)
+            terms = (math.sin(db)*math.sin(db-be)*X1*X1*Y1*Y1, math.sin(ab)*math.sin(ab-be)*X1*X1*Y0*Y0, math.sin(gb)*math.sin(gb-be)*X0*X0*Y1*Y1,
+                     -2*math.sin(v['al'])*math.sin(v['ga'])*X0*X1*Y0*Y1, math.sin(s)*math.sin(bb)*X0*X0*Y0*Y0)
             worst = max(worst, abs(sum(terms))/max(1.0, max(abs(t_) for t_ in terms)))
         return worst
 
-    def witnesses(self):
-        """sign patterns e = (1, e_2, e_3, e_4) satisfying the sign condition on the phase shifts. The flexion formulas involve
-        e_1, e_2, e_3 only (e_4 is the sign fixed by the condition); a triple (1, e_2, e_3) belongs to an admissible pattern if
-        and only if the formulas solve Bricard's equations, which is tested at three admissible values of t; e_4 is then read
-        off from the condition with the phase shifts."""
-        if self._witnesses is None:
-            lo, hi = self.admissible()[0]; hi = min(hi, lo + 5.0 if lo > 0 else 5.0)
-            tests = [lo + f*(hi - lo) for f in (0.23, 0.41, 0.67)]
-            out = []
-            for e2, e3 in itertools.product([1, -1], repeat=2):
-                e = (1, e2, e3, 1); ok = True
-                for t in tests:
-                    try:
-                        for e0 in (1, -1):
-                            if self.bricard_relative(self.cots(e, e0, t)) > 1e-8: ok = False
-                    except (ValueError, ZeroDivisionError): ok = False
-                if ok: out.append((1, e2, e3, self.fourth_sign(1, e2, e3)))
-            self._witnesses = out
-        return self._witnesses
-
-    def base_config(self, e, t, e0):
-        """dihedral angles of the base configuration at the parameter t = cot(theta_1/2), branch e0."""
-        try: c = self.cots(e, e0, t)
-        except (ValueError, ZeroDivisionError): return None
-        return self.angles_from_cots(c)
-
-    def configs_through_pair(self, e, i, X, Y, tol=1e-7):
-        """dihedral angles theta_1..theta_4 of the points of the family e whose central angles at the vertex A_i have the
-        cotangents (X, Y) = (cot theta_{i-1}/2, cot theta_i/2), theta_0 = theta_4: the parameter is theta_{i-1} (cyclic shift
-        so that it is the first angle), and the branch e0 is the one whose adjacent angle theta_i has the cotangent Y."""
-        ia = 4 if i == 1 else i - 1
-        out = []
-        for e0 in (1, -1):                                                          # parameter theta_{i-1}, branch fixed by theta_i
-            try: c = self.cots(e, e0, X, shift=ia - 1)
-            except (ValueError, ZeroDivisionError): continue
-            if abs(c[i] - Y) < tol*(1 + abs(Y)):
-                out.append(self.angles_from_cots(c))
-        if not out:                                                                 # the other way round: parameter theta_i, branch fixed by theta_{i-1}
-            for e0 in (1, -1):                                                      # (needed when theta_{i-1} sits at the boundary of its admissible set)
-                try: c = self.cots(e, e0, Y, shift=i - 1)
-                except (ValueError, ZeroDivisionError): continue
-                if abs(c[ia] - X) < tol*(1 + abs(X)):
-                    out.append(self.angles_from_cots(c))
-        return out
-
 # ============================================================================================
-# 4. GEOMETRY OF ONE 3 x 3 SUBNET (to read off the non-central dihedral angles at its vertices)
+# 4. GEOMETRY OF ONE 3 x 3 BLOCK (to read off the non-central dihedral angles at its vertices)
 # ============================================================================================
 def unit(v): return v/np.linalg.norm(v)
 
 def convex_quad(d1, d2, d3, a1=1.0):
-    """planar convex quadrilateral A_1 A_2 A_3 A_4 with angles d_i and |A_2 A_1| = a1 (appendix of the CAD paper, Section B)."""
+    """planar convex quadrilateral A_1 A_2 A_3 A_4 with angles d_i and |A_2 A_1| = a1."""
     d4 = 2*PI - d1 - d2 - d3
     s23, s12 = d2 + d3, d1 + d2
     # the side a2 = |A_2 A_3| of a convex quadrilateral with these angles: a3 > 0 needs a2 > lo_ (when d2 + d3 < pi), a4 > 0 needs
@@ -467,10 +530,19 @@ def block_points(S, th):
     d0 = {1: np.cross(n0, e[1]), 2: np.cross(n0, e[2]), 3: np.cross(n0, e[3]), 4: np.cross(n0, e[4])}   # into the central face
     d = {i: math.cos(th[i])*d0[i] + math.sin(th[i])*n0 for i in range(1, 5)}                              # into the side face
     al = {i: q[i][0] for i in range(1, 5)}; ga = {i: q[i][2] for i in range(1, 5)}
-    B = {1: A[1] + math.cos(al[1])*(-e[1]) + math.sin(al[1])*d[1], 2: A[2] + math.cos(al[2])*e[1] + math.sin(al[2])*d[1],
-         3: A[3] + math.cos(al[3])*(-e[3]) + math.sin(al[3])*d[3], 4: A[4] + math.cos(al[4])*e[3] + math.sin(al[4])*d[3]}
-    C = {2: A[2] + math.cos(ga[2])*(-e[2]) + math.sin(ga[2])*d[2], 3: A[3] + math.cos(ga[3])*e[2] + math.sin(ga[3])*d[2],
-         1: A[1] + math.cos(ga[1])*e[4] + math.sin(ga[1])*d[4], 4: A[4] + math.cos(ga[4])*(-e[4]) + math.sin(ga[4])*d[4]}
+    # the points B_i, C_i only mark the directions of the edges at A_i; their distances from A_i are chosen so that each of the
+    # four side faces is a convex quadrilateral: where the two edges of a side face converge (the angles at its base add up to
+    # less than pi), half the distance to the point where they meet, else 1. A crossed (bow-tie) side face reverses its normal at
+    # the far corners, and a dihedral angle read from these points then comes out as the supplement with the opposite sign
+    # (this made the synchronization reject correct neighbours, e.g. for rows of type d).
+    L = {1: np.linalg.norm(A[1] - A[2]), 2: np.linalg.norm(A[2] - A[3]), 3: np.linalg.norm(A[3] - A[4]), 4: np.linalg.norm(A[4] - A[1])}
+    def ln(base, near, far):
+        s = near + far
+        return 1.0 if s >= PI - 1e-12 else min(1.0, 0.5*base*math.sin(far)/math.sin(s))
+    B = {1: A[1] + ln(L[1], al[1], al[2])*(math.cos(al[1])*(-e[1]) + math.sin(al[1])*d[1]), 2: A[2] + ln(L[1], al[2], al[1])*(math.cos(al[2])*e[1] + math.sin(al[2])*d[1]),
+         3: A[3] + ln(L[3], al[3], al[4])*(math.cos(al[3])*(-e[3]) + math.sin(al[3])*d[3]), 4: A[4] + ln(L[3], al[4], al[3])*(math.cos(al[4])*e[3] + math.sin(al[4])*d[3])}
+    C = {2: A[2] + ln(L[2], ga[2], ga[3])*(math.cos(ga[2])*(-e[2]) + math.sin(ga[2])*d[2]), 3: A[3] + ln(L[2], ga[3], ga[2])*(math.cos(ga[3])*e[2] + math.sin(ga[3])*d[2]),
+         1: A[1] + ln(L[4], ga[1], ga[4])*(math.cos(ga[1])*e[4] + math.sin(ga[1])*d[4]), 4: A[4] + ln(L[4], ga[4], ga[1])*(math.cos(ga[4])*(-e[4]) + math.sin(ga[4])*d[4])}
     pts = {}
     for i in range(1, 5): pts[S.A[i]] = A[i]; pts[S.B[i]] = B[i]; pts[S.C[i]] = C[i]
     closure = max(abs(math.acos(np.clip(np.dot(unit(B[i]-A[i]), unit(C[i]-A[i])), -1, 1)) - q[i][1]) for i in range(1, 5))
@@ -489,6 +561,8 @@ def face_normal(order, pts):
             return _unit3(_cross((q[0]-p[0], q[1]-p[1], q[2]-p[2]), (r[0]-p[0], r[1]-p[1], r[2]-p[2])))
     return None
 
+DIHEDRAL_ACOS = 0.9999                             # dihedral(): |cos(bend)| above this, the bend is taken by atan2 (acos loses digits there)
+
 def dihedral(S, i, pts):
     """oriented interior dihedral angle theta_i of block S read from 3D points (None if points are missing)."""
     A, B, C = S.A, S.B, S.C
@@ -498,100 +572,147 @@ def dihedral(S, i, pts):
     if n0 is None or ni is None: return None
     nxt = A[i+1] if i < 4 else A[1]
     d = n0[0]*ni[0] + n0[1]*ni[1] + n0[2]*ni[2]
-    bend = math.acos(max(-1.0, min(1.0, d)))
+    if abs(d) < DIHEDRAL_ACOS: bend = math.acos(d)
+    else:                                              # nearly flat or folded: acos(1 - 2^-53) is already 1.5e-8, atan2 is exact to rounding
+        x_ = _cross(n0, ni); bend = math.atan2(math.sqrt(x_[0]*x_[0] + x_[1]*x_[1] + x_[2]*x_[2]), d)
     e = (pts[A[i]][0] - pts[nxt][0], pts[A[i]][1] - pts[nxt][1], pts[A[i]][2] - pts[nxt][2])
     c = _cross(n0, e)                                  # det(ni, n0, e) = ni . (n0 x e)
     det = ni[0]*c[0] + ni[1]*c[1] + ni[2]*c[2]
     return (1 if det > 0 else -1)*(PI - bend)
 
 # ============================================================================================
-# 5. SYNCHRONIZATION OF THE SUBNETS
+# 5. SYNCHRONIZATION OF THE BLOCKS
 # ============================================================================================
+def angle_gap(a, b):
+    """the distance of two oriented angles on the circle, in [0, pi]: a flat edge is both +pi and -pi (the formulas give +pi at
+    cot = 0, the vertices -pi, or +-(pi - tiny) with a sign that is rounding noise), so angles are compared modulo 2 pi.
+    Written so that it equals abs(a - b) exactly whenever |a - b| <= pi (the remainder is exact for |a - b| < 2 pi, and so is
+    2 pi - d for d in (pi, 2 pi))."""
+    d = abs(a - b) % (2*PI)
+    return min(d, 2*PI - d)
+
 def compatible(Sa, tha, ptsa, Sb, thb, ptsb, tol=1e-6):
     for i in range(1, 5):
         d = dihedral(Sb, i, ptsa)
-        if d is not None and abs(d - thb[i]) > tol: return False
+        if d is not None and angle_gap(d, thb[i]) > tol: return False
         d = dihedral(Sa, i, ptsb)
-        if d is not None and abs(d - tha[i]) > tol: return False
+        if d is not None and angle_gap(d, tha[i]) > tol: return False
     return True
 
-def candidates(S, ref_pts, families):
+REALIZE_ANGLE_TOL = 1e-6        # realize_from: the old block is reproduced when its angles agree within this (radians)
+REALIZE_BRANCH = 1e-10          # ... the pair is at a branch point when a factor of D(t) = (x1 t^2 - 1)(1 - u x1 t^2) is below this relative to its terms
+REALIZE_NEAR = 1e-4             # ... and near one within this, where the signed root of the old block is carried to the new one
+REALIZE_EXACT = 1e-10           # ... when it reproduces the old block as well as the best sign does, or within this
+REALIZE_AGREE = 1e-8            # ... a result differing from that of the first acceptable sign (the rule before) by at most this is replaced by it
+REALIZE_KEEP_T = 1e-4           # ... except next to the flat end, |t| below this, where the tool did not go before (synchronize)
+
+def _roots_from_angles(S, signs, t, shift, th):
+    """the signed root r = e0 sqrt(x1 D) (numbering 'shift', parameter t) of the configuration th of the block S, read off each
+    of its three other angles: cot(theta/2) = (n0 + n1 r)/d, i.e. sin(theta/2) (n0 + n1 r) = cos(theta/2) d (no division by a
+    small sine or d: this holds for a folded crease and at a pole too)."""
     out = []
-    for i in range(1, 5):
-        ia = 4 if i == 1 else i - 1
-        da, db = dihedral(S, ia, ref_pts), dihedral(S, i, ref_pts)
-        if da is None or db is None: continue
-        try: X, Y = 1/math.tan(da/2), 1/math.tan(db/2)
-        except ZeroDivisionError: continue                          # a shared fold at exactly 0 (the boundary of the family): no parameter there
-        for e in families:
-            for th in S.configs_through_pair(e, i, X, Y):
-                pts, clo = block_points(S, th)
-                if clo > 1e-7: continue
-                if not any(max(abs(th[j] - th2[j]) for j in range(1, 5)) < 1e-7 for (_, th2, _) in out):
-                    out.append((e, th, pts))
+    for i, (n0, n1, d) in S.cots(signs, 1, t, shift=shift, linear=True).items():
+        sh, ch = math.sin(th[i]/2), math.cos(th[i]/2)
+        if sh*n1 != 0 and math.isfinite(n0) and math.isfinite(d): out.append((ch*d - sh*n0)/(sh*n1))
     return out
 
-def propagation_order(subs, base_kn):
-    order, seen, queue = [], {base_kn}, [base_kn]
-    while queue:
-        k, n = queue.pop(0)
-        for nb in [(k, n-1), (k, n+1), (k-1, n), (k+1, n), (k-1, n-1), (k+1, n-1), (k-1, n+1), (k+1, n+1)]:
-            if nb in subs and nb not in seen: seen.add(nb); queue.append(nb); order.append(nb)
-    return order
+def realize_from(S_new, S_old, th_old, direction, signs, keep_old=True):
+    """the realization of the block S_new from its realized neighbour S_old (dihedral angles th_old), with the parameter and the
+    sign for which two neighbours agree on their common faces. In the numbering of the
+    pair (a column: the lower block renumbered cyclically by 2, the upper one kept; a row: the left block by 3, the right one by 1)
+    the two polyhedra have the same parameter, and the sign of the lower (left) block is the sign e0 of the upper (right) block
+    times -e3 e2' (a column) or -e4 e3' (a row), where e_i are the signs of the lower (left) block and e_i' those of the other; all
+    blocks have the same signs here. direction: 'up', 'down', 'right' or 'left', from S_old to S_new. None if the old block
+    cannot be reproduced or the formulas of the new one have no value there.
+    The sign of the old block is the one whose angles come closest to th_old (the largest angle_gap of the four), among those
+    that reproduce it: within 1e-6 relative in cot(theta/2), or within REALIZE_ANGLE_TOL in angle (a crease close to folded,
+    theta ~ 0, has a huge cotangent that rounding moves by more than 1e-6 relative). The closest, not the first: where the two
+    signs almost coincide (near a branch point of the pair; near the flat state t = 0 they can differ by O(t) only) the first
+    one could be the mirror branch.
+    Near a branch point of the pair (D(tp) ~ 0) the parameter hardly determines the configuration: at a relative distance rho
+    sqrt(x1 D) turns an error in tp (rounding; the old block's own error) into one 1/sqrt(rho) times larger, and near t = 0
+    the two branches differ by less than that. Nor do the data: the two blocks of a pair have the same D in exact arithmetic,
+    but each block computes it from its own x1 and u = 1 - M (M from its own vertex 1), which differ from those of the other
+    block by a few ulps; where |u| is small (M close to 1) that is ~1e-10 relative, and at rho ~ 1e-10 from a zero of the factor
+    1 - u x1 t^2 the two values of D differ by O(1) (the new block's own sign then misses the old block by ~1e-6).
+    So near a branch point (rho <= REALIZE_NEAR) the signed root r = e0 sqrt(x1 D) of the old block, read off its angles (or its
+    own sign times the root of its own D), is carried to the new one (times the factor of the signs), provided it reproduces the
+    old block (within REALIZE_ANGLE_TOL) as well as the best sign does (or to REALIZE_EXACT); at the branch point itself
+    (rho <= REALIZE_BRANCH), and when no sign reproduces the old block at all, whenever it reproduces it.
+    With keep_old, wherever the result differs from that of the rule before (the first sign within 1e-6 in cot(theta/2)) by at
+    most REALIZE_AGREE, the latter is returned, to the last bit: the new choices only act where the old one is off. synchronize
+    turns this off next to the flat end (|t| < REALIZE_KEEP_T), which the tool did not reach before: there the rule before can be
+    off by up to ~1e-7 per step, and the better result is kept.
+    A common crease at theta ~ 0 (folded) has the parameter cot(theta/2) = +-inf or huge: the formulas take the limit."""
+    f_col, f_row = -signs[2]*signs[1], -signs[3]*signs[2]
+    shift_old, shift_new, factor = {'up': (2, 0, f_col), 'down': (0, 2, f_col), 'right': (3, 1, f_row), 'left': (1, 3, f_row)}[direction]
+    def cot_half(a_): s_ = math.sin(a_/2); return math.cos(a_/2)/s_ if abs(s_) > 1e-12 else None
+    def gap_of(c): a = S_old.angles_from_cots(c); return max(angle_gap(a[i], th_old[i]) for i in range(1, 5))
+    def new_block(sign, root=None):
+        try: return S_new.angles_from_cots(S_new.cots(signs, sign, tp, shift=shift_new, root=root))
+        except (ValueError, ZeroDivisionError): return None
+    tp = cot_half(th_old[1 + shift_old])                                            # the parameter, in the numbering of the pair
+    if tp is None:                                                                   # the common crease is (almost) folded
+        s_ = math.sin(th_old[1 + shift_old]/2); tp = math.cos(th_old[1 + shift_old]/2)/s_ if s_ != 0 else math.inf
+    target = {i: cot_half(th_old[i]) for i in range(1, 5)}
+    s_old = None; best = None; first = None                                          # the sign of the old block in that numbering
+    for e0c in (1, -1):
+        try: c = S_old.cots(signs, e0c, tp, shift=shift_old)
+        except (ValueError, ZeroDivisionError): continue
+        gap = gap_of(c); in_cot = all(target[i] is None or abs(c[i] - target[i]) < 1e-6*(1 + abs(c[i])) for i in range(1, 5))
+        if in_cot and first is None: first = e0c                                     # the choice of the first acceptable sign (the rule before)
+        if (gap <= REALIZE_ANGLE_TOL or in_cot) and (best is None or gap < best): s_old, best = e0c, gap
+    th_first = new_block(factor*first) if first is not None else None               # the factor is +-1: its own inverse
+    th_new = th_first if s_old == first else (new_block(factor*s_old) if s_old is not None else None)
+    x1p, u = S_old.shifted_data(shift_old)[0], S_old.u                               # rho: relative distance from a branch point
+    rho = min(abs(x1p*tp*tp - 1)/(abs(x1p*tp*tp) + 1), abs(1 - u*x1p*tp*tp)/(1 + abs(u*x1p*tp*tp))) if abs(tp) <= FLEX_T_INF else math.inf
+    at_branch = rho <= REALIZE_BRANCH
+    if best is None or rho <= REALIZE_NEAR:                                          # carry the signed root
+        r_old = None; r_best = None
+        try: roots = _roots_from_angles(S_old, signs, tp, shift_old, th_old)
+        except (ValueError, ZeroDivisionError): roots = []
+        if s_old is not None:                                                        # the old block's own: its sign, the root of its D
+            try: roots.append(s_old*rsqrt(x1p*(x1p*tp*tp - 1)*(1 - u*x1p*tp*tp)))
+            except ValueError: pass
+        for r in roots:
+            try: gap = gap_of(S_old.cots(signs, 1, tp, shift=shift_old, root=r))
+            except (ValueError, ZeroDivisionError): continue
+            if r_best is None or gap < r_best: r_old, r_best = r, gap
+        if r_old is not None and r_best <= REALIZE_ANGLE_TOL and (best is None or at_branch or r_best <= max(best, REALIZE_EXACT)):
+            th_root = new_block(1, root=factor*r_old)
+            if th_root is not None: th_new = th_root
+    if th_new is None: return None
+    if keep_old and th_first is not None and max(angle_gap(th_first[i], th_new[i]) for i in range(1, 5)) <= REALIZE_AGREE: return th_first
+    return th_new                                                                    # (where the rule before is as good, its result is kept to the last bit)
 
-class _Budget(Exception): pass
-
-def synchronize(subs, base_kn, base_signs, e0, t, assignment=None, max_nodes=None, all_solutions=False, max_solutions=64):
-    """configurations (theta dicts) of all blocks, consistent on common faces; searches the families if assignment is None.
-    max_nodes bounds the backtracking search (used by the parameters dialog; an exhausted budget counts as 'no')."""
-    B = subs[base_kn]; nodes = [0]
-    thB = B.base_config(base_signs, t, e0)
-    if thB is None: return None, None
-    ptsB, clo = block_points(B, thB)
-    if clo > 1e-7: return None, None
-    assigned = {base_kn: (base_signs, thB, ptsB)}
-    order = propagation_order(subs, base_kn)
-    def rec(idx):
-        if idx == len(order): return True
-        nodes[0] += 1
-        if max_nodes is not None and nodes[0] > max_nodes: raise _Budget()
-        kn = order[idx]; S = subs[kn]
-        fams = [assignment[kn]] if (assignment and kn in assignment) else S.witnesses()
-        near = sorted((o for o in assigned if abs(o[0] - kn[0]) <= 2 and abs(o[1] - kn[1]) <= 2),
-                      key=lambda o: abs(o[0] - kn[0]) + abs(o[1] - kn[1]))                  # only blocks that can share faces, nearest first
-        cands = []
-        for ref in near:                                                                    # a reference sharing a vertex with this block
-            cands = candidates(S, assigned[ref][2], fams)
-            if cands: break
-        for (e, th, pts) in cands:
-            if all(compatible(S, th, pts, subs[o], assigned[o][1], assigned[o][2]) for o in near):
-                assigned[kn] = (e, th, pts)
-                if rec(idx + 1): return True
-                del assigned[kn]
-        return False
-    if all_solutions:                                                            # every consistent assignment of the patterns (capped)
-        sols = []
-        def rec_all(idx):
-            if len(sols) >= max_solutions: return
-            if idx == len(order): sols.append({kn: assigned[kn][0] for kn in assigned}); return
-            kn = order[idx]; S = subs[kn]
-            near = sorted((o for o in assigned if abs(o[0] - kn[0]) <= 2 and abs(o[1] - kn[1]) <= 2), key=lambda o: abs(o[0] - kn[0]) + abs(o[1] - kn[1]))
-            cands = []
-            fams_ = [assignment[kn]] if (assignment and kn in assignment) else S.witnesses()
-            for ref in near:
-                cands = candidates(S, assigned[ref][2], fams_)
-                if cands: break
-            for (e, th, pts) in cands:
-                if all(compatible(S, th, pts, subs[o], assigned[o][1], assigned[o][2]) for o in near):
-                    assigned[kn] = (e, th, pts); rec_all(idx + 1); del assigned[kn]
-        rec_all(0); return sols
-    try:
-        if not rec(0): return None, None
-    except _Budget: return None, None
-    return {kn: assigned[kn][1] for kn in assigned}, {kn: assigned[kn][0] for kn in assigned}
+def synchronize(subs, base_kn, signs, e0, t):
+    """the dihedral angles {block: {i: theta_i}} of all blocks at the parameter t, or None. The base block (kappa_0, nu_0) is
+    realized at the parameter t and the sign e0 by the flexion formulas; then the blocks of its row, and then those of every
+    column, each from its realized neighbour by realize_from (the parameter and the sign for which neighbours agree).
+    Finally every two blocks that share faces are checked to agree on them (their dihedral angles along the common edges)."""
+    ks = sorted({k for k, _ in subs}); ns = sorted({nu for _, nu in subs}); k0, n0 = base_kn
+    th = {}
+    try: th[base_kn] = subs[base_kn].angles_from_cots(subs[base_kn].cots(signs, e0, t))
+    except (ValueError, ZeroDivisionError): return None
+    steps = ([((k, n0), (k - 1, n0), 'right') for k in ks if k > k0] + [((k, n0), (k + 1, n0), 'left') for k in reversed(ks) if k < k0])
+    for k in ks:
+        steps += [((k, nu), (k, nu - 1), 'up') for nu in ns if nu > n0] + [((k, nu), (k, nu + 1), 'down') for nu in reversed(ns) if nu < n0]
+    for new, old, direction in steps:
+        th_new = realize_from(subs[new], subs[old], th[old], direction, signs, keep_old=abs(t) >= REALIZE_KEEP_T)
+        if th_new is None: return None
+        th[new] = th_new
+    pts = {}
+    for kn in th:
+        pts[kn], clo = block_points(subs[kn], th[kn])
+        if clo > 1e-7: return None
+    for kn in th:                                                                    # every pair of blocks with common faces agrees
+        for other in th:
+            if other <= kn or abs(other[0] - kn[0]) > 2 or abs(other[1] - kn[1]) > 2: continue
+            if not compatible(subs[kn], th[kn], pts[kn], subs[other], th[other], pts[other]): return None
+    return th
 
 # ============================================================================================
-# 6. THE NET IN SPACE WITH CONVEX FACES (the construction of the appendix of the CAD paper, generalized face by face)
+# 6. THE NET IN SPACE WITH CONVEX FACES (built face by face)
 # ============================================================================================
 
 def inner_edge_lengths(ang, m, n, base_kn, a1=1.0):
@@ -625,6 +746,46 @@ def inner_edge_lengths(ang, m, n, base_kn, a1=1.0):
     x = x*(a1/x[idx[e0]])
     return {e: float(x[idx[e]]) for e in edges}
 
+def side_spread(ang, m, n, base_kn):
+    """longest / shortest side of the central faces (inf when they cannot be closed): above ~1e6 a failed construction is due to
+    the angles, which force sides too different for double precision, not to rounding near a condition"""
+    try: L = central_face_lengths(ang, m, n, base_kn)
+    except (ArithmeticError, ValueError): return math.inf
+    return max(L.values())/min(L.values()) if L and min(L.values()) > 0 else math.inf
+
+def central_face_lengths(ang, m, n, base_kn, a1=1.0):
+    """the sides of the central faces F_{kappa nu}, closed row by row. In the block (kappa, nu), the
+    vertices A_1, ..., A_4 are V_{kappa+1,nu}, V_{kappa nu}, V_{kappa,nu+1}, V_{kappa+1,nu+1} with the angles delta_1, ..., delta_4, and
+        |A_3A_4| = (|A_1A_2| sin delta_1 - |A_2A_3| sin(delta_1 + delta_2))/sin delta_4       (upper side),
+        |A_4A_1| = (|A_2A_3| sin delta_3 - |A_1A_2| sin(delta_2 + delta_3))/sin delta_4       (right side).
+    The lower sides of the first row of blocks are 1; then, row by row, the left side of the first block is taken large enough
+    (the bound that makes all right sides of the row positive, plus the mean lower side of the row, so that the shortest side of
+    the row is not much shorter than the others), and the formulas give the others, from left to right; the upper sides are
+    positive because delta_1 + delta_2 >= pi. Finally all sides are scaled so that the edge
+    V_{kappa_0+1,nu_0} V_{kappa_0 nu_0} has length a1. None if some side is not positive."""
+    E = lambda P, Q: frozenset((P, Q)); L = {}
+    def delta(k, nu, i):
+        A = {1: (k+1, nu), 2: (k, nu), 3: (k, nu+1), 4: (k+1, nu+1)}
+        return ang[A[i]][(k, nu)]
+    for k in range(1, m-1): L[E((k, 1), (k+1, 1))] = 1.0                                   # the lower sides of the first row
+    for nu in range(1, n-1):
+        # the right side of the block (k, nu) is a_k X - b_k, X = the left side of the first block of the row
+        a_, b_, bound = 1.0, 0.0, 0.0
+        for k in range(1, m-1):
+            d2, d3, d4 = delta(k, nu, 2), delta(k, nu, 3), delta(k, nu, 4); low = L[E((k, nu), (k+1, nu))]
+            a_, b_ = a_*math.sin(d3)/math.sin(d4), (b_*math.sin(d3) + low*math.sin(d2 + d3))/math.sin(d4)
+            bound = max(bound, b_/a_)
+        mean_low = float(np.mean([L[E((k, nu), (k+1, nu))] for k in range(1, m-1)]))
+        L[E((1, nu), (1, nu+1))] = bound + mean_low                                     # above the bound by a typical side
+        for k in range(1, m-1):
+            d1, d2, d3, d4 = (delta(k, nu, i) for i in (1, 2, 3, 4))
+            low, lft = L[E((k, nu), (k+1, nu))], L[E((k, nu), (k, nu+1))]
+            L[E((k, nu+1), (k+1, nu+1))] = (low*math.sin(d1) - lft*math.sin(d1 + d2))/math.sin(d4)    # upper side
+            L[E((k+1, nu), (k+1, nu+1))] = (lft*math.sin(d3) - low*math.sin(d2 + d3))/math.sin(d4)    # right side
+    if min(L.values()) <= 0: return None
+    k0, n0 = base_kn; sc = a1/L[E((k0 + 1, n0), (k0, n0))]
+    return {e: v*sc for e, v in L.items()}
+
 def build_net(ang, thetas, m, n, base_kn, a1=1.0, free=None):
     """positions of all vertices; 'free' records the free lengths chosen for the boundary faces (reused at every t)."""
     pos = {}; Lref = a1
@@ -638,9 +799,10 @@ def build_net(ang, thetas, m, n, base_kn, a1=1.0, free=None):
         for i in range(1, 5):
             if edge == frozenset((A[i], A[i+1 if i < 4 else 1])): return i
     def convex2d(pts):
-        cr = [(pts[(k+1)%4]-pts[k])[0]*(pts[(k+2)%4]-pts[(k+1)%4])[1] - (pts[(k+1)%4]-pts[k])[1]*(pts[(k+2)%4]-pts[(k+1)%4])[0] for k in range(4)]
+        e = [(pts[(k+1)%4]-pts[k]).tolist() for k in range(4)]
+        cr = [(e[k][0]*e[(k+1)%4][1] - e[k][1]*e[(k+1)%4][0])/(math.hypot(*e[k])*math.hypot(*e[(k+1)%4]) or 1.0) for k in range(4)]   # sines of the turning angles (scale-free: faces with very short sides)
         return all(c > 1e-9 for c in cr) or all(c < -1e-9 for c in cr)
-    # The construction is done as originally (base face by the construction of the CAD paper's appendix, heuristic lengths for the faces attached
+    # The construction is done as originally (the base face explicitly, heuristic lengths for the faces attached
     # with two known corners, boundary strips with a list of free lengths). Only if that fails, the inner region is rebuilt with edge
     # lengths solved from the closure equations of all central faces, and the strips with balanced completions and backtracking.
     inner_mode = free.get('inner_mode', 'legacy') if not record else 'legacy'
@@ -667,6 +829,13 @@ def build_net(ang, thetas, m, n, base_kn, a1=1.0, free=None):
         dold = Mo - pos[P]; dold = unit(dold - np.dot(dold, u)*u); N = normal(oldf)
         dnew = math.cos(th)*dold + math.sin(th)*N
         phP, phQ = ang[P][f], ang[Q][f]
+        if not inner(R) and not inner(S) and strip_mode[0] == 'apex':
+            # a boundary face with two free corners: both at lengths that keep this face and its neighbours convex
+            lP = free.setdefault(('len', f, P, R), safe_len(P, R)) if record else free[('len', f, P, R)]
+            lQ = free.setdefault(('len', f, Q, S), safe_len(Q, S)) if record else free[('len', f, Q, S)]
+            pos[R] = pos[P] + lP*(math.cos(phP)*u + math.sin(phP)*dnew)
+            pos[S] = pos[Q] + lQ*(-math.cos(phQ)*u + math.sin(phQ)*dnew)
+            return
         phR = ang[R][f] if inner(R) else (2*PI - phP - phQ)/2
         phS = 2*PI - phP - phQ - phR
         assert 0 < phR < PI and 0 < phS < PI
@@ -676,6 +845,10 @@ def build_net(ang, thetas, m, n, base_kn, a1=1.0, free=None):
         assert lP > 0 and lQ > 0
         pos[R] = pos[P] + lP*(math.cos(phP)*u + math.sin(phP)*dnew)
         pos[S] = pos[Q] + lQ*(-math.cos(phQ)*u + math.sin(phQ)*dnew)
+        # positive lengths lP, lQ do not make the face convex: its fourth side RS can come out reversed (a crossed face)
+        quad = [pos[P], pos[Q], pos[S], pos[R]]; nq = np.cross(quad[1] - quad[0], quad[3] - quad[0])
+        crs = [np.dot(np.cross(quad[(k+1) % 4] - quad[k], quad[(k+2) % 4] - quad[(k+1) % 4]), nq) for k in range(4)]
+        assert all(c_ > 1e-12*L**4 for c_ in crs) or all(c_ < -1e-12*L**4 for c_ in crs), ("nonconvex face", f)
     def attach3(f, choice=0):
         """face with three known corners; the fourth is determined (inner corner) or placed convexly (boundary corner;
         'choice' selects among the best-balanced convex completions, for the backtracking along the boundary strips)."""
@@ -708,7 +881,10 @@ def build_net(ang, thetas, m, n, base_kn, a1=1.0, free=None):
                         a_, b_ = P4[(k-1) % 4] - P4[k], P4[(k+1) % 4] - P4[k]
                         out_.append(math.acos(max(-1.0, min(1.0, float(np.dot(a_, b_))/(np.linalg.norm(a_)*np.linalg.norm(b_))))))
                     return out_
-                if strip_mode[0] == 'legacy':                                          # as originally: the first convex length of the list
+                if strip_mode[0] == 'apex':                                            # the length that keeps both faces at this edge convex
+                    Xp = base + safe_len(K, X)*dr
+                    assert choice == 0 and ok(Xp), ("no convex completion", f)
+                elif strip_mode[0] == 'legacy':                                        # as originally: the first convex length of the list
                     Xp = next((base + fac*Lref*dr for fac in (0.8, 0.6, 1.0, 0.45, 1.3, 0.3, 1.7, 0.2, 2.5, 0.12) if ok(base + fac*Lref*dr)), None)
                     assert Xp is not None and choice == 0, ("no convex completion", f)
                 else:
@@ -753,12 +929,18 @@ def build_net(ang, thetas, m, n, base_kn, a1=1.0, free=None):
                             attach2(f, P, Q, oldf); built_.add(f); pending.remove(f); progress = True; break
             assert progress, "cannot build the inner block"
         return built_
-    built = None; last_error = None
+    built = None
     if record:
-        for sc in [1.0, 0.8, 1.25, 0.65, 1.55, 0.5, 1.9, 0.4, 2.4, 0.3]:                # the original construction, several scales
-            inner_boost[0] = sc; pos.clear(); place_base_face()
-            try: built = build_inner(); break
-            except AssertionError as ex: last_error = ex
+        Lin = central_face_lengths(ang, m, n, base_kn, a1)                              # the central faces, closed row by row
+        if Lin is not None:
+            inner_mode = 'solved'; pos.clear(); place_base_face()
+            try: built = build_inner()
+            except AssertionError: built = None; Lin = None; inner_mode = 'legacy'
+        if built is None:                                                             # (a safeguard: other lengths)
+            for sc in [1.0, 0.8, 1.25, 0.65, 1.55, 0.5, 1.9, 0.4, 2.4, 0.3]:            # the original construction, several scales
+                inner_boost[0] = sc; pos.clear(); place_base_face()
+                try: built = build_inner(); break
+                except AssertionError: pass
         if built is None:                                                             # fallback: the solved edge lengths
             Lin = inner_edge_lengths(ang, m, n, base_kn, a1)
             assert Lin is not None, "no positive edge lengths make all central faces planar quadrilaterals with the prescribed angles"
@@ -771,6 +953,21 @@ def build_net(ang, thetas, m, n, base_kn, a1=1.0, free=None):
                          [np.linalg.norm(pos[(i,j)] - pos[(i,j+1)]) for i in range(1, m) for j in range(1, n-1)]))
     # boundary strips: bottom (j = 0), top (j = n-1), left (i = 0), right (i = m-1), then corners
     strip_mode = [free.get('strip_mode', 'legacy') if not record else 'legacy']
+    faces_net = [(a, b) for a in range(m) for b in range(n)]
+    def safe_len(v, w):
+        """length of the boundary edge from the inner vertex v to the boundary vertex w: in each face at this edge whose other
+        corner next to v is inner too, the two edges from that base converge to a point unless the base angles add up to pi or
+        more; the length stays below half the distance to that point (and below 0.8 of the mean inner edge), so that every
+        boundary face is convex whatever the angles"""
+        lim = 0.8*Lref
+        for g in faces_net:
+            cg = corners(g)
+            if v not in cg or w not in cg: continue
+            kv = cg.index(v); vv = cg[(kv + 1) % 4] if cg[(kv - 1) % 4] == w else cg[(kv - 1) % 4]
+            if not inner(vv) or vv not in pos: continue
+            s_ = ang[v][g] + ang[vv][g]
+            if s_ < PI - 1e-9: lim = min(lim, 0.45*np.linalg.norm(pos[vv] - pos[v])*math.sin(ang[vv][g])/math.sin(s_))
+        return lim
     def strip(faces):
         f0 = faces[0]; cs = corners(f0)
         P, Q = next((cs[j], cs[(j+1) % 4]) for j in range(4) if cs[j] in pos and cs[(j+1) % 4] in pos)
@@ -780,11 +977,13 @@ def build_net(ang, thetas, m, n, base_kn, a1=1.0, free=None):
                 if not inner(v) and v in pos and not any(v in corners(h) for h in built_faces): del pos[v]
             if record:
                 for key in [k for k in free if k[1] == g]: del free[key]
-        built_faces = set()
+        built_faces = set(); budget = [0]
         def place(k):                                                            # depth-first over the faces of the strip
             if k == len(faces): return True
             g = faces[k]
             for choice in range(STRIP_CHOICES if (record and strip_mode[0] == 'balanced') else 1):
+                budget[0] -= 1
+                if budget[0] < 0: return False                                   # the search used up its budget: the next mode takes over
                 try: attach3(g, choice)
                 except AssertionError:
                     undo(g); return False if not record else False
@@ -792,12 +991,12 @@ def build_net(ang, thetas, m, n, base_kn, a1=1.0, free=None):
                 if place(k + 1): return True
                 built_faces.discard(g); undo(g)
             return False
-        modes = ['legacy', 'balanced'] if record else [free.get(('strip_mode', f0), 'legacy')]
-        for mode in modes:
-            strip_mode[0] = mode
-            for booster in ((0.8, 0.6, 1.0, 0.45, 1.3, 0.3, 1.7, 0.2, 2.5, 0.12) if record else (None,)):
+        modes = ['legacy', 'balanced', 'apex'] if record else [free.get(('strip_mode', f0), 'legacy')]
+        for mode in modes:                                                       # 'apex': the last resort (it can still fail on nearly degenerate nets)
+            strip_mode[0] = mode; budget[0] = STRIP_BUDGET if (record and mode == 'balanced') else math.inf
+            for booster in ((0.8, 0.6, 1.0, 0.45, 1.3, 0.3, 1.7, 0.2, 2.5, 0.12) if (record and mode != 'apex') else (None,)):
                 try:
-                    if record: attach2(f0, P, Q, oldf, booster)
+                    if booster is not None: attach2(f0, P, Q, oldf, booster)
                     else: attach2(f0, P, Q, oldf)
                 except AssertionError:
                     undo(f0); continue
@@ -920,16 +1119,36 @@ def faces_intersect(A, B, tol=1e-9):
         if t0 >= t1 - 1e-9: return False
     return (t1 - t0)*np.linalg.norm(Q - P) > tol*scale
 
+def corners_intersect(A, B, ka, kb, tol=1e-9):
+    """True if the convex planar quadrilaterals A, B (4 x 3 arrays) with the single common vertex A[ka] = B[kb] penetrate each other.
+    Each face lies in its corner at that vertex, so the two meet only on the line where their planes cross, along a segment from the
+    vertex: they penetrate exactly when the corner of A crosses the plane of B (its two edges strictly on opposite sides) along a
+    direction strictly inside the corner of B. tol is an angle (radians): faces that only touch (at the vertex, or along an edge lying
+    in the other's plane) or are coplanar are not counted, as in faces_intersect."""
+    V = A[ka]
+    a1, a2 = unit(A[ka-1] - V), unit(A[(ka+1) % 4] - V); b1, b2 = unit(B[kb-1] - V), unit(B[(kb+1) % 4] - V)
+    nB = unit(np.cross(b1, b2))
+    s1, s2 = np.dot(a1, nB), np.dot(a2, nB)                         # sines of the angles of the edges of A with the plane of B
+    if not (min(s1, s2) < -tol and max(s1, s2) > tol): return False
+    q = unit(abs(s2)*a1 + abs(s1)*a2)                                # the corner of A meets the plane of B along q
+    return np.dot(np.cross(b1, q), nB) > tol and np.dot(np.cross(q, b2), nB) > tol
+
 def self_intersections(pos, faces_all, corners):
-    """pairs of faces with no common vertex that penetrate each other."""
+    """pairs of faces that penetrate each other. Faces with a common edge cannot (each lies on one side of the edge in its own
+    plane); faces with a single common vertex (diagonal neighbours) can cut through each other along a segment from that vertex,
+    so their corners at that vertex are tested (corners_intersect; the common vertex itself does not count)."""
     pairs = []
     P = {f: np.array([pos[x] for x in corners(f)]) for f in faces_all}
     lo = {f: P[f].min(axis=0) for f in faces_all}; hi = {f: P[f].max(axis=0) for f in faces_all}
     for i, f in enumerate(faces_all):
         for g in faces_all[i+1:]:
             if (lo[f] > hi[g]).any() or (lo[g] > hi[f]).any(): continue           # bounding boxes do not meet
-            if set(corners(f)) & set(corners(g)): continue
-            if faces_intersect(P[f], P[g]) or faces_intersect(P[g], P[f]): pairs.append((f, g))
+            shared = set(corners(f)) & set(corners(g))
+            if len(shared) >= 2: continue
+            if shared:
+                v = shared.pop()
+                if corners_intersect(P[f], P[g], corners(f).index(v), corners(g).index(v)): pairs.append((f, g))
+            elif faces_intersect(P[f], P[g]) or faces_intersect(P[g], P[f]): pairs.append((f, g))
     return pairs
 
 def wheel_horizontal(ev):
@@ -953,9 +1172,11 @@ def view_axes(elev, azim, ax=None):
     u = unit(np.cross(V, w))
     return u, np.cross(w, u), w
 
-def layered_pieces(M, sf, polys, cols, max_split=2):
+def layered_pieces(M, sf, polys, cols, max_split=2, straddle=False):
     """occlusion layer of every piece (the number of faces in front of it), with the pieces that straddle an occlusion boundary
     (9 sample points hidden by different numbers of faces) split into 4 until the counts agree or max_split is reached.
+    A piece still straddling then gets its highest count, or with straddle the fractional layer (lo + hi)/2 - 0.25 between its
+    lowest and highest count: drawn after the pieces hidden by hi faces and before those hidden by lo (sorted by depth in LayerPolys).
     Returns the final pieces, their colours and their layers (pieces of a higher layer are drawn earlier)."""
     out_p, out_c, out_l = [], [], []
     Pp, cc, depth = np.array(polys), np.array(cols), 0
@@ -965,7 +1186,8 @@ def layered_pieces(M, sf, polys, cols, max_split=2):
         cnt = occlusion_counts(M, sf, smp).reshape(len(Pp), 9)
         uniform = (cnt == cnt[:, :1]).all(axis=1)
         done = uniform | (depth >= max_split)
-        out_p += list(Pp[done]); out_c += list(cc[done]); out_l += list(np.minimum(cnt[done].max(axis=1), 3))
+        hi, lo = np.minimum(cnt[done].max(axis=1), 3), np.minimum(cnt[done].min(axis=1), 3)
+        out_p += list(Pp[done]); out_c += list(cc[done]); out_l += list(np.where(hi > lo, (hi + lo)/2 - 0.25, hi) if straddle else hi)
         Pp, cc = Pp[~done], cc[~done]
         if len(Pp):
             m01, m12, m23, m30, ce = (Pp[:, 0] + Pp[:, 1])/2, (Pp[:, 1] + Pp[:, 2])/2, (Pp[:, 2] + Pp[:, 3])/2, (Pp[:, 3] + Pp[:, 0])/2, Pp.mean(axis=1)
@@ -977,15 +1199,20 @@ def layered_pieces(M, sf, polys, cols, max_split=2):
 class LayerPolys(PolyCollection):
     """the face pieces of one occlusion layer. Pieces of the same layer never overlap on the screen (an overlap would make the
     rear piece a member of a higher layer), so no depth sorting is needed inside a layer: the collection just projects its
-    3D pieces at draw time. Pieces hidden by more faces (higher layer) are drawn earlier."""
+    3D pieces at draw time. Pieces hidden by more faces (higher layer) are drawn earlier. A fractional layer holds pieces left
+    straddling an occlusion boundary (layered_pieces with straddle): these can overlap, so they are drawn far to near."""
     def __init__(self, verts, layer=0, **kwargs):
         self.layer, self.verts3d = layer, np.asarray(verts, dtype=float)
         super().__init__(np.zeros((0, 4, 2)), **kwargs)
+        self.cols3d = np.array(self.get_facecolor())                                  # the colours in the order of verts3d
     def do_3d_projection(self, *args, **kwargs):
         from mpl_toolkits.mplot3d import proj3d
         V = self.verts3d.reshape(-1, 3)
         tx, ty, tz = proj3d.proj_transform(V[:, 0], V[:, 1], V[:, 2], self.axes.M)
-        self.set_verts(np.stack([tx, ty], axis=1).reshape(self.verts3d.shape[0], 4, 2), True)
+        P = np.stack([tx, ty], axis=1).reshape(self.verts3d.shape[0], 4, 2)
+        if self.layer % 1:                                                             # straddling pieces: far to near (larger depth first)
+            o = np.argsort(-tz.reshape(-1, 4).mean(axis=1), kind='stable'); P = P[o]; self.set_facecolor(self.cols3d[o])
+        self.set_verts(P, True)
         return 1e8 + self.layer
 
 class FrontLines(Line3DCollection):
@@ -1033,7 +1260,7 @@ def theme(light, shadow, rim, warm, cool, mix, spec, edge, soft, hidden, ground,
                 GROUND_COL=tuple(ground), GROUND_A=ground_a, FACE_COLOR=face, INK_COLOR=ink)
 
 THEMES = {                                                  # picture themes (LIGHT/SHADOW/RIM/WARM/COOL, MIX, SPEC, EDGE/SOFT/HIDDEN, GROUND @ alpha, canvas)
-    # Reference paper palette: measured tones with distinct cobalt silhouette ink
+    # The reference palette: measured tones with distinct cobalt silhouette ink
     'Paper':     dict(COLOR_DEFAULTS),
     # Clean architectural plaster (the tool's first look; its bounce hues equal its end tones, so the mix changes nothing)
     'Classic':   theme([0.985, 0.985, 0.975], [0.760, 0.790, 0.850], [0.760, 0.790, 0.850],
@@ -1101,7 +1328,7 @@ def theme_hex(light, shadow, rim, warm, cool, edge, soft, hidden, ground, pen_li
     d['PEN_LIGHT'], d['PEN_DARK'] = np.array(hx(pen_light)), np.array(hx(pen_dark)); return d
 
 THEMES.update({
-    # Calibrated clay render matching the reference paper aesthetic
+    # Calibrated clay render matching the reference figures
     'Kaolin':   theme_hex('#FFFFFF', '#BAC4CE', '#9AA7B4', '#F8F6E8', '#D6E4F0',
                           '#2C4470', '#5A6B7C', '#8E9CA8', '#48525D', '#F9DCDC', '#C99696',
                           0.38, 0.12, 0.14),
@@ -1139,7 +1366,7 @@ THETA_COLS = ['#1f3a63', '#c0392b', '#2e8b57', '#8e44ad']                       
 
 
 THEMES.update({
-    # Palette committee (2026-09-15) for the photo-studio look: shade floor lifted to the paper's 0.80, one cobalt hue shared by
+    # The photo-studio look: shade floor lifted to the reference figures' 0.80, one cobalt hue shared by
     # ink, shade and ground shadow, a cream key; measured on the fig-5a net: faces 0.78-0.95, cool -0.067 / warm +0.024
     'Harmony':  theme_hex('#FCFCFB', '#D4D5D4', '#B2B8BF', '#F7F4E7', '#D5E0EC',
                           '#2E4D7E', '#7D828B', '#6680A3', '#616B7A', '#FAE5E1', '#D8B1AD',
@@ -1147,15 +1374,22 @@ THEMES.update({
 })
 apply_colors(THEMES[DEFAULT_THEME])                        # startup material = the default theme
 
-def edge_ink(e, pos, w, faces_all, corners):
-    """navy on the silhouette and the creases facing the camera, soft grey on the others."""
+def view_eye(M):
+    """the eye point of the projection M in data coordinates (the point that rows 0, 1 and 3 of M send to zero);
+    None for an orthographic projection (the eye at infinity: the view direction decides)."""
+    C = np.linalg.svd(np.vstack([M[0], M[1], M[3]]))[2][-1]
+    return C[:3]/C[3] if abs(C[3]) > 1e-12 else None
+
+def edge_ink(e, pos, w, faces_all, corners, eye=None):
+    """navy on the silhouette and the creases facing the camera, soft grey on the others. The side of a face that is seen
+    is decided from the eye point when given (the perspective picture), else from the view direction w."""
     def front(f):
         c = [pos[v] for v in corners(f)]
-        return np.dot(unit(np.cross(c[1] - c[0], c[3] - c[0])), w) > 0
+        return np.dot(unit(np.cross(c[1] - c[0], c[3] - c[0])), w if eye is None else eye - c[0]) > 0
     fs = [f for f in faces_all if set(e) <= set(corners(f))]
     return EDGE_COL if len(fs) < 2 or front(fs[0]) != front(fs[1]) else EDGE_SOFT
 
-def shaded_pieces(pos, faces_all, corners, up, w, L, cen, size, tints, nsub):
+def shaded_pieces(pos, faces_all, corners, up, w, L, cen, size, tints, nsub, eye=None):
     """the faces split into nsub x nsub pieces (for the painter's depth sorting), shaded like a studio render:
     half-Lambert key light L on the visible side, a fill light at the camera, and the soft highlight of the key light
     treated as an area light at finite distance (which gives the gentle gradient across large faces)."""
@@ -1167,7 +1401,7 @@ def shaded_pieces(pos, faces_all, corners, up, w, L, cen, size, tints, nsub):
     for f in faces_all:
         c = np.array([pos[x] for x in corners(f)])
         n = unit(np.cross(c[1]-c[0], c[3]-c[0]))
-        if np.dot(n, w) < 0: n = -n                                                   # normal of the side we see
+        if np.dot(n, w if eye is None else eye - c[0]) < 0: n = -n                   # normal of the side we see (from the eye, if given)
         d = 0.5*(1 + np.dot(n, L))
         I = np.clip((0.40*d + 0.05*abs(np.dot(n, w)))/0.45, 0, 1)
         if f in tints:                                                                # tinted faces (penetrations): linear ramp
@@ -1196,7 +1430,7 @@ class ShadowPolys(Poly3DCollection):
     def do_3d_projection(self, *args, **kwargs):
         super().do_3d_projection(*args, **kwargs); return 2e8
 
-def draw_shadow_frame(ax, pos, faces_all, corners, e1, e2, nrm, size, ncell=80):
+def draw_shadow_frame(ax, pos, faces_all, corners, e1, e2, nrm, size, ncell=80, nlevels=12):
     """soft shadow of the net on a floor perpendicular to the unit vector nrm (which points from the floor towards the net), the
     light falling along -nrm: the net's footprint on that floor, blurred, as nested translucent bands. Used for the floor of the
     viewer's frame (nrm = the screen's up direction), so that the shadow always lies under the net on the screen.
@@ -1219,7 +1453,7 @@ def draw_shadow_frame(ax, pos, faces_all, corners, e1, e2, nrm, size, ncell=80):
     img = np.apply_along_axis(lambda v: np.convolve(v, kernel((y1 - y0)/(ncell - 1)), mode='same'), 1, img)
     img = np.apply_along_axis(lambda v: np.convolve(v, kernel((x1 - x0)/(ncell - 1)), mode='same'), 0, img)
     if img.max() < 0.05: return None
-    levels = np.linspace(0.05, 1.0, 12)[:-1]
+    levels = np.linspace(0.05, 1.0, nlevels)[:-1]
     a = 1 - (1 - GROUND_A)**(1/len(levels))
     gen = contour_generator(x=gx, y=gy, z=img, fill_type="OuterOffset")
     origin = h0*nrm
@@ -1236,7 +1470,7 @@ def draw_shadow_frame(ax, pos, faces_all, corners, e1, e2, nrm, size, ncell=80):
     return [origin + x*e1 + y*e2 for x in (x0, x1) for y in (y0, y1)]
 
 
-def draw_shadow(ax, pos, faces_all, corners, L, size, ncell=80, z0=None):
+def draw_shadow(ax, pos, faces_all, corners, L, size, ncell=80, z0=None, nlevels=12):
     """returns the extents (x0, x1, y0, y1, z0) of the drawn shadow, or None."""
     """soft shadow of the net cast along the light L onto the horizontal plane z = z0 on the far side of the net from the light:
     the floor below the net when the light comes from above, the ceiling above it when the light comes from below (a flashlight
@@ -1258,21 +1492,31 @@ def draw_shadow(ax, pos, faces_all, corners, L, size, ncell=80, z0=None):
     img = np.apply_along_axis(lambda v: np.convolve(v, kernel((y1 - y0)/(ncell - 1)), mode='same'), 1, img)
     img = np.apply_along_axis(lambda v: np.convolve(v, kernel((x1 - x0)/(ncell - 1)), mode='same'), 0, img)
     if img.max() < 0.05: return None
-    levels = np.linspace(0.05, 1.0, 12)[:-1]                      # nested regions {img >= level}, each a little darker
+    levels = np.linspace(0.05, 1.0, nlevels)[:-1]                 # nested regions {img >= level}, each a little darker
     a = 1 - (1 - GROUND_A)**(1/len(levels))                      # GROUND_A = opacity at the centre of the shadow
-    for lv in levels:
-        cs = ax.contourf(X, Y, img, levels=[lv, 1.0001], colors=[GROUND_COL + (a,)], zdir='z', offset=z0, antialiased=False)
-        cols = [cs] if hasattr(cs, 'do_3d_projection') else cs.collections      # >= 3.8: the set itself is the 3D collection
-        for col in cols:                                                          # (its deprecated .collections must not be touched)
-            col.do_3d_projection = (lambda c: (lambda *a_, **k: (type(c).do_3d_projection(c, *a_, **k), 1e9)[1]))(col)
+    try:                                                          # all nested regions in ONE collection (much faster than a
+        from contourpy import contour_generator                   # filled contour set per level; the overlaps stack up alike)
+        gen = contour_generator(x=X, y=Y, z=img, fill_type="OuterOffset"); polys = []
+        for lv in levels:
+            for outer, offsets in zip(*gen.filled(lv, 1.0001)):
+                for i in range(len(offsets) - 1):
+                    ring = outer[offsets[i]:offsets[i+1]]
+                    if len(ring) >= 3: polys.append([(x_, y_, z0) for x_, y_ in ring])
+        if polys: ax.add_collection3d(ShadowPolys(polys, facecolors=[GROUND_COL + (a,)], edgecolors='none', antialiased=False))
+    except ImportError:
+        for lv in levels:
+            cs = ax.contourf(X, Y, img, levels=[lv, 1.0001], colors=[GROUND_COL + (a,)], zdir='z', offset=z0, antialiased=False)
+            cols = [cs] if hasattr(cs, 'do_3d_projection') else cs.collections      # >= 3.8: the set itself is the 3D collection
+            for col in cols:                                                          # (its deprecated .collections must not be touched)
+                col.do_3d_projection = (lambda c: (lambda *a_, **k: (type(c).do_3d_projection(c, *a_, **k), 1e9)[1]))(col)
     return (x0, x1, y0, y1, z0)
 
 class FancyButton:
     """rounded button on its own small axes: hover highlight, optional on/off toggle, Button-like on_clicked."""
     COLORS = {'off': ('#f7f9fc', '#b9c7da', '#2c4a74'), 'on': ('#cfe0f5', '#3f6fae', '#173d6e'),
               'hover_off': ('#e6eef8', '#8fa9c9', '#2c4a74'), 'hover_on': ('#bcd3f0', '#2f5f9e', '#173d6e')}
-    def __init__(self, fig, rect, label, toggle=False, on=False, fontsize=9, rounding=0.16, italic=False):
-        self.fig, self.toggle, self.on, self.hover, self.callbacks = fig, toggle, on, False, []
+    def __init__(self, fig, rect, label, toggle=False, on=False, fontsize=9, rounding=0.16, italic=False, light=False):
+        self.fig, self.toggle, self.on, self.hover, self.callbacks, self.light = fig, toggle, on, False, [], light   # light: no hover, no redraw
         self.ax = fig.add_axes(rect); self.ax.set_axis_off(); self.ax.set_navigate(False)
         w_in, h_in = rect[2]*fig.get_figwidth(), rect[3]*fig.get_figheight()
         rounding = min(rounding, 0.45*h_in/w_in)                   # the corner radius must stay below half the height (wide buttons)
@@ -1282,13 +1526,19 @@ class FancyButton:
         self.text = self.ax.text(0.5, 0.5, label, ha='center', va='center', fontsize=fontsize, transform=self.ax.transAxes,
                                  fontstyle='italic' if italic else 'normal')
         self._style()
-        fig.canvas.mpl_connect('button_release_event', self._release); fig.canvas.mpl_connect('motion_notify_event', self._motion)
+        self._cids = [fig.canvas.mpl_connect('button_release_event', self._release), fig.canvas.mpl_connect('motion_notify_event', self._motion)]
+    def remove(self):
+        """remove the button and disconnect its event handlers (a rebuilt button must not leave them behind)"""
+        for cid in self._cids: self.fig.canvas.mpl_disconnect(cid)
+        self._cids = []; self.callbacks = []
+        try: self.ax.remove()
+        except Exception: pass
     def _style(self):
         fc, ec, tc = self.COLORS[('hover_' if self.hover else '') + ('on' if self.on else 'off')]
         self.patch.set_facecolor(fc); self.patch.set_edgecolor(ec); self.text.set_color(tc)
         self.text.set_fontweight('semibold' if self.on else 'normal')
     def _motion(self, ev):
-        if not self.ax.get_visible(): return
+        if self.light or not self.ax.get_visible(): return
         h = ev.inaxes is self.ax
         if h != self.hover: self.hover = h; self._style(); self.fig.canvas.draw_idle()
     def _release(self, ev):
@@ -1296,14 +1546,27 @@ class FancyButton:
         if self.toggle: self.on = not self.on
         self._style()
         for cb in self.callbacks: cb(ev)
-        self.fig.canvas.draw_idle()
+        if not self.light: self.fig.canvas.draw_idle()
     def on_clicked(self, cb): self.callbacks.append(cb)
     def set_on(self, on): self.on = on; self._style()
 
+class TextBox(_TextBox):
+    """matplotlib's TextBox, except that a click outside a box that is not being typed into draws nothing: matplotlib redraws the
+    whole window there (stop_typing), once per box and click - 10 full draws for a click on Cancel of the Params dialog"""
+    def stop_typing(self):
+        if self.capturekeystrokes: super().stop_typing()
+
+class PanelBox(TextBox):
+    """a value box on a panel over the picture: no mouse or keys while it is hidden with its panel or blocked (a dialog over it,
+    the view being turned); matplotlib's boxes react wherever they lie, also invisible or under a dialog"""
+    def __init__(self, ax, blocked, **kw): super().__init__(ax, '', **kw); self.blocked = blocked
+    def ignore(self, ev): return super().ignore(ev) or not self.ax.get_visible() or self.blocked()
+
 def make_slider(ax_sl, lo, hi, t0):
     """the (hidden) slider holding the signed flexion parameter t = cot(theta_1/2): the positive half is the family of the net,
-    the negative half its mirror image, and (-lo, lo) is the flat band the tool keeps out of. It is driven by the theta_1 slider
-    and the value boxes; all updates of the picture go through its on_changed callbacks."""
+    the negative half its mirror image; the two halves meet at t = 0 (theta_1 = +-180, +0 and -0) where t = 0 is admissible; next to
+    an end where D = 0 instead, (-lo_flat, lo_flat) is a margin the tool keeps out of. It is driven by the theta_1 slider and the
+    value boxes; all updates of the picture go through its on_changed callbacks."""
     kw = dict(orientation='vertical', valinit=t0, valfmt='%.3f', color='none')
     try: sl = Slider(ax_sl, 'flexion parameter $t$', -hi, hi, initcolor='none', track_color='none',
                      handle_style={'facecolor': 'white', 'edgecolor': '#3f6fae', 'size': 11}, **kw)
@@ -1326,87 +1589,114 @@ def set_projection(ax):
 # 8. MAIN: assemble, synchronize, draw with a slider
 # ============================================================================================
 def admissible_t_range(B):
-    """the part of I(x_1) the tool works in: the positive half, kept 0.1 % inside the ends and 3 % of the range away from a flat
-    end; when I(x_1) is unbounded the sampling of the flexion is capped here, the theta_1 slider itself reaches the whole set."""
+    """a part [lo, hi] of I(x_1) for the first configuration, the trial parameters (startup, Params, a switch of the flexion) and the
+    tolerances of the value boxes: the positive half, kept 0.1 % inside the ends and 3 % of the range away from a flat end, an
+    unbounded I(x_1) cut at 4 times its lower end. The slider and all sampling of the flexion use the working range of theta_1."""
     lo, hi = B.admissible()[0]
     if lo == 0.0: lo = 0.03*hi if hi < math.inf else 0.05
     if hi == math.inf: hi = 4*lo
     return lo + 0.001*(hi - lo), hi - 0.001*(hi - lo)
 
-DEFAULTS = dict(BASE_ANGLES_DEG=(60.0, 80.0, 120.0, 60.0), M_FACES=5, N_FACES=5, BASE_KN=(2, 2), ROW_SYSTEMS={1: 'c', 2: 'a', 3: 'b'}, BASE_SIGNS=(1, -1, 1, -1), E0=1)   # the built-in example
+DEFAULTS = dict(BASE_ANGLES_DEG=(60.0, 80.0, 120.0, 60.0), M_FACES=5, N_FACES=5, BASE_KN=(2, 2), ROW_TYPES={1: 'c', 2: 'a', 3: 'b'}, SIGNS=(1, -1, 1, -1), E0=1)   # the built-in example
 STARTUP_ERROR = [None]
+APPLIED_THEME = [None]                                                         # (name, colours) applied in the Colours dialog: kept when Params restarts the tool
+USAGE = ("usage: python %s [--frames [--view ELEV,AZIM]]\n"
+         "  without options     the interactive window\n"
+         "  --frames            headless: saves frame_00.png .. frame_05.png of the flexion in the current folder and exits\n"
+         "  --view ELEV,AZIM    with --frames: the view in degrees, e.g. --view 30,-60 or --view=30,-60") % os.path.basename(__file__)
+
+def command_view():
+    """the view (elev, azim) of '--view ELEV,AZIM' or '--view=ELEV,AZIM', or None. -h/--help prints the usage; a malformed value ends the
+    program with the usage and exit code 2, before anything is built. Other arguments are ignored."""
+    args = sys.argv[1:]
+    if '-h' in args or '--help' in args: print(USAGE); raise SystemExit(0)
+    view = None
+    for k, a in enumerate(args):
+        if a != '--view' and not a.startswith('--view='): continue
+        val = a[7:] if a.startswith('--view=') else (args[k + 1] if k + 1 < len(args) else '')
+        try:
+            view = tuple(float(x) for x in val.split(','))
+            if len(view) != 2 or not all(map(math.isfinite, view)): raise ValueError
+        except ValueError:
+            print("%s: --view needs two numbers ELEV,AZIM in degrees, e.g. --view 30,-60 (found %r)\n%s" % (os.path.basename(__file__), val, USAGE), file=sys.stderr)
+            raise SystemExit(2)
+    return view
 
 def main():
-    global BASE_SIGNS, E0, BASE_ANGLES_DEG, M_FACES, N_FACES, BASE_KN, ROW_SYSTEMS
+    global SIGNS, E0, BASE_ANGLES_DEG, M_FACES, N_FACES, BASE_KN, ROW_TYPES
+    command_view()                                                               # a malformed command line: the usage, before the startup
     try:
         return _main()
-    except (SystemExit, ZeroDivisionError, ValueError, AssertionError) as ex:  # the parameters at the top of the file give no net:
+    except SystemExit as ex:                                                     # the parameters at the top of the file give no net (only SystemExit: other errors are bugs):
         msg = str(ex).strip() or ex.__class__.__name__                                                   # start with the built-in defaults and show the message in the dialog
-        if STARTUP_ERROR[0] is not None or (M_FACES, N_FACES, BASE_KN, tuple(BASE_ANGLES_DEG)) == (DEFAULTS['M_FACES'], DEFAULTS['N_FACES'], DEFAULTS['BASE_KN'], tuple(DEFAULTS['BASE_ANGLES_DEG'])) and ROW_SYSTEMS == DEFAULTS['ROW_SYSTEMS']:
+        names = ('BASE_ANGLES_DEG', 'M_FACES', 'N_FACES', 'BASE_KN', 'ROW_TYPES', 'SIGNS', 'E0')
+        if (not isinstance(ex.code, str) or STARTUP_ERROR[0] is not None or '--frames' in sys.argv           # --frames: the message and exit code 1, no frames of the dialog
+                or repr(tuple(globals()[k] for k in names)) == repr(tuple(DEFAULTS[k] for k in names))):    # the defaults themselves failed (compared exactly: 5.0 is not 5)
             raise
         print(msg + "\nStarting with the default net instead; the message is shown in the Params dialog.")
         STARTUP_ERROR[0] = msg
         BASE_ANGLES_DEG, M_FACES, N_FACES, BASE_KN = DEFAULTS['BASE_ANGLES_DEG'], DEFAULTS['M_FACES'], DEFAULTS['N_FACES'], DEFAULTS['BASE_KN']
-        ROW_SYSTEMS, BASE_SIGNS, E0 = dict(DEFAULTS['ROW_SYSTEMS']), DEFAULTS['BASE_SIGNS'], DEFAULTS['E0']
+        ROW_TYPES, SIGNS, E0 = dict(DEFAULTS['ROW_TYPES']), DEFAULTS['SIGNS'], DEFAULTS['E0']
         return _main()
 
 def _main():
-    global BASE_SIGNS, E0
     m, n = M_FACES, N_FACES
+    try: signs_ok = tuple(SIGNS) in SIGN_PATTERNS and E0 in (1, -1)
+    except TypeError: signs_ok = False
+    if not signs_ok:
+        raise SystemExit("\nSIGNS must be (1, -1, 1, -1) or (1, -1, -1, 1) and E0 must be 1 or -1 (found %s and %s)." % (SIGNS, E0))
     problem = angle_problem(BASE_ANGLES_DEG)                                 # impossible base angles: say so instead of dividing by zero
-    if problem: raise SystemExit("\nThe base angles %s give no net: %s\nChange BASE_ANGLES_DEG and start again." % (tuple(BASE_ANGLES_DEG), problem))
-    rows = check_parameters(m, n, BASE_KN, ROW_SYSTEMS); ROW_SYSTEMS.update(rows)
+    if problem: raise SystemExit("\nThe base angles %r give no net: %s\nChange BASE_ANGLES_DEG and start again." % (BASE_ANGLES_DEG, problem))
+    try: rows = check_parameters(m, n, BASE_KN, ROW_TYPES)
+    except AssertionError as ex: raise SystemExit("\n%s." % ex)                    # a parameter problem (main() starts the default net with the message)
+    ROW_TYPES.update(rows)
     sub = assemble_net(BASE_ANGLES_DEG, m, n, BASE_KN, rows)
     ang = vertex_face_angles(sub)
-    subs = {kn: Block(kn[0], kn[1], q) for kn, q in sub.items()}
+    try: subs = {kn: Block(kn[0], kn[1], q) for kn, q in sub.items()}
+    except (ValueError, AssertionError, ZeroDivisionError) as ex:                  # angles that pass the checks but are numerically degenerate (e.g. 1e-300)
+        raise SystemExit("\nIn floating point, the flexion of the blocks for the angles %s could not be computed (%s): the angles are very close to "
+                         "violating one of the conditions.\nChange BASE_ANGLES_DEG slightly and start again." % (tuple(BASE_ANGLES_DEG), ex))
     B = subs[BASE_KN]
     lo, hi = admissible_t_range(B)
-    I_lo, I_hi = B.admissible()[0]                                                 # the admissible set itself (the slider stops a little short of its ends)
-    def theta_of_t(t_): return math.degrees(2*math.atan(1/t_)) if t_ != 0 else 180.0   # t = cot(theta_1/2) <-> theta_1 in degrees, signs alike
-    def t_of_theta(th_deg): return 1/math.tan(math.radians(th_deg)/2) if th_deg != 0 else math.inf
+    I_lo, I_hi = B.admissible()[0]                                                 # the admissible set itself (the slider stops a little short of an end where D = 0)
+    def theta_of_t(t_): return math.degrees(2*math.atan(1/t_)) if t_ != 0 else math.copysign(180.0, t_)   # t = cot(theta_1/2) <-> theta_1 in degrees, signs alike (t = -0: theta_1 = -180, the flat end seen from the mirrored half)
+    def t_of_theta(th_deg):
+        if abs(th_deg) == 180.0: return math.copysign(0.0, th_deg)                   # the flat end exactly (1/tan(pi/2) is 6e-17 in floating point)
+        return 1/math.tan(math.radians(th_deg)/2) if th_deg != 0 else math.inf
     TH_EPS = 0.25                                                                      # degrees: theta_1 = 0 (t infinite) is excluded
     # the working range of the slider, defined on theta_1: 0.1 % of its span inside an end where the discriminant vanishes,
-    # 1 % inside the flat end (theta_1 = 180, t = 0), and TH_EPS short of theta_1 = 0 (t infinite)
+    # the flat end itself (theta_1 = +-180, t = 0) where t = 0 is admissible, and TH_EPS short of theta_1 = 0 (t infinite)
     th_min_adm = theta_of_t(I_hi) if I_hi != math.inf else 0.0; th_max_adm = theta_of_t(I_lo) if I_lo > 0 else 180.0
     span_th = th_max_adm - th_min_adm
     th_lo_w = max(th_min_adm + 0.001*span_th, TH_EPS) if th_min_adm > 0 else TH_EPS
-    th_hi_w = th_max_adm - (0.01*span_th if th_max_adm == 180.0 else 0.001*span_th)
-    lo_flat = t_of_theta(th_hi_w)                                                      # the flat band of t the slider keeps out of: |t| < lo_flat
+    FLAT_END = I_lo == 0.0                                                             # t = 0 (the base crease flat) is admissible: the slider reaches it
+    th_hi_g = th_max_adm - (0.01*span_th if th_max_adm == 180.0 else 0.001*span_th)   # the end of the regular sampling grid of theta_1 (1 % short of a flat end)
+    th_hi_w = 180.0 if FLAT_END else th_hi_g                                           # the upper end of the working range of theta_1
+    lo_flat = t_of_theta(th_hi_w)                                                      # the smallest |t| the slider takes: 0 at a flat end, else a little above I_lo
+    t_grid = t_of_theta(th_hi_g)                                                       # t at the end of the grid: below it (at a flat end) only a few extra samples
+    t_hi_w = t_of_theta(th_lo_w)                                                       # the largest |t| the slider takes (theta_1 = th_lo_w; t = infinity is excluded)
     t0 = lo + 0.15*(hi - lo)
-    fixed0 = {kn: tuple(v) for kn, v in BLOCK_SIGNS.items() if kn in subs and kn != BASE_KN}
-    thetas, assignment = synchronize(subs, BASE_KN, BASE_SIGNS, E0, t0, assignment=fixed0 or None)
-    if thetas is None and fixed0:
-        print("the prescribed block patterns BLOCK_SIGNS do not extend to a flexible net; ignoring them"); fixed0 = {}
-        thetas, assignment = synchronize(subs, BASE_KN, BASE_SIGNS, E0, t0)
-    if thetas is None:                                                          # the given base pattern / branch does not extend: try the others
-        for e0_try in (E0, -E0):
-            for e_try in B.witnesses():
-                if tuple(e_try) == tuple(BASE_SIGNS) and e0_try == E0: continue
-                thetas, assignment = synchronize(subs, BASE_KN, e_try, e0_try, t0)
-                if thetas is not None:
-                    print("BASE_SIGNS %s with e0 = %+d do not extend to a flexible net with these row types; using %s with e0 = %+d instead" % (BASE_SIGNS, E0, e_try, e0_try))
-                    BASE_SIGNS, E0 = tuple(e_try), e0_try; break
-            if thetas is not None: break
+    thetas = None
+    for f_ in (0.15, 0.05, 0.25, 0.35, 0.5, 0.65, 0.8, 0.92):                   # the blocks agree for every admissible t; numerically,
+        thetas = synchronize(subs, BASE_KN, SIGNS, E0, lo + f_*(hi - lo))           # a parameter close to a pole may still fail
+        if thetas is not None: t0 = lo + f_*(hi - lo); break
     if thetas is None:
-        raise SystemExit("\nWith the row types %s (bottom row first) no admissible sign pattern of the base block extends to a flexible "
-                         "%d x %d net.\nWhich combinations of row types work depends on the angles and on the position of the base block "
-                         "(for the angles %s, for example, nothing can be placed above a row of type 'b' or 'd').\n"
-                         "Change ROW_SYSTEMS, BASE_KN or the angles and start again; the Params dialog shows which combinations work."
-                         % ("".join(rows[nu] for nu in range(1, n - 1)), m, n, BASE_ANGLES_DEG))
-    flexions = synchronize(subs, BASE_KN, BASE_SIGNS, E0, t0, assignment=fixed0 or None, all_solutions=True) or [assignment]   # all consistent choices (under the prescribed ones)
-    if not any(f_ == assignment for f_ in flexions): flexions.insert(0, assignment)
-    flexion_state = {'index': flexions.index(assignment), 'list': flexions}
-    def flexion_label():
-        k, N = flexion_state['index'] + 1, len(flexion_state['list']); a_ = flexion_state['list'][flexion_state['index']]
-        rows_ = []
-        for nu in range(1, n - 1):
-            pats = sorted(set(a_[(kk, nu)] for kk in range(1, m - 1))); rows_.append(("%s" % (pats[0],)) if len(pats) == 1 else "mixed")
-        return "flexion %d of %d consistent with the prescribed blocks (patterns of the block rows, bottom to top: %s)" % (k, N, "; ".join(rows_))
-    cache = {}; free_lengths = {}
-    def configuration(t):
-        key = round(t, 6)
+        raise SystemExit("\nWith the row types %s (bottom row first) the blocks of the %d x %d net for the angles %s could not be made to agree "
+                         "on their common faces numerically, for the signs %s and e0 = %+d.\nThe flexion exists for all angles that pass the checks, "
+                         "so this points to a numerical problem (for instance angles close to the boundary of the elliptic type).\n"
+                         "Change the angles, ROW_TYPES or BASE_KN and start again."
+                         % ("".join(rows[nu] for nu in range(1, n - 1)), m, n, BASE_ANGLES_DEG, SIGNS, E0))
+    cache = {}; free_lengths = {}; kept = set()                                     # kept: the keys of the sampling grids (theta_regions, room_height, motion_samples), never trimmed
+    def cache_key(t): return round(t, 6) if abs(t) >= 1e-6 else t                   # the configurations are cached per 1e-6 of t (there round(t, 6) >= 1e-6 is never 0); near the flat end t = 0 per exact value
+    def trim(c_):                                                                    # room for one more: at most CACHE_SIZE configurations besides the kept ones, the oldest go first
+        if len(c_) >= CACHE_SIZE:
+            old_ = [k_ for k_ in c_ if k_ not in kept]
+            for k_ in old_[:max(0, len(old_) - CACHE_SIZE + 1)]: del c_[k_]
+    def configuration(t, keep=False):
+        key = cache_key(t)
+        if keep: kept.add(key)
         if key not in cache:
-            th, _ = synchronize(subs, BASE_KN, BASE_SIGNS, E0, t, flexion_state['list'][flexion_state['index']])
+            trim(cache); th = synchronize(subs, BASE_KN, SIGNS, E0, t)
             if th is None: cache[key] = None
             else:
                 try:
@@ -1416,33 +1706,95 @@ def _main():
                 except AssertionError as ex: cache[key] = None; state_fail['reason'] = str(ex)   # construction failed at this t: skipped
         return cache[key]
     state_fail = {}
-    def theta_regions():
+    cache_other = {}                                                                # nets with the other sign -E0 at t > 0
+    def configuration_other(t, keep=False):
+        """the net at t > 0 with the other sign -E0 (its mirror image is the net at -t with the sign E0)"""
+        key = cache_key(t)
+        if keep: kept.add(key)
+        if key not in cache_other:
+            trim(cache_other); th = synchronize(subs, BASE_KN, SIGNS, -E0, t)
+            cache_other[key] = None
+            if th is not None:
+                try:
+                    pos, worst, plan, fr = build_net(ang, th, m, n, BASE_KN, BASE_EDGE, free_lengths if free_lengths else None)
+                    cache_other[key] = (pos, worst, plan, th)
+                except AssertionError: pass
+        return cache_other[key]
+    def configuration_at(v, keep=False):
+        """the net of the flexion with the signs SIGNS and the sign E0 at the signed parameter v = cot(theta_1/2) of the base
+        block. For v < 0 it is the mirror image (z -> -z, every dihedral angle negated) of the net at -v with the other sign
+        -E0: the flexion formulas give cot(theta_i/2) at (v, e0) equal to minus their value at (-v, -e0). At the flat end the sign of
+        zero tells the halves apart: v = +0 is the net at theta_1 = 180, v = -0 the mirror image of the net with -E0 at t = 0
+        (theta_1 = -180), the same configuration reached from the mirrored half of the slider."""
+        if math.copysign(1.0, v) > 0: return configuration(v, keep)
+        c_ = configuration_other(-v, keep)
+        if c_ is None: return None
+        pos_, worst_, plan_, th_ = c_
+        return ({k_: np.array([p_[0], p_[1], -p_[2]]) for k_, p_ in pos_.items()}, worst_, plan_,
+                {f_: {i_: -a_ for i_, a_ in d_.items()} for f_, d_ in th_.items()})
+    bugs_seen = set()
+    def report_bug(where):
+        """an unexpected exception in a guarded call (one that expects only the failures of the construction at extreme parameters,
+        or none): its traceback on stderr, once per place and kind, so that a bug does not pass for a dead part, a skipped frame or a stale picture"""
+        key_ = (where, type(sys.exc_info()[1]).__name__)
+        if key_ not in bugs_seen: bugs_seen.add(key_); import traceback; print("unexpected error in %s (shown once):" % where, file=sys.stderr); traceback.print_exc()
+    def block_sign(kn):
+        """the sign e0 of the block kn in the net shown: the one for which the flexion formulas, with the signs SIGNS and the
+        block's own parameter cot(theta_1/2), give its four dihedral angles (E0 for the base block; the others follow from the
+        agreement with their neighbours). None where both signs give the same angles or the angles are at a pole."""
+        th = state['th'][kn]
+        def cot_half(a_): s_ = math.sin(a_/2); return math.cos(a_/2)/s_ if abs(s_) > 1e-12 else None
+        target = {i: cot_half(th[i]) for i in range(1, 5)}
+        if target[1] is None: return None
+        found = []
+        for e0c in (1, -1):
+            try: c = subs[kn].cots(SIGNS, e0c, target[1])
+            except (ValueError, ZeroDivisionError): continue
+            if all(target[i] is None or abs(c[i] - target[i]) < 1e-6*(1 + abs(c[i])) for i in range(2, 5)): found.append(e0c)
+        return found[0] if len(found) == 1 else None
+    def sign_str(kn, tex=True):
+        b_ = block_sign(kn)
+        return "?" if b_ is None else ("%+d" % b_ if not tex else ("$+1$" if b_ > 0 else "$-1$"))
+    def theta_regions(other=False):
         """the parts of the circle of theta_1 (degrees, t > 0 half) computed once per net: 'live' = the slider's range where the
-        whole net has a configuration, 'pen' = with penetrating faces, 'tail' = admissible beyond the slider's range (towards the
-        flat limit), 'zeros' / 'poles' = where a cotangent of the base block vanishes / is infinite."""
-        if state.get('theta_regions') is None:
+        whole net has a configuration, 'pen' = with penetrating faces, 'tail' = admissible beyond the slider's range (the
+        margins it keeps at an end where D = 0 and at theta_1 = 0; empty at a flat end, which the slider reaches), 'zeros' /
+        'poles' = where a cotangent of the base block vanishes / is infinite, 'flat_ok' = the net exists at the flat end t = 0."""
+        key_, conf_, e0_ = ('theta_regions_other', configuration_other, -E0) if other else ('theta_regions', configuration, E0)
+        if state.get(key_) is None:
             B = subs[BASE_KN]; I0, I1 = B.admissible()[0]
-            th_a, th_b = th_lo_w, th_hi_w                                              # the working range of theta_1
+            th_a, th_b = th_lo_w, th_hi_g                                              # the regular sampling grid of theta_1
+            th_e = th_hi_w                                                             # the end of the working range: th_b, or 180 at a flat end
             th_min = theta_of_t(I1) if I1 != math.inf else 0.0; th_max = theta_of_t(I0) if I0 > 0 else 180.0
             th_s = th_a                                                              # the sampling starts at the working end (already inside a closed end)
-            N = 96; live, pen = [], []; run = prun = None
-            for k_ in range(N + 2):
-                if k_ <= N:
-                    th_ = th_s + (th_b - th_s)*k_/N
-                    try: cfg = configuration(float(t_of_theta(th_)))
-                    except Exception: cfg = None                                          # an extreme parameter the construction cannot take: dead
-                    ok = cfg is not None
+            N = 96; h_ = 0.5*(th_b - th_s)/N                                          # half a sample: isolated samples stay visible
+            # at a flat end the band (th_b, 180] beyond the grid gets a few samples (at most half a grid step apart), the last
+            # one exactly at theta_1 = 180 (t = 0)
+            NB = max(4, int(math.ceil((th_e - th_b)/h_))) if th_e > th_b else 0; hb_ = 0.5*(th_e - th_b)/NB if NB else 0.0
+            samples = [th_s + (th_b - th_s)*k_/N for k_ in range(N + 1)] + [(th_e if j_ == NB else th_b + (th_e - th_b)*j_/NB) for j_ in range(1, NB + 1)]
+            runs, pruns = [], []; run = prun = None; last_ok = False
+            for k_ in range(len(samples) + 1):
+                if k_ < len(samples):
+                    th_ = samples[k_]
+                    try: cfg = conf_(float(t_of_theta(th_)), True)
+                    except (ArithmeticError, ValueError, AssertionError): cfg = None       # an extreme parameter the construction cannot take: dead
+                    except Exception: report_bug("theta_regions"); cfg = None             # anything else is a bug: reported (and dead, as before)
+                    ok = cfg is not None; last_ok = ok
                     pn = ok and len(faces_all) <= LIGHT_FACES and self_intersections(cfg[0], faces_all, corners)
-                else: ok = pn = False; th_ = th_b
-                run = [th_, th_] if (ok and run is None) else ([run[0], th_] if ok else run)
-                if not ok and run is not None: live.append(tuple(run)); run = None
-                prun = [th_, th_] if (pn and prun is None) else ([prun[0], th_] if pn else prun)
-                if not pn and prun is not None: pen.append(tuple(prun)); prun = None
+                else: ok = pn = False
+                run = [k_, k_] if (ok and run is None) else ([run[0], k_] if ok else run)
+                if not ok and run is not None: runs.append(tuple(run)); run = None
+                prun = [k_, k_] if (pn and prun is None) else ([prun[0], k_] if pn else prun)
+                if not pn and prun is not None: pruns.append(tuple(prun)); prun = None
+            flat_ok = bool(NB) and last_ok                                            # the net exists at the flat end itself
             # the isolated parameters of the base block where a cotangent has a pole (theta_i = 0: a denominator of the formulas
             # vanishes) or a zero (theta_i = 180): located by sign changes on a fine grid and refined by bisection
             def cot_i(t_, i):
-                try: return B.cots(BASE_SIGNS, E0, float(t_))[i]
+                try: return B.cots(SIGNS, e0_, float(t_))[i]
                 except (ValueError, ZeroDivisionError): return float('nan')
+            def cots4(t_):                                                             # cot_i(t_, 1..4) from one evaluation of the formulas
+                try: c_ = B.cots(SIGNS, e0_, float(t_)); return [c_[i] for i in range(1, 5)]
+                except (ValueError, ZeroDivisionError): return [float('nan')]*4
             def bisect(f_, a_, b_):
                 fa = f_(a_)
                 for _ in range(60):
@@ -1451,38 +1803,55 @@ def _main():
                     else: a_, fa = m_, fm
                 return (a_ + b_)/2
             zeros, poles, excl = [], [], []
-            ts_ = np.array([t_of_theta(th__) for th__ in np.linspace(th_b, th_a, 2001)])   # the working range, evenly in the angle
-            cs_ = np.array([[cot_i(t_, i) for i in range(1, 5)] for t_ in ts_])
-            for i in range(4):
-                v = cs_[:, i]
-                for j in np.where(np.sign(v[:-1])*np.sign(v[1:]) < 0)[0]:
-                    pole = min(abs(v[j]), abs(v[j+1])) > 10
-                    t_x = bisect((lambda t_: 1/cot_i(t_, i + 1)) if pole else (lambda t_: cot_i(t_, i + 1)), float(ts_[j]), float(ts_[j+1]))
-                    (poles if pole else zeros).append(theta_of_t(t_x)); excl.append((t_x, theta_of_t(t_x), i + 1, 'pole' if pole else 'zero'))
-            excl.sort()
-            h_ = 0.5*(th_b - th_s)/N                                                  # half a sample: isolated samples stay visible
-            live = [(max(th_s, a_ - h_), min(th_b, b_ + h_)) for a_, b_ in live]; pen = [(max(th_s, a_ - h_), min(th_b, b_ + h_)) for a_, b_ in pen]
+            def scan(ths_):
+                ts_ = np.array([t_of_theta(th__) for th__ in ths_])
+                cs_ = np.array([cots4(t_) for t_ in ts_])
+                for i in range(4):
+                    v = cs_[:, i]
+                    for j in np.where(np.sign(v[:-1])*np.sign(v[1:]) < 0)[0]:
+                        pole = min(abs(v[j]), abs(v[j+1])) > 10
+                        t_x = bisect((lambda t_: 1/cot_i(t_, i + 1)) if pole else (lambda t_: cot_i(t_, i + 1)), float(ts_[j]), float(ts_[j+1]))
+                        (poles if pole else zeros).append(theta_of_t(t_x)); excl.append((t_x, theta_of_t(t_x), i + 1, 'pole' if pole else 'zero'))
+            scan(np.linspace(th_b, th_a, 2001))                                       # the grid's range, evenly in the angle
+            if NB:
+                # the band, as finely, without t = 0 itself: a cotangent that vanishes there (another crease flat with the base
+                # edge, e.g. theta_3 when e2 = -e3 and z2 = z3) is part of the flat state, not an isolated parameter (its sign at
+                # t = 0 is rounding noise)
+                scan(np.linspace(th_e, th_b, max(3, int(math.ceil(2000*(th_e - th_b)/(th_b - th_a))) + 1))[1:])
+                try: c0_ = B.cots(SIGNS, e0_, 0.0)
+                except (ValueError, ZeroDivisionError): c0_ = {}
+                for i_, c_ in sorted(c0_.items()):                                     # a cotangent infinite at t = 0 itself (theta_i = 0; case (c), U ~ 1/t): the
+                    if math.isinf(c_): poles.append(180.0); excl.append((0.0, 180.0, i_, 'pole'))   # formulas give the limit; a red tick at the end, t = 0 excluded
+            excl.sort(key=lambda e_: (round(e_[0], 9), e_[2], e_[3]))                # by t; coincident parameters (within rounding) by the index of the angle
+            def ext(ia, ib):                                                           # a run of samples as an interval, half a sample wider on each side
+                return (max(th_s, samples[ia] - (h_ if ia <= N else hb_)), min(th_e, samples[ib] + (h_ if ib < N or not NB else hb_)))
+            live = [ext(*r_) for r_ in runs]; pen = [ext(*r_) for r_ in pruns]
             t_live = [(t_of_theta(b_), t_of_theta(a_)) for a_, b_ in live]              # the same parts in t (t decreases with theta)
             # the real sets (for the report): the parts that touch the slider's ends run on to the admissible ends of the base
-            # block, open at a flat end (t = 0, theta_1 = 180) and at t = infinity (theta_1 = 0); interior gaps as sampled
+            # block, open at an end where D = 0 and at t = infinity (theta_1 = 0); at a flat end (t = 0, theta_1 = 180) closed where
+            # the net exists at t = 0 itself, open where it exists only next to it; interior gaps as sampled
             real_th = []
+            open_flat = bool(NB) and bool(runs) and runs[-1][1] == len(samples) - 2     # the last run reaches the sample next to a dead flat end
             for k_, (a_, b_) in enumerate(live):
                 lb, rb = '[', ']'
-                if k_ == 0 and abs(a_ - th_s) < 1e-9: a_, lb = th_min, ('(' if th_min == 0.0 else '[')
-                if k_ == len(live) - 1 and abs(b_ - th_b) < 1e-9: b_, rb = th_max, (')' if th_max == 180.0 else ']')
+                if k_ == 0 and abs(a_ - th_s) < 1e-9: a_, lb = th_min, '('                # the ends of I(x_1) are not in it (open set)
+                if k_ == len(live) - 1 and (abs(b_ - th_e) < 1e-9 or open_flat): b_, rb = th_max, (']' if flat_ok else ')')
                 real_th.append((a_, b_, lb, rb))
             real_t = [((0.0 if b_ == 180.0 else t_of_theta(b_)), (math.inf if a_ == 0.0 else t_of_theta(a_)), rb.replace(']', '[').replace(')', '('), lb.replace('[', ']').replace('(', ')'))
                       for a_, b_, lb, rb in real_th]
-            state['theta_regions'] = dict(live=live, pen=pen, tail=[(th_min, th_s), (th_b, th_max)], zeros=zeros, poles=poles, excl=excl, t_live=t_live,
-                                          real_th=real_th, real_t=real_t)
-        return state['theta_regions']
+            state[key_] = dict(live=live, pen=pen, tail=[(th_min, th_s), (th_e, th_max)], zeros=zeros, poles=poles, excl=excl, t_live=t_live,
+                                          real_th=real_th, real_t=real_t, flat_ok=flat_ok)
+        return state[key_]
     first = configuration(t0)
     if first is None:                                                           # try other admissible values of t before giving up
         for f_ in (0.05, 0.25, 0.35, 0.5, 0.65, 0.8, 0.92):
             first = configuration(lo + f_*(hi - lo))
             if first is not None: t0 = lo + f_*(hi - lo); break
     if first is None:
-        raise SystemExit("\nThe net could not be built in space for any value of the flexion parameter (%s).\nChange the base angles or the row types." % state_fail.get('reason', 'unknown reason'))
+        spread = side_spread(vertex_face_angles(sub), m, n, BASE_KN)
+        raise SystemExit("\nThe net could not be built in space for any value of the flexion parameter (%s).\n%s" % (state_fail.get('reason', 'unknown reason'),
+                         "These angles force sides of the central faces that differ by a factor of %.0e, too much for double precision: make the smallest angle larger." % spread
+                         if spread > 1e6 else "Change the base angles or the row types."))
     pos0, worst, plan, th0 = first
     def corners(f): i, j = f; return [(i, j), (i+1, j), (i+1, j+1), (i, j+1)]
     faces_all = [(a, b) for a in range(m) for b in range(n)]
@@ -1496,59 +1865,81 @@ def _main():
     def Fn(f, tex=True): return (r"$F_{%d%d}$" if tex else "F%d%d") % f
     def Vn(v, tex=True): return (r"$V_{%d%d}$" if tex else "V%d%d") % v
     def admissible_sets_text(tex=True):
-        """the two lines '+-t in ...' and '+-theta_1 in ...' for the explanations and the report file"""
+        """the lines 't in ...', '-t in ...', 'theta_1 in ...', '-theta_1 in ...' for the explanations and the report file (t > 0 with
+        the sign e0; t < 0 from the nets with the other sign, mirrored)"""
         # the sets of the flexion parameter and of theta_1 of the base block where the net has a configuration (the parts the
         # slider reaches, as a union of intervals), minus the isolated parameters where a cotangent of the base block has a
         # pole (a denominator of the formulas vanishes, theta_i = 0) or a zero (theta_i = 180)
-        R = theta_regions(); out_ = []
+        R, Ro = theta_regions(), theta_regions(other=True); out_ = []
         def set_lines(label, ivals, excl, fmt, unit):
             def num(v_): return "0" + unit if v_ == 0 else ("\u221e" if v_ == math.inf else ("180" + unit if v_ == 180.0 and unit else fmt % v_ + unit))
             body = " \u222a ".join("%s%s, %s%s" % (lb, num(a_), num(b_), rb) for a_, b_, lb, rb in ivals) or "\u2205"
             if excl:
                 body += " \\ {" + ", ".join("%s%s (%s)" % (fmt % v_, unit, (r"$\theta_%d = %s$" % (i_, "0" if k_ == 'pole' else "180^\\circ")) if tex
                                               else "theta_%d = %s" % (i_, "0" if k_ == 'pole' else "180\u00b0")) for v_, i_, k_ in excl) + "}"
-            words, lines_, cur = body.split(" "), [], "  " + label + " "
+            words, lines_, cur = re.findall(r"(?:[^\s$]*\$[^$]*\$)+[^\s$]*|\S+", body), [], "  " + label + " "   # a $...$ span is never split (an odd '$' shows a line as source)
             for w_ in words:
                 if len(re.sub(r"\$[^$]*\$", "x", cur + w_)) > 58: lines_.append(cur.rstrip()); cur = "      " + w_ + " "
                 else: cur += w_ + " "
             return "\n".join(lines_ + [cur.rstrip()])
-        out_.append(set_lines(("$\\pm t$" if tex else "+-t") + " ∈", R['real_t'], [(t_, i_, k_) for t_, th_, i_, k_ in R['excl']], "%.4f", ""))
-        out_.append(set_lines((r"$\pm\theta_1$" if tex else "+-theta_1") + " ∈", R['real_th'],
-                                 [(th_, i_, k_) for t_, th_, i_, k_ in sorted(R['excl'], key=lambda e_: e_[1])], "%.1f", "\u00b0"))
+        for R_, sg_t, sg_th in ((R, "$t$" if tex else "t", r"$\theta_1$" if tex else "theta_1"), (Ro, "$-t$" if tex else "-t", r"$-\theta_1$" if tex else "-theta_1")):
+            out_.append(set_lines(sg_t + " ∈", R_['real_t'], [(t_, i_, k_) for t_, th_, i_, k_ in R_['excl']], "%.4f", ""))
+        for R_, sg_t, sg_th in ((R, "", r"$\theta_1$" if tex else "theta_1"), (Ro, "", r"$-\theta_1$" if tex else "-theta_1")):
+            out_.append(set_lines(sg_th + " ∈", R_['real_th'], [(th_, i_, k_) for t_, th_, i_, k_ in sorted(R_['excl'], key=lambda e_: e_[1])], "%.1f", "\u00b0"))
         return "\n".join(out_)
-    def verify(pos, th, t, tex=True):
-        """everything recomputed from the drawn vertices: congruence of all faces, prescribed flat angles, planarity, dihedral angles
-        (tex: face names as mathtext for the panels; plain names for the text file)."""
+    def check_values(pos, th):
+        """the checks recomputed from the vertices of a net: the largest deviations of the edge lengths and the face angles from
+        those of the first net, of the flat angles at the inner vertices from the prescribed ones, of the faces from planarity, and
+        of the dihedral angles along the edges of the central faces from the formula values of every block; and the convexity of
+        all faces."""
         d_len = max(abs(edge_length(pos, e) - ref_lengths[e]) for e in edges_all)
         d_fa = max(abs(face_angle(pos, v, f) - ref_face_angles[(v, f)]) for f in faces_all for v in corners(f))
         d_flat = max(abs(face_angle(pos, v, f) - ang[v][f]) for v in ang for f in ang[v])
         def normal(f): c = [pos[v] for v in corners(f)]; return unit(np.cross(c[1]-c[0], c[3]-c[0]))
         d_plan = max(abs(np.dot(pos[c[2]] - pos[c[0]], normal(f)))/np.linalg.norm(pos[c[2]] - pos[c[0]]) for f in faces_all for c in [corners(f)])
-        d_dih = 0.0                                          # oriented dihedral angles read from the vertices vs. the formula values
-        for f in th:
-            for i in range(1, 5):
-                d_dih = max(d_dih, abs(dihedral(subs[f], i, pos) - th[f][i]))
-        d_conv = 0.0
+        d_dih = max(angle_gap(dihedral(subs[f], i, pos), th[f][i]) for f in th for i in range(1, 5))
+        convex = True
         for f in faces_all:
             c = [pos[v] for v in corners(f)]; N = normal(f)
-            cr = [np.dot(np.cross(c[(k+1)%4]-c[k], c[(k+2)%4]-c[(k+1)%4]), N) for k in range(4)]
-            d_conv = max(d_conv, 0.0 if all(x > 0 for x in cr) else 1.0)
+            if not all(np.dot(np.cross(c[(k+1)%4]-c[k], c[(k+2)%4]-c[(k+1)%4]), N) > 0 for k in range(4)): convex = False
+        return dict(len=d_len, fa=d_fa, flat=d_flat, plan=d_plan, dih=d_dih, convex=convex)
+    def verify(pos, th, t, tex=True):
+        """everything recomputed from the drawn vertices: congruence of all faces, prescribed flat angles, planarity, dihedral angles
+        (tex: face names as mathtext for the panels; plain names for the text file)."""
+        cv = check_values(pos, th)
+        d_len, d_fa, d_flat, d_plan, d_dih, d_conv = cv['len'], cv['fa'], cv['flat'], cv['plan'], cv['dih'], (0.0 if cv['convex'] else 1.0)
         light = len(faces_all) > LIGHT_FACES
         live_pen = len(faces_all) <= LIVE_PEN_FACES                                 # small nets: the intersection test also while dragging
         pairs = [] if (light or (state.get('dragging', False) and not live_pen)) else self_intersections(pos, faces_all, corners)
         state_pen = ("(not tested for nets with more than %d faces)" % LIGHT_FACES if light else ("(checked when the slider is released)" if (state.get('dragging', False) and not live_pen) else "none")) if not pairs else ", ".join(Fn(f, tex) + " & " + Fn(g, tex) for f, g in pairs[:3]) + (" (+%d more)" % (len(pairs) - 3) if len(pairs) > 3 else "")
         rep = ("checks\n\n\n  edge lengths vs. initial:      %.1e (all %d edges)\n  face angles vs. initial:       %.1e rad (all %d faces)\n"
                "  flat angles vs. prescribed:    %.1e rad (%d inner vertices)\n  planarity of faces:            %.1e\n"
-               "  dihedral angles vs. formulas:  %.1e rad (%d central edges)\n  convex faces:                  %s\n"
+               "  dihedral angles vs. formulas:  %.1e rad (%d in %d blocks)\n  convex faces:                  %s\n"
                "  self-intersection:             %s"
-               % (d_len, len(edges_all), d_fa, len(faces_all), d_flat, len(ang), d_plan, d_dih, 4*len(th), "all" if d_conv == 0 else "NO", state_pen))
+               % (d_len, len(edges_all), d_fa, len(faces_all), d_flat, len(ang), d_plan, d_dih, 4*len(th), len(th), "all" if d_conv == 0 else "NO", state_pen))
         state['penetrating'] = set(sum([[f, g] for f, g in pairs], []))
         return rep
     P0 = np.array(list(pos0.values())); mid = (P0.max(0) + P0.min(0))/2; rng = (P0.max(0) - P0.min(0)).max()*0.56
 
     # ---------------------------------------------------------------- figure and panels
     fig = plt.figure(figsize=(12.5, 9.5), facecolor='white')
-    try: fig.canvas.manager.set_window_title("GQS-net %d \u00d7 %d" % (m, n))   # the window title (instead of 'Figure 1')
+    try: fig.canvas.manager.set_window_title("%d \u00d7 %d net" % (m, n))       # the window title (instead of 'Figure 1')
+    except Exception: pass
+    # matplotlib searches all artists for pickable ones on every mouse press and every wheel notch (recomputing axis ticks on
+    # the way); nothing here uses that picking (faces are found by pick_face), so it is switched off: clicks and scrolling are faster
+    for pick_id in ('_button_pick_id', '_scroll_pick_id'):
+        try: fig.canvas.mpl_disconnect(getattr(fig, pick_id))
+        except Exception: pass
+    # matplotlib's own keys (rcParams keymap.*) in this window: only full screen ('f'), save ('s'), close (ctrl/cmd+w) and the grids ('g', 'G':
+    # only the face panel's inset shows one) are kept. The others break the tool: 'l', 'k', 'L' make the axes under the mouse logarithmic (the
+    # theta_1 track disappears), 'p', 'o' (pan/zoom) lock every button, slider and box, 'h', 'r', 'c', 'v', the arrows and backspace (the
+    # toolbar's view history) turn the 3D view under a picture drawn for another view, and 'q' would close the tool at one stray key
+    def default_keys(ev):
+        if ev.key != 'q' and any(ev.key in matplotlib.rcParams[k_] for k_ in ('keymap.fullscreen', 'keymap.save', 'keymap.quit', 'keymap.grid', 'keymap.grid_minor')):
+            matplotlib.backend_bases.key_press_handler(ev)                         # (while a value box is typed in, matplotlib empties all keymaps)
+    try:
+        if fig.canvas.manager.key_press_handler_id is not None:
+            fig.canvas.mpl_disconnect(fig.canvas.manager.key_press_handler_id); fig.canvas.mpl_connect('key_press_event', default_keys)
     except Exception: pass
     DESIGN_W, DESIGN_H = 12.5, 9.5                                               # the layout below is designed for this window size (inches)
     # Physical layout: the right column and the parameters dialog keep their size in inches whatever the window size; when the window
@@ -1598,44 +1989,49 @@ def _main():
         fig.canvas.draw_idle()
     state_scroll = {'relayout': relayout}
     ax = fig.add_axes([0.13, 0.02, 0.72, 0.93], projection='3d')
-    title_text = fig.text(0.9245, 0.985, "%d \u00d7 %d GQS-net" % (m, n), ha="center", va="top", fontsize=13.5, color=INK, fontweight="bold"); reg('col', title_text)
+    title_text = fig.text(0.9245, 0.985, "%d \u00d7 %d net" % (m, n), ha="center", va="top", fontsize=13.5, color=INK, fontweight="bold"); reg('col', title_text)
     state = {'t': t0, 'pos': pos0, 'th': th0, 'labels': {'vertices': False, 'faces': False, 'edges': False, 'angles': False},
-             'elev': 30, 'azim': -55, 'report': True, 'info': False, 'unrolled': 0,
+             'elev': 30, 'azim': -60, 'report': True, 'info': False, 'unrolled': 0,
              'hidden': True, 'shadow': SHOW_SHADOW, 'selected': None, 'dfig': None}
+    ax.view_init(elev=state['elev'], azim=state['azim'])                           # the startup view (Reset returns to it; ROOM_LAMP_VIEW assumes it)
     def panel(x, y, size, **kw):
         return fig.text(x, y, "", fontsize=size, family='monospace', va='top', color=INK, linespacing=1.25,
                         bbox=dict(boxstyle='round,pad=0.6,rounding_size=0.9', facecolor=PANEL_FC, edgecolor=PANEL_EC, alpha=0.88), **kw)
     report_text = panel(0.012, 0.968, 7.9)
     n_edges, n_faces, n_inner, n_blocks = m*(n + 1) + n*(m + 1), m*n, (m - 1)*(n - 1), (m - 2)*(n - 2)
     I0_, I1_ = subs[BASE_KN].admissible()[0]                                        # the admissible set of the base block, for the explanations
-    adm_txt = ("(0, " if I0_ == 0 else "[%.4f, " % I0_) + ("\u221e)" if I1_ == math.inf else "%.4f]" % I1_)
+    def adm_num(v_): return "\u221e" if v_ == math.inf else "%.4f" % v_
+    adm_txt = ("\u211d" if (I0_ == 0 and I1_ == math.inf) else "(\u2212%s, %s)" % (adm_num(I1_), adm_num(I1_)) if I0_ == 0 else
+               "(\u2212%s, \u2212%s) \u222a (%s, %s)" % (adm_num(I1_), adm_num(I0_), adm_num(I0_), adm_num(I1_)))
     INFO = ("HOW THE CHECKS ARE COMPUTED (all from the current vertex\n"
             "coordinates, recomputed at every position of the slider;\n"
-            "a value box under a slider or in the Params dialog can be edited:\n"
-            "click it, type, press Enter; Tab moves to the next box)\n\n"
+            "a value box (under a slider, in this report, or in the Params\n"
+            "dialog) can be edited: click it, type, press Enter; Tab moves\n"
+            "to the next box)\n\n"
             "edge lengths vs. initial\n"
             r"  $|V_{ij} - V_{kl}|$ for each of the %d edges, minus the same" % n_edges + "\n"
-            "  length in the initial configuration; maximum over edges.\n\n"
+            "  length in the initial net; maximum over edges.\n\n"
             "face angles vs. initial   (rigidity: nothing changes)\n"
             "  at every corner of every face, including the corners at\n"
             "  the boundary of the net, the angle between the two edges\n"
             "  (arccos of the dot product of the unit edge vectors) minus\n"
-            "  the value it had in the first configuration; maximum over\n"
+            "  the value it had in the initial net; maximum over\n"
             "  the %d angles. With the edge lengths: every face stays\n" % (4*n_faces) +
             "  congruent to itself, so the net moves as a mechanism.\n"
             "  This line does not say WHICH angles the faces have.\n\n"
             "flat angles vs. prescribed   (identity: the right values)\n"
             "  only at the %d inner vertices (%d angles, four faces\n" % (n_inner, 4*n_inner) +
             "  meet there): the measured angle minus the value the flat\n"
-            "  angle must have, namely the base angles at the base block\n"
-            "  propagated by the relations between adjacent 3 x 3 blocks.\n"
+            r"  angle must have, namely $\alpha_1, \beta_1, \gamma_1, \delta_1$ at the vertex" "\n"
+            "  $A_1$ of the base block, carried to all blocks by the relations\n"
+            "  between the flat angles of adjacent 3 x 3 blocks.\n"
             "  At the boundary vertices only two faces meet and nothing\n"
             "  is prescribed, so they appear in the previous line only.\n\n"
             "planarity of faces\n"
             "  for each face, the distance of the fourth vertex from\n"
             "  the plane of the other three, divided by the diagonal.\n\n"
             "dihedral angles vs. formulas\n"
-            r"  at each edge of each central face $F_{kn}$, the oriented" "\n"
+            r"  at each edge of each central face $F_{\kappa\nu}$, the oriented" "\n"
             "  dihedral angle read from the drawn vertices (with the\n"
             r"  normals of the two faces and its sign) minus $\theta_i$ from" "\n"
             "  the explicit flexion formulas of the 3 x 3 block.\n\n"
@@ -1643,32 +2039,44 @@ def _main():
             "  for every face the four cross products of consecutive\n"
             "  edge vectors point to the same side of the face normal.\n\n"
             "self-intersection\n"
-            "  for every pair of faces without a common vertex, the\n"
+            "  for every pair of faces without a common edge, the\n"
             "  segment in which one face meets the plane of the other\n"
             "  is clipped by that other face; a nonempty result means\n"
-            "  the faces penetrate each other (drawn in red tones).\n\n"
+            "  the faces penetrate each other (drawn in red tones).\n"
+            "  Diagonal neighbours (one common vertex) are tested by\n"
+            "  their corners at that vertex: they penetrate when the\n"
+            "  corners overlap beyond the vertex itself.\n\n"
+            "view, zoom\n"
+            "  the direction of view (elevation and azimuth in degrees; the\n"
+            "  left mouse button in the picture turns it, with Freeze on it\n"
+            "  pans) and the size of\n"
+            "  the picture against the startup frame (1 = start and Reset,\n"
+            "  2 = twice as large; the right mouse button zooms). Typed\n"
+            "  values apply on Enter (a zoom about the current centre).\n\n"
             "slider\n"
             + ("  the slider is the dihedral angle $\\theta_1$ of the base block $F_{%d%d}$\n"
-               "  (the still face) at its first edge, on the full circle; the\n"
-               "  boxes under it show $\\theta_1$ and the flexion parameter of the\n"
-               "  formulas, $t = \\cot(\\theta_1/2)$ (both can be edited). The admissible\n"
-               "  set of this block is $t \\in$ %s; the parts of it (and of $\\theta_1$)\n"
-               "  where the whole net has a configuration, minus the isolated\n"
-               "  parameters listed after a backslash, are\n"
+               "  (the still face) along its edge $A_1A_2$, on the full circle;\n"
+               "  the boxes under it show $\\theta_1$ and the flexion parameter of\n"
+               "  the formulas, $t = \\cot(\\theta_1/2)$ (both can be edited). The\n"
+               "  admissible set of this block is $I(x_1)$ = %s;\n"
+               "  the parts of it (and of $\\theta_1$) where the net can be built in\n"
+               "  space, minus the isolated parameters listed after a backslash,\n"
+               "  are\n"
                "{SETS}\n"
-               "  (symmetric: $-t$, i.e. $\\theta_1 < 0$, is the mirror image). The\n"
-               "  slider stops short of the ends by 0.1%% of the span of $\\theta_1$\n"
-               "  where the discriminant vanishes, by 1%% at the flat end\n"
-               "  ($\\theta_1 = 180^\\circ$, $t = 0$) and 0.25$^\\circ$ before $\\theta_1 = 0$ ($t$ infinite);\n"
-               "  the +/- buttons step $\\theta_1$ by one degree.\n") % (BASE_KN[0], BASE_KN[1], adm_txt) +
-            "  Colours: blue = the net has a configuration,\n"
-            "  rose = faces penetrate, pale = admissible but nearly flat\n"
-            "  (the slider keeps out of it), grey = no configuration\n"
-            "  (the picture stays), ticks = a cotangent of the base block\n"
-            "  vanishes (grey, some $\\theta_i = 180^\\circ$) or has a pole (red,\n"
-            "  $\\theta_i = 0$, a denominator of the formulas). $\\theta_1 < 0$ shows\n"
-            "  the mirror image of the net (reflected in the plane of the\n"
-            "  base face, every dihedral angle negated).\n\n"
+               "  For $t < 0$ ($\\theta_1 < 0$) the net is the mirror image of the net\n"
+               "  at $-t$ with the other sign $-e_0$ (reflected in the plane of the\n"
+               "  base face, every dihedral angle negated). The slider stops\n"
+               "  short of the ends by 0.1%% of the span of $\\theta_1$ where\n"
+               "  $D(x_1, t) = 0$ and 0.25$^\\circ$ before $\\theta_1 = 0$ ($t$ infinite). Where\n"
+               "  $t = 0$ is admissible it reaches the flat end $\\theta_1 = \\pm 180^\\circ$\n"
+               "  ($t = \\pm 0$, the edge $A_1A_2$ flat), where its two halves meet\n"
+               "  in the same net. The +/- buttons step $\\theta_1$ by one degree.\n") % (BASE_KN[0], BASE_KN[1], adm_txt) +
+            "  Colours: blue = the net can be built, rose = faces penetrate,\n"
+            "  pale = admissible, in a margin the slider keeps out of,\n"
+            "  grey = the net cannot be built (the picture stays),\n"
+            "  ticks = a cotangent of the base block vanishes (grey, some\n"
+            "  $\\theta_i = 180^\\circ$) or has a pole (red, $\\theta_i = 0$, a denominator\n"
+            "  of the formulas).\n\n"
             "picture\n"
             "  visible edges: navy on the silhouette and on creases facing\n"
             "  the camera, soft grey on the other creases; parts behind\n"
@@ -1686,11 +2094,15 @@ def _main():
             "  move, the net stands on its base face on an invisible stand\n"
             "  high enough for the whole flexion; from under the floor there\n"
             "  is no shadow to see (the Blender render adds the studio's ink\n"
-            "  rule: blue creases on the top side, grey underneath).\n"
-            "  The same net (same flat angles) usually admits several flexions,\n"
-            "  one for each consistent choice of the sign patterns of the\n"
-            "  blocks: prescribe them block by block in Params; the report\n"
-            "  says which one is shown and how many exist.\n"
+            "  rule: blue creases on the top side, grey underneath).\n\n"
+            "signs\n"
+            r"  all 3 x 3 blocks flex with the same signs $(e_1, e_2, e_3, e_4)$," "\n"
+            "  (1, -1, 1, -1) or (1, -1, -1, 1), chosen in Params with the\n"
+            r"  sign $e_0$ of the base block; the sign $e_0$ of every other block" "\n"
+            "  is the one with which it agrees with its neighbours on their\n"
+            "  common faces (shown with the data of its central face and in\n"
+            "  Dihedrals).\n\n"
+            "buttons\n"
             "  Freeze locks the rotation so that the\n"
             "  left mouse button drags the picture instead.\n"
             "  Colours: the picture theme. Paper is the palette measured\n"
@@ -1700,25 +2112,31 @@ def _main():
             "  Advanced: pick each entry's colour on the wheel (with the\n"
             "  lightness slider) or type its code; - / + for tint mix,\n"
             "  specular and shadow opacity. Apply repaints the net.\n"
-            "  save: SVG / PNG of the picture, OBJ (+ report) of the current\n"
-            "  configuration, Motion = an OBJ sequence spaced evenly in\n"
-            "  theta_1 over its admissible range, without the penetrating\n"
+            "  save: SVG / PNG of the picture, OBJ (+ report) of the net\n"
+            "  shown, Motion = an OBJ sequence spaced evenly in\n"
+            "  theta_1 over the slider's range for t >= 0 (from the flat\n"
+            "  end where t = 0 is admissible), without the penetrating\n"
             "  ones (index.txt lists theta_1 and t of each frame). Render in\n"
-            "  Blender exports the configuration and renders it in the\n"
+            "  Blender exports the net shown and renders it in the\n"
             "  background with the built-in recipe (Blender is found\n"
             "  automatically, or set BLENDER_PATH; a render_net.py next\n"
-            "  to this script replaces the built-in recipe).\n"
+            "  to this script replaces the built-in recipe). Seen from below,\n"
+            "  a render shows the shadow in the Top light, and in the Eye\n"
+            "  light from more than about 20 degrees below (Studio and World\n"
+            "  draw it on a glass floor in front of the net, which the\n"
+            "  render cannot show).\n"
             "  Params: the net itself (angles, size, base block, row types,\n"
-            "  signs, branch); it checks every choice before Apply.\n"
+            r"  signs, sign $e_0$); Apply builds the net before it replaces the" "\n"
+            "  window (a change of the signs alone keeps it).\n"
             "  Click on a face for its angles and\n"
             "  edges; for a central face also the data of its 3 x 3\n"
-            r"  block ($M$, $r_i$, $s_i$, $f_i$, $K$, $K'$, phase shifts, signs $e_i$)" "\n"
-            "  and a plot of its dihedral angles along the motion.\n"
+            r"  block ($M$, $r_i$, $s_i$, $f_i$, $K$, $K'$, phase shifts, $e_i$, $e_0$)" "\n"
+            r"  and a plot of its dihedral angles against $\theta_1$ ($t \geq 0$)." "\n"
             r"  Button Dihedrals: a window with $\theta_1, \dots, \theta_4$ of" "\n"
-            "  all %d 3 x 3 blocks\n" % n_blocks +
-            r"  as functions of $t$ (marker = current $t$)." "\n\n"
-            "Values of 1e-14 ... 1e-16 are double-precision rounding;\n"
-            "a geometric inconsistency would appear as 1e-3 or larger.")
+            + ("  all %d 3 x 3 blocks\n" % n_blocks if n_blocks <= 100 else "  the 3 x 3 blocks within 3 rows and columns of the base block\n") +
+            r"  against $\theta_1$ of the base block, $t \geq 0$ (marker = now)." "\n\n"
+            "Values up to 1e-11 (some larger nets: 1e-8) are double-precision\n"
+            "rounding; a geometric inconsistency would appear as 1e-3 or more.")
     INFO_LINES = INFO.split("\n")
     def with_glyphs(text, glyphs):
         """reserves room at the right end of the first line of a (monospace) panel for the small round (i) / (x) buttons."""
@@ -1731,9 +2149,13 @@ def _main():
         first = lines[0]; pad = max(2, width - vis_len(first) - len(glyphs))
         lines[0] = first + " "*pad + glyphs
         return "\n".join(lines)
+    VIEW_W, VIEW_A, VIEW_B = 9, "  view:   elev ", "   azim "                      # the view boxes: VIEW_W columns of the report text, after these labels
+    VIEW_LINES = ["", VIEW_A + " "*VIEW_W + VIEW_B + " "*VIEW_W, "", "  zoom:" + " "*(len(VIEW_A) - 7 + VIEW_W) + " \u00d7"]   # (the zoom box under the elev box)
     def report_string():                             # the report, continued by the unrolled part of the explanations
         body = state['report_str']
         if state.get('blender_line') and 'Blender' not in body: body = body.rstrip() + "\n  " + state['blender_line']
+        lines = body.split("\n"); k_ = next((i + 1 for i, l in enumerate(lines) if l.startswith("  self-intersection:")), len(lines))
+        body = "\n".join(lines[:k_] + VIEW_LINES + [""]*(k_ < len(lines)) + lines[k_:])   # the view lines right after the checks, before the notes: the boxes stay put
         if state['unrolled'] > 0:                                                    # the explanations, with the current sets of t and theta_1
             body = body + "\n\n" + "\n".join(INFO_LINES[:state['unrolled']]).replace("{SETS}", admissible_sets_text(True))
         return with_glyphs(body, " "*8)
@@ -1743,13 +2165,15 @@ def _main():
     def room_height():
         """height of the invisible stand of the photo studio (light 'room'): the base face F_kn stays at z = 0 and the rest of the
         net flexes about it, so the floor must stay clear of the deepest point of EVERY admissible configuration. Set once per net
-        from a sample of the flexion range: ROOM_CLEARANCE under that point, at least ROOM_MIN_HEIGHT (in net sizes)."""
+        from a sample of the flexion range (the slider's whole range, evenly in theta_1, both halves):
+        ROOM_CLEARANCE under that point, at least ROOM_MIN_HEIGHT (in net sizes)."""
         if state.get('room_floor') is None:
             zmin, sz = 0.0, 0.0
-            for t_ in np.linspace(lo, hi, 41):
-                cfg = configuration(float(t_))
-                if cfg is None: continue
-                P = np.array(list(cfg[0].values())); zmin = min(zmin, float(P[:, 2].min())); sz = max(sz, float((P.max(0) - P.min(0)).max()))
+            for th_ in np.linspace(th_lo_w, th_hi_w, 41):
+                t_ = float(t_of_theta(float(th_)))
+                for cfg in (configuration(t_, True), configuration_at(-t_, True)):           # both halves of the slider (-0.0 at a flat end)
+                    if cfg is None: continue
+                    P = np.array(list(cfg[0].values())); zmin = min(zmin, float(P[:, 2].min())); sz = max(sz, float((P.max(0) - P.min(0)).max()))
             P = np.array(list(state['pos'].values())); zmin = min(zmin, float(P[:, 2].min())); sz = max(sz, float((P.max(0) - P.min(0)).max()))
             state['room_floor'] = max(ROOM_MIN_HEIGHT*sz, -zmin + ROOM_CLEARANCE*sz)
         return state['room_floor']
@@ -1758,7 +2182,8 @@ def _main():
         lims = (ax.get_xlim3d(), ax.get_ylim3d(), ax.get_zlim3d()) if state.get('drawn') else None   # keep the user's zoom
         ax.cla(); pos = state['pos']
         if state.get('canvas_color'): ax.set_facecolor(state['canvas_color'])   # cla() resets the patch: keep a dark canvas dark
-        report = verify(state['pos'], state['th'], state['t'])      # also updates state['penetrating']
+        rotating = bool(state.get('rotating')) and state.get('report_str') is not None
+        report = state['report_str'] if rotating else verify(state['pos'], state['th'], state['t'])   # also updates state['penetrating']
         if lims is None:
             ax.set_xlim(mid[0]-rng, mid[0]+rng); ax.set_ylim(mid[1]-rng, mid[1]+rng); ax.set_zlim(mid[2]-rng, mid[2]+rng)
         else:
@@ -1787,34 +2212,42 @@ def _main():
             # 'world': the sun at noon, fixed in space: the shadow is the vertical footprint of the net on the floor; the shading
             # light is anchored high above the first view (so that vertical faces still show their modelling)
             if 'L_world' not in state:
-                el0 = state['elev'] if abs(state['elev']) <= 90 else 180 - state['elev']
+                e_ = state['elev'] if -180 <= state['elev'] < 180 else (state['elev'] + 180.0) % 360.0 - 180.0   # the elevation in [-180, 180),
+                el0 = e_ if abs(e_) <= 90 else (180 - e_ if e_ > 0 else -180 - e_)                                   # folded into [-90, 90]
                 u0, up0, w0 = view_axes(max(el0, 15.0), state['azim'])
                 state['L_world'] = unit(np.array([0, 0, 1.0]) + 0.35*w0 - 0.25*u0)
             L, Lsh = state['L_world'], np.array([0, 0, 1.0])
         allP = np.array(list(pos.values())); size = (allP.max(0) - allP.min(0)).max(); cen = (allP.max(0) + allP.min(0))/2
         state['shadow_box'] = None; state['shadow_pts'] = None
+        dragging = bool(state.get('dragging')) or rotating                          # theta_1 dragged or the view rotated: coarser sampling
+        n_before_shadow = len(ax.collections)
         if state['shadow']:
             lims_ = (ax.get_xlim3d(), ax.get_ylim3d(), ax.get_zlim3d())
             if Lsh is None:                                                       # 'top': floor of the viewer's frame, seen from 30 degrees above
                 nrm = unit(math.cos(math.radians(30))*up + math.sin(math.radians(30))*w)
-                state['shadow_pts'] = draw_shadow_frame(ax, pos, faces_all, corners, u, unit(np.cross(nrm, u)), nrm, size)
+                state['shadow_pts'] = draw_shadow_frame(ax, pos, faces_all, corners, u, unit(np.cross(nrm, u)), nrm, size,
+                                                         ncell=40 if dragging else 80, nlevels=12)
             elif mode == 'room' and (cen[2] + (18.2*FOCAL_LENGTH*0.55*size*w[2] if FOCAL_LENGTH else (1e9 if w[2] > 0 else -1e9))) < -room_height():
                 pass                                                              # the eye is under the studio's floor: no shadow to be seen from there
             else:
                 n_before = len(ax.collections)
-                state['shadow_box'] = draw_shadow(ax, pos, faces_all, corners, Lsh, size, z0=(-room_height() if mode == 'room' else None))   # None when the light is too flat
+                state['shadow_box'] = draw_shadow(ax, pos, faces_all, corners, Lsh, size, z0=(-room_height() if mode == 'room' else None),   # None when the light is too flat
+                                                  ncell=40 if dragging else 80, nlevels=12)                               # lighter while dragging
                 if state['shadow_box'] is not None and (w[2] > 0) != (Lsh[2] > 0):
                     # the viewer is on the other side of the shadow plane than the light (under the floor, or above the ceiling): the
                     # shadow lies on a glass plane BETWEEN the viewer and the net, so it is drawn in front of the net, translucent
                     for c in ax.collections[n_before:]:
                         c.do_3d_projection = (lambda orig: (lambda *a, **k: (orig(*a, **k), -2e9)[1]))(c.do_3d_projection)
             ax.set_xlim3d(lims_[0]); ax.set_ylim3d(lims_[1]); ax.set_zlim3d(lims_[2])   # contourf autoscales; undo
+        state['shadow_cols'] = ax.collections[n_before_shadow:]                    # kept by the preview while the view is rotated
         sf = screen_faces(ax, pos, faces_all, corners)                 # projected faces with the current projection
         state['screen_faces'] = sf
         tints = {f: PEN_TINT for f in state.get('penetrating', set())}          # only penetrating faces are tinted
-        quick = len(faces_all) > LIGHT_FACES                                        # the picture style never changes while dragging
+        quick = len(faces_all) > LIGHT_FACES                                        # the light style: large nets only
         nsub = max(2, min(NSUB, int(round(NSUB*math.sqrt(25.0/len(faces_all))))))    # fewer pieces per face for large nets
-        polys, cols = shaded_pieces(pos, faces_all, corners, up, w, L, cen, size, tints, nsub)
+        if dragging: nsub = max(2, nsub//2)                                         # while dragging: the same style, coarser sampling
+        eye = view_eye(ax.get_proj())                                               # the perspective eye (None: orthographic): decides the side seen
+        polys, cols = shaded_pieces(pos, faces_all, corners, up, w, L, cen, size, tints, nsub, eye=eye)
         # the edges as thin quads in the view plane: used by the light mode and by the preview shown while the view is rotated
         Lm = float(np.mean([edge_length(pos, e) for e in edges_all])); wq = 0.012*Lm; lift = 0.004*size*w; eq, ec = [], []
         for e in edges_all:
@@ -1826,8 +2259,8 @@ def _main():
         if quick:                                                                  # light mode: plain depth sorting, no occlusion layers
             ax.add_collection3d(Poly3DCollection(polys + eq, facecolors=list(cols) + ec, edgecolors='none', antialiased=False))
         else:
-            polys, cols, layer = layered_pieces(ax.get_proj(), sf, polys, cols, max_split=2 if len(faces_all) <= 36 else 1)
-            for lv in range(4):
+            polys, cols, layer = layered_pieces(ax.get_proj(), sf, polys, cols, max_split=2 if len(faces_all) <= 36 else 1, straddle=len(faces_all) > 36)
+            for lv in np.unique(layer):
                 idx = np.nonzero(layer == lv)[0]
                 if len(idx): ax.add_collection(LayerPolys([polys[i] for i in idx], layer=lv, facecolors=[cols[i] for i in idx], edgecolors='none', antialiased=False), autolim=False)
         # edges: visible parts in dark blue, parts behind faces as faint thin lines
@@ -1836,7 +2269,7 @@ def _main():
             P, Q = sorted(e)
             if quick: continue                                                     # quick / light mode: edges already drawn with the faces
             PQ_faces = {f for f in faces_all if P in corners(f) and Q in corners(f)}
-            for lv, sg in edge_segments(ax, pos[P], pos[Q], PQ_faces, sf).items():
+            for lv, sg in edge_segments(ax, pos[P], pos[Q], PQ_faces, sf, nsamp=12 if dragging else 32).items():
                 segs_all[lv] += sg
                 if lv == 0: segs_edge[0] += [e]*len(sg)
         style = {1: (HIDDEN_COL + (0.32,), 0.5), 2: (HIDDEN_COL + (0.20,), 0.45), 3: (HIDDEN_COL + (0.14,), 0.4)}
@@ -1846,7 +2279,7 @@ def _main():
                 col, lw = style[lv]
                 ax.add_collection3d(FrontLines(segs_all[lv], rank=lv, colors=[col], linewidths=lw))
         if segs_all[0]:                                                              # visible parts: ink by the kind of crease
-            inks = [edge_ink(sg_edge, pos, w, faces_all, corners) for sg_edge in segs_edge[0]]
+            inks = [edge_ink(sg_edge, pos, w, faces_all, corners, eye=eye) for sg_edge in segs_edge[0]]
             ax.add_collection3d(FrontLines(segs_all[0], rank=0, colors=[ink + (1.0,) for ink in inks], linewidths=[0.95 if ink == EDGE_COL else 0.75 for ink in inks], capstyle='round', joinstyle='round'))
         LB = dict(facecolor='white', alpha=0.75, edgecolor='none', pad=0.5); Z = 1000       # labels above all collections
         if state['labels']['vertices']:
@@ -1869,14 +2302,15 @@ def _main():
                             color='#1b7f2a' if vv in ang else '#c2571a', bbox=LB, zorder=Z)
         ax.set_axis_off(); state['drawn'] = True
         state['report_str'] = report; report_text.set_text(report_string())
+        if 'sync_view' in state: state['sync_view']()                              # the view boxes follow the view and the zoom
         report_text.set_visible(state['report'])
         if 'layout_panels' in state: state['layout_panels']()
         fig.canvas.draw_idle()
     # ---- the motion sampled along t (cached configurations), for the plots of the dihedral angles
     def motion_samples(nmin):
         ts_ = sorted(k for k in cache if cache[k] is not None)
-        if len(ts_) < nmin:
-            for tt in np.linspace(lo, hi, nmin + 1): configuration(float(tt))
+        if sum(1 for k in ts_ if not FLAT_END or k >= t_grid - 1e-6) < nmin:        # (the few samples between the grid and a flat end do not count)
+            for th_ in np.linspace(th_lo_w, th_hi_g, nmin + 1): configuration(float(t_of_theta(float(th_))), True)   # the slider's range, evenly in theta_1
             ts_ = sorted(k for k in cache if cache[k] is not None)
         return ts_
     def block_curves(kn, ts_):
@@ -1893,15 +2327,33 @@ def _main():
     # ---- face picking: click on a face to see the data of its block
     state['press'] = None
     def on_press(ev):
-        if ev.inaxes is ax: state['press'] = (ev.x, ev.y)
+        if ev.inaxes is ax:
+            state['press'] = (ev.x, ev.y)
+            if getattr(fig.canvas, 'supports_blit', False) and fast['kind'] is None and 'draw_idle' not in vars(fig.canvas):
+                fig.canvas.draw_idle = view_request                                  # a rotation, zoom or pan will ask for a redraw
+    def view_request(*a, **k):
+        """the first redraw request of a rotation, zoom or pan (matplotlib's own handler has changed the view): the fast repaint
+        starts, with the picture rebuilt for the current view at every step; any other request is an ordinary redraw"""
+        if fast['kind'] == 'rotate': fast_request(); return
+        if state.get('press') is not None and fast['kind'] is None:
+            state['rotating'] = True
+            if fast_begin('rotate', drag_arts(), rebuild=redraw):
+                fig.canvas.draw_idle = fast_request; return
+            state['rotating'] = False
+        if vars(fig.canvas).get('draw_idle') is view_request: del fig.canvas.draw_idle
+        fig.canvas.draw_idle()
     def on_motion(ev):
         """the occlusion layers and the hidden-line segments are valid only for the view they were computed for: as soon as a drag
         in the 3D axes starts, the picture is replaced by a plain depth-sorted preview (faces and edges in one collection), which
         stays correct under rotation; the full picture is redrawn when the mouse is released."""
+        if state.get('rotating') and fast['kind'] is None and 'sync_view' in state: state['sync_view']()   # (the preview: the view boxes follow too)
         if state.get('press') is None or state.get('rotating') or state.get('preview') is None or ev.inaxes is not ax: return
         if abs(ev.x - state['press'][0]) < 3 and abs(ev.y - state['press'][1]) < 3: return
-        state['rotating'] = True
-        for c in list(ax.collections): c.remove()
+        if fast['kind'] == 'rotate': return                                          # the same style as at rest, repainted fast
+        state['rotating'] = True                                                      # (a backend that cannot blit: the preview)
+        keep = set(map(id, state.get('shadow_cols', [])))                            # the shadow stays (no blink)
+        for c in list(ax.collections):
+            if id(c) not in keep: c.remove()
         for t_ in list(ax.texts): t_.remove()
         polys_p, cols_p = state['preview']
         ax.add_collection3d(Poly3DCollection(polys_p, facecolors=cols_p, edgecolors='none', antialiased=False))
@@ -1927,9 +2379,9 @@ def _main():
         lines = ["Face " + Fn(f), "", "  angles (deg): " + ", ".join("%.2f" % math.degrees(face_angle(pos, vv, f)) for vv in cs),
                  "  edges: " + ", ".join("%.4f" % edge_length(pos, frozenset((cs[k], cs[(k+1) % 4]))) for k in range(4))]
         if f in subs:
-            S = subs[f]; e = flexion_state['list'][flexion_state['index']][f]; th = state['th'][f]
-            lines += [r"  central face of a $3 \times 3$ block with " + RELATION_TEXT[ROW_SYSTEMS[f[1]]],
-                      r"  signs $(e_1, e_2, e_3, e_4)$ = %s" % (e,),
+            S = subs[f]; e = tuple(SIGNS); th = state['th'][f]
+            lines += [r"  central face of a $3 \times 3$ block with " + RELATION_TEXT[ROW_TYPES[f[1]]],
+                      r"  signs $(e_1, e_2, e_3, e_4)$ = %s (all blocks),  sign $e_0$ = %s" % (e, sign_str(f)),
                       r"  $M$ = %.6f,   $u = 1 - M$ = %.6f" % (S.M, S.u),
                       r"  $r_1 = r_2$ = %.6f,  $r_3 = r_4$ = %.6f,  $s_1 = s_4$ = %.6f,  $s_2 = s_3$ = %.6f" % (S.v[1]['r'], S.v[3]['r'], S.v[1]['s'], S.v[2]['s']),
                       r"  $f_1, \dots, f_4$ = %s" % ", ".join("%.6f" % S.v[i]['f'] for i in range(1, 5)),
@@ -1940,12 +2392,13 @@ def _main():
                       r"  $t_3$ = %s,  $t_4$ = %s" % (S.phase_string(3), S.phase_string(4)),
                       r"  $e_1 t_1 + e_2 t_2 + e_3 t_3 + e_4 t_4$ = " + S.sign_condition_string(e),
                       "  dihedral angles now (deg): " + ", ".join("%.3f" % math.degrees(th[i]) for i in range(1, 5)),
-                      r"  (inset: $\theta_1, \dots, \theta_4$ of this block along the motion, marker = current $t$)"]
-            ts_ = motion_samples(16); curves = block_curves(f, ts_)
+                      r"  (inset: $\theta_1, \dots, \theta_4$ of this block against $\theta_1$ of the base block, $t \geq 0$; marker = now)"]
+            ts_ = motion_samples(16); curves = block_curves(f, ts_); xs_ = [theta_of_t(k) for k in ts_]   # against theta_1: bounded, as on the slider
             inset.cla(); inset.set_visible(True)
-            for i, cv in enumerate(curves): inset.plot(ts_, cv, lw=1.2, color=THETA_COLS[i], label=r"$\theta_%d$" % (i+1))
-            for i in range(4): inset.plot([state['t']], [math.degrees(th[i+1])], 'o', ms=4, color=THETA_COLS[i])
-            inset.set_xlabel('$t$', fontsize=8, color=INK); inset.set_ylabel('deg', fontsize=7, color=INK); style_axes(inset)
+            for i, cv in enumerate(curves): inset.plot(xs_, cv, lw=1.2, color=THETA_COLS[i], label=r"$\theta_%d$" % (i+1))
+            if not state.get('mirror'):                                                  # the curves are for t >= 0
+                for i in range(4): inset.plot([theta_of_t(state['t'])], [math.degrees(th[i+1])], 'o', ms=4, color=THETA_COLS[i])
+            inset.set_xlabel(r'$\theta_1$ (°)', fontsize=8, color=INK); inset.set_ylabel('deg', fontsize=7, color=INK); style_axes(inset)
             inset.legend(fontsize=6.5, ncol=4, loc='upper center', bbox_to_anchor=(0.5, 1.25), frameon=False)
         else:
             owners = [kn for kn in subs if f in [(kn[0]+a, kn[1]+b) for a in (-1, 0, 1) for b in (-1, 0, 1)]]
@@ -1959,6 +2412,9 @@ def _main():
         if 'layout_panels' in state: state['layout_panels']()
         fig.canvas.draw_idle()
     def on_release(ev):
+        if vars(fig.canvas).get('draw_idle') is view_request: del fig.canvas.draw_idle   # a click: no view change happened
+        if state.get('rotating') and fast['kind'] == 'rotate':                     # released anywhere: the view change ends
+            state['rotating'] = False; state['press'] = None; fast_end(); redraw(); return
         if ev.inaxes is not ax: return
         if state['press'] is not None and abs(ev.x - state['press'][0]) < 3 and abs(ev.y - state['press'][1]) < 3:
             f = pick_face(ev)
@@ -1974,7 +2430,7 @@ def _main():
         over the picture the wheel redraws after a zoom. With a modifier key the wheel scrolls horizontally."""
         H, W = fig.get_figheight(), fig.get_figwidth(); step = 0.25/H*(1 if ev.button == 'down' else -1)     # a quarter inch per notch
         hstep = 0.25/W*(1 if ev.button == 'down' else -1); horizontal = wheel_horizontal(ev)
-        xf_, yf_ = ev.x/fig.bbox.width, ev.y/fig.bbox.height
+        xf_ = ev.x/fig.bbox.width
         if dlg['open'] or cdl['open']:
             if horizontal: offs_x['dlg'] = min(max(0.0, offs_x['dlg'] + hstep), overflow_x('dlg'))
             else: offs['dlg'] = min(max(0.0, offs['dlg'] + step), overflow('dlg'))
@@ -1987,14 +2443,16 @@ def _main():
             if t_.get_visible():
                 bb = measure(t_)
                 if (bb.x0 <= ev.x <= bb.x1 + 12 and bb.y0 - 12 <= ev.y <= bb.y1 + 12) or (over_inset and t_ is face_text):
-                    lows = [measure(t).y0/fig.bbox.height for t in (report_text, face_text) if t.get_visible()]
-                    if inset.get_visible(): lows.append(inset.get_position().y0 - 0.45/fig.get_figheight())
-                    max_off = max(0.0, -min(lows) + 0.02 + offs['panel'])
+                    max_off = panel_max_off()
                     if horizontal: offs_x['panel'] = min(max(0.0, offs_x['panel'] + hstep), overflow_x('panel'))
                     else: offs['panel'] = min(max(0.0, offs['panel'] + step), max_off)
-                    layout_panels(); fig.canvas.draw_idle(); return
-        if ev.inaxes is ax: redraw()
+                    layout_panels()
+                    if fast['kind'] == 'panel' or (fast['kind'] is None and fast_begin('panel', panel_arts())): fast_paint()
+                    else: fig.canvas.draw_idle()
+                    return
+        if ev.inaxes is ax and (ax.get_xlim3d(), ax.get_ylim3d(), ax.get_zlim3d()) != state.get('lims_drawn'): redraw()   # (Axes3D of matplotlib 3.10 has no wheel zoom)
     fig.canvas.mpl_connect('scroll_event', on_scroll_ui)
+    fig.canvas.mpl_connect('draw_event', lambda ev: state.update(lims_drawn=(ax.get_xlim3d(), ax.get_ylim3d(), ax.get_zlim3d())))   # the limits of the picture on screen
     def on_resize(ev):
         for g in offs: offs[g] = min(offs[g], overflow(g)) if g != 'panel' else 0.0
         for g in offs_x: offs_x[g] = 0.0
@@ -2006,10 +2464,14 @@ def _main():
         """window with theta_1..theta_4 of every block along the motion: all plots live on one canvas, at most 3 x 3 of them are
         in view, and the scrollbars / mouse wheel move the canvas continuously (smooth scrolling)."""
         if state['dfig'] is not None and plt.fignum_exists(state['dfig'].number): return
-        ts_ = motion_samples(40)
+        ts_ = motion_samples(40); xs_ = [theta_of_t(k) for k in ts_]            # plotted against theta_1 (bounded; t is unbounded for some nets)
         nk, nn = m - 2, n - 2                                                    # blocks: kappa = 1..nk (columns), nu = 1..nn (rows)
         vk, vn = min(nk, 3), min(nn, 3)
         dfig = plt.figure(figsize=(3.7*vk + 0.9, 2.75*vn + 1.6), facecolor='white')
+        try:
+            if dfig.canvas.manager.key_press_handler_id is not None:                   # the same key bindings as the main window
+                dfig.canvas.mpl_disconnect(dfig.canvas.manager.key_press_handler_id); dfig.canvas.mpl_connect('key_press_event', default_keys)
+        except Exception: pass
         try: dfig.canvas.manager.set_window_title("dihedral angles of the 3 x 3 blocks")
         except Exception: pass
         def geometry():
@@ -2025,11 +2487,11 @@ def _main():
         tiles = {}; marks = []; leg_holder = []
         for kn in shown_blocks:
             a_ = dfig.add_axes([0, 0, tw, th_]); a_.set_zorder(0)
-            for i, cv in enumerate(block_curves(kn, ts_)): a_.plot(ts_, cv, lw=1.3, color=THETA_COLS[i], label=r"$\theta_%d$" % (i+1))
-            a_.set_title(r"%s   (signs $e$ = %s)" % (Fn(kn), flexion_state['list'][flexion_state['index']][kn]), fontsize=9.5, color=INK)
-            vl = a_.axvline(state['t'], color='#8fa9c9', lw=0.9, ls='--')
-            dots = [a_.plot([state['t']], [math.degrees(state['th'][kn][i])], 'o', ms=4, color=THETA_COLS[i-1])[0] for i in range(1, 5)]
-            style_axes(a_); a_.set_xlabel('$t$', fontsize=9, color=INK); a_.set_ylabel('deg', fontsize=8, color=INK); a_.tick_params(labelsize=7)
+            for i, cv in enumerate(block_curves(kn, ts_)): a_.plot(xs_, cv, lw=1.3, color=THETA_COLS[i], label=r"$\theta_%d$" % (i+1))
+            a_.set_title(Fn(kn), fontsize=9.5, color=INK)                          # (with the sign e0 now: update_dihedrals)
+            vl = a_.axvline(theta_of_t(state['t']), color='#8fa9c9', lw=0.9, ls='--')
+            dots = [a_.plot([theta_of_t(state['t'])], [math.degrees(state['th'][kn][i])], 'o', ms=4, color=THETA_COLS[i-1])[0] for i in range(1, 5)]
+            style_axes(a_); a_.set_xlabel(r'$\theta_1$ (°) of the base block', fontsize=9, color=INK); a_.set_ylabel('deg', fontsize=8, color=INK); a_.tick_params(labelsize=7)
             tiles[kn] = a_; marks.append((kn, vl, dots))
         # masks above and below the viewport so that partly scrolled plots do not run into the title, the legend and the scrollbars
         masks = []
@@ -2041,8 +2503,8 @@ def _main():
                                     facecolor='white', edgecolor='none', zorder=1)
                 dfig.add_artist(p_); masks.append(p_)
         place_masks(L0, R0, B0, T0, gx, gy)
-        dfig.text(0.5, 0.985, r"dihedral angles $\theta_1, \dots, \theta_4$ along the motion, with respect to the central face $F_{\kappa\nu}$" "\n"
-                  r"of the corresponding $3 \times 3$ block, $1 \leq \kappa \leq %d$, $1 \leq \nu \leq %d$" % (nk, nn) + ("" if len(subs) <= 100 else "  (large net: only the blocks near the base block)"),
+        dfig.text(0.5, 0.985, r"dihedral angles $\theta_1, \dots, \theta_4$ for $t \geq 0$, with respect to the central face $F_{\kappa\nu}$" "\n"
+                  r"of the corresponding $3 \times 3$ block, $1 \leq \kappa \leq %d$, $1 \leq \nu \leq %d$;  signs $(e_1, e_2, e_3, e_4)$ = %s" % (nk, nn, tuple(SIGNS)) + ("" if len(subs) <= 100 else "  (large net: only the blocks near the base block)"),
                   ha='center', va='top', fontsize=9.5, color=INK, zorder=3, linespacing=1.25)
         h, l = tiles[shown_blocks[0]].get_legend_handles_labels()
         leg = dfig.legend(h[:4], l[:4], loc='upper center', bbox_to_anchor=(0.5, 1 - 0.54/dfig.get_figheight()), ncol=4, fontsize=9, frameon=False); leg.set_zorder(3)
@@ -2100,6 +2562,7 @@ def _main():
             except Exception: pass
         dfig.canvas.mpl_connect('close_event', closed)
         state['dfig'], state['dmarks'], state['dbars'] = dfig, marks, bars
+        update_dihedrals()
         try: dfig.show()
         except Exception: pass
         plt.figure(fig.number)                                                     # the main figure stays the current one
@@ -2108,9 +2571,11 @@ def _main():
         if dfig is None: return
         if not plt.fignum_exists(dfig.number):          # closed by hand on a backend without close events
             state['dfig'] = None; b_dih.set_on(False); return
-        for kn, vl, dots in state['dmarks']:
-            vl.set_xdata([state['t'], state['t']])
-            for i, d in enumerate(dots): d.set_data([state['t']], [math.degrees(state['th'][kn][i+1])])
+        th1_ = theta_of_t(state['t'])
+        for kn, vl, dots in state['dmarks']:                                                # the plots are for t >= 0 (against theta_1): no marker for t < 0
+            vl.set_xdata([th1_, th1_]); vl.set_visible(not state.get('mirror'))
+            for i, d in enumerate(dots): d.set_data([th1_], [math.degrees(state['th'][kn][i+1])]); d.set_visible(not state.get('mirror'))
+            vl.axes.title.set_text(r"%s   (sign $e_0$ = %s now%s)" % (Fn(kn), sign_str(kn), ", mirrored" if state.get('mirror') else ""))   # it changes along the motion: as in the face panel
         dfig.canvas.draw_idle()
     def close_dihedrals():
         dfig = state['dfig']; state['dfig'] = None
@@ -2119,6 +2584,7 @@ def _main():
     X0, XW, H = 0.862, 0.125, 0.030
     ax_sl = fig.add_axes([0.926, 0.530, 0.030, 0.385]); ax_sl.set_facecolor('none'); ax_sl.set_visible(False)   # hidden: t is set through theta_1 and the boxes
     sl = make_slider(ax_sl, lo, hi, t0); reg('col', ax_sl)
+    sl.set_active(False)                                                            # hidden: no mouse (it lies under the theta_1 box and track); set_val still works
     sl.valmin, sl.valmax = -1e12, 1e12                                                # the hidden model takes any admissible t (t is unbounded for some nets)
     # the value under the track is a text box: click it, type a t and press Enter (only admissible values are taken)
     sl.valtext.set_visible(False)
@@ -2127,36 +2593,58 @@ def _main():
     t_box.text_disp.set_fontsize(9); t_box.text_disp.set_color('#2c4a74')
     for sp in ax_tb.spines.values(): sp.set_edgecolor('#b9c7da'); sp.set_linewidth(0.8)
     reg('col', ax_tb)
+    def put_box(tb, txt):
+        """the text of a value box shown as is: TextBox.set_val would place a text cursor by a full redraw of the window, twice
+        per step of the slider (slow, and during a drag it showed the window without the net for a moment: a blink)"""
+        tb.text_disp.set_text(txt); tb._shown = txt; tb._edited = False               # _shown: submitted unedited (Enter, Tab, a click elsewhere) it changes nothing
+        try: tb.cursor.set_visible(False)
+        except Exception: pass
+    def box_t(v_): return ("%.1e" % v_) if (FLAT_END and 0 < abs(v_) < 5e-4) else ("%.3f" % v_)      # a tiny t next to the flat end is not shown as 0.000
+    def box_th(v_):                                                                # %.1f, unless that would show a value next to the flat end as 180.0
+        s_ = "%.1f" % v_
+        if abs(v_) != 180.0 and abs(float(s_)) == 180.0:
+            s_ = "%.4f" % v_
+            if abs(float(s_)) == 180.0: s_ = ("-" if v_ < 0 else "") + "≈180"
+        return s_ + "°"
     def sync_t_box():
         """the box shows the slider's value (without firing its own submit)"""
-        t_box.eventson = False; t_box.set_val('%.3f' % sl.val); t_box.eventson = True
+        put_box(t_box, box_t(sl.val))
         try: t_box.cursor.set_visible(False)                                            # set_val shows the text cursor although nothing is edited
         except Exception: pass
+    def t_str(v_): return "%.3g" % v_ if (FLAT_END and 0 < abs(v_) < min(t_grid, 1e-4)) else "%.4f" % v_   # a tiny t near the flat end is not shown as 0.0000
     def t_submit(text):
-        try: v = float(text.strip().replace(',', '.'))
+        if text == t_box._shown and not t_box._edited: return                           # the box as shown, not edited: the parameter stays (not rounded to the display)
+        try: v = float(text.strip().replace(',', '.').replace('\u2212', '-'))           # (also the minus sign U+2212 of the notes)
         except ValueError:
             note("$t$: '%s' is not a number" % text.strip(), key='tbox'); sync_t_box(); return
+        if math.isnan(v): note("$t$: '%s' is not a number" % text.strip(), key='tbox'); sync_t_box(); return
+        if not math.isfinite(v):
+            note("$t$: must be a finite number ($t$ infinite, $\\theta_1 = 0$, is excluded)", key='tbox'); sync_t_box(); return
         eps = 1e-3*(hi - lo); a_ = abs(v)                                               # the ends may be typed as displayed (rounded)
         if not (I_lo - eps <= a_ <= I_hi + eps):
-            note("$t$: must lie in the admissible set %s or its mirror image" % adm_txt, key='tbox'); sync_t_box(); return
-        clamped = a_ < lo_flat; a_ = max(a_, lo_flat)
-        if configuration(a_) is None:
-            note("$t$: no configuration of the net at %.4f" % a_, key='tbox'); sync_t_box(); return
-        sl.set_val(math.copysign(a_, v) if v != 0 else a_)                              # on_change: the configuration and the picture follow
+            note("$t$: must lie in the admissible set $I(x_1)$ = %s" % adm_txt, key='tbox'); sync_t_box(); return
+        clamped = a_ < lo_flat; a_ = max(a_, lo_flat)                                   # (only near an end where D = 0: at a flat end lo_flat = 0)
+        clamped_hi = a_ > t_hi_w; a_ = min(a_, t_hi_w)                                  # towards theta_1 = 0 (t infinite) or an end where D = 0: as far as the slider goes
+        v_ = math.copysign(a_, v)                                                       # '-0' is the flat end of the mirrored half (theta_1 = -180)
+        if configuration_at(v_) is None:
+            note("$t$: the net cannot be built at %s" % t_str(v_), key='tbox'); sync_t_box(); return
+        sl.set_val(v_)                                                                  # on_change: the configuration and the picture follow
         sync_t_box()
-        if clamped: note("$t$: the slider stops at %.4f, a little short of the flat end" % a_, key='tbox')   # after the redraw, so that it stays visible
+        if clamped: note("$t$: the slider stops at %.4f, a little short of the end of the admissible set" % a_, key='tbox')   # after the redraw, so that it stays visible
+        if clamped_hi: note("$t$: the slider stops at %.4f, a little short of %s" % (a_, "$\\theta_1 = 0$ ($t$ infinite)" if I_hi == math.inf else "the end of the admissible set"), key='tbox')
     t_box.on_submit(t_submit)
     def mark_t(ok):
         t_box.text_disp.set_color('#2c4a74' if ok else '#b00020')
     def show_t(v_):
-        t_box.eventson = False; t_box.set_val('%.3f' % v_); t_box.eventson = True
+        put_box(t_box, box_t(v_))
         try: t_box.cursor.set_visible(False)
         except Exception: pass
     sl.on_changed(lambda val: sync_t_box())
-    # ---- the slider: the dihedral angle theta_1 of the base block on the full circle (-180, 180) degrees; t = cot(theta_1/2).
+    # ---- the slider: the dihedral angle theta_1 of the base block on the full circle [-180, 180] degrees; t = cot(theta_1/2).
     # t > 0 gives theta_1 in (0, 180); theta_1 < 0 is the mirror image of the net (reflected in the plane of its base face,
-    # every dihedral angle negated). The track shows where a configuration exists (blue), the admissible tail near the flat
-    # limit t -> 0 that the slider keeps out of (pale), the penetrating parts (rose), the dead parts (grey), and the
+    # every dihedral angle negated); where t = 0 is admissible both halves reach the flat end theta_1 = +-180 (t = +0 / -0, the
+    # same net). The track shows where a configuration exists (blue), the admissible margins the slider keeps out of (pale:
+    # 0.1 % at an end where D = 0, TH_EPS at theta_1 = 0), the penetrating parts (rose), the dead parts (grey), and the
     # isolated parameters where a cotangent of the base block vanishes (theta_i = 180, grey tick) or has a pole (theta_i = 0,
     # a denominator of the formulas, red tick). Nothing moves while the handle is in a dead part.
     th_title2 = fig.text(0.918, 0.543, r'$t = \cot(\theta_1/2)$', ha='center', va='top', fontsize=8.5, color='#2c4a74'); reg('col', th_title2)   # under the theta_1 box
@@ -2170,16 +2658,19 @@ def _main():
     handle_th = getattr(th_sl, '_handle', None)
     if handle_th is not None: handle_th.set_zorder(5); handle_th.set_clip_on(False); handle_th.set_markersize(12); handle_th.set_markeredgewidth(1.4)
     ax_th.set_xlim(0, 1); ax_th.set_ylim(-180, 180); reg('col', ax_th)
-    bb_th = ax_th.get_position(); aspect_th = ((360.0)/(fig.get_figheight()*bb_th.height))/(1.0/(fig.get_figwidth()*bb_th.width))
     th_art = []
     ax_thb = fig.add_axes([0.895, 0.564, 0.046, 0.026], zorder=6)                     # theta_1, right under the slider
     th_box = TextBox(ax_thb, '', initial='%.1f°' % theta_of_t(t0), textalignment='center', color='#ffffff', hovercolor='#eef3fa')
     th_box.text_disp.set_fontsize(9); th_box.text_disp.set_color('#2c4a74')
     for sp in ax_thb.spines.values(): sp.set_edgecolor('#b9c7da'); sp.set_linewidth(0.8)
     reg('col', ax_thb)
-    def draw_track(ax_, art_, half_span, bands, ticks):
+    t_box._shown, th_box._shown, t_box._edited, th_box._edited = t_box.text, th_box.text, False, False   # the initial texts, as if put by put_box
+    for tb_ in (t_box, th_box): tb_.on_text_change(lambda txt, tb_=tb_: setattr(tb_, '_edited', tb_._edited or txt != tb_._shown))   # typed into (Enter itself
+                                                                                    # also reports a change, of nothing): a submit counts, even of the same text
+    def draw_track(ax_, art_, half_span, bands, ticks, bands_neg, ticks_neg):
         """a rounded grey track over [-half_span, half_span] with coloured bands (a, b, colour, zorder, alpha) and tick marks
-        (value, colour), each drawn on both halves (the mirror half paler), and a white gap at 0 (an excluded point)"""
+        (value, colour) given for the positive half and, separately, for the negative half (as positive values, drawn at
+        their negatives), and a white gap at 0 (an excluded point)"""
         for a_ in art_:
             try: a_.remove()
             except Exception: pass
@@ -2187,23 +2678,23 @@ def _main():
         bb_ = ax_.get_position(); asp_ = ((2*half_span)/(fig.get_figheight()*bb_.height))/(1.0/(fig.get_figwidth()*bb_.width))
         cap = FancyBboxPatch((0.28, -half_span), 0.44, 2*half_span, boxstyle="round,pad=0,rounding_size=0.22", mutation_aspect=asp_, facecolor='#e3eaf3', edgecolor='none', zorder=1)
         ax_.add_patch(cap); art_.append(cap)
-        for a_, b_, colr, z_, alpha in bands:
-            if b_ <= a_ + 1e-12: continue
-            for sgn_ in (1, -1):
+        for sgn_, bands_, ticks_ in ((1, bands, ticks), (-1, bands_neg, ticks_neg)):
+            for a_, b_, colr, z_, alpha in bands_:
+                if b_ <= a_ + 1e-12: continue
                 lo_, hi_ = sorted((sgn_*a_, sgn_*b_))
-                r_ = Rectangle((0.28, lo_), 0.44, hi_ - lo_, facecolor=colr, edgecolor='none', zorder=z_, alpha=alpha if sgn_ > 0 else 0.45*alpha)
+                r_ = Rectangle((0.28, lo_), 0.44, hi_ - lo_, facecolor=colr, edgecolor='none', zorder=z_, alpha=alpha)
                 ax_.add_patch(r_); r_.set_clip_path(cap); art_.append(r_)
-        for v_, colr in ticks:
-            for sgn_ in (1, -1):
-                art_.append(ax_.plot([0.28, 0.72], [sgn_*v_, sgn_*v_], color=colr, lw=1.1, zorder=5, alpha=1.0 if sgn_ > 0 else 0.5)[0])
+            for v_, colr in ticks_:
+                art_.append(ax_.plot([0.28, 0.72], [sgn_*v_, sgn_*v_], color=colr, lw=1.1, zorder=5)[0])
         g_ = 0.0033*half_span
         gap_ = Rectangle((0.24, -g_), 0.52, 2*g_, facecolor='white', edgecolor='none', zorder=5); ax_.add_patch(gap_); art_.append(gap_)
-    t_art = []
     def draw_tracks():
-        R = theta_regions(); pen_c = tuple(PEN_TINT[1])
-        tick = [(z_, '#6b7d99') for z_ in R['zeros']] + [(p_, '#b00020') for p_ in R['poles']]
-        draw_track(ax_th, th_art, 180.0, [(a_, b_, '#cfdcec', 2, 1.0) for a_, b_ in R['tail']] + [(a_, b_, '#8fb6e3', 3, 1.0) for a_, b_ in R['live']]
-                   + [(a_, b_, pen_c, 4, 0.75) for a_, b_ in R['pen']], tick)
+        pen_c = tuple(PEN_TINT[1])
+        def bands(R_): return ([(a_, b_, '#cfdcec', 2, 1.0) for a_, b_ in R_['tail']] + [(a_, b_, '#8fb6e3', 3, 1.0) for a_, b_ in R_['live']]
+                               + [(a_, b_, pen_c, 4, 0.75) for a_, b_ in R_['pen']])
+        def ticks(R_): return [(z_, '#6b7d99') for z_ in R_['zeros']] + [(p_, '#b00020') for p_ in R_['poles']]
+        R, Ro = theta_regions(), theta_regions(other=True)
+        draw_track(ax_th, th_art, 180.0, bands(R), ticks(R), bands(Ro), ticks(Ro))
     draw_tracks()
     def mark_theta(ok):
         th_box.text_disp.set_color('#2c4a74' if ok else '#b00020')
@@ -2211,48 +2702,62 @@ def _main():
         """the theta slider and its box follow t and the mirror flag (without firing their own callbacks)"""
         th_deg = theta_of_t(sl.val)
         th_sl.eventson = False; th_sl.set_val(th_deg); th_sl.eventson = True
-        th_box.eventson = False; th_box.set_val('%.1f°' % th_deg); th_box.eventson = True
+        put_box(th_box, box_th(th_deg))
         try: th_box.cursor.set_visible(False)
         except Exception: pass
         mark_theta(True)
     def on_theta(val):
         th_deg = float(val)
         def show_dead():                                                          # the box follows the handle, in red; nothing else moves
-            th_box.eventson = False; th_box.set_val('%.1f°' % th_deg); th_box.eventson = True
+            put_box(th_box, box_th(th_deg))
             try: th_box.cursor.set_visible(False)
             except Exception: pass
             mark_theta(False); fig.canvas.draw_idle()
         if abs(th_deg) < TH_EPS: show_dead(); return                               # the excluded point theta_1 = 0
         t_ = t_of_theta(th_deg); a_ = abs(t_); eps_ = 1e-3*(hi - lo)
-        ok = (lo_flat - eps_ <= a_ <= I_hi + eps_) and configuration(float(max(a_, lo_flat))) is not None
-        if ok: sl.set_val(math.copysign(float(max(a_, lo_flat)), t_))                # on_change: the configuration (mirrored below zero)
+        a_w = min(max(a_, lo_flat), t_hi_w)                                            # the working range (the margins next to its ends are not entered)
+        ok = (lo_flat - eps_ <= a_ <= I_hi + eps_) and configuration_at(math.copysign(float(a_w), t_)) is not None
+        if ok: sl.set_val(math.copysign(float(a_w), t_))                              # on_change: the configuration (mirrored below zero)
         else: show_dead()
     th_sl.on_changed(on_theta)
     sl.on_changed(lambda val: sync_theta())
+    def th_str(v_):                                                                # %.2f, unless that would show a value next to the flat end as 180.00
+        s_ = "%.2f" % v_
+        if abs(v_) == 180.0 or abs(float(s_)) != 180.0: return s_
+        s_ = "%.12g" % v_
+        return s_ if abs(float(s_)) != 180.0 else repr(v_)
     def th_submit(text):
-        try: v = float(text.strip().replace(',', '.').replace('°', '').replace('deg', '').strip())
-        except ValueError:
+        if text == th_box._shown and not th_box._edited: return                         # the box as shown (also '≈180°'), not edited: theta_1 stays
+        try: v = float(text.strip().replace(',', '.').replace('\u2212', '-').replace('\u2248', '').replace('°', '').replace('deg', '').strip())
+        except ValueError: v = math.nan
+        if math.isnan(v):
             note(r"$\theta_1$: '%s' is not a number" % text.strip(), key='thbox'); sync_theta(); return
-        if abs(v) < TH_EPS or abs(v) > 180:
-            note(r"$\theta_1$: must lie in (-180°, 180°), not 0", key='thbox'); sync_theta(); return
-        t_ = abs(t_of_theta(v)); eps_ = 1e-3*(hi - lo)
-        if not (I_lo - eps_ <= t_ <= I_hi + eps_) or configuration(float(min(max(t_, lo), hi))) is None:
-            note(r"$\theta_1$: no configuration at %.2f° (a dead part of the slider)" % v, key='thbox'); sync_theta(); return
-        clamped = t_ < lo_flat                                                          # the flat end: the slider stops a little short of it
-        if clamped: v = math.copysign(theta_of_t(lo_flat), v)
+        if v == 0 or abs(v) > 180:
+            note(r"$\theta_1$: must lie in [-180°, 180°], not 0", key='thbox'); sync_theta(); return
+        t_ = abs(t_of_theta(v)) if abs(v) > 1e-300 else math.inf; eps_ = 1e-3*(hi - lo)  # (t of a tiny angle overflows); the ends may be typed as displayed (rounded)
+        if not (I_lo - eps_ <= t_ <= I_hi + eps_):                                      # not admissible: rejected as in the t box, before any clamping
+            e_ = ["%.2f°" % x_ if 0 < x_ < 180 else "%d°" % x_ for x_ in (th_min_adm, th_max_adm)]
+            note(r"$\theta_1$: must lie in the admissible set, $|\theta_1|$ ∈ (%s, %s%s ($t \in I(x_1)$)" % (e_[0], e_[1], "]" if FLAT_END else ")"), key='thbox'); sync_theta(); return
+        clamped, clamped_lo = t_ < lo_flat, t_ > t_hi_w                                 # inside the margins next to an end where D = 0 or theta_1 = 0: as far as the slider goes
+        if clamped or clamped_lo: v = math.copysign(th_hi_w if clamped else th_lo_w, v)   # (a flat end is reached: lo_flat = 0)
+        a_w = min(max(t_, lo_flat), t_hi_w)                                             # checked at the parameter the slider takes (as on_theta)
+        if configuration_at(math.copysign(float(a_w), v)) is None:
+            note(r"$\theta_1$: the net cannot be built at %s° (a dead part of the slider)" % th_str(v), key='thbox'); sync_theta(); return
         th_sl.set_val(v)
-        if clamped: note(r"$\theta_1$: the slider stops at %.1f°, a little short of the flat end" % abs(v), key='thbox')
+        if clamped: note(r"$\theta_1$: the slider stops at %.1f°, a little short of the end of the admissible set" % abs(v), key='thbox')
+        if clamped_lo: note(r"$\theta_1$: the slider stops at %.2f°, a little short of %s" % (abs(v), "$\\theta_1 = 0$" if I_hi == math.inf else "the end of the admissible set"), key='thbox')
     th_box.on_submit(th_submit)
-    # beside the track: theta_1..theta_4 of the base block along t (t vertical, the angle horizontal) in the colours of the
-    # dihedral plots, and the range of t with penetrating faces marked with the penetration tint
-    ax_curve = fig.add_axes([0.942, 0.545, 0.046, 0.350]); ax_curve.set_axis_off(); ax_curve.set_navigate(False); ax_curve.set_facecolor('none')
+    # beside the track: theta_1..theta_4 of the base block against theta_1 (theta_1 vertical, at the height of the track beside it:
+    # the half t > 0, over the working range th_lo_w..th_hi_w; the angle horizontal) in the colours of the dihedral plots, and the
+    # parts with penetrating faces marked with the penetration tint
+    ax_curve = fig.add_axes([0.942, 0.600, 0.046, 0.330]); ax_curve.set_axis_off(); ax_curve.set_navigate(False); ax_curve.set_facecolor('none')
     ax_curve.set_zorder(0); ax_curve.set_visible(SHOW_SLIDER_CURVE); reg('col', ax_curve)
     def draw_curve():
         ax_curve.cla(); ax_curve.set_axis_off()
         ts_ = motion_samples(40)
         if len(ts_) < 3: return
-        curves = block_curves(BASE_KN, ts_)
-        for i, cv in enumerate(curves): ax_curve.plot(cv, ts_, lw=1.0, color=THETA_COLS[i], alpha=0.9)
+        curves = block_curves(BASE_KN, ts_); ths_ = [theta_of_t(k) for k in ts_]
+        for i, cv in enumerate(curves): ax_curve.plot(cv, ths_, lw=1.0, color=THETA_COLS[i], alpha=0.9)
         if len(faces_all) <= LIGHT_FACES:
             pen = [k for k in ts_ if self_intersections(cache[k][0], faces_all, corners)]
             if pen:                                                              # contiguous runs of penetrating samples -> tinted bands
@@ -2261,34 +2766,83 @@ def _main():
                     if ts_.index(k) != ts_.index(prev) + 1: runs.append((start, prev)); start = k
                     prev = k
                 runs.append((start, prev))
-                dt_ = (hi - lo)/max(1, len(ts_) - 1)
-                for a_, b_ in runs: ax_curve.axhspan(max(lo, a_ - dt_/2), min(hi, b_ + dt_/2), color=tuple(PEN_TINT[1]), alpha=0.5, lw=0)
+                dth_ = (th_hi_w - th_lo_w)/max(1, len(ts_) - 1)                         # (theta_1 decreases as t grows)
+                for a_, b_ in runs: ax_curve.axhspan(max(th_lo_w, theta_of_t(b_) - dth_/2), min(th_hi_w, theta_of_t(a_) + dth_/2), color=tuple(PEN_TINT[1]), alpha=0.5, lw=0)
         allv = np.concatenate([cv[~np.isnan(cv)] for cv in curves]); lo_v, hi_v = float(allv.min()), float(allv.max()); pad_v = 0.06*(hi_v - lo_v) + 1
-        ax_curve.set_ylim(lo, hi); ax_curve.set_xlim(lo_v - pad_v, hi_v + pad_v)
+        ax_curve.set_ylim(-180, 180); ax_curve.set_xlim(lo_v - pad_v, hi_v + pad_v)        # the vertical scale of the track
     state_scroll['draw_curve'] = draw_curve
     def take_config(cfg):
-        """positions and dihedral angles of a configuration into the state; theta_1 < 0 shows the mirror image of the net
-        (reflected in the plane of its base face: z -> -z, every dihedral angle negated)"""
-        if state.get('mirror'):
-            state['pos'] = {v_: np.array([p_[0], p_[1], -p_[2]]) for v_, p_ in cfg[0].items()}
-            state['th'] = {f_: {i_: -a_ for i_, a_ in d_.items()} for f_, d_ in cfg[3].items()}
-        else: state['pos'] = cfg[0]; state['th'] = cfg[3]
+        """positions and dihedral angles of the net shown (for t < 0 already the mirror image, see configuration_at)"""
+        state['pos'] = cfg[0]; state['th'] = cfg[3]
     def on_change(val):
         v_ = float(val); a_ = abs(v_)
-        cfg = configuration(a_) if a_ >= lo_flat - 1e-9 else None                      # inside the flat band (-lo_flat, lo_flat) nothing is shown
+        cfg = configuration_at(v_) if a_ >= lo_flat - 1e-9 else None                   # inside the margin (-lo_flat, lo_flat) at an end where D = 0 nothing is shown
         if cfg is not None:
-            state['t'] = a_; state['mirror'] = v_ < 0; take_config(cfg); redraw()
+            state['t'] = a_; state['mirror'] = math.copysign(1.0, v_) < 0; take_config(cfg); redraw()   # (v_ = -0: the flat end of the mirrored half)
             if state['selected'] is not None: show_face(state['selected'])
             update_dihedrals()
         mark_t(cfg is not None); mark_theta(cfg is not None)
         if cfg is None: fig.canvas.draw_idle()
     sl.on_changed(on_change)
     # while the slider is dragged only the self-intersection test of medium-size nets is postponed to the release (the picture style is unchanged)
+    # fast repaints (blitting): the window without some artists is drawn once and kept as a picture; each step then repaints
+    # only those artists over it. Used while theta_1 is dragged (the net, the panels, the handle and the value boxes) and while
+    # the panels on the left are scrolled. The artists stay visible, so an ordinary redraw in between still shows everything.
+    # A backend that cannot blit redraws the window as usual.
+    fast = {'bg': None, 'arts': [], 'kind': None, 'pending': False, 'capturing': False}
+    def fast_begin(kind, arts, rebuild=None):
+        """the window without the moving artists, rendered off screen and kept; the screen is not touched (an ordinary draw
+        would show that picture for a moment: a blink when a drag or a scroll starts)"""
+        if not getattr(fig.canvas, 'supports_blit', False): return False
+        try:
+            from matplotlib.backends.backend_agg import FigureCanvasAgg
+            vis = [a_.get_visible() for a_ in arts]
+            for a_ in arts: a_.set_visible(False)
+            fast['capturing'] = True
+            try:
+                if isinstance(fig.canvas, FigureCanvasAgg): FigureCanvasAgg.draw(fig.canvas)   # into the buffer only, not shown
+                else: fig.canvas.draw()
+            finally:
+                fast['capturing'] = False
+                for a_, v_ in zip(arts, vis): a_.set_visible(v_)
+            fast.update(bg=fig.canvas.copy_from_bbox(fig.bbox), arts=list(arts), kind=kind, size=fig.canvas.get_width_height(), rebuild=rebuild)
+            fast_paint()                                                            # the whole picture back in the buffer at once
+            return True
+        except Exception: fast_end(); return False
+    def fast_paint():
+        if fast['bg'] is None or fast.get('size') != fig.canvas.get_width_height(): fast['pending'] = False; return
+        if fast.get('rebuild') is not None:                                          # the picture for the current view (its own
+            fast['pending'] = True                                                  # redraw requests are swallowed here)
+            try: fast['rebuild']()
+            except Exception: report_bug("the redraw while rotating")             # (the repaint goes on, as before)
+        fast['pending'] = False
+        try:
+            fig.canvas.restore_region(fast['bg'])
+            for a_ in sorted(fast['arts'], key=lambda a__: a__.get_zorder()):         # in the order of an ordinary draw
+                if a_.get_visible(): fig.draw_artist(a_)
+            fig.canvas.blit(fig.bbox)
+        except Exception: pass
+    def fast_request(*a, **k):                                                      # the redraw requests of one step: one repaint
+        if fast['pending']: return
+        fast['pending'] = True
+        tm = fig.canvas.new_timer(interval=0); tm.single_shot = True; tm.add_callback(fast_paint); tm.start(); fast['timer'] = tm
+    def fast_end():
+        fast.update(bg=None, arts=[], kind=None, pending=False, rebuild=None)
+        if 'draw_idle' in vars(fig.canvas): del fig.canvas.draw_idle
+    def fast_invalidate(ev):                                                        # any other redraw: the kept picture of the panels is stale
+        if fast['kind'] == 'panel' and not fast['capturing']: fast.update(bg=None, arts=[], kind=None)
+    fig.canvas.mpl_connect('draw_event', fast_invalidate)
+    def drag_arts(): return ([ax, inset, report_text, face_text, b_x_rep.ax, b_info.ax, b_x_face.ax, th_box.ax, t_box.ax]
+                             + ([handle_th] if handle_th is not None else []) + [b_.ax for b_ in vbox.values()])
+    def panel_arts(): return [report_text, face_text, inset, b_x_rep.ax, b_info.ax, b_x_face.ax] + [b_.ax for b_ in vbox.values()]
+    state['fast'] = (fast_begin, fast_paint, fast_end)
     def sl_press(ev):
-        if ev.inaxes is ax_th: state['dragging'] = True
+        if ev.inaxes is ax_th:
+            state['dragging'] = True
+            if fast_begin('drag', drag_arts()): fig.canvas.draw_idle = fast_request
     def sl_release(ev):
         if state.get('dragging'):
-            state['dragging'] = False; redraw()
+            state['dragging'] = False; fast_end(); redraw()
             if state['selected'] is not None: show_face(state['selected'])
     fig.canvas.mpl_connect('button_press_event', sl_press); fig.canvas.mpl_connect('button_release_event', sl_release)
     def half(y, side): return [X0 if side == 0 else X0 + XW - 0.058, y, 0.058, H]
@@ -2325,23 +2879,35 @@ def _main():
         return f
     b_hid.on_clicked(flip('hidden', b_hid)); b_shad.on_clicked(flip('shadow', b_shad))
     def reset(ev):
-        ax.view_init(elev=30, azim=-55); state['drawn'] = False; state.pop('L_world', None); state.pop('room_floor', None); state.pop('theta_regions', None); state.pop('Lsh_world', None)
-        if sl.val < 0: sl.set_val(-sl.val)                                             # on_change: back to the upright family
+        ax.view_init(elev=30, azim=-60); state['drawn'] = False; state.pop('L_world', None); state.pop('room_floor', None); state.pop('Lsh_world', None)   # the startup view; theta_regions (net and flexion only) is kept
+        if math.copysign(1.0, sl.val) < 0: sl.set_val(-sl.val)                         # on_change: back to the upright family (also from -0, the mirrored flat end)
         else: redraw()
-    def next_flexion(ev):
-        """the next consistent assignment of the blocks' patterns: another flexion of the same net (same flat angles)."""
-        if len(flexion_state['list']) < 2: note("this net has a single flexion for the base pattern %s" % (BASE_SIGNS,), key='flexion'); return
-        flexion_state['index'] = (flexion_state['index'] + 1) % len(flexion_state['list'])
-        cache.clear(); free_lengths.clear(); state['drawn'] = False
-        cfg = configuration(state['t'])
-        if cfg is None:
-            for f_ in (0.15, 0.3, 0.5, 0.7):
-                cfg = configuration(lo + f_*(hi - lo))
-                if cfg is not None: state['t'] = lo + f_*(hi - lo); sl.set_val(state['t']); break
-        if cfg is not None:
-            take_config(cfg); redraw()
-            if state['selected'] is not None: show_face(state['selected'])
-            close_dihedrals(); note(flexion_label(), key='flexion')
+    def switch_flexion(signs=None, e0=None):
+        """other signs of all blocks and/or another sign e0 of the base block (Apply in Params, when nothing else changed): the
+        same net (same faces, same free lengths), another flexion. The configuration is recomputed at the current t (else at the
+        nearest parameter that has one); the frame, the track of the slider, the picture and the face panel follow, and the
+        Dihedrals window closes. False, and nothing changes, if this flexion cannot be built in space for this net."""
+        global SIGNS, E0
+        nonlocal mid, rng
+        old = (SIGNS, E0); old_cache, old_other = dict(cache), dict(cache_other)
+        if signs is not None: SIGNS = tuple(signs)
+        if e0 is not None: E0 = e0
+        cache.clear(); cache_other.clear(); state.pop('theta_regions', None); state.pop('theta_regions_other', None); state.pop('room_floor', None)
+        cfg = None; sgn_ = -1.0 if state.get('mirror') else 1.0                        # the same half of the slider
+        for t_ in [state['t']] + sorted((lo + f_*(hi - lo) for f_ in (0.05, 0.15, 0.3, 0.5, 0.7, 0.9)), key=lambda v_: abs(v_ - state['t'])):
+            cfg = configuration_at(sgn_*t_)
+            if cfg is not None: state['t'] = t_; break
+        if cfg is None:                                                                 # back to the flexion shown
+            SIGNS, E0 = old; cache.clear(); cache.update(old_cache); cache_other.clear(); cache_other.update(old_other)
+            state.pop('theta_regions', None); state.pop('theta_regions_other', None)
+            return False
+        P_ = np.array(list(cfg[0].values())); mid = (P_.max(0) + P_.min(0))/2; rng = (P_.max(0) - P_.min(0)).max()*0.56
+        state['drawn'] = False                                                          # the frame is fitted to the new flexion; the view angles stay
+        close_dihedrals(); b_dih.set_on(False)
+        sl.eventson = False; sl.set_val(sgn_*state['t']); sl.eventson = True
+        sync_t_box(); sync_theta(); take_config(cfg); draw_tracks(); redraw()
+        if state['selected'] is not None: show_face(state['selected'])
+        return True
     def freeze(ev):
         """Freeze on: the view angles are locked and the left mouse button drags (pans) the picture; off: the left button rotates."""
         try:
@@ -2377,16 +2943,16 @@ def _main():
     reg('col', *[b.ax for b in b_light.values()])
     def set_light(frame):
         def f(ev):
-            state['light_frame'] = frame; state.pop('L_world', None); state.pop('room_floor', None); state.pop('theta_regions', None)
+            state['light_frame'] = frame; state.pop('L_world', None); state.pop('room_floor', None)   # theta_regions depends only on the net and its flexion: kept
             for key, b in b_light.items(): b.set_on(key == frame)
             redraw()
         return f
     for key, b in b_light.items(): b.on_clicked(set_light(key))
-    dlg = {'axes': [], 'dyn': [], 'rowbtns': [], 'sgnbtns': [], 'open': False, 'sgnsel': tuple(BASE_SIGNS)}
+    dlg = {'axes': [], 'dyn': [], 'rowbtns': [], 'open': False}
     veil = fig.add_axes([0, 0, 1, 1], zorder=30); veil.set_axis_off(); veil.set_navigate(False)
     veil.add_patch(FancyBboxPatch((0, 0), 1, 1, boxstyle="square,pad=0", transform=veil.transAxes, facecolor='white', alpha=0.86, edgecolor='none'))
     veil.set_visible(False)
-    PX, PY, PW, PH = 0.20, 0.04, 0.60, 0.92                                     # the dialog frame
+    PX, PY, PW, PH = 0.20, 0.14, 0.60, 0.72                                     # the dialog frame
     frame = fig.add_axes([PX, PY, PW, PH], zorder=31); frame.set_axis_off(); frame.set_navigate(False); reg('dlg', frame)
     frame.add_patch(FancyBboxPatch((0, 0), 1, 1, boxstyle="round,pad=0,rounding_size=0.02", mutation_aspect=PW*fig.get_figwidth()/(PH*fig.get_figheight()),
                                    transform=frame.transAxes, facecolor='#fbfcfe', edgecolor='#8fa9c9', linewidth=1.2))
@@ -2399,56 +2965,90 @@ def _main():
     def dbutton(x, y, w, label, h=0.03, **kw):
         b = FancyButton(fig, [x, y - h/2, w, h], label, **kw); b.ax.set_zorder(32); b.ax.set_visible(False)
         dlg['axes'].append(b.ax); dlg['buttons'].append(b); reg('dlg', b.ax); return b
-    def spinbox(x, y, w, val, key, step, lo_, hi_, fmt, after):
-        """a text box with up/down arrows; 'after' is called when the value changes."""
+    def set_box(tb, txt):
+        """the text of a value box, without the text cursor (TextBox.set_val draws the cursor and may redraw the window)"""
+        tb.text_disp.set_text(txt)
+        try: tb.cursor.set_visible(False)
+        except Exception: pass
+    def paint_box(tb):
+        """shows a new value at once: only the box is repainted on the screen (blit), not the window; a backend that cannot
+        blit gets an ordinary redraw"""
+        c_ = fig.canvas
+        try:
+            if not c_.supports_blit: raise RuntimeError
+            a_ = tb.ax; a_.draw_artist(a_.patch)
+            for sp_ in a_.spines.values(): a_.draw_artist(sp_)
+            a_.draw_artist(tb.text_disp); c_.blit(a_.bbox)
+        except Exception: c_.draw_idle()
+    def box_int(key, default):
+        try: return int(float(dlg[key].text))
+        except (ValueError, KeyError, OverflowError): return default             # (OverflowError: 'inf')
+    def spinbox(x, y, w, val, key, step, lo_, hi_, fmt, after=None):
+        """a text box with up/down arrows. An arrow only writes the new value into the box and repaints the box; 'after'
+        (optional) keeps dependent boxes in range. hi_ may be a function (a bound that depends on another box). Everything
+        is checked when Apply is pressed."""
         axb = fig.add_axes([x, y - 0.014, w, 0.028], zorder=32); axb.set_visible(False)
-        tb = TextBox(axb, '', initial=fmt % val, textalignment='center', color='#ffffff', hovercolor='#eef3fa')
+        tb = TextBox(axb, '', initial=fmt % val, textalignment='center', color='#ffffff', hovercolor='#ffffff')   # no hover repaint
         tb.text_disp.set_fontsize(9.5); dlg['axes'].append(axb); dlg[key] = tb; reg('dlg', axb); tb.set_active(False)
-        dlg.setdefault('textboxes', []).append(tb)
+        dlg.setdefault('textboxes', []).append(tb); dlg.setdefault('exact', {})[key] = val   # the value behind the text (the box shows it rounded by fmt)
         def bump(d):
             def f(ev):
-                try: v = float(tb.text) + d*step
+                txt = tb.text.strip()
+                try: v = (dlg['exact'][key] if txt == fmt % dlg['exact'][key] else float(txt.replace(',', '.'))) + d*step   # from the full value while the box shows it
                 except ValueError: return
-                v = min(max(v, lo_), hi_); tb.set_val(fmt % v)                  # set_val fires on_submit, which calls 'after'
-                try: tb.cursor.set_visible(False)                                # set_val shows the text cursor although the box is not being edited
-                except Exception: pass
+                if math.isnan(v): return
+                v = min(max(v, lo_), hi_() if callable(hi_) else hi_); dlg['exact'][key] = v
+                set_box(tb, fmt % v); paint_box(tb)
+                if after: after()
             return f
-        up = dbutton(x + w + 0.004, y + 0.0075, 0.02, '▲', h=0.014, fontsize=6, rounding=0.3)
-        dn = dbutton(x + w + 0.004, y - 0.0075, 0.02, '▼', h=0.014, fontsize=6, rounding=0.3)
-        up.on_clicked(bump(+1)); dn.on_clicked(bump(-1)); tb.on_submit(lambda txt: after())
+        up = dbutton(x + w + 0.004, y + 0.0075, 0.02, '▲', h=0.014, fontsize=6, rounding=0.3, light=True)
+        dn = dbutton(x + w + 0.004, y - 0.0075, 0.02, '▼', h=0.014, fontsize=6, rounding=0.3, light=True)
+        up.on_clicked(bump(+1)); dn.on_clicked(bump(-1))
+        if after: tb.on_submit(lambda txt: after())
         return tb
+    def keep_in_range(key, size_key):
+        """the base block stays inside the net when the net shrinks: kappa_0 <= m - 2, nu_0 <= n - 2"""
+        hi_ = max(1, box_int(size_key, 3) - 2)
+        if box_int(key, 1) > hi_: set_box(dlg[key], '%d' % hi_); paint_box(dlg[key])
+    RX = PX + PW - 0.03                                                          # right margin of the contents: nothing goes beyond it
+    SOFT = '#4a5b78'
+    def heading(y, title, sub=None):
+        """a section: a bold title of one or two words, and under it, if needed, a short line in the soft ink"""
+        dtext(LX, y, title, 9.5, fontweight='bold')
+        if sub: dtext(LX, y - 0.027, sub, 8, color=SOFT)
+    def two_boxes(y, names, keys, vals, his, afters):
+        """two labelled value boxes at the right margin, on the line of the section's title"""
+        for k_, (nm, key, val, hi_, after) in enumerate(zip(names, keys, vals, his, afters)):
+            xb = RX - 0.084 - (1 - k_)*0.119                                     # box 0.06 + arrows 0.024, a gap of 0.035
+            dtext(xb - 0.006, y, nm, 9.5, ha='right')
+            spinbox(xb, y, 0.06, val, key, 1, 1 if key in ('kap', 'nu') else 3, hi_, '%d', after)
     dtext(PX + PW/2, PY + PH - 0.04, 'Parameters of the net', 12, ha='center', fontweight='bold')
-    # --- angles
-    y = PY + PH - 0.095
-    dtext(LX, y, r'flat angles at the vertex $A_1$ of the base block (degrees):  $\alpha_1$, $\beta_1$, $\gamma_1$, $\delta_1$')
-    def on_angles(): refresh_signs()
-    for j, a in enumerate(BASE_ANGLES_DEG): spinbox(LX + j*0.135, y - 0.045, 0.095, a, 'ang%d' % j, 1.0, 1.0, 179.0, '%g', on_angles)
-    # --- size and base
-    y -= 0.105
-    dtext(LX, y, r'faces  $M \times N$ ($M$ columns, $N$ rows, $M, N \geq 3$):  $F_{ij}$, $0 \leq i < M$, $0 \leq j < N$')
-    def on_size(): build_row_buttons(); refresh_signs()
-    spinbox(LX + 0.35, y, 0.06, m, 'M', 1, 3, 60, '%d', on_size); spinbox(LX + 0.44, y, 0.06, n, 'N', 1, 3, 60, '%d', on_size)
-    y -= 0.055
-    dtext(LX, y, r'base block: central face $F_{\kappa\nu}$, $1 \leq \kappa \leq M-2$, $1 \leq \nu \leq N-2$')
-    spinbox(LX + 0.35, y, 0.06, BASE_KN[0], 'kap', 1, 1, 58, '%d', lambda: None); spinbox(LX + 0.44, y, 0.06, BASE_KN[1], 'nu', 1, 1, 58, '%d', lambda: refresh_signs())
-    # --- row types
-    y -= 0.06
-    dtext(LX, y, r'type of each row of blocks, $\nu = 1$ (bottom) $\ldots$ $N-2$ (top), any combination; click: a $\to$ b $\to$ c $\to$ d')
-    ROWS_Y = y - 0.045
-    legend_txt = dtext(LX, ROWS_Y - 0.085, "", 7.4, va='top', linespacing=1.4, color='#4a5b78')
-    legend_txt.set_text("in every block, vertices 2 and 3 carry the complements to pi of the flat angles at vertices 1 and 4; the type fixes vertex 4 from vertex 1:\n"
-                        r"a: $(\alpha_4,\beta_4,\gamma_4,\delta_4)=(\pi-\alpha_1,\ \pi-\beta_1,\ \pi-\gamma_1,\ \pi-\delta_1)$   b: $(\beta_1,\ \alpha_1,\ \delta_1,\ \gamma_1)$   "
-                        r"c: $(\alpha_1,\ \beta_1,\ \pi-\gamma_1,\ \pi-\delta_1)$   d: $(\beta_1,\ \alpha_1,\ \pi-\delta_1,\ \pi-\gamma_1)$")
+    # --- flat angles
+    y = PY + PH - 0.09
+    heading(y, 'Flat angles', r'$\alpha_1$, $\beta_1$, $\gamma_1$, $\delta_1$ at the vertex $A_1$ of the base block, in degrees')
+    for j, a in enumerate(BASE_ANGLES_DEG): spinbox(LX + j*0.135, y - 0.068, 0.095, a, 'ang%d' % j, 1.0, 1.0, 179.0, '%g')
+    # --- net size and base block
+    y -= 0.125
+    heading(y, 'Net size', r'$m \times n$ faces $F_{ij}$, $0 \leq i < m$, $0 \leq j < n$; $3 \leq m, n \leq %d$, $m n \leq %d$' % (MAX_MN, MAX_FACES))
+    two_boxes(y, ('$m$', '$n$'), ('M', 'N'), (m, n), (lambda: min(MAX_MN, MAX_FACES//max(3, box_int('N', 3))), lambda: min(MAX_MN, MAX_FACES//max(3, box_int('M', 3)))),
+              (lambda: keep_in_range('kap', 'M'), lambda: (keep_in_range('nu', 'N'), build_row_buttons())))   # the row strip changes: a redraw
+    y -= 0.075
+    heading(y, 'Base block', r'central face $F_{\kappa_0\nu_0}$, $1 \leq \kappa_0 \leq m-2$, $1 \leq \nu_0 \leq n-2$')
+    two_boxes(y, (r'$\kappa_0$', r'$\nu_0$'), ('kap', 'nu'), BASE_KN, (lambda: max(1, box_int('M', 3) - 2), lambda: max(1, box_int('N', 3) - 2)), (None, None))
+    # --- the assembly: the type rho_nu of each row of blocks
+    y -= 0.075
+    heading(y, 'Assembly', r'$\rho_\nu \in \{$a, b, c, d$\}$ for each row of blocks $\nu = 1, \ldots, n-2$, bottom to top; click to change')
+    ROWS_Y = y - 0.078
     dlg['row_off'] = 0                                                          # first row shown in the strip of row-type buttons
-    dlg['rowtypes'] = dict(ROW_SYSTEMS)                                          # the chosen type of every row (also of the rows not on screen)
-    ROWS_PER_LINE, ROW_LINES = 9, 2
+    dlg['rowtypes'] = dict(ROW_TYPES)                                          # the chosen type of every row (also of the rows not on screen)
+    ROWS_PER_LINE, ROW_LINES = 8, 2
     def build_row_buttons():
-        for b in dlg['rowbtns']: b.ax.remove(); groups['dlg'].remove(b.ax)
+        for b in dlg['rowbtns']: b.remove(); groups['dlg'].remove(b.ax)
         for t_ in dlg['dyn']:
-            a_ = t_.ax if hasattr(t_, 'ax') else t_
-            a_.remove(); groups['dlg'].remove(a_)
+            if hasattr(t_, 'remove') and hasattr(t_, 'ax'): groups['dlg'].remove(t_.ax); t_.remove()       # a scroll arrow (FancyButton)
+            else: t_.remove(); groups['dlg'].remove(t_)
         dlg['rowbtns'], dlg['dyn'] = [], []
-        try: nrows = max(1, min(int(dlg['N'].text) - 2, 60))
+        try: nrows = max(1, min(int(dlg['N'].text) - 2, MAX_MN - 2))
         except ValueError: nrows = n - 2
         base_type = dlg['rowtypes'].get(BASE_KN[1], 'a')
         for r in range(1, nrows + 1): dlg['rowtypes'].setdefault(r, base_type)
@@ -2457,273 +3057,88 @@ def _main():
         shown = range(dlg['row_off'] + 1, min(nrows, dlg['row_off'] + cap) + 1)
         for k, r in enumerate(shown):
             col, line = k % ROWS_PER_LINE, k // ROWS_PER_LINE
-            xx, yy = LX + col*0.0595, ROWS_Y - line*0.048
-            t_ = fig.text(xx + 0.024, yy + 0.024, r'$\nu=%d$' % r, fontsize=7.2, color='#4a5b78', ha='center', va='center', zorder=32, visible=dlg['open'])
+            xx, yy = LX + col*0.0595, ROWS_Y - line*0.052
+            t_ = fig.text(xx + 0.024, yy + 0.025, r'$\rho_{%d}$' % r, fontsize=8, color=SOFT, ha='center', va='center', zorder=32, visible=dlg['open'])
             b = FancyButton(fig, [xx, yy - 0.014, 0.048, 0.028], dlg['rowtypes'][r], fontsize=9.5)
             b.ax.set_zorder(32); b.ax.set_visible(dlg['open'])
             def cycle(bb, rr):
                 def f(ev):
-                    new = 'abcd'[('abcd'.index(bb.text.get_text()) + 1) % 4]; bb.text.set_text(new); dlg['rowtypes'][rr] = new; refresh_signs()
+                    new = 'abcd'[('abcd'.index(bb.text.get_text()) + 1) % 4]; bb.text.set_text(new); dlg['rowtypes'][rr] = new
                 return f
             b.on_clicked(cycle(b, r)); dlg['rowbtns'].append(b); dlg['dyn'].append(t_); reg('dlg', b.ax, t_)
         if nrows > cap:                                                          # more rows than fit: arrows scroll the strip
             xr = LX + ROWS_PER_LINE*0.0595 + 0.01
             up = FancyButton(fig, [xr, ROWS_Y - 0.014, 0.022, 0.028], '▲', fontsize=7, rounding=0.3)
-            dn = FancyButton(fig, [xr, ROWS_Y - 0.048 - 0.014, 0.022, 0.028], '▼', fontsize=7, rounding=0.3)
+            dn = FancyButton(fig, [xr, ROWS_Y - 0.052 - 0.014, 0.022, 0.028], '▼', fontsize=7, rounding=0.3)
             for bb in (up, dn): bb.ax.set_zorder(32); bb.ax.set_visible(dlg['open']); dlg['dyn'].append(bb); reg('dlg', bb.ax)
             def shift(d):
                 def f(ev): dlg['row_off'] = max(0, min(dlg['row_off'] + d*ROWS_PER_LINE, nrows - cap)); build_row_buttons()
                 return f
             up.on_clicked(shift(-1)); dn.on_clicked(shift(+1))
         relayout()
-    # --- signs
-    y = ROWS_Y - 0.15
-    dtext(LX, y, r'signs $(e_1, e_2, e_3, e_4)$ of the flexion of the base block; admissible: $e_1 t_1 + e_2 t_2 + e_3 t_3 + e_4 t_4 \in \Lambda$')
-    SIGNS_Y = y - 0.045
-    sgn_note = dtext(LX, SIGNS_Y - 0.024, "", 7.6, color='#4a5b78', va='top', linespacing=1.4)
-    _sgn_set = sgn_note.set_text
-    sgn_note.set_text = lambda txt: _sgn_set(wrap_math(txt, 118))
-    def refresh_signs():
-        key = tuple(dlg['ang%d' % j].text for j in range(4)) + (dlg['M'].text, dlg['N'].text, dlg['kap'].text, dlg['nu'].text) + tuple(sorted(dlg['rowtypes'].items()))
-        if dlg.get('sgn_key') == key: return
-        dlg['sgn_key'] = key
-        par_msg.set_visible(False)                                                # a stale "cannot apply" message goes with the change
-        for b in dlg['sgnbtns']: b.ax.remove(); groups['dlg'].remove(b.ax)
-        dlg['sgnbtns'] = []
-        sgn_note.set_color('#4a5b78')
-        try:
-            angs = tuple(float(dlg['ang%d' % j].text) for j in range(4))
-            problem = angle_problem(angs)                                         # the hypotheses on the base angles, in words
-            if problem: raise ValueError(problem)
-            nu = int(dlg['nu'].text); rtype = dlg['rowtypes'].get(nu, ROW_SYSTEMS[BASE_KN[1]])
-            Bt = Block(1, 1, block_from_vertex1(tuple(math.radians(a) for a in angs), rtype)); pats = Bt.witnesses()
-            sgn_note.set_text(r"base row of type %s,  $M$ = %.4f:  %d admissible pattern%s ($e_4$ is fixed by the other three signs)" % (rtype, Bt.M, len(pats), "" if len(pats) == 1 else "s"))
-        except Exception as ex:
-            pats = []; sgn_note.set_text(str(ex)); sgn_note.set_color('#b00020')
-        # which admissible patterns extend to a flexible net with the rows and the size currently entered (trial synchronization)
-        feas = {}
-        try:
-            if pats:                                                                  # nothing to check when the angles give no pattern
-                mm, nn_ = int(dlg['M'].text), int(dlg['N'].text); kk, nu = int(dlg['kap'].text), int(dlg['nu'].text)
-                rows_new = {r: dlg['rowtypes'][r] for r in range(1, nn_ - 1) if r in dlg['rowtypes']}
-                if nu not in rows_new: rows_new[nu] = 'a'
-                rows_ok = check_parameters(mm, nn_, (kk, nu), rows_new, verbose=False)
-                sub_t = assemble_net(angs, mm, nn_, (kk, nu), rows_ok); subs_t = {kn: Block(kn[0], kn[1], q) for kn, q in sub_t.items()}
-                lo_t, hi_t = admissible_t_range(subs_t[(kk, nu)])
-                ang_t = vertex_face_angles(sub_t); t_try = lo_t + 0.15*(hi_t - lo_t)
-                for pat in pats:                                                      # synchronization AND construction in space
-                    th_t = None
-                    for e0_ in (1, -1):
-                        th_t, _ = synchronize(subs_t, (kk, nu), pat, e0_, t_try, max_nodes=6*len(subs_t))
-                        if th_t is not None: break
-                    if th_t is None: feas[pat] = 'nosync'; continue
-                    try: build_net(ang_t, th_t, mm, nn_, (kk, nu), BASE_EDGE); feas[pat] = True
-                    except AssertionError: feas[pat] = 'nobuild'
-        except Exception as ex:
-            feas = {pat: True for pat in pats}; sgn_note.set_text(sgn_note.get_text() + "\ncould not check the construction: %s" % (ex.args[0] if ex.args else ex,))
-        good = [p for p in pats if feas.get(p, True) is True]
-        if dlg['sgnsel'] not in good and good: dlg['sgnsel'] = good[0]
-        dlg['can_apply'] = bool(good)
-        set_apply_enabled(bool(good))
-        reasons = set(v for v in feas.values() if v is not True)
-        why = " / ".join(r for r in ("do not extend to a flexible net with these row types" if 'nosync' in reasons else "",
-                                    "give a net that the construction cannot build in space" if 'nobuild' in reasons else "") if r)
-        if pats and not good:
-            sgn_note.set_text(sgn_note.get_text() + "\nno sign pattern works here (all patterns " + why + "): change a row type or the angles")
-        elif pats and len(good) < len(pats):
-            sgn_note.set_text(sgn_note.get_text() + "\ngreyed patterns " + why)
-        for j, pat in enumerate(pats):
-            ok_ = feas.get(pat, True) is True
-            b = FancyButton(fig, [LX + j*0.135, SIGNS_Y - 0.015, 0.125, 0.03], "(%+d, %+d, %+d, %+d)" % pat, toggle=True, on=(pat == dlg['sgnsel'] and ok_), fontsize=8.5)
-            b.ax.set_zorder(32); b.ax.set_visible(dlg['open'])
-            if not ok_: b.text.set_color('#b5bcc8'); b.patch.set_edgecolor('#dde3ec')
-            def pick(bb, pp, okk):
-                def f(ev):
-                    if not okk: bb.set_on(False); return
-                    dlg['sgnsel'] = pp; par_msg.set_visible(False)
-                    for b2 in dlg['sgnbtns']: b2.set_on(b2 is bb)
-                    if 'grid' in dlg: reset_grid(); relayout()
-                return f
-            b.on_clicked(pick(b, pat, ok_)); dlg['sgnbtns'].append(b); reg('dlg', b.ax)
-        if 'grid' in dlg: dlg['fixed'] = {}; complete_assignment(); build_grid()
-        relayout()
-    # --- branch
-    y = SIGNS_Y - 0.085
-    dtext(LX, y, r'branch $e_0$ of the base block (the other blocks follow, shown small in the grid)')
-    e0_btns = [dbutton(LX + 0.415, y, 0.04, '−1', toggle=True, on=(E0 == -1)), dbutton(LX + 0.46, y, 0.04, '+1', toggle=True, on=(E0 == 1))]
-    # --- the sign pattern of every block: a grid laid out like the net (kappa to the right, nu upwards); click a block to cycle its
-    #     admissible patterns, the other blocks then follow (a consistent completion is searched); the base block is the one of the row above
-    GRID_Y = y - 0.048
-    dtext(LX, GRID_Y, r'each $3 \times 3$ block $(\kappa, \nu)$, $1 \leq \kappa \leq M-2$, $1 \leq \nu \leq N-2$: its signs $e_1 e_2 e_3 e_4$ and, small, its branch $e_0$; click to cycle')
-    dlg['grid'] = {}; dlg['gridtxt'] = []; dlg['fixed'] = {}; dlg['assign'] = {}
-    def pat_str(p): return "".join("+" if v > 0 else "−" for v in p)
-    GRID_K, GRID_N = 9, 4                                                        # blocks shown at a time (columns x rows); arrows scroll the window
-    dlg['grid_off'] = [0, 0]
-    def build_grid():
-        for b in dlg['grid'].values(): b.ax.remove(); groups['dlg'].remove(b.ax)
-        for t_ in dlg['gridtxt']:
-            a_ = t_.ax if hasattr(t_, 'ax') else t_
-            a_.remove(); groups['dlg'].remove(a_)
-        dlg['grid'] = {}; dlg['gridtxt'] = []
-        try: mm, nn_ = int(dlg['M'].text), int(dlg['N'].text)
-        except ValueError: return
-        nk, nr = mm - 2, nn_ - 2
-        k0 = max(0, min(dlg['grid_off'][0], nk - GRID_K)); n0 = max(0, min(dlg['grid_off'][1], nr - GRID_N)); dlg['grid_off'] = [k0, n0]
-        ks = range(k0 + 1, min(nk, k0 + GRID_K) + 1); ns = range(n0 + 1, min(nr, n0 + GRID_N) + 1)
-        cw_, ch_ = 0.052, 0.026
-        try: base_kn = (int(dlg['kap'].text), int(dlg['nu'].text))
-        except ValueError: base_kn = None
-        for kk_ in ks:
-            for nu_ in ns:
-                xx, yy = LX + 0.03 + (kk_ - 1 - k0)*(cw_ + 0.004), GRID_Y - 0.042 - (ns.stop - 1 - nu_)*(ch_ + 0.004) - ch_
-                p = dlg['assign'].get((kk_, nu_)); lab = pat_str(p) if p else "?"
-                e0b = dlg.get('e0s', {}).get((kk_, nu_))
-                if e0b is not None: lab += " \u207a" if e0b > 0 else " \u207b"
-                is_base = (kk_, nu_) == base_kn
-                b = FancyButton(fig, [xx, yy, cw_, ch_], lab, fontsize=8, rounding=0.3, toggle=is_base, on=is_base); b.ax.set_zorder(32); b.ax.set_visible(dlg['open'])
-                if (kk_, nu_) in dlg['fixed'] or is_base: b.text.set_fontweight('bold')
-                b.on_clicked((lambda kn_: lambda ev: cycle_block(kn_))((kk_, nu_)))
-                dlg['grid'][(kk_, nu_)] = b; reg('dlg', b.ax); dlg['buttons'].append(b)
-        try: rend = fig.canvas.get_renderer()
-        except Exception: rend = None
-        def centre_on(t_, y_target):                                              # measured: the text's centre exactly on y_target (figure fraction)
-            if rend is None: return
-            try:
-                bb_ = t_.get_window_extent(rend); yc = (bb_.y0 + bb_.y1)/2/fig.bbox.height
-                x_, y_ = t_.get_position(); t_.set_position((x_, y_ + (y_target - yc)))
-            except Exception: pass
-        for nu_ in ns:
-            yc_ = GRID_Y - 0.042 - (ns.stop - 1 - nu_)*(ch_ + 0.004) - ch_/2          # centre of that row of buttons
-            t_ = fig.text(LX + 0.005, yc_, r"$\nu$=%d" % nu_, fontsize=7, color='#4a5b78', va='center', zorder=32, visible=dlg['open'])
-            centre_on(t_, yc_); dlg['gridtxt'].append(t_); reg('dlg', t_)
-        y_bottom = GRID_Y - 0.042 - (len(ns) - 1)*(ch_ + 0.004) - ch_                 # bottom of the lowest row of buttons
-        for kk_ in ks:
-            t_ = fig.text(LX + 0.03 + (kk_ - 1 - k0)*(cw_ + 0.004) + cw_/2, y_bottom - 0.012, r"$\kappa$=%d" % kk_, fontsize=7, color='#4a5b78', ha='center', va='center', zorder=32, visible=dlg['open'])
-            centre_on(t_, y_bottom - 0.012); dlg['gridtxt'].append(t_); reg('dlg', t_)
-        # arrows when the net has more blocks than the window shows
-        xa = LX + 0.03 + GRID_K*(cw_ + 0.004) + 0.006; ya = GRID_Y - 0.042 - GRID_N*(ch_ + 0.004)/2
-        def arrow(x, y, label, dk, dn):
-            bb_ = FancyButton(fig, [x, y - 0.012, 0.02, 0.024], label, fontsize=7, rounding=0.3); bb_.ax.set_zorder(32); bb_.ax.set_visible(dlg['open'])
-            def f(ev): dlg['grid_off'] = [dlg['grid_off'][0] + dk, dlg['grid_off'][1] + dn]; build_grid(); relayout()
-            bb_.on_clicked(f); dlg['gridtxt'].append(bb_); reg('dlg', bb_.ax); dlg['buttons'].append(bb_)
-        slots = []                                                                # the arrows in one column at the right, inside the frame
-        if nr > GRID_N: slots += [('\u25b2', 0, +GRID_N), ('\u25bc', 0, -GRID_N)]
-        if nk > GRID_K: slots += [('\u25b6', +GRID_K, 0), ('\u25c0', -GRID_K, 0)]
-        for i_, (lab_, dk_, dn_) in enumerate(slots): arrow(xa, ya + 0.045 - i_*0.030, lab_, dk_, dn_)
-        # how many flexions the prescription leaves
-        tn = trial_net()
-        if tn is not None and dlg['assign']:
-            subs_t, base_t, t_try = tn
-            fixed = {kn: p for kn, p in dlg['fixed'].items() if kn in subs_t and kn != base_t}
-            sols = synchronize(subs_t, base_t, tuple(dlg['sgnsel']), -1 if e0_btns[0].on else 1, t_try, assignment=fixed or None, all_solutions=True, max_solutions=65) or []
-            nfl = len(sols); txt = ("%d flexion%s consistent with the prescribed blocks" % (nfl, "" if nfl == 1 else "s")) if nfl < 65 else "more than 64 flexions consistent with the prescribed blocks"
-            t_ = fig.text(LX, GRID_Y - 0.018, txt, fontsize=7.5, color='#4a5b78', va='top', zorder=32, visible=dlg['open'])
-            dlg['gridtxt'].append(t_); reg('dlg', t_)
-    def trial_net():
-        """the blocks and the base block for the values in the dialog (None when the entries give no net)."""
-        try:
-            angs = tuple(float(dlg['ang%d' % j].text) for j in range(4))
-            if angle_problem(angs): return None
-            mm, nn_ = int(dlg['M'].text), int(dlg['N'].text); kk, nu = int(dlg['kap'].text), int(dlg['nu'].text)
-            rows_new = {r: dlg['rowtypes'][r] for r in range(1, nn_ - 1) if r in dlg['rowtypes']}
-            if nu not in rows_new: rows_new[nu] = 'a'
-            rows_ok = check_parameters(mm, nn_, (kk, nu), rows_new, verbose=False)
-            sub_t = assemble_net(angs, mm, nn_, (kk, nu), rows_ok); subs_t = {kn: Block(kn[0], kn[1], q) for kn, q in sub_t.items()}
-            lo_t, hi_t = admissible_t_range(subs_t[(kk, nu)])
-            return subs_t, (kk, nu), lo_t + 0.15*(hi_t - lo_t)
-        except Exception: return None
-    def complete_assignment():
-        """a consistent assignment of all blocks that respects the fixed ones (and the selected base pattern / branch)."""
-        tn = trial_net()
-        if tn is None: dlg['assign'] = {}; return False
-        subs_t, base_t, t_try = tn
-        fixed = {kn: p for kn, p in dlg['fixed'].items() if kn in subs_t and kn != base_t}
-        sg = tuple(dlg['sgnsel']); e0_ = -1 if e0_btns[0].on else 1
-        th_t, a_t = synchronize(subs_t, base_t, sg, e0_, t_try, assignment=fixed or None, max_nodes=8*len(subs_t))
-        if th_t is None:
-            th_t, a_t = synchronize(subs_t, base_t, sg, -e0_, t_try, assignment=fixed or None, max_nodes=8*len(subs_t))
-        if th_t is None: return False
-        dlg['assign'] = dict(a_t)
-        e0s = {}
-        for kn_, th_ in th_t.items():                                                # the branch each block ended up on
-            S_ = subs_t[kn_]; tk = 1/math.tan(th_[1]/2) if abs(math.sin(th_[1]/2)) > 1e-12 else None
-            if tk is None: continue
-            for e0c in (1, -1):
-                try: c = S_.cots(a_t[kn_], e0c, tk)
-                except Exception: continue
-                if all(abs(c[i] - 1/math.tan(th_[i]/2)) < 1e-6*(1 + abs(c[i])) for i in range(1, 5)): e0s[kn_] = e0c; break
-        dlg['e0s'] = e0s; return True
-    def cycle_block(kn_):
-        tn = trial_net()
-        if tn is None: return
-        subs_t, base_t, t_try = tn
-        if kn_ == base_t:
-            info_msg("this is the base block: its signs and its branch are chosen in the rows above"); dlg['grid'][kn_].set_on(True); return
-        pats = subs_t[kn_].witnesses(); cur = dlg['assign'].get(kn_, pats[0])
-        idx = (pats.index(cur) + 1) % len(pats) if cur in pats else 0
-        saved = dict(dlg['fixed']); dlg['fixed'][kn_] = pats[idx]
-        if not complete_assignment():
-            # try the following patterns of this block before giving up
-            ok = False
-            for step in range(1, len(pats)):
-                dlg['fixed'][kn_] = pats[(idx + step) % len(pats)]
-                if complete_assignment(): ok = True; break
-            if not ok:
-                dlg['fixed'] = saved; complete_assignment()
-                par_msg.set_text("no flexion with another pattern at block %s (the other prescribed blocks constrain it)" % (kn_,)); par_msg.set_visible(True)
-        else: par_msg.set_visible(False)
-        build_grid(); relayout()
-    def reset_grid():
-        dlg['fixed'] = {}; complete_assignment(); build_grid()
-
-    def pick_e0(k):
-        def f(ev):
-            par_msg.set_visible(False)
-            for j, b in enumerate(e0_btns): b.set_on(j == k)
-            if 'grid' in dlg: complete_assignment(); build_grid(); relayout()
-        return f
-    for k, b in enumerate(e0_btns): b.on_clicked(pick_e0(k))
+    # --- the signs of every block and the sign e0 of the base block: the two choices of each, at the right margin
+    def pat_text(p_): return "(%s)" % ", ".join(("%d" % v_).replace("-", "\u2212") for v_ in p_)
+    y = ROWS_Y - 0.052 - 0.056
+    heading(y, 'Signs', r'$(e_1, e_2, e_3, e_4)$ of every $3 \times 3$ block')
+    sgn_btns = [dbutton(RX - 0.23 + k_*0.12, y, 0.11, pat_text(p_), toggle=True, on=(tuple(p_) == tuple(SIGNS)), fontsize=8.5)
+                for k_, p_ in enumerate(SIGN_PATTERNS)]
+    y -= 0.075
+    heading(y, r'Sign $e_0$', 'of the base block; every other block takes the sign with which it agrees with its neighbours')
+    E0_VALUES = (1, -1)
+    e0_btns = [dbutton(RX - 0.11 + k_*0.06, y, 0.05, lab_, toggle=True, on=(E0 == v_), fontsize=9)
+               for k_, (v_, lab_) in enumerate(zip(E0_VALUES, ('+1', '\u22121')))]
+    dlg['signs'], dlg['e0'] = tuple(SIGNS), E0
+    def pick(values, btns, key):
+        def make(k_):
+            def f(ev):
+                dlg[key] = values[k_]
+                for j_, b_ in enumerate(btns): b_.set_on(j_ == k_)                  # a click on the chosen one keeps it chosen
+            return f
+        for k_, b_ in enumerate(btns): b_.on_clicked(make(k_))
+    pick(SIGN_PATTERNS, sgn_btns, 'signs'); pick(E0_VALUES, e0_btns, 'e0')
     # --- apply / cancel
     b_apply = dbutton(PX + PW/2 - 0.11, PY + 0.024, 0.10, 'Apply'); b_cancel = dbutton(PX + PW/2 + 0.01, PY + 0.024, 0.10, 'Cancel')
-    def set_apply_enabled(on):
-        dlg['can_apply'] = on
-        if on: b_apply.COLORS = FancyButton.COLORS; b_apply.text.set_color('#2c4a74'); b_apply.patch.set_edgecolor('#b9c7da'); b_apply.patch.set_facecolor('#f7f9fc')
-        else: b_apply.text.set_color('#b5bcc8'); b_apply.patch.set_edgecolor('#dde3ec'); b_apply.patch.set_facecolor('#f4f6f9')
-    par_msg = fig.text(PX + PW/2, PY + 0.047, "", fontsize=8.5, color='#b00020', ha='center', va='bottom', zorder=32, visible=False, linespacing=1.3)
-    def info_msg(text, seconds=4.0):
-        """an informational note (not an error) in the dialog, in the soft ink, that disappears by itself."""
-        par_msg.set_color('#4a5b78'); par_msg.set_text(text); par_msg.set_visible(True); fig.canvas.draw_idle()
-        def hide():
-            if par_msg.get_color() == '#4a5b78': par_msg.set_visible(False); par_msg.set_color('#b00020'); fig.canvas.draw_idle()
-        tm = fig.canvas.new_timer(interval=int(seconds*1000)); tm.single_shot = True; tm.add_callback(hide); tm.start(); dlg['timer'] = tm
-    _par_set = par_msg.set_text
-    def _par_set_red(txt):
-        if par_msg.get_color() == '#4a5b78': par_msg.set_color('#b00020')
-        _par_set(txt)
-    reg('dlg', par_msg)
-    _msg_set = par_msg.set_text
-    par_msg.set_text = lambda txt: (_msg_set(wrap_math(txt, 100)))
-    build_row_buttons(); refresh_signs()
+    # --- a message box over the dialog, when the parameters give no net: modal (its transparent veil takes all clicks but OK's)
+    pop = {'veil': fig.add_axes([0, 0, 1, 1], zorder=33)}
+    pop['veil'].set_axis_off(); pop['veil'].set_navigate(False); pop['veil'].set_visible(False)
+    QX, QY, QW, QH = 0.29, 0.39, 0.42, 0.22
+    pop['frame'] = fig.add_axes([QX, QY, QW, QH], zorder=34); pop['frame'].set_axis_off(); pop['frame'].set_navigate(False)
+    pop['frame'].add_patch(FancyBboxPatch((0, 0), 1, 1, boxstyle="round,pad=0,rounding_size=0.03", mutation_aspect=QW*fig.get_figwidth()/(QH*fig.get_figheight()),
+                                          transform=pop['frame'].transAxes, facecolor='#fffdfd', edgecolor='#c98a95', linewidth=1.3))
+    pop['frame'].set_visible(False)
+    pop['title'] = fig.text(QX + QW/2, QY + QH - 0.032, "", fontsize=11, fontweight='bold', color='#b00020', ha='center', va='center', zorder=35, visible=False)
+    pop['text'] = fig.text(QX + QW/2, QY + QH - 0.062, "", fontsize=9, color=INK, ha='center', va='top', zorder=35, visible=False, linespacing=1.4)
+    pop['ok'] = FancyButton(fig, [QX + QW/2 - 0.04, QY + 0.022, 0.08, 0.032], 'OK', fontsize=9.5); pop['ok'].ax.set_zorder(36); pop['ok'].ax.set_visible(False)
+    dlg['buttons'].append(pop['ok'])
+    def popup_visible(): return pop['frame'].get_visible()
+    def show_popup(title, text):
+        pop['title'].set_text(title); pop['text'].set_text(wrap_math(text, 64))
+        for a_ in (pop['veil'], pop['frame'], pop['ok'].ax, pop['title'], pop['text']): a_.set_visible(True)
+        fig.canvas.draw_idle()
+    def hide_popup(ev=None):
+        for a_ in (pop['veil'], pop['frame'], pop['ok'].ax, pop['title'], pop['text']): a_.set_visible(False)
+        fig.canvas.draw_idle()
+    pop['ok'].on_clicked(hide_popup)
+    def popup_keys(ev):
+        if popup_visible() and ev.key in ('enter', 'escape', ' '): hide_popup()
+    fig.canvas.mpl_connect('key_press_event', popup_keys)
+    build_row_buttons()
     def reset_dialog():
         """the widgets back to the current parameters of the net: Cancel discards the draft, and the dialog always opens on the truth"""
-        def set_box(tb, txt):
-            tb.eventson = False; tb.set_val(txt); tb.eventson = True                # no on_submit: refresh_signs() is called once below
-            try: tb.cursor.set_visible(False)
-            except Exception: pass
-        for j, a in enumerate(BASE_ANGLES_DEG): set_box(dlg['ang%d' % j], '%g' % a)
+        for j, a in enumerate(BASE_ANGLES_DEG): set_box(dlg['ang%d' % j], '%g' % a); dlg['exact']['ang%d' % j] = float(a)
         set_box(dlg['M'], '%d' % m); set_box(dlg['N'], '%d' % n); set_box(dlg['kap'], '%d' % BASE_KN[0]); set_box(dlg['nu'], '%d' % BASE_KN[1])
-        dlg['rowtypes'] = dict(ROW_SYSTEMS); dlg['row_off'] = 0; dlg['sgnsel'] = tuple(BASE_SIGNS); dlg['sgn_key'] = None
-        dlg['fixed'] = {kn: tuple(v) for kn, v in BLOCK_SIGNS.items()}; dlg['assign'] = dict(flexion_state['list'][flexion_state['index']])
-        for j, b in enumerate(e0_btns): b.set_on((E0 == -1) if j == 0 else (E0 == 1))
-        par_msg.set_visible(False); build_row_buttons(); refresh_signs()
-        # refresh_signs rebuilds the pattern buttons and clears the prescribed blocks as if the base pattern had changed: put the
-        # applied prescriptions back and show the flexion that is actually in the window (not merely a consistent one)
-        dlg['fixed'] = {kn: tuple(v) for kn, v in BLOCK_SIGNS.items()}
-        if 'grid' in dlg:
-            complete_assignment(); dlg['assign'] = dict(flexion_state['list'][flexion_state['index']]); build_grid(); relayout()
+        dlg['rowtypes'] = dict(ROW_TYPES); dlg['row_off'] = 0
+        dlg['signs'], dlg['e0'] = tuple(SIGNS), E0
+        for j_, b_ in enumerate(sgn_btns): b_.set_on(SIGN_PATTERNS[j_] == tuple(SIGNS))
+        for j_, b_ in enumerate(e0_btns): b_.set_on(E0_VALUES[j_] == E0)
+        build_row_buttons()
     def set_dialog(on):
         dlg['open'] = on; state['dlg_open'] = on or cdl['open']
-        if on: reset_dialog()
+        for tb_ in (t_box, th_box): tb_.set_active(not state['dlg_open'])         # under the veil of a dialog: no typing
+        if on:
+            try: dlg['snap'] = (fig.canvas.copy_from_bbox(fig.bbox), fig.canvas.get_width_height())   # the window as it is, for Cancel
+            except Exception: dlg['snap'] = None
+            reset_dialog()
         for tb in dlg.get('textboxes', []): tb.set_active(on)                    # hidden text boxes must not react to clicks (they grab the mouse)
         if not on and fig.canvas.mouse_grabber is not None:
             try: fig.canvas.release_mouse(fig.canvas.mouse_grabber)
@@ -2731,12 +3146,27 @@ def _main():
         ax.set_visible(not on)                                                    # the 3D scene is not redrawn while the dialog is open (speed)
         veil.set_visible(on); frame.set_visible(on)
         for a_ in dlg['axes']: a_.set_visible(on)
-        for b in dlg['rowbtns'] + dlg['sgnbtns'] + list(dlg.get('grid', {}).values()): b.ax.set_visible(on)
-        for t_ in dlg['dyn'] + dlg.get('gridtxt', []): (t_.ax.set_visible(on) if hasattr(t_, 'ax') else t_.set_visible(on))
-        if not on: par_msg.set_visible(False)
+        for b in dlg['rowbtns']: b.ax.set_visible(on)
+        for t_ in dlg['dyn']: (t_.ax.set_visible(on) if hasattr(t_, 'ax') else t_.set_visible(on))
+        if not on and popup_visible(): hide_popup()
         offs['dlg'] = 0.0; offs_x['dlg'] = 0.0; relayout()
         b_par.set_on(on); fig.canvas.draw_idle()
-    b_par.on_clicked(lambda ev: set_dialog(b_par.on))
+    def nodraw(*a, **k): pass
+    def end_nodraw(*a):                                                             # the next event redraws as usual again
+        if vars(fig.canvas).get('draw_idle') is nodraw: del fig.canvas.draw_idle
+    for ev_name in ('motion_notify_event', 'button_press_event', 'scroll_event', 'key_press_event'): fig.canvas.mpl_connect(ev_name, end_nodraw)
+    def close_dialog():
+        """closes the dialog when nothing was applied (Cancel, or the Params button again): the picture of the window kept when the
+        dialog opened comes back at once, instead of a redraw of the whole net"""
+        snap = dlg.pop('snap', None); c_ = fig.canvas
+        if snap is None or snap[1] != c_.get_width_height() or not getattr(c_, 'supports_blit', False):
+            set_dialog(False); return
+        c_.draw_idle = nodraw                                                        # the rest of this click draws nothing
+        tm = c_.new_timer(interval=0); tm.single_shot = True; tm.add_callback(end_nodraw); tm.start(); dlg['nodraw_timer'] = tm
+        set_dialog(False)
+        try: c_.restore_region(snap[0]); c_.blit(fig.bbox)
+        except Exception: end_nodraw(); c_.draw_idle()
+    b_par.on_clicked(lambda ev: set_dialog(True) if b_par.on else close_dialog())
 
     # ---- colours dialog (button Colours): named themes; Advanced = pick the colour of each entry from a palette (no typing)
     import matplotlib.colors as mcolors
@@ -2746,6 +3176,7 @@ def _main():
     NUMBERS = [('TINT_MIX', 'tint mix', 0.05), ('SPEC_K', 'specular', 0.04), ('GROUND_A', 'shadow opacity', 0.02)]
     cdl = {'axes': [], 'adv_axes': [], 'buttons': [], 'open': False, 'advanced': False, 'vals': dict(THEMES[DEFAULT_THEME]), 'theme': DEFAULT_THEME, 'sel': 'EDGE_COL',
            'swatch': {}, 'pal': {}, 'num_text': {}}
+    if APPLIED_THEME[0] is not None: cdl['theme'], cdl['vals'] = APPLIED_THEME[0][0], dict(APPLIED_THEME[0][1]); cdl['applied'] = APPLIED_THEME[0]   # the theme applied before Params restarted the tool
     CX, CY, CW, CH = 0.25, 0.06, 0.50, 0.88
     cframe = fig.add_axes([CX, CY, CW, CH], zorder=31); cframe.set_axis_off(); cframe.set_navigate(False); reg('dlg', cframe)
     cframe.add_patch(FancyBboxPatch((0, 0), 1, 1, boxstyle="round,pad=0,rounding_size=0.02", mutation_aspect=CW*fig.get_figwidth()/(CH*fig.get_figheight()),
@@ -2767,7 +3198,7 @@ def _main():
     theme_btns = {}
     for i, name in enumerate(THEMES):
         r_, c_ = divmod(i, 6)
-        theme_btns[name] = cbutton(CX + 0.03 + c_*0.0735, CY + CH - 0.125 - r_*0.038, 0.068, name, toggle=True, on=(name == DEFAULT_THEME), fontsize=8.5)
+        theme_btns[name] = cbutton(CX + 0.03 + c_*0.0735, CY + CH - 0.125 - r_*0.038, 0.068, name, toggle=True, on=(name == cdl['theme']), fontsize=8.5)
     def refresh_swatches():
         for key, a_ in cdl['swatch'].items():
             a_.set_facecolor(mcolors.to_hex(tuple(float(v) for v in cdl['vals'][key])))
@@ -2775,6 +3206,7 @@ def _main():
         for key, t_ in cdl['num_text'].items(): t_.set_text("%.2f" % cdl['vals'][key])
         if 'hex_box' in cdl:
             cdl['hex_box'].eventson = False; cdl['hex_box'].set_val(mcolors.to_hex(tuple(float(v) for v in cdl['vals'][cdl['sel']])).upper()); cdl['hex_box'].eventson = True
+            if not cdl['hex_box'].capturekeystrokes: cdl['hex_box'].cursor.set_visible(False)   # set_val shows a text cursor (TextBox: a click no longer hides it)
         fig.canvas.draw_idle()
     def pick_theme(name):
         def f(ev):
@@ -2815,7 +3247,7 @@ def _main():
     ctext(WX, WY - 0.03, 'lightness', 8.5, adv=True)
     lax = fig.add_axes([WX, WY - 0.055, WD, 0.014], zorder=32); lax.set_visible(False); lax.set_navigate(False)
     cdl['adv_axes'].append(lax); reg('dlg', lax)
-    light_sl = Slider(lax, '', 0.05, 0.95, valinit=0.6, color='#8fb6e3'); light_sl.valtext.set_visible(False)
+    light_sl = Slider(lax, '', 0.05, 0.95, valinit=0.6, color='#8fb6e3'); light_sl.valtext.set_visible(False); light_sl.set_active(False)
     cdl['buttons'].append(light_sl)
     def on_light(val):
         cdl['wheel_light'] = float(val); wheel_im.set_data(wheel_image(float(val))); fig.canvas.draw_idle()
@@ -2845,7 +3277,7 @@ def _main():
     def show_advanced(on):
         cdl['advanced'] = on
         for a_ in cdl['adv_axes']: a_.set_visible(on and cdl['open'])
-        cdl['hex_box'].set_active(on and cdl['open'])
+        cdl['hex_box'].set_active(on and cdl['open']); light_sl.set_active(on and cdl['open'])   # hidden: no mouse (it lies over the picture)
         b_adv.set_on(on); fig.canvas.draw_idle()
     b_adv.on_clicked(lambda ev: show_advanced(b_adv.on))
     def set_cdialog(on):
@@ -2853,7 +3285,8 @@ def _main():
         ax.set_visible(not on); veil.set_visible(on); cframe.set_visible(on)
         for a_ in cdl['axes']: a_.set_visible(on)
         for a_ in cdl['adv_axes']: a_.set_visible(on and cdl['advanced'])
-        cdl['hex_box'].set_active(on and cdl['advanced'])
+        cdl['hex_box'].set_active(on and cdl['advanced']); light_sl.set_active(on and cdl['advanced'])
+        for tb_ in (t_box, th_box): tb_.set_active(not state['dlg_open'])         # under the veil of a dialog: no typing
         if not on:
             cmsg.set_visible(False)
             if fig.canvas.mouse_grabber is not None:
@@ -2871,8 +3304,8 @@ def _main():
         try: apply_colors(cdl['vals']); apply_canvas(cdl['vals'])
         except Exception as ex:
             cmsg.set_text("cannot apply: %s" % (ex,)); cmsg.set_visible(True); fig.canvas.draw_idle(); return
-        cdl['applied'] = (cdl['theme'], dict(cdl['vals']))
-        set_cdialog(False); state['drawn'] = False; redraw()
+        cdl['applied'] = APPLIED_THEME[0] = (cdl['theme'], dict(cdl['vals']))         # (APPLIED_THEME: also after a restart by Params)
+        set_cdialog(False); redraw()                                                # the colours change; the zoom and the view stay
     def ccancel(ev):
         """Cancel: back to the applied theme (the draft would otherwise be exported in the side-car and shown when the dialog reopens)"""
         th, vals = cdl.get('applied', (DEFAULT_THEME, dict(THEMES[DEFAULT_THEME])))
@@ -2880,48 +3313,72 @@ def _main():
         for nm, b in theme_btns.items(): b.set_on(nm == th)
         set_cdialog(False)
     b_capply.on_clicked(capply); b_ccancel.on_clicked(ccancel)
+    if APPLIED_THEME[0] is not None: apply_canvas(cdl['vals'])                    # restarted by Params: the canvas of the applied theme (the materials are module globals, kept)
     def col_click(ev):
         if dlg['open']: set_dialog(False)
         set_cdialog(b_col.on)
     b_col.on_clicked(col_click)
-    b_cancel.on_clicked(lambda ev: (reset_dialog(), set_dialog(False)))
-    _apply_style = b_apply._style
-    def _apply_style_guard():
-        _apply_style()
-        if not dlg.get('can_apply', True): b_apply.text.set_color('#b5bcc8'); b_apply.patch.set_edgecolor('#dde3ec'); b_apply.patch.set_facecolor('#f4f6f9')
-    b_apply._style = _apply_style_guard
+    b_cancel.on_clicked(lambda ev: close_dialog())                                 # the dialog is reset when it opens again
     def apply_params(ev):
-        global BASE_ANGLES_DEG, M_FACES, N_FACES, BASE_KN, ROW_SYSTEMS, BASE_SIGNS, E0, BLOCK_SIGNS
-        try: angle_issue = angle_problem(tuple(float(dlg['ang%d' % j].text) for j in range(4)))
-        except Exception as ex: angle_issue = str(ex)
-        if angle_issue:
-            par_msg.set_text("cannot apply: " + angle_issue); par_msg.set_visible(True); fig.canvas.draw_idle(); return
-        if not dlg.get('can_apply', True):
-            par_msg.set_text("cannot apply: with these row types no sign pattern extends to a flexible net"); par_msg.set_visible(True); fig.canvas.draw_idle(); return
+        """checks the draft and applies it; whatever gives no net is explained in the message box, and nothing changes"""
+        global BASE_ANGLES_DEG, M_FACES, N_FACES, BASE_KN, ROW_TYPES, SIGNS, E0
+        sg, e0_ = tuple(dlg['signs']), dlg['e0']
+        def value(key, name, whole=False):
+            txt = dlg[key].text.strip(); ex_ = dlg['exact'].get(key)
+            if not whole and ex_ is not None and txt == '%g' % ex_: return float(ex_)   # the box still shows its value: all its digits, not the 6 shown
+            try: v = float(txt.replace(',', '.').replace('\u00b0', '').replace('\u2212', '-'))
+            except ValueError: raise ValueError("%s: '%s' is not a number" % (name, txt))
+            if whole and (not math.isfinite(v) or v != int(v)): raise ValueError("%s: '%s' is not a whole number" % (name, txt))
+            return int(v) if whole else v
         try:
-            angs = tuple(float(dlg['ang%d' % j].text) for j in range(4))
-            assert all(0 < a < 180 for a in angs), "the four angles must lie in (0, 180) degrees"
-            problem = angle_problem(angs); assert problem is None, problem
-            mm, nn_ = int(dlg['M'].text), int(dlg['N'].text)
-            kk, nu = int(dlg['kap'].text), int(dlg['nu'].text)
-            sg = tuple(dlg['sgnsel']); assert len(sg) == 4, "select one of the admissible sign patterns"
-            e0_ = -1 if e0_btns[0].on else 1
+            angs = tuple(value('ang%d' % j, nm) for j, nm in enumerate((r"$\alpha_1$", r"$\beta_1$", r"$\gamma_1$", r"$\delta_1$")))
+            mm, nn_ = value('M', "$m$", True), value('N', "$n$", True)
+            kk, nu = value('kap', r"$\kappa_0$", True), value('nu', r"$\nu_0$", True)
+            problem = angle_problem(angs)                                                   # the hypotheses on the base angles, in words
+            if problem: raise ValueError(problem)
+            if mm < 3 or nn_ < 3: raise ValueError(r"the net needs at least $3 \times 3$ faces; here $m$ = %d, $n$ = %d" % (mm, nn_))
+            if mm > MAX_MN or nn_ > MAX_MN or mm*nn_ > MAX_FACES:                       # (before anything of that size is built)
+                raise ValueError(r"the net can have at most %d faces, at most %d along a side (MAX_FACES, MAX_MN at the top of the file: a larger net "
+                                 r"takes minutes to start); here $m$ = %d, $n$ = %d" % (MAX_FACES, MAX_MN, mm, nn_))
+            if not (1 <= kk <= mm - 2 and 1 <= nu <= nn_ - 2):
+                raise ValueError(r"the base block must satisfy $1 \leq \kappa_0 \leq m-2$ and $1 \leq \nu_0 \leq n-2$; here $\kappa_0$ = %d, $\nu_0$ = %d, $m$ = %d, $n$ = %d" % (kk, nu, mm, nn_))
             rows_new = {r: dlg['rowtypes'][r] for r in range(1, nn_ - 1) if r in dlg['rowtypes']}
             if nu not in rows_new: rows_new[nu] = 'a'
-            rows_ok = check_parameters(mm, nn_, (kk, nu), rows_new)        # trial assembly and synchronization before touching the window
-            sub_t = assemble_net(angs, mm, nn_, (kk, nu), rows_ok)
-            subs_t = {kn: Block(kn[0], kn[1], q) for kn, q in sub_t.items()}
-            assert sg in subs_t[(kk, nu)].witnesses(), "the selected sign pattern is not admissible for the base block"
+            rows_ok = check_parameters(mm, nn_, (kk, nu), rows_new, verbose=False)
+            same_net = (all(abs(a_ - float(b_)) <= 1e-12*abs(float(b_)) for a_, b_ in zip(angs, BASE_ANGLES_DEG)) and (mm, nn_) == (m, n) and (kk, nu) == tuple(BASE_KN)
+                        and all(rows_ok[r] == ROW_TYPES.get(r) for r in range(1, nn_ - 1)))
+            if same_net:                                                                # only the signs: the window stays
+                if (sg, e0_) == (tuple(SIGNS), E0): close_dialog(); return               # nothing changed at all
+                if not switch_flexion(signs=sg, e0=e0_):
+                    raise ValueError("the flexion with these signs could not be built in space for this net (numerically)")
+                set_dialog(False); return
+            sub_t = assemble_net(angs, mm, nn_, (kk, nu), rows_ok)                     # trial assembly, flexion and construction
+            try: subs_t = {kn: Block(kn[0], kn[1], q) for kn, q in sub_t.items()}      # before touching the window
+            except (ValueError, AssertionError, ZeroDivisionError) as ex:
+                raise ValueError("in floating point, the flexion of the blocks could not be computed (%s). For these angles the flexion "
+                                 "exists, so this is rounding, for angles very close to violating one of the conditions: change one of them slightly" % (ex,))
             lo_t, hi_t = admissible_t_range(subs_t[(kk, nu)])
-            fixed_ = {kn_: p for kn_, p in dlg.get('fixed', {}).items() if kn_ in subs_t and kn_ != (kk, nu)}
-            th_t, _ = synchronize(subs_t, (kk, nu), sg, e0_, lo_t + 0.15*(hi_t - lo_t), assignment=fixed_ or None)
-            assert th_t is not None, "no consistent choice of the signs for the other blocks with this base pattern"
+            th_t = None
+            for f_ in (0.15, 0.05, 0.25, 0.35, 0.5, 0.65, 0.8, 0.92):
+                th_t = synchronize(subs_t, (kk, nu), sg, e0_, lo_t + f_*(hi_t - lo_t))
+                if th_t is not None: break
+            if th_t is None:
+                raise ValueError("in floating point, the blocks could not be made to agree on their common faces. For these angles "
+                                 "the flexion exists, so this is rounding, for angles very close to violating one of the conditions: "
+                                 "change one of them slightly")
             try: build_net(vertex_face_angles(sub_t), th_t, mm, nn_, (kk, nu), BASE_EDGE)
-            except AssertionError as ex: raise AssertionError("the construction in space fails for this net (%s)" % (ex.args[0] if ex.args else ex,))
+            except AssertionError as ex:
+                spread = side_spread(vertex_face_angles(sub_t), mm, nn_, (kk, nu))
+                if spread > 1e6:
+                    raise ValueError("in floating point, the construction of the net in space failed (%s). These angles force sides of the "
+                                     "central faces that differ by a factor of %.0e, too much for double precision: make the smallest angle larger"
+                                     % (ex.args[0] if ex.args else ex, spread))
+                raise ValueError("in floating point, the construction of the net in space failed (%s). For these angles the net "
+                                 "exists, so this is rounding: change one of the angles slightly" % (ex.args[0] if ex.args else ex,))
         except Exception as ex:
-            par_msg.set_text("cannot apply: %s" % (ex.args[0] if ex.args else ex,)); par_msg.set_visible(True); fig.canvas.draw_idle(); return
-        BASE_ANGLES_DEG, M_FACES, N_FACES, BASE_KN, ROW_SYSTEMS, BASE_SIGNS, E0 = angs, mm, nn_, (kk, nu), rows_ok, sg, e0_
-        BLOCK_SIGNS = {kn_: tuple(p) for kn_, p in dlg.get('fixed', {}).items() if kn_ != (kk, nu)}
+            if not isinstance(ex, (ValueError, AssertionError, ZeroDivisionError)): import traceback; traceback.print_exc()   # not a parameter problem: a bug, in full on the console
+            show_popup("These parameters give no net", str(ex.args[0] if ex.args else ex)); return
+        BASE_ANGLES_DEG, M_FACES, N_FACES, BASE_KN, ROW_TYPES, SIGNS, E0 = angs, mm, nn_, (kk, nu), rows_ok, sg, e0_
         close_dihedrals(); plt.close(fig)
         state['rebuild'] = True
     b_apply.on_clicked(apply_params)
@@ -2930,16 +3387,82 @@ def _main():
         b = FancyButton(fig, [0.4, 0.9, 0.022, 0.026], label, toggle=toggle, fontsize=8.5, rounding=0.3, italic=italic); b.ax.set_zorder(20)
         b.ax.set_visible(False); return b
     b_info = small('i', toggle=True, italic=True); b_x_rep, b_x_face = small('×'), small('×')
+    # ---- the view lines of the report: elevation and azimuth of the view and the zoom = the size of the picture against the
+    # startup frame mid +- rng (1 at the start and after Reset, 2 = twice as large); they follow the view, and a typed value sets it
+    def zoom_now():                                                                 # the mean of the three half-ranges (all equal unless
+        return rng/float(np.mean([(b_ - a_)/2 for a_, b_ in (ax.get_xlim3d(), ax.get_ylim3d(), ax.get_zlim3d())]))   # the toolbar's box zoom was used)
+    def norm_deg(v_): w_ = (v_ + 180.0) % 360.0 - 180.0; return v_ if -180.0 < v_ <= 180.0 else (180.0 if w_ == -180.0 else w_)   # an angle in (-180, 180] (as is when there)
+    def box_deg(v_): s_ = "%.1f" % norm_deg(v_); return {"-180.0": "180.0", "-0.0": "0.0"}.get(s_, s_) + "°"
+    def box_zoom(z_): return "%.2f" % z_ if 0.1 <= z_ < 100 else ("%.4g" % z_ if 100 <= z_ < 1e4 else "%.3g" % z_)   # 3-4 digits also far out
+    vbox, vcache = {}, {}
+    for key_ in ('elev', 'azim', 'zoom'):                                          # (placed by layout_panels, over the blank columns of the view lines)
+        vb_ = PanelBox(fig.add_axes([0.0, 0.0, 0.05, 0.02], zorder=6, visible=False),
+                       lambda: bool(state.get('dlg_open')) or fast['kind'] in ('rotate', 'drag') or state.get('press') is not None or bool(state.get('rotating')),
+                       textalignment='center', color='#ffffff', hovercolor='#ffffff')   # no hover colour: crossing a box over the picture costs no redraw
+        vb_.text_disp.set_fontsize(8); vb_.text_disp.set_color('#2c4a74')
+        for sp in vb_.ax.spines.values(): sp.set_edgecolor('#b9c7da'); sp.set_linewidth(0.8)
+        vb_._shown = None; vb_.on_text_change(lambda txt, tb_=vb_: txt != tb_._shown and setattr(tb_, '_shown', None))   # an edit counts (not Enter or Tab alone)
+        vbox[key_] = vb_
+    def sync_view():                                                                # the boxes show the view and the zoom (no draw)
+        put_box(vbox['elev'], box_deg(ax.elev)); put_box(vbox['azim'], box_deg(ax.azim)); put_box(vbox['zoom'], box_zoom(zoom_now()))
+    def view_submit(key_):
+        def f(text):
+            if text == vbox[key_]._shown: return                                        # the box as shown, not edited: the view stays (not rounded to the display)
+            try: v = float(text.strip().replace(',', '.').replace('\u2212', '-').replace('°', '').replace('deg', '').replace('\u00d7', '').strip())
+            except ValueError: v = math.nan
+            if not math.isfinite(v) or (key_ == 'zoom' and not 0.01 <= v <= 1000):
+                sync_view()                                                             # the box shows the view again; why, in the report
+                note("%s: '%s' is not a number" % (key_, text.strip().replace('$', r'\$')) if math.isnan(v) else "%s: must be a finite number" % key_ if key_ != 'zoom' else
+                     "zoom: must lie in [0.01, 1000] (1 = the startup frame)", key=key_); return
+            if key_ == 'zoom':
+                for get_, set_ in ((ax.get_xlim3d, ax.set_xlim3d), (ax.get_ylim3d, ax.set_ylim3d), (ax.get_zlim3d, ax.set_zlim3d)):
+                    c_ = sum(get_())/2; set_(c_ - rng/v, c_ + rng/v)                     # about the current centre: a pan stays
+            else:
+                el_, az_ = (norm_deg(v), ax.azim) if key_ == 'elev' else (ax.elev, norm_deg(v))
+                folded = abs(norm_deg(el_)) > 90                                        # upside down in mplot3d (the first drag flips it): the
+                if folded: el_, az_ = math.copysign(180.0, norm_deg(el_)) - norm_deg(el_), norm_deg(az_ + 180.0)   # same eye from the other side, upright
+                ax.view_init(elev=el_, azim=az_)
+            redraw()                                                                    # (redraw keeps the limits and the view, and syncs the boxes)
+            if key_ != 'zoom' and folded:
+                note("elev: %s is the view from elev %s, azim %s (upright)" % (box_deg(v), box_deg(ax.elev), box_deg(ax.azim)), key='elev')
+        return f
+    for key_, vb_ in vbox.items(): vb_.on_submit(view_submit(key_))
+    state['sync_view'] = sync_view; sync_view()
+    def place_view():
+        """the view boxes over the blank columns of the view lines (the report is monospace: a column is the width of a line over its
+        length; the rows are matplotlib's own layout of the text, exact also under lines with mathtext); sizes in the text's units"""
+        r_ = state.get('renderer') or fig.canvas.get_renderer()
+        key = (report_text.get_text(), report_text.get_fontsize(), fig.dpi, getattr(r_, 'dpi', None))
+        fs_ = report_text.get_fontsize()*fig.dpi/72
+        if vcache.get('key') != key:
+            k_ = report_text.get_text().split("\n").index(VIEW_LINES[1])
+            try: info = report_text._get_layout(r_)[1]; rows = (info[k_][3], info[k_ + 2][3])
+            except Exception: rows = (-(0.73 + 1.09*k_)*fs_, -(0.73 + 1.09*(k_ + 2))*fs_)   # (a uniform line pitch)
+            cell = r_.get_text_width_height_descent(VIEW_LINES[1], report_text.get_fontproperties(), ismath=False)[0]/len(VIEW_LINES[1])
+            vcache.clear(); vcache.update(key=key, rows=rows, cell=cell)
+        X, Y = fig.transFigure.transform(report_text.get_position()); c_, h_ = vcache['cell'], 1.5*fs_; W_, H_ = fig.bbox.width, fig.bbox.height
+        for b_, col, row in ((vbox['elev'], len(VIEW_A), 0), (vbox['azim'], len(VIEW_A) + VIEW_W + len(VIEW_B), 0), (vbox['zoom'], len(VIEW_A), 1)):
+            b_.ax.set_position([(X + col*c_)/W_, (Y + vcache['rows'][row] + 0.38*fs_ - h_/2)/H_, VIEW_W*c_/W_, h_/H_]); b_.ax.set_visible(True)
     def refresh_panels():
         report_text.set_text(report_string()); report_text.set_visible(state['report']); layout_panels(); fig.canvas.draw_idle()
+    extent_cache = {}
     def measure(text):
         """window extent of a text with the best renderer at hand, never triggering a draw (a draw from inside a draw event freezes
-        the interface): the renderer of the last draw event, else the canvas renderer."""
+        the interface): the renderer of the last draw event, else the canvas renderer. A panel text that did not change is not
+        laid out again: its last extent is shifted to the new position (the wheel moves the long explanations many times)."""
+        key = (id(text), text.get_text(), text.get_fontsize(), text.get_visible(), fig.dpi, tuple(fig.bbox.size))
+        pos = text.get_position(); hit = extent_cache.get(key)
+        if hit is not None and text.get_transform() is fig.transFigure:
+            (px, py), bb0 = hit
+            return bb0.translated((pos[0] - px)*fig.bbox.width, (pos[1] - py)*fig.bbox.height)
         r = state.get('renderer')
-        try: return text.get_window_extent(r) if r is not None else text.get_window_extent()
+        try: bb = text.get_window_extent(r) if r is not None else text.get_window_extent()
         except Exception:
-            try: return text.get_window_extent(fig.canvas.get_renderer())
+            try: bb = text.get_window_extent(fig.canvas.get_renderer())
             except Exception: return Bbox.from_extents(0, 0, 1, 1)
+        if len(extent_cache) > 64: extent_cache.clear()
+        extent_cache[key] = (pos, bb)
+        return bb
     def corner_of(text):
         """figure coordinates of the top-right corner of the box of a panel text (whatever its current size)."""
         bb = measure(text)
@@ -2967,8 +3490,15 @@ def _main():
         mid = 0.5*text.get_fontsize()/72.0                                                # the middle of the first line below the top of the text (inches)
         for k, b in enumerate(btns):
             b.ax.set_position([x1 - bw - k*(bw + 0.05/W), y1 - (mid + 0.11)/H, bw, bh]); b.ax.set_visible(True)
-    def layout_panels():
-        """(x) and (i) in the top-right corners of the panels (over the short first lines only). The face panel sits under the
+    def panel_max_off():
+        """how far the left panels can be scrolled up: until the lowest one (or the plot under the face panel) ends just above the
+        bottom of the window; 0 when they fit (figure fractions)"""
+        lows = [measure(t).y0/fig.bbox.height for t in (report_text, face_text) if t.get_visible()]
+        if inset.get_visible(): lows.append(inset.get_position().y0 - 0.45/fig.get_figheight())
+        return max(0.0, -min(lows) + 0.02 + offs['panel']) if lows else 0.0
+    def layout_panels(clamp=True):
+        """(x) and (i) in the top-right corners of the panels (over the short first lines only), and the view boxes on their lines of the
+        report (place_view). The face panel sits under the
         report box (or to its right while the explanations are unrolled), and its plot under the face panel, with gaps and a plot
         size fixed in inches, so that nothing overlaps whatever the window size; the mouse wheel scrolls the whole left group."""
         W, H = fig.get_figwidth(), fig.get_figheight()
@@ -2976,11 +3506,12 @@ def _main():
         report_text.set_position((xf, top))
         if report_text.get_visible():
             x1, y1 = corner_of(report_text)
-            place_small([b_x_rep, b_info], report_text)
+            place_small([b_x_rep, b_info], report_text); place_view()
             if state['unrolled'] > 0: xf = x1 + 0.012                              # explanations unrolled: the face panel goes to the right (x1 includes the scroll)
             else: top = bottom_of(report_text)[1] - 0.25/H                         # otherwise under the report box
         else:
             b_x_rep.ax.set_visible(False); b_info.ax.set_visible(False)
+            for b_ in vbox.values(): b_.ax.set_visible(False)
         face_text.set_position((xf, top))
         if face_text.get_visible():
             place_small([b_x_face], face_text)
@@ -2989,17 +3520,20 @@ def _main():
             inset.set_position([xf + 0.55/W, y0 - 0.55/H - h, w, h])
         else:
             b_x_face.ax.set_visible(False)
+        if clamp and (offs['panel'] > panel_max_off() + 1e-6 or offs_x['panel'] > overflow_x('panel') + 1e-6):   # the panels shrank (report hidden or
+            offs['panel'] = min(offs['panel'], panel_max_off()); offs_x['panel'] = min(offs_x['panel'], overflow_x('panel'))   # rolled up, face closed):
+            layout_panels(False)                                                  # no scroll beyond their end, the wheel reaches them
     state['layout_panels'] = layout_panels
     def after_draw(ev):
-        """the (x)/(i) buttons and the plot are placed from the measured text boxes; after a resize the boxes are only known once the
+        """the (x)/(i) buttons, the view boxes and the plot are placed from the measured text boxes; after a resize the boxes are only known once the
         figure has been drawn, so their placement is corrected here (a second draw is requested only if something moved)."""
-        if state.get('in_after_draw'): return                                   # never re-enter
+        if state.get('in_after_draw') or fast['capturing']: return              # never re-enter; not in the capture draw (panels hidden on purpose)
         state['in_after_draw'] = True
         try:
             state['renderer'] = getattr(ev, 'renderer', None)
-            arts = (inset, b_x_rep.ax, b_info.ax, b_x_face.ax)
+            arts = (inset, b_x_rep.ax, b_info.ax, b_x_face.ax, *[b_.ax for b_ in vbox.values()])
             before = [tuple(a.get_position().bounds) for a in arts]
-            layout_panels()
+            layout_panels(False)                                                # (no clamp of the scroll: a fast repaint or a saved picture draws without the panels)
             after = [tuple(a.get_position().bounds) for a in arts]
             moved = any(max(abs(u - v) for u, v in zip(p, q)) > 1e-3 for p, q in zip(before, after))
             state['redraw_chain'] = state.get('redraw_chain', 0) + 1 if moved else 0
@@ -3017,7 +3551,12 @@ def _main():
     b_rep.on_clicked(set_report); b_info.on_clicked(set_info); b_x_rep.on_clicked(close_report); b_x_face.on_clicked(hide_face)
     layout_panels()
     # ---- saving
-    def fname(): return "gqs_net_%dx%d_t%.3f" % (m, n, state['t'])
+    def t_txt(fmt):                                         # the signed t by fmt when that is exact (round values), else to 1e-6 (the configurations
+        v_ = -state['t'] if state.get('mirror') else state['t']; s_ = fmt % v_     # are kept per 1e-6 of t), by %.6g next to the flat end
+        return s_ if abs(float(s_) - v_) <= 1e-9 else ("%.6g" % v_ if abs(v_) < 1e-3 else "%.6f" % v_)
+    def fname():                                            # + the flexion when it is not signs (1, -1, 1, -1), e0 = 1: two flexions at one t differ
+        flex = "" if (tuple(SIGNS), E0) == (SIGN_PATTERNS[0], 1) else "_s%s_e%+d" % ("".join("+" if s_ > 0 else "-" for s_ in SIGNS), E0)
+        return "gqs_net_%dx%d_t%s%s" % (m, n, t_txt("%.3f"), flex)
     def picture_bbox():
         """bounding box (inches) of the drawn net and its shadow on the screen, with a margin: the crop for the saved pictures."""
         pts = list(state['pos'].values())
@@ -3045,23 +3584,25 @@ def _main():
             for c in polys: c.set_edgecolor('none'); c.set_linewidth(1.0)
     def save_obj(ev):
         fn = fname()
-        with open(fn + ".obj", "w") as fh:
+        with open(fn + ".obj", "w", encoding="utf-8") as fh:
             idx = {}
             for k, (vv, p) in enumerate(sorted(state['pos'].items())):
                 idx[vv] = k + 1; fh.write("v %.10f %.10f %.10f\n" % tuple(p))
             for a in range(m):
                 for b in range(n):
                     fh.write("f %d %d %d %d\n" % tuple(idx[x] for x in [(a, b), (a+1, b), (a+1, b+1), (a, b+1)]))
-        with open(fn + "_report.txt", "w") as fh:
+        with open(fn + "_report.txt", "w", encoding="utf-8") as fh:                     # utf-8: the report has '∈' (not in cp1252, Windows' default)
+            fh.write("signs (e1, e2, e3, e4) of all blocks: %s,  sign e0 of the base block F%d%d: %+d,  t = %s\n\n"
+                     % (tuple(SIGNS), BASE_KN[0], BASE_KN[1], E0, t_txt("%.6f")))
             fh.write(verify(state['pos'], state['th'], state['t'], tex=False) + "\n" + admissible_sets_text(False) + "\n\nEdge lengths:\n")
             for e in edges_all: P, Q = sorted(e); fh.write("  V%d%d-V%d%d: %.10f\n" % (P + Q + (edge_length(state['pos'], e),)))
             fh.write("\nFlat angles at inner vertices (deg), measured / prescribed:\n")
             for vv in sorted(ang):
                 for f in sorted(ang[vv]): fh.write("  V%d%d in F%d%d: %.6f / %.6f\n" % (vv + f + (math.degrees(face_angle(state['pos'], vv, f)), math.degrees(ang[vv][f]))))
-            fh.write("\nDihedral angles of the 3 x 3 blocks (deg):\n")
-            for kn in sorted(state['th']): fh.write("  F%d%d: %s\n" % (kn + (str([round(math.degrees(state['th'][kn][i]), 6) for i in range(1, 5)]),)))
+            fh.write("\nDihedral angles of the 3 x 3 blocks (deg), and the sign e0 of each block:\n")
+            for kn in sorted(state['th']): fh.write("  F%d%d: %s  e0 = %s\n" % (kn + (str([round(math.degrees(state['th'][kn][i]), 6) for i in range(1, 5)]), sign_str(kn, tex=False))))
     def write_obj(fn, pos_):
-        with open(fn, "w") as fh:
+        with open(fn, "w", encoding="utf-8") as fh:
             idx = {}
             for k, (vv, p) in enumerate(sorted(pos_.items())):
                 idx[vv] = k + 1; fh.write("v %.10f %.10f %.10f\n" % tuple(p))
@@ -3069,51 +3610,62 @@ def _main():
                 for b in range(n):
                     fh.write("f %d %d %d %d\n" % tuple(idx[x] for x in [(a, b), (a+1, b), (a+1, b+1), (a, b+1)]))
     def save_motion(ev):
-        """MOTION_FRAMES configurations over the whole admissible range as OBJ files, skipping those with penetrating faces;
-        an index file lists the parameter of each frame. Written to the folder gqs_net_MxN_motion next to the other saves."""
+        """MOTION_FRAMES configurations over the slider's range for t >= 0 (from the flat end where t = 0 is admissible) as OBJ files. Every frame is checked from its vertices as the
+        drawn net is (check_values) and tested for penetrating faces; frames that fail are skipped. An index file lists the parameter
+        of each frame and ends with the largest deviations over all frames. Written to the folder gqs_net_MxN_motion next to the
+        other saves; the frames and the index of an earlier Motion there are removed first (other files stay)."""
         folder = "gqs_net_%dx%d_motion" % (m, n); os.makedirs(folder, exist_ok=True)
         R = theta_regions(); th_lo_, th_hi_ = R['tail'][0][1], R['live'][-1][1] if R['live'] else R['tail'][1][0]   # the sampled range of theta_1
-        ths_ = np.linspace(th_hi_, th_lo_, MOTION_FRAMES); kept = 0; skipped = 0                                 # evenly in the angle, from the flat end
-        with open(os.path.join(folder, "index.txt"), "w") as fh:
+        ths_ = np.linspace(th_hi_, th_lo_, MOTION_FRAMES); kept = 0; skipped = 0; pen = 0; failed = 0         # evenly in the angle, from the upper end (180 itself at a flat end)
+        worst = dict(len=0.0, fa=0.0, flat=0.0, plan=0.0, dih=0.0); worst_failed = 0.0
+        L_max, L_min = max(ref_lengths.values()), min(ref_lengths.values())
+        tol_ = dict(len=CHECK_TOL*L_max, **{key: max(CHECK_TOL, 1e-10*L_max/L_min) for key in ('fa', 'flat', 'plan', 'dih')})   # the rounding level (CHECK_TOL)
+        for f_ in os.listdir(folder):                                                   # an earlier Motion of this size (other flexion or net): no mixed sequence
+            if re.fullmatch(r"frame_\d{3,}\.obj|index\.txt", f_): os.remove(os.path.join(folder, f_))
+        with open(os.path.join(folder, "index.txt"), "w", encoding="utf-8") as fh:
             fh.write("# frame  theta_1 (deg, base block)  t = cot(theta_1/2)  file\n")
             for k, th_ in enumerate(ths_):
                 t_ = t_of_theta(float(th_))
                 try: cfg = configuration(float(t_))
-                except Exception: cfg = None
+                except (ArithmeticError, ValueError, AssertionError): cfg = None
+                except Exception: report_bug("Motion"); cfg = None
                 if cfg is None: skipped += 1; continue
-                if self_intersections(cfg[0], faces_all, corners): skipped += 1; continue
+                cv = check_values(cfg[0], cfg[3])
+                if not cv['convex'] or any(cv[key] > tol_[key] for key in worst):
+                    failed += 1; worst_failed = max([worst_failed] + [cv[key]/tol_[key] for key in worst]); continue
+                if self_intersections(cfg[0], faces_all, corners): pen += 1; continue
+                for key in worst: worst[key] = max(worst[key], cv[key])
                 fn = "frame_%03d.obj" % kept; write_obj(os.path.join(folder, fn), cfg[0]); fh.write("%3d  %9.4f  %.6f  %s\n" % (kept, th_, t_, fn)); kept += 1
-        state['report_str'] = state['report_str'].rstrip() + "\n  motion saved: %d OBJ files in %s (%d frames skipped: penetration or no construction)" % (kept, folder, skipped)
+            fh.write("# checks of all frames, from their vertices (largest deviations): edge lengths vs. initial %.1e, face angles vs. "
+                     "initial %.1e rad, flat angles vs. prescribed %.1e rad, planarity %.1e, dihedral angles vs. formulas %.1e rad; all faces "
+                     "convex\n" % (worst['len'], worst['fa'], worst['flat'], worst['plan'], worst['dih']) if kept else "# no frame kept: nothing checked\n")
+        note = "%d frames skipped: %d penetration, %d no construction" % (pen + skipped, pen, skipped) + (", %d failed a check (up to %.0f times its tolerance)" % (failed, worst_failed) if failed else "")
+        state['report_str'] = state['report_str'].rstrip() + "\n  motion saved: %d OBJ files in %s (%s)" % (kept, folder, note)
         report_text.set_text(report_string()); layout_panels(); fig.canvas.draw_idle()
     def write_sidecar(fn_json):
-        """the view and the picture theme next to an OBJ, for render_net.py (Blender)."""
+        """the view and the picture theme next to an OBJ, for render_net.py (Blender), and the configuration shown (signed t, signs, e0)."""
         cols = {k: (list(map(float, v)) if not isinstance(v, (str, float, int)) else v) for k, v in cdl['vals'].items()}
         cols.update(EDGE_COL=list(EDGE_COL), EDGE_SOFT=list(EDGE_SOFT), HIDDEN_COL=list(HIDDEN_COL), LIGHT_COL=list(map(float, LIGHT_COL)),
                     SHADOW_COL=list(map(float, SHADOW_COL)), WARM_BOUNCE=list(map(float, WARM_BOUNCE)), COOL_BOUNCE=list(map(float, COOL_BOUNCE)),
                     GROUND_COL=list(GROUND_COL), GROUND_A=float(GROUND_A), FACE_COLOR=cdl['vals'].get('FACE_COLOR', '#FFFFFF'))
         meta = dict(elev=float((state['elev'] + 180.0) % 360.0 - 180.0), azim=float((state['azim'] + 180.0) % 360.0 - 180.0), focal_length=FOCAL_LENGTH, light_frame=state.get('light_frame', LIGHT_FRAME),
-                    size=[m, n], t=float(state['t']), theme=cdl['theme'], colors=cols, hidden=bool(state.get('hidden', True)))
+                    size=[m, n], t=float(-state['t'] if state.get('mirror') else state['t']), theme=cdl['theme'], colors=cols, hidden=bool(state.get('hidden', True)),
+                    mirror=bool(state.get('mirror')), signs=[int(s_) for s_ in SIGNS], e0=int(E0))   # t as in the file name (negative on the mirrored half; mirror: also for t = -0)
         if state.get('light_frame', LIGHT_FRAME) == 'room':                                    # the studio's floor and lamps, for the whole flexion
             meta['floor_z'] = -float(room_height()); meta['room_lamp_view'] = [float(x) for x in ROOM_LAMP_VIEW]
-        with open(fn_json, "w") as fh: json.dump(meta, fh, indent=1)
+        with open(fn_json, "w", encoding="utf-8") as fh: json.dump(meta, fh, indent=1)
     _save_obj = save_obj
     def save_obj_with_meta(ev):
         _save_obj(ev); write_sidecar(fname() + ".json")
     def render_blender(ev):
         """export the current configuration and render it with Blender in the background (render_net.py next to this file);
         the progress of Cycles ('Sample k/N' lines) is shown in the report box."""
-        import subprocess, threading, re as _re
+        import subprocess, threading, signal, re as _re
         recipe = os.path.join(os.path.dirname(os.path.abspath(__file__)), "render_net.py")   # a render_net.py next to the script overrides the built-in recipe
-        if not os.path.exists(recipe):
-            try:
-                import tempfile
-                recipe = os.path.join(tempfile.gettempdir(), "gqs_render_net.py")
-                with open(recipe, "w", encoding="utf-8") as fh: fh.write(RENDER_RECIPE)             # the recipe carried inside this file
-            except Exception as ex:
-                note("could not write the Blender recipe to a temporary file: %s" % ex); return
         blender = find_blender()
         if blender is None:
-            note("Blender not found%s: no 'blender' on the PATH and none in the usual install folders; set BLENDER_PATH at the top of the file" % (" at BLENDER_PATH = %s" % BLENDER_PATH if BLENDER_PATH else "")); return
+            note("Blender not found at BLENDER_PATH = %s: correct it at the top of the file, or set it to \"\" to search the usual install folders" % BLENDER_PATH if BLENDER_PATH else
+                 "Blender not found: no 'blender' on the PATH and none in the usual install folders; set BLENDER_PATH at the top of the file"); return
         proc = state.get('blender_proc')
         if proc is not None and proc.poll() is None:
             note("Blender: a render is still running, wait for it", key='blender'); return
@@ -3121,6 +3673,16 @@ def _main():
         for stale in (out, out + ".progress"):                                   # never report an old picture as the new one
             try: os.remove(stale)
             except Exception: pass
+        tmp_recipe = None
+        if not os.path.exists(recipe):
+            try:
+                import tempfile
+                fd, tmp_recipe = tempfile.mkstemp(prefix="gqs_render_net_", suffix=".py"); recipe = tmp_recipe   # a new file of its own (a fixed name may be taken), removed after the render
+                with os.fdopen(fd, "w", encoding="utf-8") as fh: fh.write(RENDER_RECIPE)             # the recipe carried inside this file
+            except Exception as ex:
+                try: os.remove(tmp_recipe)
+                except Exception: pass
+                note("could not write the Blender recipe to a temporary file: %s" % ex); return
         cmd = [blender, "-b", "--python-exit-code", "1", "--python", recipe, "--", fn + ".obj", out, fn + ".json", "--samples", str(RENDER_SAMPLES), "--engine", RENDER_ENGINE, "--size", RENDER_SIZE]
         note("Blender: starting ...", key='blender')
         def run():
@@ -3131,7 +3693,7 @@ def _main():
             import time as _time
             prog = out + ".progress"
             try:
-                pr = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
+                pr = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding="utf-8", errors="replace", bufsize=1)   # UTF-8 whatever the locale: a byte it cannot decode must not stop the reader
                 state['blender_proc'] = pr
                 buf = []; passes = 0                                                # Freestyle renders the strokes as a second Cycles pass
                 def reader():
@@ -3141,7 +3703,7 @@ def _main():
                 while pr.poll() is None:
                     _time.sleep(0.25)
                     try:
-                        with open(prog) as fh: txt = fh.read()
+                        with open(prog, encoding='utf-8', errors='replace') as fh: txt = fh.read()
                     except Exception: txt = ""
                     if 'Finished' in txt and last and 'sample' in last: passes += 1
                     msm = next((mm for src in list(reversed(buf[-8:])) + [txt] for mm in [_re.search(r"Sample (\d+)/(\d+)", src)] if mm), None)
@@ -3154,14 +3716,20 @@ def _main():
                     if cur and cur != last: state['pending_note'] = (cur, 'blender'); last = cur
                 _time.sleep(0.3); tail = buf[-40:]
                 if pr.returncode == 0 and os.path.exists(out): msg = "Blender: done, %s written" % out
-                else:
-                    bad = [l for l in tail if ('Error' in l or 'error' in l) and 'strokes set empty' not in l]   # Freestyle's 'strokes set empty' is harmless
-                    msg = "Blender failed (exit %s, see the terminal): " % pr.returncode + (bad[-1] if bad else (tail[-1] if tail else "no message")); print("\n".join(tail))
+                else:                                                               # the cause: the recipe's Python exception, else the first error or crash line
+                    tb = [k for k, l in enumerate(tail) if l.startswith('Traceback')]
+                    bad = [l for l in tail[tb[-1] + 1:] if l and not l[0].isspace()][:1] if tb else []
+                    for kw in (('terminat', 'exception', 'segmentation fault'), ('error',), ('crash',)):   # the most specific line first ('crash' is also in a crash-log path)
+                        bad = bad or [l for l in tail if any(s_ in l.lower() for s_ in kw) and 'strokes set empty' not in l]   # Freestyle's 'strokes set empty' is harmless
+                    try: how = "crashed (%s" % signal.Signals(-pr.returncode).name if pr.returncode < 0 else "failed (exit %s" % pr.returncode
+                    except Exception: how = "failed (exit %s" % pr.returncode
+                    msg = "Blender %s, see the terminal): " % how + (bad[0] if bad else (tail[-1] if tail else "no message")); print("\n".join(tail))
                 try: pr.stdout.close()
                 except Exception: pass
             except Exception as ex: msg = "Blender: %s" % ex
-            try: os.remove(prog)
-            except Exception: pass
+            for f_ in filter(None, (prog, tmp_recipe)):                             # the progress file, and the temporary recipe (Blender is done with it)
+                try: os.remove(f_)
+                except Exception: pass
             state['pending_note'] = (msg, 'blender')
         threading.Thread(target=run, daemon=True).start()
     def note(msg, key=None):
@@ -3184,15 +3752,17 @@ def _main():
     fig._widgets = state['widgets'] = [sl, b_minus, b_plus, b_vert, b_face, b_edge, b_angl, b_hid, b_shad, b_rep, b_reset, b_dih, b_frz, b_par, b_col, *b_light.values(), *cdl['buttons'],
                                        b_svg, b_png, b_obj, b_seq, b_rend, b_info, b_x_rep, b_x_face]   # keep the widgets alive
     # Tab / shift+Tab while typing in a value box: submit it and move to the next / previous box of its group
-    tab_groups = [[dlg[k_] for k_ in ('ang0', 'ang1', 'ang2', 'ang3', 'M', 'N', 'kap', 'nu') if k_ in dlg], [t_box, th_box]]
+    tab_groups = [[dlg[k_] for k_ in ('ang0', 'ang1', 'ang2', 'ang3', 'M', 'N', 'kap', 'nu') if k_ in dlg], [th_box, t_box, vbox['elev'], vbox['azim'], vbox['zoom']]]
     def on_tab(ev):
         if ev.key not in ('tab', 'shift+tab'): return
         for grp in tab_groups:
             for k_, tb_ in enumerate(grp):
                 if getattr(tb_, 'capturekeystrokes', False):
-                    nxt = grp[(k_ + (1 if ev.key == 'tab' else -1)) % len(grp)]
+                    d_ = 1 if ev.key == 'tab' else -1                                   # the next box that takes keys (the view boxes: not with the report hidden)
+                    nxt = next((g_ for j_ in range(1, len(grp)) for g_ in [grp[(k_ + j_*d_) % len(grp)]] if not isinstance(g_, PanelBox) or not g_.ignore(ev)), None)
+                    if nxt is not None and not (nxt.ax.get_visible() and nxt.get_active()): nxt = None
                     tb_.stop_typing()                                                   # submits the box (its on_submit runs)
-                    if nxt.ax.get_visible() and nxt.get_active():
+                    if nxt is not None:
                         nxt.begin_typing(); nxt.cursor_index = len(nxt.text)
                         try: nxt._rendercursor()
                         except Exception: pass
@@ -3200,16 +3770,20 @@ def _main():
     fig.canvas.mpl_connect('key_press_event', on_tab)
     if SHOW_SLIDER_CURVE:
         try: draw_curve()
-        except Exception: pass
+        except Exception: report_bug("draw_curve")
     if STARTUP_ERROR[0] is not None:                                            # parameters of the file failed: show why, in the dialog
         set_dialog(True)
-        par_msg.set_text("the parameters at the top of the file gave no net: " + STARTUP_ERROR[0].split("\nChange ")[0].replace("\n", " ").strip() + " \u2014 edit the values here and press Apply"); par_msg.set_visible(True)
+        show_popup("The parameters at the top of the file give no net",
+                   STARTUP_ERROR[0].split("\nChange ")[0].replace("\n", " ").strip().rstrip(".") + ". The default net is shown; edit the values here and press Apply.")
         STARTUP_ERROR[0] = None
+    spread = side_spread(vertex_face_angles(sub), m, n, BASE_KN)
+    if spread > 1e6:                                                            # built, but beyond double precision: say so (the checks show it)
+        note("warning: the sides of the central faces differ by a factor of %.0e;\n  the thin boundary faces may not keep their shape along the slider" % spread)
     if "--frames" in sys.argv:          # headless: save a few frames and exit (optional: --view ELEV,AZIM)
-        if "--view" in sys.argv:
-            el, az = map(float, sys.argv[sys.argv.index("--view") + 1].split(",")); ax.view_init(elev=el, azim=az); state['drawn'] = False
-        for k, t in enumerate(np.linspace(lo, hi, 6)):
-            cfg = configuration(float(t))
+        view = command_view()                                                    # (checked by main() before the startup)
+        if view: ax.view_init(elev=view[0], azim=view[1]); state['drawn'] = False
+        for k, th_f in enumerate(np.linspace(th_hi_w, th_lo_w, 6)):                  # the slider's whole range, evenly in theta_1
+            t = t_of_theta(float(th_f)); cfg = configuration(float(t))
             if cfg is None: continue
             state['t'] = float(t); take_config(cfg); state['info'] = (k == 1); state['unrolled'] = len(INFO_LINES) if k == 1 else 0
             state['labels'] = {'vertices': k == 0, 'faces': k == 0, 'edges': k == 0, 'angles': False}
@@ -3233,14 +3807,16 @@ def _main():
         try:
             fig.canvas.flush_events(); fig.canvas.start_event_loop(0.05)          # always on the main canvas (never on a closed one)
             if 'poll_notes' in state: state['poll_notes']()
-        except Exception: break
+        except Exception:
+            if plt.fignum_exists(fig.number): report_bug("the event loop")         # (not when the window was closed under the call)
+            break
     return state.get('rebuild', False)
 
 # ============================================================================================
 # The Blender recipe, carried inside this file: the Render button writes it to a temporary file and runs Blender on it
 # (a render_net.py placed next to this script takes precedence, for tinkering). Same content as render_net.py.
 # ============================================================================================
-RENDER_RECIPE = r'''# render_net.py -- Blender recipe (headless) for a GQS-net exported by gqs_net_visualization.py
+RENDER_RECIPE = r'''# render_net.py -- Blender recipe (headless) for an m x n net exported by gqs.py
 #
 #   Blender -b --python render_net.py -- net.obj out.png [net.json] [--samples N] [--engine cycles|eevee] [--size WxH]
 #
@@ -3254,9 +3830,9 @@ RENDER_RECIPE = r'''# render_net.py -- Blender recipe (headless) for a GQS-net e
 # blocked by the net (the ground shadow, as the tool casts it); Freestyle strokes: the outline in the theme's ink, the interior
 # creases in the softer ink, the occluded creases faint; composited over the theme's canvas colour.
 #
-# The look was calibrated on the figures of the CAD paper (face tones 0.79 - 0.96, cool shade / warm light, ~2 px cobalt
+# The look was calibrated on reference figures (face tones 0.79 - 0.96, cool shade / warm light, ~2 px cobalt
 # creases, a soft compact shadow); the tints are derived from the theme's own lit and shaded tones, so every theme keeps its
-# intent, boosted by TINT_BOOST (1 = exactly the tool's tints, 3 = the paper's stronger warm/cool split; the boost tapers off
+# intent, boosted by TINT_BOOST (1 = exactly the tool's tints, 3 = the reference figures' stronger warm/cool split; the boost tapers off
 # for themes whose light tone is itself coloured, so a lavender or blue theme is not turned cream).
 import bpy, sys, os, json, math
 from mathutils import Vector, Matrix
@@ -3309,8 +3885,8 @@ CANVAS = colors.get("FACE_COLOR", "#FFFFFF")
 canvas_rgb = hex_rgb(CANVAS) if isinstance(CANVAS, str) else tuple(float(x) for x in CANVAS[:3])
 mix = float(colors.get("TINT_MIX", 0.35)); spec_k = float(colors.get("SPEC_K", 0.12))
 
-# ---- the look: calibrated on the figures of the CAD paper; these are the knobs of a variant
-TINT_BOOST = 3.0       # the theme's warm/cool tints times this: 1 = exactly the tool's tints, 3 = the paper's stronger split
+# ---- the look: calibrated on reference figures; these are the knobs of a variant
+TINT_BOOST = 3.0       # the theme's warm/cool tints times this: 1 = exactly the tool's tints, 3 = the reference figures' stronger split
 TRANSLUCENCY = 0.0     # weight of a Translucent BSDF mixed in. The faces have no thickness, so such a lobe carries the key
                        # light straight through every face into the folds behind it and flattens the creases: keep it at 0
                        # (a small value, 0.05 - 0.10, gives a hint of vellum without losing the fold contrast).
@@ -3332,7 +3908,7 @@ else:
     bpy.ops.import_scene.obj(filepath=obj_path, axis_forward='Y', axis_up='Z')           # Blender < 4.0
 meshes = [o for o in bpy.context.scene.objects if o.type == 'MESH' and len(o.data.polygons)]
 if not meshes: sys.exit("no faces found in %s" % obj_path)
-net = meshes[0]; net.name = "GQS-net"
+net = meshes[0]; net.name = "net"
 for p in net.data.polygons: p.use_smooth = False
 try: net.data.shade_flat()
 except Exception: pass
@@ -3457,7 +4033,7 @@ elif light_mode == 'room':                                                      
     w0 = Vector((math.cos(e0)*math.cos(a0), math.cos(e0)*math.sin(a0), math.sin(e0))); u0 = Vector((-math.sin(a0), math.cos(a0), 0.0)); up0 = w0.cross(u0)
     key_dir = (-0.55*u0 + 0.75*up0 + 0.40*w0).normalized()
 else:                                                                                  # studio: high, upper left, in front of the viewer
-    key_dir = (-0.55*u + 0.75*up + 0.40*w).normalized()                                # calibrated on the paper's figures
+    key_dir = (-0.55*u + 0.75*up + 0.40*w).normalized()                                # calibrated on the reference figures
 if light_mode in ('studio', 'top') and not below and key_dir.z < 0.6:                 # looking down, 'up on the screen' is nearly horizontal and the
     h = Vector((key_dir.x, key_dir.y, 0.0))                                            # key would sink to the horizon: keep it at least ~37 degrees up
     h = h.normalized()*0.8 if h.length > 1e-6 else Vector((-0.8, 0.0, 0.0))
@@ -3474,14 +4050,30 @@ elif light_mode == 'top':                                                       
     h_ = Vector((up.x, up.y, 0.0)); shadow_dir = (h_.normalized()*0.35 + Vector((0, 0, 0.94))).normalized() if h_.length > 1e-6 else Vector((0, 0, 1))
 elif light_mode == 'room':  shadow_dir = (Vector((0, 0, 1)) - 0.45*u0 - 0.25*w0).normalized()  # the studio's soft lamp: high, upper left of the reference view, a little behind
 else:                       shadow_dir = (Vector((0, 0, 1)) - 0.18*u - 0.10*w).normalized()   # studio: nearly vertical, a little towards the viewer
+# the shadow catcher: the plane P.catch_n = catch_h with the net on its + side, normally the floor (catch_n up, catch_h = floor_z). Seen
+# from below, the floor lies between the camera and the net, and a shadow catcher there cuts the net out of the picture (tested). Where
+# the tool casts the shadow behind the net, the catcher goes there: a flashlight under the net ('eye') onto a ceiling above it, 'top'
+# onto its floor in the viewer's frame (seen from 30 degrees above). 'studio' and 'world' have it on the floor in front of the net (a
+# translucent glass plane in the tool) and 'room' has none: no ground shadow from below there (catch = False).
+catch_n, catch_h, catch = Vector((0, 0, 1)), floor_z, not below
+if below and light_mode == 'eye' and key_dir.z < 0:                                     # the flashlight under the net: a ceiling, as in the tool
+    shadow_dir = (key_dir if key_dir.z <= -0.15 else Vector((key_dir.x, key_dir.y, 0.0)).normalized()*0.99 - Vector((0, 0, 0.15))).normalized()
+    catch_n, catch_h, catch = Vector((0, 0, -1)), -(hi.z + 0.02*size), "on a ceiling above the net"
+elif below and light_mode == 'top':                                                     # the tool's screen floor (light along its normal)
+    catch_n = (math.cos(math.radians(30))*up + math.sin(math.radians(30))*w).normalized(); shadow_dir = catch_n
+    catch_h, catch = min((net.matrix_world @ v.co).dot(catch_n) for v in net.data.vertices) - 0.06*size, "on the floor of the viewer's frame"
+if below and catch:                                                                     # the catcher turned to face the net, through the centre's projection
+    e2_ = catch_n.cross(u); o_ = cen + (catch_h - cen.dot(catch_n))*catch_n
+    floor.matrix_world = Matrix(((u.x, e2_.x, catch_n.x, o_.x), (u.y, e2_.y, catch_n.y, o_.y), (u.z, e2_.z, catch_n.z, o_.z), (0, 0, 0, 1)))
+    print("camera below the ground plane (elevation %.1f): the shadow %s" % (elev_n, catch))
 
 # ----------------------------------------------------------------------------------------------- framing
 # fit the projected extent of the net and of its shadow on the floor (as the tool's crop does), centred, with a margin
 def _frame_pts():
     for vtx in net.data.vertices:
         P = net.matrix_world @ vtx.co; yield P
-        if not below and shadow_dir.z > 0.05 and P.z > floor_z:
-            S = P - shadow_dir*(0.7*(P.z - floor_z)/shadow_dir.z); r_ = 0.08*(P.z - floor_z)   # most of its shadow on the floor (the far penumbra may fade out of the frame)
+        if catch and not engine.startswith("eevee") and shadow_dir.dot(catch_n) > 0.05 and P.dot(catch_n) > catch_h:   # (Eevee draws no ground shadow)
+            d_ = P.dot(catch_n) - catch_h; S = P - shadow_dir*(0.7*d_/shadow_dir.dot(catch_n)); r_ = 0.08*d_   # most of its shadow on the floor (the far penumbra may fade out of the frame)
             for dx in (-r_, r_):
                 yield S + dx*u; yield S + dx*w
 xs, ys = [], []
@@ -3519,8 +4111,8 @@ if RIM_SHARE > 0 and not below:
     d_rim = 5.0*size
     rim = area_light("rim", cen + d_rim*rim_dir, rim_hue, RIM_SHARE*E_key*math.pi*d_rim**2, 2.5*size)   # cool-white glow from behind
     link_lights(rim, net_coll, net_coll)
-if below:
-    print("camera below the ground plane (elevation %.1f): no floor, no ground shadow" % elev_n)
+if not catch:
+    print("camera below the ground plane (elevation %.1f): no floor, no ground shadow (the floor would lie between the camera and the net)" % elev_n)
     bpy.data.objects.remove(floor, do_unlink=True)
 else:
     d_sh = 6.0*size
@@ -3564,7 +4156,7 @@ try:
     lum_L = 0.2126*LIGHT[0] + 0.7152*LIGHT[1] + 0.0722*LIGHT[2]
     if lum_L < 0.8: thick *= 1.3                                                        # darker themes: the mid-tone faces take contrast from the lines
     if light_mode == 'room':
-        # the ink rule of the paper's figures: the silhouette always in the ink; borders and creases in the ink on the top side of
+        # the ink rule of the reference figures: the silhouette always in the ink; borders and creases in the ink on the top side of
         # the sheet (the side its base face turns up on the table), in the soft ink on faces seen from underneath (Freestyle face marks)
         M3 = net.matrix_world.to_3x3(); polys = net.data.polygons
         signed = [((M3 @ p.normal).dot(w), p.area) for p in polys]
@@ -3610,7 +4202,7 @@ if engine.startswith("eevee"):
         except Exception: continue
     try: scene.eevee.taa_render_samples = max(16, samples)
     except Exception: pass
-    if not below:
+    if catch:
         floor.hide_render = True                                                       # the shadow catcher and light linking are Cycles-only
         print("Eevee: no ground shadow (the shadow catcher is a Cycles feature)")
 else:
@@ -3641,7 +4233,7 @@ def _stats(*args):
     txt = next((a_ for a_ in args if isinstance(a_, str)), None)
     if not txt: return
     try:
-        with open(progress_path, "w") as fh: fh.write(txt)
+        with open(progress_path, "w", encoding="utf-8") as fh: fh.write(txt)
     except Exception: pass
 try: bpy.app.handlers.render_stats.append(_stats)
 except Exception as ex: print("no render_stats handler:", ex)

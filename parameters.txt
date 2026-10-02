@@ -1,0 +1,122 @@
+Settings of gqs.py for the pictures of the GQS-nets in the figures with the digits 2026, the letters G, Q, S and the animals
+
+Each net is shown at t1 (the digit, letter or animal) and at other positions of the same flexion (t2; for the animals
+t2, t3, t4), from the same view and at the same zoom.
+
+To reproduce a picture:
+  1. set the parameters of the net at the top of gqs.py (or in the Params dialog) and start gqs.py;
+  2. type t into the t box;
+  3. type elev, azim and zoom into the view boxes;
+  4. switch Shadow off and Hidden on or off, and press PNG;
+  5. turn the saved picture by the angle given (gqs.py has no camera roll).
+
+Notation: BASE_ANGLES_DEG = (alpha_1, beta_1, gamma_1, delta_1) in degrees, BASE_KN = (kappa_0, nu_0), ROW_TYPES[nu] = rho_nu,
+SIGNS = (e_1, e_2, e_3, e_4), E0 = e_0.
+
+== 2026 ==
+
+first digit, 2
+  BASE_ANGLES_DEG = (135, 22.5, 142.5, 82.5)
+  M_FACES, N_FACES = 6, 14
+  BASE_KN = (1, 1)
+  ROW_TYPES = {1: 'a', 2: 'a', 3: 'b', 4: 'b', 5: 'b', 6: 'a', 7: 'a', 8: 'a', 9: 'b', 10: 'b', 11: 'b', 12: 'a'}
+  SIGNS = (1, -1, 1, -1)
+  E0 = 1
+  t1 = 0.24,  t2 = 0.06
+  elev = -4.04,  azim = 154.52,  zoom = 1.00
+  turn the picture counterclockwise by 168.3 deg
+
+second digit, 0
+  BASE_ANGLES_DEG = (127.5, 67.5, 120, 135)
+  M_FACES, N_FACES = 6, 14
+  BASE_KN = (1, 1)
+  ROW_TYPES = {1: 'c', 2: 'a', 3: 'b', 4: 'a', 5: 'a', 6: 'b', 7: 'b', 8: 'b', 9: 'a', 10: 'a', 11: 'b', 12: 'a'}
+  SIGNS = (1, -1, 1, -1)
+  E0 = 1
+  t1 = 0.16,  t2 = 0.45
+  elev = -27.18,  azim = -36.70,  zoom = 0.61
+  turn the picture clockwise by 99.2 deg
+
+third digit, 2
+  BASE_ANGLES_DEG = (72, 144, 144, 108)
+  M_FACES, N_FACES = 6, 14
+  BASE_KN = (1, 1)
+  ROW_TYPES = {1: 'c', 2: 'a', 3: 'b', 4: 'b', 5: 'b', 6: 'a', 7: 'a', 8: 'a', 9: 'b', 10: 'b', 11: 'b', 12: 'a'}
+  SIGNS = (1, -1, 1, -1)
+  E0 = 1
+  t1 = 2.93,  t2 = 1.65
+  elev = -7.48,  azim = 137.78,  zoom = 0.81
+  turn the picture clockwise by 177.8 deg
+
+fourth digit, 6
+  BASE_ANGLES_DEG = (45, 90, 45, 30)
+  M_FACES, N_FACES = 6, 14
+  BASE_KN = (1, 1)
+  ROW_TYPES = {1: 'c', 2: 'b', 3: 'b', 4: 'b', 5: 'b', 6: 'b', 7: 'b', 8: 'b', 9: 'a', 10: 'a', 11: 'b', 12: 'a'}
+  SIGNS = (1, -1, 1, -1)
+  E0 = 1
+  t1 = 0.1,  t2 = 0.5
+  elev = 33.48,  azim = 44.25,  zoom = 0.61
+  turn the picture counterclockwise by 58.7 deg
+
+== G Q S ==
+
+letter G
+  BASE_ANGLES_DEG = (45, 45, 90, 150)
+  M_FACES, N_FACES = 5, 12
+  BASE_KN = (1, 1)
+  ROW_TYPES = {1: 'a', 2: 'b', 3: 'a', 4: 'b', 5: 'a', 6: 'b', 7: 'b', 8: 'a', 9: 'a', 10: 'a'}
+  SIGNS = (1, -1, -1, 1)
+  E0 = 1
+  t1 = 6.25,  t2 = 1.12
+  elev = 43.15,  azim = 36.59,  zoom = 1.05
+  turn the picture clockwise by 50.7 deg
+
+letter Q
+  BASE_ANGLES_DEG = (142.5, 127.5, 15, 60)
+  M_FACES, N_FACES = 5, 12
+  BASE_KN = (1, 7)
+  ROW_TYPES = {1: 'b', 2: 'b', 3: 'a', 4: 'b', 5: 'a', 6: 'b', 7: 'a', 8: 'a', 9: 'a', 10: 'a'}
+  SIGNS = (1, -1, -1, 1)
+  E0 = -1
+  t1 = 0.64,  t2 = 0.38
+  elev = 25.09,  azim = 29.65,  zoom = 0.54
+  turn the picture clockwise by 39.2 deg
+
+letter S
+  BASE_ANGLES_DEG = (75, 22.5, 112.5, 120)
+  M_FACES, N_FACES = 5, 12
+  BASE_KN = (1, 3)
+  ROW_TYPES = {1: 'b', 2: 'a', 3: 'a', 4: 'b', 5: 'b', 6: 'a', 7: 'b', 8: 'b', 9: 'b', 10: 'a'}
+  SIGNS = (1, -1, 1, -1)
+  E0 = 1
+  t1 = 0.78,  t2 = 0.44
+  elev = -46.52,  azim = -178.49,  zoom = 0.71
+  turn the picture counterclockwise by 140.6 deg
+
+== animals ==
+
+The red curve on the t1 pictures (the side outline of the model) is drawn over the picture afterwards.
+gqs.py draws nets with more than 150 faces without hidden lines, so for these nets Hidden on and off give the same picture.
+
+bunny (the Stanford bunny)
+  BASE_ANGLES_DEG = (45, 90, 45, 30)
+  M_FACES, N_FACES = 6, 60
+  BASE_KN = (1, 1)
+  ROW_TYPES = {1: 'c', 2: 'a', 3: 'b', 4: 'b', 5: 'a', 6: 'b', 7: 'a', 8: 'b', 9: 'a', 10: 'a', 11: 'a', 12: 'a', 13: 'b', 14: 'a', 15: 'a', 16: 'a', 17: 'b', 18: 'a', 19: 'c', 20: 'c', 21: 'a', 22: 'a', 23: 'a', 24: 'a', 25: 'a', 26: 'b', 27: 'b', 28: 'b', 29: 'a', 30: 'a', 31: 'a', 32: 'a', 33: 'a', 34: 'c', 35: 'c', 36: 'a', 37: 'c', 38: 'c', 39: 'b', 40: 'a', 41: 'a', 42: 'a', 43: 'a', 44: 'a', 45: 'a', 46: 'a', 47: 'c', 48: 'a', 49: 'c', 50: 'b', 51: 'c', 52: 'a', 53: 'a', 54: 'a', 55: 'd', 56: 'c', 57: 'c', 58: 'a'}
+  SIGNS = (1, -1, 1, -1)
+  E0 = 1
+  t1 = 0.5,  t2, t3, t4 = 0.093, 0.71, 0.83
+  elev = 22.13,  azim = 38.43,  zoom = 1.00
+  turn the picture counterclockwise by 49.5 deg
+
+fish (Blub)
+  BASE_ANGLES_DEG = (45, 90, 45, 30)
+  M_FACES, N_FACES = 6, 60
+  BASE_KN = (1, 1)
+  ROW_TYPES = {1: 'd', 2: 'a', 3: 'b', 4: 'a', 5: 'a', 6: 'a', 7: 'a', 8: 'b', 9: 'a', 10: 'b', 11: 'b', 12: 'a', 13: 'a', 14: 'a', 15: 'a', 16: 'a', 17: 'a', 18: 'b', 19: 'b', 20: 'a', 21: 'a', 22: 'a', 23: 'a', 24: 'a', 25: 'b', 26: 'b', 27: 'a', 28: 'b', 29: 'a', 30: 'a', 31: 'a', 32: 'a', 33: 'a', 34: 'a', 35: 'a', 36: 'a', 37: 'b', 38: 'b', 39: 'a', 40: 'b', 41: 'a', 42: 'a', 43: 'a', 44: 'a', 45: 'a', 46: 'a', 47: 'c', 48: 'a', 49: 'c', 50: 'b', 51: 'a', 52: 'a', 53: 'b', 54: 'a', 55: 'a', 56: 'a', 57: 'b', 58: 'a'}
+  SIGNS = (1, -1, 1, -1)
+  E0 = 1
+  t1 = 0.96,  t2, t3, t4 = 0.15, 0.49, 1.21
+  elev = -6.06,  azim = 83.60,  zoom = 1.00
+  turn the picture counterclockwise by 137.0 deg
