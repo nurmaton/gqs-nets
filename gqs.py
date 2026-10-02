@@ -16,6 +16,7 @@
 # Dihedral angles are oriented: -pi (equivalently +pi; angles are compared modulo 2 pi) when adjacent faces are coplanar,
 # positive when the face bends towards the side of the normal of the central face (Bricard variables cot(theta/2)).
 # Requires numpy and matplotlib only.
+# Written with the assistance of the Claude models Opus 5.5, Fable 5, and Fable 5.1 (Anthropic); all code was checked by the authors.
 
 import math, itertools, sys, json, re, textwrap, os, shutil, glob
 import numpy as np
