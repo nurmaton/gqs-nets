@@ -1,6 +1,6 @@
 # Application: every file with its size (bytes) and md5; 247 files, 77.7 MB in all (MANIFEST.txt itself not listed)
 # file                                                                bytes  md5
-README.md                                                             34397  ae2bfdf1db48e177da3b935626d2c3a9
+README.md                                                             34466  1a9e47e47814b3c0859cd526f6004e85
 checks/check_clear_height.py                                           4366  35743d55e97ca4cf373a69d2289ddfb8
 checks/check_dimensions.py                                            11503  a4f6ea8a4fdb6c281c0e6213fc2993f0
 checks/check_exchange.py                                               3502  b8c286586b497e1f0735561840842008
@@ -23,8 +23,8 @@ data/hall_iii_transport_V.npy                                         11984  d8f
 data/hall_iii_transport_panels.npy                                    86528  e92e22b8440db3b97052c0a2674eddcc
 data/halls.json                                                        4316  d92a86ff787645415d4e5975681c120a
 data/motion_t.json                                                    16354  eb192399dcedc7855d8946fbde911ef8
-expected_values.json                                                  54723  24f9c9bff657c1f473b7f23ce2656ccc
-fem/check_results.py                                                  18800  493caaed1717b0582df46c20be469db4
+expected_values.json                                                  54959  db6692da2b24e54fdcee2ae1a9417468
+fem/check_results.py                                                  19108  c4214718f74d7a7fdc54e2bc311d35a4
 fem/classify.py                                                       12235  5d2f6e60e1b254f60cba15cb7fdd5503
 fem/compare_static.py                                                  4376  1db9cd5d9c479c489fadf5b4c16f917f
 fem/decks/MD5SUMS                                                      4724  e0b852346503284561f1cd9e2e4ee923
@@ -210,8 +210,8 @@ fem/results/reruns/hall_iii_V1_k8_static.json                         33843  2e5
 fem/results/reruns/hall_iii_V1_k8_static.log                           2664  edee1ac0d75256f5e3ac64c1920bdd37
 fem/shellnet.py                                                      103616  e075e371b9e7bf6d522a176fb5590998
 fem/smoke_test.py                                                      1850  ab91bb2c809cb36ad57149660f27d260
-figures/label_sizes.json                                               6339  b029bbcc30f94010c5c7fd23bc20c65b
-figures/sections.py                                                   33211  d63da54ec58b3690a4edc3eb762d7369
+figures/label_sizes.json                                               6336  6f966b9c03aba9626399f05f3103a69a
+figures/sections.py                                                   33233  81e3d163ade6e55b718399cf17d98e12
 figures/snow.py                                                       15318  eb39a06d1bdfd4e3f44fd77efd361ba9
 figures/snow_data/hall_i_V1.json                                       1293  e4b81506385eb1452d8b47daf1622000
 figures/snow_data/hall_i_V1.npz                                     1837968  21657f688009a3d49346bd76b1c68a49

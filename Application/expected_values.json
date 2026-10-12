@@ -1742,6 +1742,14 @@
   },
   {
    "check": "check_fe_results",
+   "key": "iii.fe.u_vert_change_k6_k8_max_pct",
+   "quantity": "largest change of the vertical displacements of (iii) from k = 6 to 8 (%)",
+   "hall": "iii",
+   "rule": "max",
+   "expected": 2.5
+  },
+  {
+   "check": "check_fe_results",
    "key": "fe.all_lambda1_above_1",
    "quantity": "all buckling factors lambda_1 exceed 1",
    "hall": null,
