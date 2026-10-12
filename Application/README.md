@@ -39,7 +39,7 @@ PASS / FAIL / SKIP, key, hall, expected value and rule, measured value, quantity
 The comparison rules: `equal`; `roundN` (the measured value rounded to N decimals equals the printed value); `tol`; `max`;
 `range`. Items that need ccx or Blender are SKIPped when these are not found.
 
-Measured on a laptop (Apple M-series, 4 threads for ccx); a run from a fresh copy gave 265 PASS, 0 FAIL, 0 SKIP in 13.1 min:
+Measured on a laptop (Apple M-series, 4 threads for ccx); a run from a fresh copy gave 266 PASS, 0 FAIL, 0 SKIP in 13.9 min:
 
 | step | script | time |
 |---|---|---|
@@ -193,10 +193,11 @@ transport position is at t = 0.3199999976, and exactly for (ii), (iii)).
   around the latch is not left out (the factored self-weight alone exceeds the wrinkling limit 0.025 m from the latch); the
   change of the capacities from k = 8 to 12 (up to 10 %); the spread of the rail foot (19.6 and 17.7 mm under self-weight;
   85.8 and 75.5 mm under snow, the largest displacement under snow being at the foot on the rails); the vertical displacement
-  of (iii) at k = 4 / 6 / 8 (12.66 / 13.03 / 13.26 mm); the overhang of the open ends of (i) (1.64 m); elements and element
-  lengths (51, 44, 41 mm); the peak memory of ccx (the job ledgers give the maximum resident set size in GiB = 2^30 bytes in
-  their column max_rss_GB: 13.4 GiB = 14.4 GB for (iii) at k = 8, 14.7 GiB = 15.7 GB for (i) at k = 12); h/b and mu_3; the
-  section values. The places for (ii) and (iii) come from the reruns in `results/reruns`, the others from the stored results.
+  of (iii) at k = 4 / 6 / 8 (12.66 / 13.03 / 13.26 mm) and its largest change from k = 6 to 8 over the four stored series
+  (2.43 %); the overhang of the open ends of (i) (1.64 m); elements and element lengths (51, 44, 41 mm); the peak memory of
+  ccx (the job ledgers give the maximum resident set size in GiB = 2^30 bytes in their column max_rss_GB: 13.4 GiB = 14.4 GB
+  for (iii) at k = 8, 14.7 GiB = 15.7 GB for (i) at k = 12); h/b and mu_3; the section values. The places for (ii) and (iii)
+  come from the reruns in `results/reruns`, the others from the stored results.
 - `smoke_test.py`: one short ccx run, (ii) with both feet anchored at k = 4 (1-2 min): compare_static.py finds the stored
   k = 4 results (113 quantities) reproduced to the last digit.
 - `results/`: per hall the module output and the post-processing of the static runs, the buckling summaries, every mode with
@@ -364,7 +365,7 @@ that produces or checks it.
 - `fem/input/`: the deployed outer skin as the FE runs read it; (iii) is the 13-row sub-net of its runs extended by the exact
   two-row translation (equal to the gqs.py window to 1e-14 m).
 - `fem/results/reruns/`: the two fe.py static reruns (see fem/).
-- `expected_values.json`: every checked quantity with its printed value and rule (265 items).
+- `expected_values.json`: every checked quantity with its printed value and rule (266 items).
 
 ## 7. What is not recomputed here
 
@@ -372,8 +373,8 @@ that produces or checks it.
   quick run reruns one short model (k = 4), and two full static runs ((ii) at k = 12, (iii) at k = 8, both feet anchored) were
   rerun with fe.py and equal the stored runs (`fem/results/reruns`); the other full studies, in particular the buckling runs,
   are not rerun (hours, 9-16 GB).
-- The vertical displacement of (iii) at k = 6 (13.03 mm) is read from the stored mesh-series results of a separate run of the
-  same model; no deck of that run is kept.
+- The vertical displacements of (iii) at k = 6 are read from the stored mesh-series results of a separate run of the same
+  model; no deck of that run is kept.
 - The peak memory is read from the job ledgers of the runs (maximum resident set size in GiB, converted to GB).
 - The searches that found the nets (beam search, local search, enumeration of palindromes) are not included; the nets are
   given and checked. Their targets (a parabola or a circular arc of the given span) are not rechecked; the words

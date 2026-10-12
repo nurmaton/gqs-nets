@@ -6,13 +6,14 @@
 # a support of (ii) and at the spindle end of (i); the wrinkling capacity of (i) with both feet anchored at r = 0.2, 0.15,
 # 0.1 m; the change of the capacities from k = 8 to k = 12; the spread of the rail foot of (ii) and (iii) under self-weight
 # and under snow, and that the largest displacement under snow is at the foot on the rails; the vertical displacement of (iii)
-# at k = 4, 6, 8; the overhang of the open ends of (i) past the last supported vertex; the place where the governing limit is
-# reached (at the open end for (i) with both feet anchored, next to a support for (ii), on a hinge line for (iii), on a
-# hinge line on the side of the foot on the rails for (i) with spindle and lock; for (ii) and (iii) from the fe.py reruns in
-# results/reruns, which also equal the stored results); the capacity of (i) with spindle and lock when the latch zone is not
-# left out (the factored self-weight alone exceeds the wrinkling limit there); the local buckling modes whose factors fall
-# with the mesh (at a support of (ii), k = 4, 8, 12; at the end of the spindle of (i), k = 8, 12); elements, element length
-# and peak memory of ccx (the job ledgers give the maximum resident set size in GiB = 2^30 bytes; GB = 10^9 bytes).
+# at k = 4, 6, 8 and its largest change from k = 6 to 8 over the stored series; the overhang of the open ends of (i) past the
+# last supported vertex; the place where the governing limit is reached (at the open end for (i) with both feet anchored, next
+# to a support for (ii), on a hinge line for (iii), on a hinge line on the side of the foot on the rails for (i) with spindle
+# and lock; for (ii) and (iii) from the fe.py reruns in results/reruns, which also equal the stored results); the capacity of
+# (i) with spindle and lock when the latch zone is not left out (the factored self-weight alone exceeds the wrinkling limit
+# there); the local buckling modes whose factors fall with the mesh (at a support of (ii), k = 4, 8, 12; at the end of the
+# spindle of (i), k = 8, 12); elements, element length and peak memory of ccx (the job ledgers give the maximum resident set
+# size in GiB = 2^30 bytes; GB = 10^9 bytes).
 # usage: python3 fem/check_results.py           output: out/check_fe_results.json
 # Written with the assistance of the Claude models Opus 5.5, Fable 5, and Fable 5.1 (Anthropic); all code was checked by the authors.
 
@@ -205,14 +206,17 @@ vals['iii.fe.rerun_V1_k8_max_rel_diff'] = CS.compare(rr3, s1, show=False)[0]
 vals['iii.fe.governing_V1_on_hinge_line'] = bool(rr3['capacity']['governing'] == 'ULS_face_compression_sigma_w'
                                                  and w3['hinge_dist'] < 1e-9 and w3['vertex_dist'] > 0.1)
 det['iii.V1_place'] = w3
-ser = J('hall_iii', 'mesh_series_k4_k6_k8.json')['V1_S2+']['u_v']
+MS = J('hall_iii', 'mesh_series_k4_k6_k8.json')
+ser = MS['V1_S2+']['u_v']
 for kk in ('k4', 'k6', 'k8'): vals['iii.fe.u_vert_V1_S2p_%s_mm' % kk] = ser[kk]
+vals['iii.fe.u_vert_change_k6_k8_max_pct'] = max(100 * abs(MS[s]['u_v']['k8'] / MS[s]['u_v']['k6'] - 1) for s in MS)
 print('\nhall (iii), k = 8: capacity with both feet anchored %.4f (%s, %s), with spindle and lock %.4f (%s, %s)' % (d1 + d3))
 print('  lambda_1 (rule A, load scaled by 0.5 so that factors down to about 0.26 are returned): V1 %.4f (%s), V3 %.4f (%s)'
       % (lam3['V1'][0], lam3['V1'][1], lam3['V3'][0], lam3['V3'][1]))
 print('  rail foot (V3): %.1f mm under self-weight, up to %.1f mm under self-weight and snow, the largest displacement under snow lying %s'
       % (vals['iii.fe.spread_G_mm'], vals['iii.fe.spread_snow_mm'], fe.describe(pl3[0])))
-print('  largest vertical displacement (V1, SLS S2+) at k = 4 / 6 / 8: %.2f / %.2f / %.2f mm' % (ser['k4'], ser['k6'], ser['k8']))
+print('  largest vertical displacement (V1, SLS S2+) at k = 4 / 6 / 8: %.2f / %.2f / %.2f mm; largest change from k = 6 to 8 over the %d series: %.2f %%'
+      % (ser['k4'], ser['k6'], ser['k8'], len(MS), vals['iii.fe.u_vert_change_k6_k8_max_pct']))
 print('  fe.py rerun, both feet anchored, k = 8: capacity %.4f (%s, %s), largest relative difference to the stored run %.1e; reached %s'
       % (rr3['capacity']['s_k_max'], rr3['capacity']['governing'], rr3['capacity']['case'], vals['iii.fe.rerun_V1_k8_max_rel_diff'], fe.describe(w3)))
 

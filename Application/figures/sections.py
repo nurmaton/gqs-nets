@@ -179,7 +179,7 @@ def deployed_labels(nm, i, R):
     cf, hw = R['cf'], R['hw']
     a, b = R['main']
     L = [TL.Lab('dep%d_title' % i, i, TITLE[nm], 'lab', 'south west'),
-         TL.Lab('dep%d_Hc' % i, i, r'$H_c$\\%s~m' % ('%.2f' % cf['Hc']), 'lab', 'west', opts='align=left'),
+         TL.Lab('dep%d_Hc' % i, i, r'$H_{\mathrm{c}}$\\%s~m' % ('%.2f' % cf['Hc']), 'lab', 'west', opts='align=left'),
          TL.Lab('dep%d_W20' % i, i, r'$W_{20}$\\%s~m' % ('%.2f' % (b - a)), 'greenlab', 'north', opts='align=center'),
          TL.Lab('dep%d_span' % i, i, r'span %s~m' % f2(R['span']), 'lab', 'north'),
          TL.Lab('dep%d_rise' % i, i, r'rise %s~m' % f2(R['rise']), 'lab', 'north', rot=90)]
@@ -406,7 +406,7 @@ def print_dep(labs, G, maps, fig_h_bp, SZ):
         for l in [l for l in labs if l.panel == i]:
             k = l.key.split('_', 1)[1]
             if k == 'Hc':
-                l = TL.Lab(l.key, i, r'$H_c = %s$~m' % f2(Hc), 'lab', 'center', xc, yc, pre=VAL_FONT, dec=4)
+                l = TL.Lab(l.key, i, r'$H_{\mathrm{c}} = %s$~m' % f2(Hc), 'lab', 'center', xc, yc, pre=VAL_FONT, dec=4)
             elif k == 'W20':
                 l = TL.Lab(l.key, i, r'$W_{20} = %s$~m' % f2(b - a), 'greenlab', 'north', xc, wtop, pre=VAL_FONT, dec=4)
             out.append(l)
