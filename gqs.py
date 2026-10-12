@@ -16,7 +16,7 @@
 # Dihedral angles are oriented: -pi (equivalently +pi; angles are compared modulo 2 pi) when adjacent faces are coplanar,
 # positive when the face bends towards the side of the normal of the central face (Bricard variables cot(theta/2)).
 # Requires numpy and matplotlib only.
-# Written with the assistance of the Claude models Opus 5.5, Fable 5, and Fable 5.1 (Anthropic); all code was checked by the authors.
+# Revised with the assistance of the Claude models Opus 5.5, Fable 5, and Fable 5.1 (Anthropic); all code was checked by the authors.
 
 import math, itertools, sys, json, re, textwrap, os, shutil, glob
 import numpy as np
@@ -45,8 +45,9 @@ PI = math.pi
 # ============================================================================================
 BASE_ANGLES_DEG = (60.0, 80.0, 120.0, 60.0)   # (alpha_1, beta_1, gamma_1, delta_1) at the vertex A_1 of the base block
 M_FACES, N_FACES = 5, 5                        # m x n: the net has the faces F_ij, 0 <= i < m = M_FACES, 0 <= j < n = N_FACES
-MAX_MN = 60                                    # the largest m and n accepted (here and in Params)
-MAX_FACES = 400                                # ... and the largest m n: the startup builds ~200 configurations, ~1 min of CPU at 400 faces (10 x 26: ~35 s)
+MAX_MN = 200                                   # the largest m and n accepted (here and in Params)
+MAX_FACES = 10000                              # ... and the largest m n: the startup builds ~200 configurations, ~1 min of CPU at 400 faces (10 x 26: ~35 s);
+                                               # it grows faster than the number of faces (measured on a busy machine: 12 x 33 in 2.6 min, 54 x 33 in 28 min)
 BASE_KN = (2, 2)                               # (kappa_0, nu_0): the base block has the central face F_{kappa_0 nu_0} (1 <= kappa_0 <= m-2, 1 <= nu_0 <= n-2)
 ROW_TYPES = {1: 'c', 2: 'a', 3: 'b'}           # type ('a'..'d', see RELATION_TEXT) of the row of 3 x 3 blocks with central faces F_{. nu},
                                                # nu = 1 .. n-2 (rows not listed get the type of the row nu_0)
@@ -1689,10 +1690,11 @@ def _main():
                          % ("".join(rows[nu] for nu in range(1, n - 1)), m, n, BASE_ANGLES_DEG, SIGNS, E0))
     cache = {}; free_lengths = {}; kept = set()                                     # kept: the keys of the sampling grids (theta_regions, room_height, motion_samples), never trimmed
     def cache_key(t): return round(t, 6) if abs(t) >= 1e-6 else t                   # the configurations are cached per 1e-6 of t (there round(t, 6) >= 1e-6 is never 0); near the flat end t = 0 per exact value
-    def trim(c_):                                                                    # room for one more: at most CACHE_SIZE configurations besides the kept ones, the oldest go first
-        if len(c_) >= CACHE_SIZE:
+    cache_cap = max(50, min(CACHE_SIZE, CACHE_SIZE*100//(m*n)))                     # fewer configurations for large nets (their size grows with m n)
+    def trim(c_):                                                                    # room for one more: at most cache_cap configurations besides the kept ones, the oldest go first
+        if len(c_) >= cache_cap:
             old_ = [k_ for k_ in c_ if k_ not in kept]
-            for k_ in old_[:max(0, len(old_) - CACHE_SIZE + 1)]: del c_[k_]
+            for k_ in old_[:max(0, len(old_) - cache_cap + 1)]: del c_[k_]
     def configuration(t, keep=False):
         key = cache_key(t)
         if keep: kept.add(key)

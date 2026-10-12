@@ -34,7 +34,7 @@ f6e9bab36fab"],
 
 Cell["\<\
 Tested on: Mathematica 14.0
-Written with the assistance of the Claude models Opus 5.5, Fable 5, and Fable \
+Revised with the assistance of the Claude models Opus 5.5, Fable 5, and Fable \
 5.1 (Anthropic)
 All computations were checked by the authors\
 \>", "Subtitle",
