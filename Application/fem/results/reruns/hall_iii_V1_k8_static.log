@@ -1,0 +1,29 @@
+hall_iii_V1_k8_static: 28800 S8R elements, 101250 nodes
+hall_iii_V1_k8_static: gate True (SVD zero 0, FE zero 0), f1 4.420 Hz; snow totals {'S1': 13219, 'S2+': 12392, 'S2-': 12392} N, G 5312 N
+  SLS S1   u_vert 10.41 mm, u_tot 12.19 mm; capacities (r = 0.15 m): {'SLS_deflection_span/200': 2.136, 'ULS_face_vm_fy/gM': 3.969, 'ULS_face_compression_sigma_w': 0.959, 'ULS_core_shear': 3.34, 'SLS_total_span/200': 1.791}
+  SLS S2+  u_vert 13.26 mm, u_tot 15.71 mm; capacities (r = 0.15 m): {'SLS_deflection_span/200': 1.584, 'ULS_face_vm_fy/gM': 2.796, 'ULS_face_compression_sigma_w': 0.676, 'ULS_core_shear': 2.408, 'SLS_total_span/200': 1.309}
+  SLS S2-  u_vert 13.26 mm, u_tot 15.70 mm; capacities (r = 0.15 m): {'SLS_deflection_span/200': 1.585, 'ULS_face_vm_fy/gM': 2.797, 'ULS_face_compression_sigma_w': 0.676, 'ULS_core_shear': 2.409, 'SLS_total_span/200': 1.309}
+  SLS_deflection_span/200        1.584 (S2+): on the hinge line (17, 7)-(18, 7), 0.000 m from the vertex (18, 7); across the span 0.21 (0 foot 1, 1 foot 2), 1.76 m above foot 1
+  ULS_face_vm_fy/gM              2.796 (S2+): on the hinge line (2, 9)-(2, 10), 0.163 m from the vertex (2, 9); across the span 0.34 (0 foot 1, 1 foot 2), 2.14 m above foot 1
+  ULS_face_compression_sigma_w   0.676 (S2+): on the hinge line (2, 9)-(2, 10), 0.163 m from the vertex (2, 9); across the span 0.34 (0 foot 1, 1 foot 2), 2.14 m above foot 1
+  ULS_core_shear                 2.408 (S2+): on the hinge line (0, 10)-(1, 10), 0.163 m from the vertex (0, 10); across the span 0.36 (0 foot 1, 1 foot 2), 2.17 m above foot 1
+  SLS_total_span/200             1.309 (S2+): on the hinge line (0, 9)-(1, 9), 0.000 m from the vertex (0, 9); across the span 0.31 (0 foot 1, 1 foot 2), 2.01 m above foot 1
+  capacity s_k,max = 0.676 kN/m2 (ULS_face_compression_sigma_w, S2+); wrinkling alone at r = 0.2 / 0.15 / 0.1 m: 3.937 / 0.676 / 0.504; 546 s
+      547.78 real       714.31 user        35.61 sys
+         13958037504  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+            13622091  page reclaims
+                 340  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 619  voluntary context switches
+              374261  involuntary context switches
+       4331000675098  instructions retired
+        975765652762  cycles elapsed
+          2532871768  peak memory footprint

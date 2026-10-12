@@ -1,0 +1,106 @@
+{
+ "container_20ft": {
+  "source": "ISO 668:2020, type 1CC",
+  "external_L_W_H_m": [
+   6.058,
+   2.438,
+   2.591
+  ],
+  "internal_min_L_W_H_m": [
+   5.867,
+   2.33,
+   2.35
+  ],
+  "door_min_W_H_m": [
+   2.286,
+   2.261
+  ]
+ },
+ "container_floor_top_m": {
+  "value": 0.17,
+  "source": "assumed for the picture (not standardised); not labelled"
+ },
+ "truck": {
+  "source": "Council Directive 96/53/EC, Annex I 1.2(a) (width 2.55 m) and 1.3 (height 4.00 m), consolidated text of 14/08/2019, https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:01996L0053-20190814",
+  "max_width_m": 2.55,
+  "max_height_m": 4.0,
+  "max_length_articulated_m": 16.5,
+  "max_kingpin_to_rear_m": 12.0,
+  "length_source": "96/53/EC Annex I 1.1 (articulated vehicle 16.50 m) and 1.6 (king pin to rear of the semi-trailer 12.00 m); beyond them only on a special permit, Art. 4(3)",
+  "deck_requirement_m": 0.733,
+  "deck_requirement_source": "4.00 m - H_tr: the road height limit minus the transport height of (i)",
+  "vehicle": {
+   "name": "Kaessbohrer K.SLL 2/2H-18/20, 2-axle extendable low-bed semi-trailer (well type)",
+   "source": "https://kaessbohrer.com/en/products/low-bed-588-c/low-loader-610-c/ksll-2-2h-18-20 (read 2026-10-07)",
+   "well_top_loaded_m": 0.3,
+   "well_length_closed_m": 6.81,
+   "extension_m": 5.55,
+   "length_closed_m": 13.21,
+   "gooseneck_length_m": 3.6,
+   "coupling_height_m": 1.25,
+   "wheelbase_closed_m": 10.53,
+   "width_m": 2.54,
+   "axles": 2,
+   "tyre": "245/70 R17.5",
+   "well_thickness_m": 0.2,
+   "well_thickness_source": "Kaessbohrer, K.SLL 2 test article: 'In the standard configuration, the platform is 200 mm thick' (https://kaessbohrer.com/en/kaessbohrers-k-sll-2-has-tested-by-an-industry-specialist-695-pg, read 2026-10-07)",
+   "ground_clearance_m": 0.1,
+   "ground_clearance_source": "Kaessbohrer newsroom: K.SLL 2 'has the lowest loading height with the ground clearance of just 100 mm' (https://kaessbohrer.com/en/newsroom/kassbohrer-strengthened-the-fleet-of-germany-s-rudebusch-771-n); equals 0.300 - 0.200",
+   "bogie_deck_height_m": 0.95,
+   "bogie_deck_height_source": "Kaessbohrer, K.SLL 2 test article (DE): 'Hoehe Fahrwerk: 950' mm (https://kaessbohrer.com/de/kaessbohrers-k-sll-2-wurde-von-einem-branchenspezialisten-getestet-695-pg)",
+   "ride_height_note": "the 300 mm well height is the air-suspension ride height (ECAS option: 300/340 mm, same test article); the parked trailer is drawn at ride height (assumption)",
+   "extension_note": "product page Pe 5,550 mm; the test article says the well telescopes 5.5 m in 50 cm steps",
+   "floor": "wooden floor in the well between the steel side frames",
+   "floor_source": "Kaessbohrer, K.SLL 2 test article: wooden floor in three segments; Doll vario T2H: 45 mm spruce floor 'zwischen den Flachbettrahmen' (drawn as one floor 45 mm thick between two 80 mm side frames; the frame width is schematic)",
+   "twin_source": "Kaessbohrer, K.SLL 2 test article: 'dual tires 245/70 R 17,5 eightfold plus spare wheel' (https://kaessbohrer.com/en/kaessbohrers-k-sll-2-has-tested-by-an-industry-specialist-695-pg)"
+  },
+  "tyre": {
+   "diameter_m": 0.792,
+   "loaded_radius_m": 0.361,
+   "source": "Michelin XTA2 Energy 245/70R17.5: '31.2 inch / 792 mm', loaded radius '14.2 inch / 361 mm', https://business.michelinman.com/tires/michelin-xta-2-energy",
+   "section_width_m": 0.249,
+   "section_width_source": "Hankook TH31 245/70R17.5: 9.8 in, https://www.hankooktire.com/us/en/tire/vantra/trailerth31-th31.html",
+   "twin_spacing_m": 0.27,
+   "twin_spacing_source": "Michelin XTA2 Energy: minimum dual spacing '10.6 inch / 270 mm'",
+   "twin": true,
+   "twin_source": "Goldhofer NA STZ-H/L 6 'Twin tires: 245/70 R 17.5' (https://www.goldhofer.com/en/north-america/semi-lowloader/stz-h/l-6); Fliegl 'Twin tyres'"
+  },
+  "other_models": {
+   "axle_spacing_m": 1.36,
+   "axle_spacing_source": "Doll vario T2H 'Radstand: 1.360 mm' (https://www.doll-heavyhaulage.com/de/schwertransport-fahrzeuge/tiefbett-sattelauflieger/2-achs-tiefbett-vario-t2h-s3fs21); Goldhofer STZ-VL 1,360/1,510 mm",
+   "width_over_tyres_m": 2.52,
+   "width_over_tyres_source": "Nooteboom EURO low-loader bogie width 2520 (https://www.nooteboom.com/trailers/eurotrailer/euro-low-loader/), another model"
+  },
+  "schematic": {
+   "kingpin_to_front_m": 1.21,
+   "kingpin_to_front_note": "assumed: the closed trailer then meets the 12.00 m king-pin-to-rear limit exactly (13.21 - 1.21, Annex I 1.6); swing clearance (king pin to the vertical face of the neck) 1.94 m, within the 1.90-2.40 m of Goldhofer STEPSTAR but below the 2.03-2.79 m range of the Rogers glossary; front corner radius 1.75 m within the 2.04 m of Annex I 4.4; rear axle 0.79 m from the rear end (wheelbase taken as king pin to the centre of the axle group, the only reading that fits the maker's numbers)",
+   "gooseneck_depth_m": 0.45,
+   "gooseneck_depth_note": "not sourced for the K.SLL 2 (a dealer listing gives about 0.45 m); drawn schematically",
+   "landing_legs_note": "position and type not sourced (a dealer listing of the K.SLL 2 mentions a hydraulic traverse for the detachable gooseneck); two legs under the gooseneck, 0.06 m in front of the neck: the posts lie outside the 1.94 m swing clearance circle, their 0.30 m pads on the road reach 0.05 m inside it; drawn schematically",
+   "rear_step_note": "the step from the well up to the deck over the axles is not sourced: 0.10 m long, 0.15 m in front of the front tyres (whether this leaves room to steer them to the maker's 42 deg depends on the unsourced pivot position)",
+   "underrun_note": "UN R58: bottom at most 0.45 m above the road, section at least 0.12 m high, at most 0.20 m in from the rear, at most 0.10 m narrower each side than the axle (https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:42019X0272)",
+   "extension_floor_note": "the floor of the extended well is an option of such trailers (Langendorf SATBUEV), drawn",
+   "well_underside_note": "flat underside over the whole extended well, drawn as one 2.54 m wide slab; the maker gives the clearance, not the shape (schematic)",
+   "swing_clearance_m": 1.94,
+   "rear_step_m": 0.1,
+   "neck_m": 0.45,
+   "neck_note": "the vertical front of the well up to the gooseneck, 0.45 m long, drawn schematically",
+   "rear_section_note": "deck over the axles drawn as a 60 mm plate on two main beams, with rear lights and mud flaps (schematic; only its height 0.95 m is sourced)",
+   "parked_state_note": "drawn at the 0.30 m air-suspension ride height with undeflected tyres; no load securing, side markers or spare wheel are drawn"
+  }
+ },
+ "knee_walls_footline_m": {
+  "hall_i": 0.08,
+  "hall_ii": 0.3,
+  "hall_iii": 0.5,
+  "source": "design input: height of the foot line above the floor"
+ },
+ "person_height_m": {
+  "value": 1.8,
+  "source": "a person of 1.80 m for scale"
+ },
+ "joint_m": {
+  "value": 0.0,
+  "source": "no joint: the verified slabs are rendered exactly; panel edges are drawn as lines"
+ }
+}

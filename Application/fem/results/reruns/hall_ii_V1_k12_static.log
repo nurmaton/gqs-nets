@@ -1,0 +1,29 @@
+hall_ii_V1_k12_static: 26928 S8R elements, 89947 nodes
+hall_ii_V1_k12_static: gate True (SVD zero 0, FE zero 0), f1 4.331 Hz; snow totals {'S1': 16963, 'S2+': 16284, 'S2-': 16292} N, G 6160 N
+  SLS S1   u_vert 12.91 mm, u_tot 16.89 mm; capacities (r = 0.2 m): {'SLS_deflection_span/200': 2.012, 'ULS_face_vm_fy/gM': 2.377, 'ULS_face_compression_sigma_w': 0.662, 'ULS_core_shear': 3.767, 'SLS_total_span/200': 1.446}
+  SLS S2+  u_vert 15.93 mm, u_tot 20.02 mm; capacities (r = 0.2 m): {'SLS_deflection_span/200': 1.526, 'ULS_face_vm_fy/gM': 2.255, 'ULS_face_compression_sigma_w': 0.641, 'ULS_core_shear': 2.906, 'SLS_total_span/200': 1.158}
+  SLS S2-  u_vert 13.07 mm, u_tot 17.78 mm; capacities (r = 0.2 m): {'SLS_deflection_span/200': 1.979, 'ULS_face_vm_fy/gM': 2.224, 'ULS_face_compression_sigma_w': 0.644, 'ULS_core_shear': 2.961, 'SLS_total_span/200': 1.349}
+  SLS_deflection_span/200        1.526 (S2+): 0.019 m from the nearest hinge line, 0.059 m from the vertex (1, 14); across the span 0.87 (0 foot 1, 1 foot 2), 1.37 m above foot 1
+  ULS_face_vm_fy/gM              2.224 (S2-): on the hinge line (3, 16)-(3, 17), 0.222 m from the support vertex (3, 17); across the span 1.01 (0 foot 1, 1 foot 2), 0.22 m above foot 1
+  ULS_face_compression_sigma_w   0.641 (S2+): on a free edge, 0.222 m from the support vertex (1, 17); across the span 0.98 (0 foot 1, 1 foot 2), 0.13 m above foot 1
+  ULS_core_shear                 2.906 (S2+): on the hinge line (1, 12)-(2, 12), 0.222 m from the vertex (1, 12); across the span 0.81 (0 foot 1, 1 foot 2), 2.09 m above foot 1
+  SLS_total_span/200             1.158 (S2+): on a free edge, 0.022 m from the vertex (0, 14); across the span 0.81 (0 foot 1, 1 foot 2), 1.15 m above foot 1
+  capacity s_k,max = 0.641 kN/m2 (ULS_face_compression_sigma_w, S2+); wrinkling alone at r = 0.2 / 0.15 / 0.1 m: 0.641 / 0.359 / 0.178; 431 s
+      432.30 real       545.32 user        22.01 sys
+          7692943360  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             7751615  page reclaims
+                  51  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 612  voluntary context switches
+              294814  involuntary context switches
+       3683910964396  instructions retired
+        787445425411  cycles elapsed
+          1924287296  peak memory footprint

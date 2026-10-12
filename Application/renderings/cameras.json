@@ -1,0 +1,108 @@
+{
+ "_note": "camera and render settings of the three renderings (two positions per image): scene.py places the camera at target + dist d, d = (-sin az cos el, -cos az cos el, sin el), looking at the target, lens 55 mm on a 36 mm sensor; target and dist follow from the scene (all labelled points in view); location and rotation as Blender set them",
+ "render": {
+  "engine": "CYCLES",
+  "samples": 1024,
+  "size": [
+   3000,
+   1200
+  ],
+  "view_transform": "Standard",
+  "denoise": 1,
+  "adaptive_threshold": 0.003,
+  "seed": 7,
+  "freestyle_lines": true,
+  "line_width": 1.0,
+  "film_transparent": true
+ },
+ "hall_i": {
+  "case": "hall_i",
+  "size": [
+   3000,
+   1200
+  ],
+  "az": 22.0,
+  "el": 26.0,
+  "lens": 55.0,
+  "sensor_width": 36.0,
+  "sensor_fit": "AUTO",
+  "dist": 45.20215273290482,
+  "target": [
+   -4.40384578704834,
+   0.9794706106185913,
+   2.131751775741577
+  ],
+  "location": [
+   -19.6224422454834,
+   -36.68733596801758,
+   21.945518493652344
+  ],
+  "rotation_euler_xyz": [
+   1.1170109510421753,
+   -7.681275171478319e-09,
+   -0.3839724659919739
+  ],
+  "clip_end": 1000.0,
+  "gap": 6.0
+ },
+ "hall_ii": {
+  "case": "hall_ii",
+  "size": [
+   3000,
+   1200
+  ],
+  "az": 32.0,
+  "el": 22.0,
+  "lens": 55.0,
+  "sensor_width": 36.0,
+  "sensor_fit": "AUTO",
+  "dist": 36.71181443083249,
+  "target": [
+   -3.587817668914795,
+   0.30788272619247437,
+   0.9726361632347107
+  ],
+  "location": [
+   -21.625545501708984,
+   -28.558486938476562,
+   14.725103378295898
+  ],
+  "rotation_euler_xyz": [
+   1.186823844909668,
+   6.691863063679193e-08,
+   -0.5585053563117981
+  ],
+  "clip_end": 1000.0,
+  "gap": 5.0
+ },
+ "hall_iii": {
+  "case": "hall_iii",
+  "size": [
+   3000,
+   1200
+  ],
+  "az": 32.0,
+  "el": 22.0,
+  "lens": 55.0,
+  "sensor_width": 36.0,
+  "sensor_fit": "AUTO",
+  "dist": 36.21109424167904,
+  "target": [
+   -3.405381917953491,
+   0.4283541738986969,
+   0.9863174557685852
+  ],
+  "location": [
+   -21.197101593017578,
+   -28.044313430786133,
+   14.551219940185547
+  ],
+  "rotation_euler_xyz": [
+   1.186823844909668,
+   -2.57272905201944e-08,
+   -0.5585053563117981
+  ],
+  "clip_end": 1000.0,
+  "gap": 5.0
+ }
+}

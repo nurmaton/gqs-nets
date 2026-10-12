@@ -1,0 +1,56 @@
+{
+ "V1": {
+  "S1": {
+   "s_max_total": 1.446115232972905,
+   "node_total": 6736,
+   "uG_at_node_mm": 4.319491744378948,
+   "utot_at_sk1_mm": 16.8882155586275,
+   "s_max_vertical": 2.011960549437212,
+   "node_vertical": 6708
+  },
+  "S2+": {
+   "s_max_total": 1.1581994726097609,
+   "node_total": 6277,
+   "uG_at_node_mm": 4.338873645740707,
+   "utot_at_sk1_mm": 20.015346866150434,
+   "s_max_vertical": 1.5257554693846516,
+   "node_vertical": 6708
+  },
+  "S2-": {
+   "s_max_total": 1.3493220534409631,
+   "node_total": 6736,
+   "uG_at_node_mm": 4.319491744378948,
+   "utot_at_sk1_mm": 17.78247751750537,
+   "s_max_vertical": 1.978994469731974,
+   "node_vertical": 6708
+  },
+  "G_only_utot_max_mm": 4.338873645740707
+ },
+ "V3": {
+  "S1": {
+   "s_max_total": 0.0431867022005591,
+   "node_total": 15898,
+   "uG_at_node_mm": 19.647793803534512,
+   "utot_at_sk1_mm": 85.69141502837404,
+   "s_max_vertical": 0.7493071948898169,
+   "node_vertical": 3873
+  },
+  "S2+": {
+   "s_max_total": 0.043972527685032695,
+   "node_total": 15898,
+   "uG_at_node_mm": 19.647793803534512,
+   "utot_at_sk1_mm": 84.51116126739016,
+   "s_max_vertical": 0.7204206674952418,
+   "node_vertical": 21646
+  },
+  "S2-": {
+   "s_max_total": 0.043139394246958396,
+   "node_total": 15898,
+   "uG_at_node_mm": 19.647793803534512,
+   "utot_at_sk1_mm": 85.76384156401276,
+   "s_max_vertical": 0.758147866282524,
+   "node_vertical": 3873
+  },
+  "G_only_utot_max_mm": 19.647793803534512
+ }
+}

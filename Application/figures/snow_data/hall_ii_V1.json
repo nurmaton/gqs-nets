@@ -1,0 +1,62 @@
+{
+ "span": 4.5,
+ "rise": 2.54,
+ "up": [
+  0,
+  0,
+  1.0
+ ],
+ "along": [
+  0,
+  1.0,
+  0
+ ],
+ "k": 12,
+ "tag": "hall_ii_V1_k12",
+ "json": "hall_ii_V1_k12.json",
+ "source": "hall_ii_V1_k12_static.dat (steps G, S1, S2+, S2-)",
+ "sls_from": "G field + S1 field (linear combination)",
+ "case": "hall_ii_V1",
+ "m": 11,
+ "n": 17,
+ "frame_R": [
+  [
+   1.0,
+   0.0,
+   0.0
+  ],
+  [
+   0.0,
+   1.0,
+   0.0
+  ],
+  [
+   0.0,
+   0.0,
+   1.0
+  ]
+ ],
+ "frame_O": [
+  8.881784197001252e-16,
+  -2.5734383892665376,
+  -0.15089880040320455
+ ],
+ "x_foot1": -2.33511940881094,
+ "x_foot2": 2.335119408810939,
+ "checks": {
+  "u_vert_max_mm": 12.911522,
+  "u_tot_max_mm": 16.8882155586275,
+  "json_SLS_S1_u_vert_max_mm": 12.911522,
+  "json_SLS_S1_u_tot_max_mm": 16.8882155586275,
+  "u_vert_max_mm_SLS_S2+": 15.930922,
+  "json_SLS_S2+_u_vert_max_mm": 15.930922,
+  "u_vert_max_mm_SLS_S2-": 13.069359,
+  "json_SLS_S2-_u_vert_max_mm": 13.069359,
+  "capacity_SLS_total_check": 1.4461152329729048,
+  "capacity_SLS_vertical_check": 2.0119605494372115,
+  "u_tot_G_max_mm": 4.338873645740707
+ },
+ "n_spindle": 0,
+ "n_latch": 0,
+ "latch": null
+}

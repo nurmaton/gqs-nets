@@ -1,0 +1,1658 @@
+{
+ "run": "hall_ii_V1_k4_bk_S2p_n30",
+ "source": "hall_ii_V1_k4_bk_S2p_n30",
+ "factors": [
+  2.57288,
+  3.359244,
+  3.79274,
+  3.82902,
+  4.221234,
+  5.054246,
+  5.099715,
+  5.17165,
+  5.564804,
+  5.587927,
+  5.620663,
+  5.649464,
+  5.704239,
+  5.740946,
+  5.995599,
+  6.105836,
+  6.312227,
+  6.362452,
+  6.527601,
+  6.618975,
+  6.65992,
+  6.666919,
+  6.719852,
+  6.817385,
+  6.895366,
+  7.165025,
+  7.170696,
+  7.20256,
+  7.215151,
+  7.34059
+ ],
+ "rows": [
+  {
+   "f_sup": 0.18737466440137526,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.27764907270467387,
+   "f_vtx": 0.18720414750161524,
+   "vtx": [
+    11,
+    0
+   ],
+   "vtx_is_support": true,
+   "peak_xyz": [
+    -2.3591,
+    2.2228,
+    -0.02
+   ],
+   "peak_vertex": [
+    11,
+    0
+   ],
+   "peak_vertex_dist": 0.13308840202034217,
+   "peak_dist_support": 0.13308840202034217,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.0026326614561908677,
+   "f_beyond05": 0.5804123538697631,
+   "n_missing": 0,
+   "g_sup": 0.3467126271395989,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.3460281448654527,
+   "g_vtx_at": [
+    11,
+    0
+   ],
+   "g_vtx_is_support": true,
+   "a_sup": 0.20355951056729688,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 0.22135706340378222,
+   "a_vtx_at": [
+    10,
+    0
+   ],
+   "peak_area_m2": 0.21547196417335693,
+   "peak_extent_m": 0.7985304121220532,
+   "class_deform": "broad",
+   "class_disp": "broad",
+   "R_far05": 0.6111261925315692,
+   "A30": 0.004314150798525802,
+   "class": "local-support",
+   "mode": 1,
+   "factor": 2.57288
+  },
+  {
+   "f_sup": 0.0005870535113838748,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.02895747127492929,
+   "f_vtx": 0.038215076150340685,
+   "vtx": [
+    10,
+    15
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    1.7382,
+    2.5734,
+    1.2041
+   ],
+   "peak_vertex": [
+    11,
+    14
+   ],
+   "peak_vertex_dist": 0.0,
+   "peak_dist_support": 1.5216112764234373,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.29288358700123407,
+   "f_beyond05": 0.9323478501739838,
+   "n_missing": 0,
+   "g_sup": 0.007192055465921722,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.056618030963413536,
+   "g_vtx_at": [
+    10,
+    12
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 0.025098066442184097,
+   "a_vtx_at": [
+    10,
+    8
+   ],
+   "peak_area_m2": 13.808900716222185,
+   "peak_extent_m": 4.853632275593843,
+   "class_deform": "broad",
+   "class_disp": "broad",
+   "R_far05": 0.8442519335988439,
+   "A30": 0.27647996007370934,
+   "class": "broad",
+   "mode": 2,
+   "factor": 3.359244
+  },
+  {
+   "f_sup": 0.0005160261526001192,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.05154951791318404,
+   "f_vtx": 0.05154951791318404,
+   "vtx": [
+    9,
+    13
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    1.4817,
+    1.4145,
+    1.5118
+   ],
+   "peak_vertex": [
+    9,
+    13
+   ],
+   "peak_vertex_dist": 0.0,
+   "peak_dist_support": 1.8689502951027885,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.29082682023858497,
+   "f_beyond05": 0.870057028935785,
+   "n_missing": 0,
+   "g_sup": 0.007193140098666367,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.047344834769016464,
+   "g_vtx_at": [
+    7,
+    13
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 0.02503565203612742,
+   "a_vtx_at": [
+    10,
+    9
+   ],
+   "peak_area_m2": 13.613561838801393,
+   "peak_extent_m": 4.5959999282719854,
+   "class_deform": "broad",
+   "class_disp": "broad",
+   "R_far05": 0.9826565654214003,
+   "A30": 0.2725689112407854,
+   "class": "broad",
+   "mode": 3,
+   "factor": 3.79274
+  },
+  {
+   "f_sup": 0.011081563059799631,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.011610642647306256,
+   "f_vtx": 0.051198291417637175,
+   "vtx": [
+    9,
+    13
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    2.3138,
+    -1.7682,
+    -0.1132
+   ],
+   "peak_vertex": [
+    1,
+    17
+   ],
+   "peak_vertex_dist": 0.06654420101017056,
+   "peak_dist_support": 0.06654420101017056,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 8.227067050596462e-05,
+   "f_beyond05": 0.9866874552654031,
+   "n_missing": 0,
+   "g_sup": 0.7040298822714014,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.7025607816064793,
+   "g_vtx_at": [
+    1,
+    17
+   ],
+   "g_vtx_is_support": true,
+   "a_sup": 1.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    1,
+    17
+   ],
+   "peak_area_m2": 0.0035951940629592037,
+   "peak_extent_m": 0.0,
+   "class_deform": "local-support",
+   "class_disp": "broad",
+   "R_far05": 0.29030489630963935,
+   "A30": 7.198249385749325e-05,
+   "class": "local-support",
+   "mode": 4,
+   "factor": 3.82902
+  },
+  {
+   "f_sup": 0.26696120468507845,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.29283818005849876,
+   "f_vtx": 0.2665697745717785,
+   "vtx": [
+    5,
+    17
+   ],
+   "vtx_is_support": true,
+   "peak_xyz": [
+    2.3138,
+    -0.2526,
+    -0.1132
+   ],
+   "peak_vertex": [
+    5,
+    17
+   ],
+   "peak_vertex_dist": 0.06654420101017058,
+   "peak_dist_support": 0.06654420101017058,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 8.227067050596462e-05,
+   "f_beyond05": 0.6693877662005945,
+   "n_missing": 0,
+   "g_sup": 0.9290136831379728,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.9289591444943847,
+   "g_vtx_at": [
+    5,
+    17
+   ],
+   "g_vtx_is_support": true,
+   "a_sup": 1.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    5,
+    17
+   ],
+   "peak_area_m2": 0.0035951940629592484,
+   "peak_extent_m": 0.0,
+   "class_deform": "local-support",
+   "class_disp": "broad",
+   "R_far05": 0.055585879370937986,
+   "A30": 7.198249385749414e-05,
+   "class": "local-support",
+   "mode": 5,
+   "factor": 4.221234
+  },
+  {
+   "f_sup": 0.0006856962466201365,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.009120276247077765,
+   "f_vtx": 0.06834881594445412,
+   "vtx": [
+    1,
+    3
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    2.23,
+    -0.5691,
+    0.7792
+   ],
+   "peak_vertex": [
+    4,
+    16
+   ],
+   "peak_vertex_dist": 0.11525793709869278,
+   "peak_dist_support": 1.0054032968318742,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.02937062937062937,
+   "f_beyond05": 0.9898969539563205,
+   "n_missing": 0,
+   "g_sup": 0.0020470602532369933,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.7159302903360113,
+   "g_vtx_at": [
+    4,
+    16
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 0.25000000000000006,
+   "a_vtx_at": [
+    1,
+    3
+   ],
+   "peak_area_m2": 1.319196541501845,
+   "peak_extent_m": 4.883517568908898,
+   "class_deform": "local-vertex",
+   "class_disp": "broad",
+   "R_far05": 0.43976865060505854,
+   "A30": 0.02641277641277648,
+   "class": "local-vertex",
+   "mode": 6,
+   "factor": 5.054246
+  },
+  {
+   "f_sup": 0.0007298398296445287,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.06646693768702416,
+   "f_vtx": 0.06646693768702418,
+   "vtx": [
+    1,
+    3
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    -1.7382,
+    -2.1693,
+    1.2041
+   ],
+   "peak_vertex": [
+    1,
+    3
+   ],
+   "peak_vertex_dist": 0.0,
+   "peak_dist_support": 1.5216112764234322,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.2842451665981078,
+   "f_beyond05": 0.8354379608279128,
+   "n_missing": 0,
+   "g_sup": 0.007672942494425442,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.09696856898969412,
+   "g_vtx_at": [
+    1,
+    4
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 0.024926868185444477,
+   "a_vtx_at": [
+    2,
+    8
+   ],
+   "peak_area_m2": 13.519128074747721,
+   "peak_extent_m": 4.4729855308798045,
+   "class_deform": "broad",
+   "class_disp": "broad",
+   "R_far05": 0.9734706515276522,
+   "A30": 0.2706781710687964,
+   "class": "broad",
+   "mode": 7,
+   "factor": 5.099715
+  },
+  {
+   "f_sup": 0.0008942894272366457,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.025313882017488,
+   "f_vtx": 0.058926426324153174,
+   "vtx": [
+    1,
+    4
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    1.5126,
+    -0.1649,
+    1.4072
+   ],
+   "peak_vertex": [
+    5,
+    13
+   ],
+   "peak_vertex_dist": 0.11525793709869109,
+   "peak_dist_support": 1.7622615807134305,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.00041135335252982314,
+   "f_beyond05": 0.9677420125182424,
+   "n_missing": 0,
+   "g_sup": 0.0013012762820367866,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.8433632751064483,
+   "g_vtx_at": [
+    5,
+    13
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 0.9090909090909078,
+   "a_vtx_at": [
+    5,
+    13
+   ],
+   "peak_area_m2": 0.02109180516936066,
+   "peak_extent_m": 3.422186686696629,
+   "class_deform": "local-vertex",
+   "class_disp": "broad",
+   "R_far05": 0.30028854246205194,
+   "A30": 0.0004222972972972937,
+   "class": "local-vertex",
+   "mode": 8,
+   "factor": 5.17165
+  },
+  {
+   "f_sup": 0.0005531627900803737,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.02214682590399282,
+   "f_vtx": 0.04853369594315785,
+   "vtx": [
+    3,
+    4
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    -1.2155,
+    -2.2228,
+    1.29
+   ],
+   "peak_vertex": [
+    0,
+    4
+   ],
+   "peak_vertex_dist": 0.0,
+   "peak_dist_support": 1.8689502951027825,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.2839983545865899,
+   "f_beyond05": 0.9426275330335024,
+   "n_missing": 0,
+   "g_sup": 0.009427809216207476,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.11553044499441502,
+   "g_vtx_at": [
+    5,
+    13
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 0.0247170828094127,
+   "a_vtx_at": [
+    4,
+    2
+   ],
+   "peak_area_m2": 13.342963565662716,
+   "peak_extent_m": 5.003310982090758,
+   "class_deform": "broad",
+   "class_disp": "broad",
+   "R_far05": 0.9891050503664283,
+   "A30": 0.2671510288697791,
+   "class": "broad",
+   "mode": 9,
+   "factor": 5.564804
+  },
+  {
+   "f_sup": 0.0004811264290289304,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.08951521592092752,
+   "f_vtx": 0.0890376996366165,
+   "vtx": [
+    5,
+    14
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    1.6408,
+    0.1114,
+    1.2533
+   ],
+   "peak_vertex": [
+    5,
+    14
+   ],
+   "peak_vertex_dist": 0.11525793709869109,
+   "peak_dist_support": 1.5975461683001044,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.0004936240230357877,
+   "f_beyond05": 0.9077330434500657,
+   "n_missing": 0,
+   "g_sup": 0.0003099517789504765,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.9371332576969775,
+   "g_vtx_at": [
+    5,
+    14
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    5,
+    14
+   ],
+   "peak_area_m2": 0.03067898933725174,
+   "peak_extent_m": 0.13308840202034172,
+   "class_deform": "local-vertex",
+   "class_disp": "broad",
+   "R_far05": 0.17705617427053977,
+   "A30": 0.0006142506142506064,
+   "class": "local-vertex",
+   "mode": 10,
+   "factor": 5.587927
+  },
+  {
+   "f_sup": 0.0005216523814327162,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.01447872296686547,
+   "f_vtx": 0.04767628511880323,
+   "vtx": [
+    3,
+    4
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    -1.472,
+    -2.5734,
+    0.9823
+   ],
+   "peak_vertex": [
+    0,
+    3
+   ],
+   "peak_vertex_dist": 0.0,
+   "peak_dist_support": 1.6120487711530935,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.30711641299876596,
+   "f_beyond05": 0.9671107354320018,
+   "n_missing": 0,
+   "g_sup": 0.0101214064643362,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.052397134052228234,
+   "g_vtx_at": [
+    5,
+    4
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 0.02357114441055558,
+   "a_vtx_at": [
+    2,
+    8
+   ],
+   "peak_area_m2": 14.459391162013647,
+   "peak_extent_m": 6.367577248305506,
+   "class_deform": "broad",
+   "class_disp": "broad",
+   "R_far05": 0.9868187467858306,
+   "A30": 0.2895039926289927,
+   "class": "broad",
+   "mode": 11,
+   "factor": 5.620663
+  },
+  {
+   "f_sup": 0.0006302397074108376,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.0064631568871603,
+   "f_vtx": 0.04420069848079223,
+   "vtx": [
+    3,
+    4
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    2.2632,
+    -0.6196,
+    0.8069
+   ],
+   "peak_vertex": [
+    4,
+    16
+   ],
+   "peak_vertex_dist": 0.13308840202034128,
+   "peak_dist_support": 1.0369645333411275,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.1874125874125874,
+   "f_beyond05": 0.9931656953904328,
+   "n_missing": 0,
+   "g_sup": 0.0031652066459771093,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.6696923927319879,
+   "g_vtx_at": [
+    4,
+    16
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 0.038100512252526725,
+   "a_vtx_at": [
+    5,
+    3
+   ],
+   "peak_area_m2": 8.656028905584858,
+   "peak_extent_m": 4.933677373822096,
+   "class_deform": "local-vertex",
+   "class_disp": "broad",
+   "R_far05": 0.6892403896323585,
+   "A30": 0.17330985104422622,
+   "class": "broad",
+   "mode": 12,
+   "factor": 5.649464
+  },
+  {
+   "f_sup": 0.30321998511087844,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.31274326747824527,
+   "f_vtx": 0.30205128282236104,
+   "vtx": [
+    1,
+    17
+   ],
+   "vtx_is_support": true,
+   "peak_xyz": [
+    2.2713,
+    -1.6671,
+    -0.0377
+   ],
+   "peak_vertex": [
+    1,
+    17
+   ],
+   "peak_vertex_dist": 0.1996326030305115,
+   "peak_dist_support": 0.1996326030305115,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.00041135335252982314,
+   "f_beyond05": 0.6803990501040508,
+   "n_missing": 0,
+   "g_sup": 0.8455589490550142,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.8448870442223552,
+   "g_vtx_at": [
+    1,
+    17
+   ],
+   "g_vtx_is_support": true,
+   "a_sup": 1.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    1,
+    17
+   ],
+   "peak_area_m2": 0.025885397253306283,
+   "peak_extent_m": 0.13308840202034095,
+   "class_deform": "local-support",
+   "class_disp": "broad",
+   "R_far05": 0.0850420343089987,
+   "A30": 0.0005182739557739517,
+   "class": "local-support",
+   "mode": 13,
+   "factor": 5.704239
+  },
+  {
+   "f_sup": 0.0003582333570464322,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.3116617262544191,
+   "f_vtx": 0.31065567526352367,
+   "vtx": [
+    5,
+    13
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    1.4724,
+    -0.2526,
+    1.615
+   ],
+   "peak_vertex": [
+    5,
+    13
+   ],
+   "peak_vertex_dist": 0.11525793709869198,
+   "peak_dist_support": 1.9660188674284231,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.0004936240230357877,
+   "f_beyond05": 0.6846893036894254,
+   "n_missing": 0,
+   "g_sup": 6.0910336561498795e-05,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.9653217077392314,
+   "g_vtx_at": [
+    5,
+    13
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    5,
+    13
+   ],
+   "peak_area_m2": 0.030678989337252008,
+   "peak_extent_m": 0.13308840202034197,
+   "class_deform": "local-vertex",
+   "class_disp": "broad",
+   "R_far05": 0.08594810836816708,
+   "A30": 0.0006142506142506117,
+   "class": "local-vertex",
+   "mode": 14,
+   "factor": 5.740946
+  },
+  {
+   "f_sup": 0.00041724668445026455,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.9103628439876172,
+   "f_vtx": 0.9071845101111863,
+   "vtx": [
+    4,
+    15
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    2.1017,
+    -0.2927,
+    0.9331
+   ],
+   "peak_vertex": [
+    4,
+    15
+   ],
+   "peak_vertex_dist": 0.11525793709869254,
+   "peak_dist_support": 1.1124997309093152,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.0004936240230357877,
+   "f_beyond05": 0.08257472001973355,
+   "n_missing": 0,
+   "g_sup": 1.1560153164572606e-05,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.9695772768442628,
+   "g_vtx_at": [
+    4,
+    15
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    4,
+    15
+   ],
+   "peak_area_m2": 0.03067898933725231,
+   "peak_extent_m": 0.1330884020203426,
+   "class_deform": "local-vertex",
+   "class_disp": "local-vertex",
+   "R_far05": 0.015212082399192034,
+   "A30": 0.0006142506142506178,
+   "class": "local-vertex",
+   "mode": 15,
+   "factor": 5.995599
+  },
+  {
+   "f_sup": 0.19897508450457121,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.28854280398995985,
+   "f_vtx": 0.19864636845348105,
+   "vtx": [
+    11,
+    17
+   ],
+   "vtx_is_support": true,
+   "peak_xyz": [
+    2.3591,
+    2.2228,
+    -0.02
+   ],
+   "peak_vertex": [
+    11,
+    17
+   ],
+   "peak_vertex_dist": 0.13308840202034355,
+   "peak_dist_support": 0.13308840202034355,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.002221308103661045,
+   "f_beyond05": 0.5869662363089202,
+   "n_missing": 0,
+   "g_sup": 0.37170730653963985,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.3702678109938309,
+   "g_vtx_at": [
+    11,
+    17
+   ],
+   "g_vtx_is_support": true,
+   "a_sup": 0.24399999999999997,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 0.2653333333333345,
+   "a_vtx_at": [
+    10,
+    17
+   ],
+   "peak_area_m2": 0.1797597031479626,
+   "peak_extent_m": 0.6654420101017176,
+   "class_deform": "broad",
+   "class_disp": "broad",
+   "R_far05": 0.47068067061497254,
+   "A30": 0.0035991246928747107,
+   "class": "local-support",
+   "mode": 16,
+   "factor": 6.105836
+  },
+  {
+   "f_sup": 0.002550406096449286,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.05119504799515736,
+   "f_vtx": 0.05266629026169695,
+   "vtx": [
+    5,
+    13
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    1.4724,
+    -0.2526,
+    1.615
+   ],
+   "peak_vertex": [
+    5,
+    13
+   ],
+   "peak_vertex_dist": 0.11525793709869198,
+   "peak_dist_support": 1.9660188674284231,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.00032908268202385847,
+   "f_beyond05": 0.9348430799748506,
+   "n_missing": 0,
+   "g_sup": 0.001714483139822467,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.9243837201175857,
+   "g_vtx_at": [
+    5,
+    13
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    5,
+    13
+   ],
+   "peak_area_m2": 0.02300924200293896,
+   "peak_extent_m": 0.23857837996030834,
+   "class_deform": "local-vertex",
+   "class_disp": "broad",
+   "R_far05": 0.20820874356646127,
+   "A30": 0.00046068796068795794,
+   "class": "local-vertex",
+   "mode": 17,
+   "factor": 6.312227
+  },
+  {
+   "f_sup": 0.18187869745346674,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.20674747997377663,
+   "f_vtx": 0.18148808902117464,
+   "vtx": [
+    11,
+    0
+   ],
+   "vtx_is_support": true,
+   "peak_xyz": [
+    -2.3135,
+    2.1218,
+    0.0391
+   ],
+   "peak_vertex": [
+    11,
+    0
+   ],
+   "peak_vertex_dist": 0.216268653283056,
+   "peak_dist_support": 0.216268653283056,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.0009049773755656109,
+   "f_beyond05": 0.7644662894898477,
+   "n_missing": 0,
+   "g_sup": 0.8104175689418347,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.8099806890735679,
+   "g_vtx_at": [
+    11,
+    0
+   ],
+   "g_vtx_is_support": true,
+   "a_sup": 0.6666666666666666,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 0.6666666666666666,
+   "a_vtx_at": [
+    11,
+    0
+   ],
+   "peak_area_m2": 0.06039926025771515,
+   "peak_extent_m": 0.49602218837120504,
+   "class_deform": "local-support",
+   "class_disp": "broad",
+   "R_far05": 0.2706002457624528,
+   "A30": 0.0012093058968058973,
+   "class": "local-support",
+   "mode": 18,
+   "factor": 6.362452
+  },
+  {
+   "f_sup": 0.0005408498676849863,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.05271006124168451,
+   "f_vtx": 0.059234249540332025,
+   "vtx": [
+    10,
+    15
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    1.6408,
+    0.1114,
+    1.2533
+   ],
+   "peak_vertex": [
+    5,
+    14
+   ],
+   "peak_vertex_dist": 0.11525793709869109,
+   "peak_dist_support": 1.5975461683001044,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.00024681201151789385,
+   "f_beyond05": 0.9271757197501713,
+   "n_missing": 0,
+   "g_sup": 0.0006412561940669855,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.9126821413775483,
+   "g_vtx_at": [
+    5,
+    14
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    5,
+    14
+   ],
+   "peak_area_m2": 0.015339494668625858,
+   "peak_extent_m": 0.11525793709869164,
+   "class_deform": "local-vertex",
+   "class_disp": "broad",
+   "R_far05": 0.2692589052170725,
+   "A30": 0.000307125307125303,
+   "class": "local-vertex",
+   "mode": 19,
+   "factor": 6.527601
+  },
+  {
+   "f_sup": 0.6385767785540054,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.6526259807579494,
+   "f_vtx": 0.6381967783008979,
+   "vtx": [
+    1,
+    17
+   ],
+   "vtx_is_support": true,
+   "peak_xyz": [
+    2.2926,
+    -1.7176,
+    -0.0754
+   ],
+   "peak_vertex": [
+    1,
+    17
+   ],
+   "peak_vertex_dist": 0.13308840202034095,
+   "peak_dist_support": 0.13308840202034095,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.00024681201151789385,
+   "f_beyond05": 0.3412919092574947,
+   "n_missing": 0,
+   "g_sup": 0.9771663912761697,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.9771162328754975,
+   "g_vtx_at": [
+    1,
+    17
+   ],
+   "g_vtx_is_support": true,
+   "a_sup": 1.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    1,
+    17
+   ],
+   "peak_area_m2": 0.013422057835047699,
+   "peak_extent_m": 0.06654420101017056,
+   "class_deform": "local-support",
+   "class_disp": "local-support",
+   "R_far05": 0.035614626103851584,
+   "A30": 0.00026873464373464157,
+   "class": "local-support",
+   "mode": 20,
+   "factor": 6.618975
+  },
+  {
+   "f_sup": 0.12508124050618652,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.2017362561019195,
+   "f_vtx": 0.2048619000558163,
+   "vtx": [
+    4,
+    15
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    1.9045,
+    -0.2051,
+    1.01
+   ],
+   "peak_vertex": [
+    4,
+    15
+   ],
+   "peak_vertex_dist": 0.11525793709869224,
+   "peak_dist_support": 1.2381762824294384,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.0008227067050596463,
+   "f_beyond05": 0.77064272128564,
+   "n_missing": 0,
+   "g_sup": 0.08409623819835997,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.8559986119771676,
+   "g_vtx_at": [
+    4,
+    15
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.42081447963800983,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 0.5791855203619901,
+   "a_vtx_at": [
+    4,
+    15
+   ],
+   "peak_area_m2": 0.052969192527599566,
+   "peak_extent_m": 1.1568728683887861,
+   "class_deform": "local-vertex",
+   "class_disp": "broad",
+   "R_far05": 0.8107496385376107,
+   "A30": 0.0010605420761670798,
+   "class": "local-vertex",
+   "mode": 21,
+   "factor": 6.65992
+  },
+  {
+   "f_sup": 0.5295331272090146,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.543202999006116,
+   "f_vtx": 0.5291309798975171,
+   "vtx": [
+    5,
+    17
+   ],
+   "vtx_is_support": true,
+   "peak_xyz": [
+    2.2713,
+    -0.3536,
+    -0.0377
+   ],
+   "peak_vertex": [
+    5,
+    17
+   ],
+   "peak_vertex_dist": 0.19963260303051195,
+   "peak_dist_support": 0.19963260303051195,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.00032908268202385847,
+   "f_beyond05": 0.4498528585101071,
+   "n_missing": 0,
+   "g_sup": 0.8432734605507619,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.8430938357844652,
+   "g_vtx_at": [
+    5,
+    17
+   ],
+   "g_vtx_is_support": true,
+   "a_sup": 1.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    5,
+    17
+   ],
+   "peak_area_m2": 0.02229020319034737,
+   "peak_extent_m": 0.10119314312832615,
+   "class_deform": "local-support",
+   "class_disp": "local-support",
+   "R_far05": 0.08834166830345329,
+   "A30": 0.0004462914619164643,
+   "class": "local-support",
+   "mode": 22,
+   "factor": 6.666919
+  },
+  {
+   "f_sup": 0.0010172788785004364,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.20306181938416867,
+   "f_vtx": 0.19725012337426154,
+   "vtx": [
+    5,
+    13
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    1.4724,
+    -0.1516,
+    1.615
+   ],
+   "peak_vertex": [
+    5,
+    13
+   ],
+   "peak_vertex_dist": 0.11525793709869209,
+   "peak_dist_support": 1.9660188674284236,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.00041135335252982314,
+   "f_beyond05": 0.7826533486998152,
+   "n_missing": 0,
+   "g_sup": 0.0007091171710356716,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.891643786197069,
+   "g_vtx_at": [
+    5,
+    13
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    5,
+    13
+   ],
+   "peak_area_m2": 0.02684411567009545,
+   "peak_extent_m": 0.13308840202034147,
+   "class_deform": "local-vertex",
+   "class_disp": "broad",
+   "R_far05": 0.12135009882448064,
+   "A30": 0.0005374692874692841,
+   "class": "local-vertex",
+   "mode": 23,
+   "factor": 6.719852
+  },
+  {
+   "f_sup": 0.003599767106890361,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.5936258752721478,
+   "f_vtx": 0.5816903916467341,
+   "vtx": [
+    4,
+    16
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    2.2974,
+    -0.7073,
+    0.5664
+   ],
+   "peak_vertex": [
+    4,
+    16
+   ],
+   "peak_vertex_dist": 0.15247191909473365,
+   "peak_dist_support": 0.7795902365597351,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.0005758946935417523,
+   "f_beyond05": 0.28979381597658704,
+   "n_missing": 0,
+   "g_sup": 0.002988365974886762,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.7816966732466162,
+   "g_vtx_at": [
+    4,
+    16
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 0.8888888888888883,
+   "a_vtx_at": [
+    4,
+    16
+   ],
+   "peak_area_m2": 0.04314232875551087,
+   "peak_extent_m": 0.4990815075762875,
+   "class_deform": "local-vertex",
+   "class_disp": "local-vertex",
+   "R_far05": 0.21922997354096438,
+   "A30": 0.0008637899262899275,
+   "class": "local-vertex",
+   "mode": 24,
+   "factor": 6.817385
+  },
+  {
+   "f_sup": 0.5087975475093721,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.565538661225655,
+   "f_vtx": 0.5084317357979684,
+   "vtx": [
+    7,
+    0
+   ],
+   "vtx_is_support": true,
+   "peak_xyz": [
+    -2.3138,
+    0.6567,
+    -0.1132
+   ],
+   "peak_vertex": [
+    7,
+    0
+   ],
+   "peak_vertex_dist": 0.06654420101017108,
+   "peak_dist_support": 0.06654420101017108,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 8.227067050596462e-05,
+   "f_beyond05": 0.36270986825370716,
+   "n_missing": 0,
+   "g_sup": 0.9292884858855797,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.9292582697668508,
+   "g_vtx_at": [
+    7,
+    0
+   ],
+   "g_vtx_is_support": true,
+   "a_sup": 1.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    7,
+    0
+   ],
+   "peak_area_m2": 0.003595194062959241,
+   "peak_extent_m": 0.0,
+   "class_deform": "local-support",
+   "class_disp": "local-support",
+   "R_far05": 0.04002724126875949,
+   "A30": 7.198249385749399e-05,
+   "class": "local-support",
+   "mode": 25,
+   "factor": 6.895366
+  },
+  {
+   "f_sup": 0.004979983370994737,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.8675112802771167,
+   "f_vtx": 0.8440843098774659,
+   "vtx": [
+    4,
+    16
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    2.2671,
+    -0.5557,
+    0.555
+   ],
+   "peak_vertex": [
+    4,
+    16
+   ],
+   "peak_vertex_dist": 0.12993170609329083,
+   "peak_dist_support": 0.792441974660378,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.00032908268202385847,
+   "f_beyond05": 0.06187293489286032,
+   "n_missing": 0,
+   "g_sup": 0.003875776412364345,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.8934190930010768,
+   "g_vtx_at": [
+    4,
+    16
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 0.7959183673469398,
+   "a_vtx_at": [
+    4,
+    16
+   ],
+   "peak_area_m2": 0.023488601211333976,
+   "peak_extent_m": 0.48587520754652574,
+   "class_deform": "local-vertex",
+   "class_disp": "local-vertex",
+   "R_far05": 0.10428164658914833,
+   "A30": 0.0004702856265356328,
+   "class": "local-vertex",
+   "mode": 26,
+   "factor": 7.165025
+  },
+  {
+   "f_sup": 0.0013113957597422272,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.3168796854002502,
+   "f_vtx": 0.31539215544067,
+   "vtx": [
+    8,
+    1
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    -2.23,
+    0.9732,
+    0.7792
+   ],
+   "peak_vertex": [
+    8,
+    1
+   ],
+   "peak_vertex_dist": 0.11525793709869252,
+   "peak_dist_support": 1.0054032968318711,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.00032908268202385847,
+   "f_beyond05": 0.6684469133250194,
+   "n_missing": 0,
+   "g_sup": 0.00029220097855023894,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.9697043039283395,
+   "g_vtx_at": [
+    8,
+    1
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    8,
+    1
+   ],
+   "peak_area_m2": 0.019174368335782573,
+   "peak_extent_m": 0.1330884020203419,
+   "class_deform": "local-vertex",
+   "class_disp": "broad",
+   "R_far05": 0.05258679237182313,
+   "A30": 0.0003839066339066337,
+   "class": "local-vertex",
+   "mode": 27,
+   "factor": 7.170696
+  },
+  {
+   "f_sup": 0.0007597588174466575,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.38719203648806877,
+   "f_vtx": 0.3946107678876123,
+   "vtx": [
+    4,
+    15
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    2.1017,
+    -0.2927,
+    0.9331
+   ],
+   "peak_vertex": [
+    4,
+    15
+   ],
+   "peak_vertex_dist": 0.11525793709869254,
+   "peak_dist_support": 1.1124997309093152,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.00032908268202385847,
+   "f_beyond05": 0.58258864979607,
+   "n_missing": 0,
+   "g_sup": 0.00010089962300379756,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.973054634265153,
+   "g_vtx_at": [
+    4,
+    15
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    4,
+    15
+   ],
+   "peak_area_m2": 0.019174368335782677,
+   "peak_extent_m": 0.19882190123939603,
+   "class_deform": "local-vertex",
+   "class_disp": "broad",
+   "R_far05": 0.04386515459126061,
+   "A30": 0.0003839066339066358,
+   "class": "local-vertex",
+   "mode": 28,
+   "factor": 7.20256
+  },
+  {
+   "f_sup": 0.6762044403424063,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.6883696957918687,
+   "f_vtx": 0.6759481135635306,
+   "vtx": [
+    5,
+    17
+   ],
+   "vtx_is_support": true,
+   "peak_xyz": [
+    2.2926,
+    -0.3031,
+    -0.0754
+   ],
+   "peak_vertex": [
+    5,
+    17
+   ],
+   "peak_vertex_dist": 0.13308840202034133,
+   "peak_dist_support": 0.13308840202034133,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.00016454134101192923,
+   "f_beyond05": 0.3072394942643671,
+   "n_missing": 0,
+   "g_sup": 0.9805484198792913,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.9804789003229147,
+   "g_vtx_at": [
+    5,
+    17
+   ],
+   "g_vtx_is_support": true,
+   "a_sup": 1.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    5,
+    17
+   ],
+   "peak_area_m2": 0.010306222980483185,
+   "peak_extent_m": 0.06654420101017076,
+   "class_deform": "local-support",
+   "class_disp": "local-support",
+   "R_far05": 0.03952223964405086,
+   "A30": 0.00020634981572481667,
+   "class": "local-support",
+   "mode": 29,
+   "factor": 7.215151
+  },
+  {
+   "f_sup": 0.0007305941097252444,
+   "f_spin": 0.0,
+   "f_latch": 0.0,
+   "f_peak": 0.21631580946983175,
+   "f_vtx": 0.21722478031570136,
+   "vtx": [
+    4,
+    16
+   ],
+   "vtx_is_support": false,
+   "peak_xyz": [
+    2.2953,
+    -0.6634,
+    0.7685
+   ],
+   "peak_vertex": [
+    4,
+    16
+   ],
+   "peak_vertex_dist": 0.11525793709869102,
+   "peak_dist_support": 0.9834512689745503,
+   "peak_dist_spindle_end": null,
+   "peak_dist_latch": null,
+   "part30": 0.00041135335252982314,
+   "f_beyond05": 0.7737453241918166,
+   "n_missing": 0,
+   "g_sup": 0.0002662087889914753,
+   "g_spin": 0.0,
+   "g_latch": 0.0,
+   "g_vtx": 0.9557165549229917,
+   "g_vtx_at": [
+    4,
+    16
+   ],
+   "g_vtx_is_support": false,
+   "a_sup": 0.0,
+   "a_spin": 0.0,
+   "a_latch": 0.0,
+   "a_vtx": 1.0,
+   "a_vtx_at": [
+    4,
+    16
+   ],
+   "peak_area_m2": 0.026844115670095328,
+   "peak_extent_m": 0.11525793709869205,
+   "class_deform": "local-vertex",
+   "class_disp": "broad",
+   "R_far05": 0.1503712690248946,
+   "A30": 0.0005374692874692817,
+   "class": "local-vertex",
+   "mode": 30,
+   "factor": 7.34059
+  }
+ ]
+}

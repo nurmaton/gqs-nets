@@ -1,0 +1,143 @@
+{
+ "tag": "hall_iii_V3_k8_bk_s0.05",
+ "variant": "V3",
+ "scale": 0.05,
+ "f1_Hz": 2.692657,
+ "runs": {
+  "bk_S1_n6": {
+   "case": "S1",
+   "nmodes": 6,
+   "factors": [
+    2.014812,
+    2.063089,
+    2.1879090000000003,
+    2.6832485,
+    2.8612255,
+    2.867927
+   ],
+   "window": [
+    0.025219843844038203,
+    2.867927
+   ],
+   "classA": [
+    "local-spindle",
+    "broad",
+    "broad",
+    "broad",
+    "broad",
+    "local-spindle"
+   ],
+   "classB": [
+    "Lspin",
+    "BROAD",
+    "BROAD",
+    "BROAD",
+    "BROAD",
+    "Lspin"
+   ],
+   "lowest_broad_A": [
+    2,
+    2.063089
+   ],
+   "lowest_broad_B": [
+    2,
+    2.063089
+   ],
+   "margin_ok": [
+    false,
+    false
+   ],
+   "ccx_s": 109.75064396858215
+  },
+  "bk_S2p_n6": {
+   "case": "S2+",
+   "nmodes": 6,
+   "factors": [
+    2.1873270000000002,
+    2.2175920000000002,
+    2.2950725,
+    2.4174745000000004,
+    2.7903605000000002,
+    2.8564985000000003
+   ],
+   "window": [
+    0.02522073117820829,
+    2.8564985000000003
+   ],
+   "classA": [
+    "broad",
+    "broad",
+    "broad",
+    "broad",
+    "broad",
+    "local-vertex"
+   ],
+   "classB": [
+    "BROAD",
+    "BROAD",
+    "BROAD",
+    "BROAD",
+    "BROAD",
+    "Lvtx"
+   ],
+   "lowest_broad_A": [
+    1,
+    2.1873270000000002
+   ],
+   "lowest_broad_B": [
+    1,
+    2.1873270000000002
+   ],
+   "margin_ok": [
+    true,
+    true
+   ],
+   "ccx_s": 96.50266003608704
+  },
+  "bk_S2m_n6": {
+   "case": "S2-",
+   "nmodes": 6,
+   "factors": [
+    2.03204,
+    2.065,
+    2.118432,
+    2.4149815,
+    2.7029785000000004,
+    2.8209265
+   ],
+   "window": [
+    0.025223539495762858,
+    2.8209265
+   ],
+   "classA": [
+    "broad",
+    "broad",
+    "broad",
+    "broad",
+    "local-vertex",
+    "broad"
+   ],
+   "classB": [
+    "BROAD",
+    "BROAD",
+    "BROAD",
+    "BROAD",
+    "Lvtx",
+    "BROAD"
+   ],
+   "lowest_broad_A": [
+    1,
+    2.03204
+   ],
+   "lowest_broad_B": [
+    1,
+    2.03204
+   ],
+   "margin_ok": [
+    true,
+    true
+   ],
+   "ccx_s": 110.51010394096375
+  }
+ }
+}
