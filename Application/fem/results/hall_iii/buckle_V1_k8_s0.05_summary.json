@@ -1,0 +1,143 @@
+{
+ "tag": "hall_iii_V1_k8_bk_s0.05",
+ "variant": "V1",
+ "scale": 0.05,
+ "f1_Hz": 4.419632,
+ "runs": {
+  "bk_S1_n6": {
+   "case": "S1",
+   "nmodes": 6,
+   "factors": [
+    1.459616,
+    1.4620710000000001,
+    2.0531265000000003,
+    2.0533345,
+    3.0661635,
+    3.1053665
+   ],
+   "window": [
+    0.025202897934385408,
+    3.1053665
+   ],
+   "classA": [
+    "local-support",
+    "local-support",
+    "local-support",
+    "local-support",
+    "broad",
+    "broad"
+   ],
+   "classB": [
+    "Lsup",
+    "Lsup",
+    "Lsup",
+    "Lsup",
+    "BROAD",
+    "BROAD"
+   ],
+   "lowest_broad_A": [
+    5,
+    3.0661635
+   ],
+   "lowest_broad_B": [
+    5,
+    3.0661635
+   ],
+   "margin_ok": [
+    false,
+    false
+   ],
+   "ccx_s": 87.12348198890686
+  },
+  "bk_S2p_n6": {
+   "case": "S2+",
+   "nmodes": 6,
+   "factors": [
+    1.3313065000000002,
+    1.652002,
+    1.9628825,
+    2.072454,
+    2.6598710000000003,
+    2.936205
+   ],
+   "window": [
+    0.02521468773239947,
+    2.936205
+   ],
+   "classA": [
+    "local-support",
+    "local-support",
+    "local-support",
+    "local-support",
+    "broad",
+    "broad"
+   ],
+   "classB": [
+    "Lsup",
+    "Lsup",
+    "Lsup",
+    "Lsup",
+    "BROAD",
+    "BROAD"
+   ],
+   "lowest_broad_A": [
+    5,
+    2.6598710000000003
+   ],
+   "lowest_broad_B": [
+    5,
+    2.6598710000000003
+   ],
+   "margin_ok": [
+    false,
+    false
+   ],
+   "ccx_s": 87.26284122467041
+  },
+  "bk_S2m_n6": {
+   "case": "S2-",
+   "nmodes": 6,
+   "factors": [
+    1.331194,
+    1.6524315000000003,
+    1.9629020000000001,
+    2.072867,
+    2.6604975,
+    2.9366115
+   ],
+   "window": [
+    0.02521465775911381,
+    2.9366115
+   ],
+   "classA": [
+    "local-support",
+    "local-support",
+    "local-support",
+    "local-support",
+    "broad",
+    "broad"
+   ],
+   "classB": [
+    "Lsup",
+    "Lsup",
+    "Lsup",
+    "Lsup",
+    "BROAD",
+    "BROAD"
+   ],
+   "lowest_broad_A": [
+    5,
+    2.6604975
+   ],
+   "lowest_broad_B": [
+    5,
+    2.6604975
+   ],
+   "margin_ok": [
+    false,
+    false
+   ],
+   "ccx_s": 87.72024822235107
+  }
+ }
+}

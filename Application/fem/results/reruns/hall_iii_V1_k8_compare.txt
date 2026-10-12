@@ -1,0 +1,116 @@
+this run: hall_iii_V1_k8_static.json
+stored:   fem/results/hall_iii/static_V1_k8.json
+  snow total S1 (N)                                                  this run        13218.985   stored        13218.985   rel. diff 0.0e+00
+  snow total S2+ (N)                                                 this run       12392.4634   stored       12392.4634   rel. diff 0.0e+00
+  snow total S2- (N)                                                 this run       12392.3428   stored       12392.3428   rel. diff 0.0e+00
+  self-weight (N)                                                    this run       5312.33024   stored       5312.33024   rel. diff 0.0e+00
+  first frequency (Hz)                                               this run         4.419632   stored         4.419632   rel. diff 0.0e+00
+  SLS_S1 largest vertical displacement (m)                           this run      0.010406783   stored      0.010406783   rel. diff 0.0e+00
+  SLS_S1 largest total displacement (m)                              this run     0.0121856443   stored     0.0121856443   rel. diff 0.0e+00
+  SLS_S1 largest face von Mises stress (Pa)                          this run        323172790   stored        323172790   rel. diff 0.0e+00
+  SLS_S1 largest face compression (Pa)                               this run        346849326   stored        346849326   rel. diff 0.0e+00
+  SLS_S1 largest core shear stress (Pa)                              this run       62865.8259   stored       62865.8259   rel. diff 0.0e+00
+  SLS_S2+ largest vertical displacement (m)                          this run      0.013263496   stored      0.013263496   rel. diff 0.0e+00
+  SLS_S2+ largest total displacement (m)                             this run     0.0157096879   stored     0.0157096879   rel. diff 0.0e+00
+  SLS_S2+ largest face von Mises stress (Pa)                         this run        431629483   stored        431629483   rel. diff 0.0e+00
+  SLS_S2+ largest face compression (Pa)                              this run        463530170   stored        463530170   rel. diff 0.0e+00
+  SLS_S2+ largest core shear stress (Pa)                             this run       78897.4726   stored       78897.4726   rel. diff 0.0e+00
+  SLS_S2- largest vertical displacement (m)                          this run      0.013260289   stored      0.013260289   rel. diff 0.0e+00
+  SLS_S2- largest total displacement (m)                             this run     0.0157044667   stored     0.0157044667   rel. diff 0.0e+00
+  SLS_S2- largest face von Mises stress (Pa)                         this run        431488403   stored        431488403   rel. diff 0.0e+00
+  SLS_S2- largest face compression (Pa)                              this run        463378716   stored        463378716   rel. diff 0.0e+00
+  SLS_S2- largest core shear stress (Pa)                             this run       78852.1725   stored       78852.1725   rel. diff 0.0e+00
+  ULS_S1 largest vertical displacement (m)                           this run     0.0152860042   stored     0.0152860042   rel. diff 0.0e+00
+  ULS_S1 largest total displacement (m)                              this run     0.0178895842   stored     0.0178895842   rel. diff 0.0e+00
+  ULS_S1 largest face von Mises stress (Pa)                          this run        474595911   stored        474595911   rel. diff 0.0e+00
+  ULS_S1 largest face compression (Pa)                               this run        509376785   stored        509376785   rel. diff 0.0e+00
+  ULS_S1 largest core shear stress (Pa)                              this run       91987.8623   stored       91987.8623   rel. diff 0.0e+00
+  ULS_S2+ largest vertical displacement (m)                          this run     0.0195776511   stored     0.0195776511   rel. diff 0.0e+00
+  ULS_S2+ largest total displacement (m)                             this run      0.023184032   stored      0.023184032   rel. diff 0.0e+00
+  ULS_S2+ largest face von Mises stress (Pa)                         this run        637281143   stored        637281143   rel. diff 0.0e+00
+  ULS_S2+ largest face compression (Pa)                              this run        684398155   stored        684398155   rel. diff 0.0e+00
+  ULS_S2+ largest core shear stress (Pa)                             this run       116605.245   stored       116605.245   rel. diff 0.0e+00
+  ULS_S2- largest vertical displacement (m)                          this run     0.0195729856   stored     0.0195729856   rel. diff 0.0e+00
+  ULS_S2- largest total displacement (m)                             this run     0.0231762043   stored     0.0231762043   rel. diff 0.0e+00
+  ULS_S2- largest face von Mises stress (Pa)                         this run        637069523   stored        637069523   rel. diff 0.0e+00
+  ULS_S2- largest face compression (Pa)                              this run        684170975   stored        684170975   rel. diff 0.0e+00
+  ULS_S2- largest core shear stress (Pa)                             this run       116537.295   stored       116537.295   rel. diff 0.0e+00
+  capacity S1 SLS_deflection_span/200, r = 0 m (kN/m2)               this run       2.13614079   stored       2.13614079   rel. diff 0.0e+00
+  capacity S1 ULS_face_vm_fy/gM, r = 0 m (kN/m2)                     this run      0.425644718   stored      0.425644718   rel. diff 0.0e+00
+  capacity S1 ULS_face_compression_sigma_w, r = 0 m (kN/m2)          this run                0   stored                0   rel. diff 0.0e+00
+  capacity S1 ULS_core_shear, r = 0 m (kN/m2)                        this run        1.1125458   stored        1.1125458   rel. diff 0.0e+00
+  capacity S1 SLS_deflection_span/200, r = 0.05 m (kN/m2)            this run       2.13614079   stored       2.13614079   rel. diff 0.0e+00
+  capacity S1 ULS_face_vm_fy/gM, r = 0.05 m (kN/m2)                  this run       2.63261883   stored       2.63261883   rel. diff 0.0e+00
+  capacity S1 ULS_face_compression_sigma_w, r = 0.05 m (kN/m2)       this run      0.572951034   stored      0.572951034   rel. diff 0.0e+00
+  capacity S1 ULS_core_shear, r = 0.05 m (kN/m2)                     this run       2.66656702   stored       2.66656702   rel. diff 0.0e+00
+  capacity S1 SLS_deflection_span/200, r = 0.1 m (kN/m2)             this run       2.13614079   stored       2.13614079   rel. diff 0.0e+00
+  capacity S1 ULS_face_vm_fy/gM, r = 0.1 m (kN/m2)                   this run       3.04294799   stored       3.04294799   rel. diff 0.0e+00
+  capacity S1 ULS_face_compression_sigma_w, r = 0.1 m (kN/m2)        this run      0.711217117   stored      0.711217117   rel. diff 0.0e+00
+  capacity S1 ULS_core_shear, r = 0.1 m (kN/m2)                      this run       3.00979532   stored       3.00979532   rel. diff 0.0e+00
+  capacity S1 SLS_deflection_span/200, r = 0.15 m (kN/m2)            this run       2.13614079   stored       2.13614079   rel. diff 0.0e+00
+  capacity S1 ULS_face_vm_fy/gM, r = 0.15 m (kN/m2)                  this run        3.9688865   stored        3.9688865   rel. diff 0.0e+00
+  capacity S1 ULS_face_compression_sigma_w, r = 0.15 m (kN/m2)       this run      0.958815019   stored      0.958815019   rel. diff 0.0e+00
+  capacity S1 ULS_core_shear, r = 0.15 m (kN/m2)                     this run       3.34032884   stored       3.34032884   rel. diff 0.0e+00
+  capacity S1 SLS_deflection_span/200, r = 0.2 m (kN/m2)             this run       2.13614079   stored       2.13614079   rel. diff 0.0e+00
+  capacity S1 ULS_face_vm_fy/gM, r = 0.2 m (kN/m2)                   this run       6.61480515   stored       6.61480515   rel. diff 0.0e+00
+  capacity S1 ULS_face_compression_sigma_w, r = 0.2 m (kN/m2)        this run       7.25329524   stored       7.25329524   rel. diff 0.0e+00
+  capacity S1 ULS_core_shear, r = 0.2 m (kN/m2)                      this run       12.1916684   stored       12.1916684   rel. diff 0.0e+00
+  capacity S2+ SLS_deflection_span/200, r = 0 m (kN/m2)              this run       1.58418996   stored       1.58418996   rel. diff 0.0e+00
+  capacity S2+ ULS_face_vm_fy/gM, r = 0 m (kN/m2)                    this run      0.298778031   stored      0.298778031   rel. diff 0.0e+00
+  capacity S2+ ULS_face_compression_sigma_w, r = 0 m (kN/m2)         this run                0   stored                0   rel. diff 0.0e+00
+  capacity S2+ ULS_core_shear, r = 0 m (kN/m2)                       this run      0.835488316   stored      0.835488316   rel. diff 0.0e+00
+  capacity S2+ SLS_deflection_span/200, r = 0.05 m (kN/m2)           this run       1.58418996   stored       1.58418996   rel. diff 0.0e+00
+  capacity S2+ ULS_face_vm_fy/gM, r = 0.05 m (kN/m2)                 this run       1.86237857   stored       1.86237857   rel. diff 0.0e+00
+  capacity S2+ ULS_face_compression_sigma_w, r = 0.05 m (kN/m2)      this run      0.405600301   stored      0.405600301   rel. diff 0.0e+00
+  capacity S2+ ULS_core_shear, r = 0.05 m (kN/m2)                    this run       2.15658004   stored       2.15658004   rel. diff 0.0e+00
+  capacity S2+ SLS_deflection_span/200, r = 0.1 m (kN/m2)            this run       1.58418996   stored       1.58418996   rel. diff 0.0e+00
+  capacity S2+ ULS_face_vm_fy/gM, r = 0.1 m (kN/m2)                  this run       2.15231356   stored       2.15231356   rel. diff 0.0e+00
+  capacity S2+ ULS_face_compression_sigma_w, r = 0.1 m (kN/m2)       this run      0.503643704   stored      0.503643704   rel. diff 0.0e+00
+  capacity S2+ ULS_core_shear, r = 0.1 m (kN/m2)                     this run       2.28330857   stored       2.28330857   rel. diff 0.0e+00
+  capacity S2+ SLS_deflection_span/200, r = 0.15 m (kN/m2)           this run       1.58418996   stored       1.58418996   rel. diff 0.0e+00
+  capacity S2+ ULS_face_vm_fy/gM, r = 0.15 m (kN/m2)                 this run       2.79556231   stored       2.79556231   rel. diff 0.0e+00
+  capacity S2+ ULS_face_compression_sigma_w, r = 0.15 m (kN/m2)      this run      0.675746104   stored      0.675746104   rel. diff 0.0e+00
+  capacity S2+ ULS_core_shear, r = 0.15 m (kN/m2)                    this run       2.40801356   stored       2.40801356   rel. diff 0.0e+00
+  capacity S2+ SLS_deflection_span/200, r = 0.2 m (kN/m2)            this run       1.58418996   stored       1.58418996   rel. diff 0.0e+00
+  capacity S2+ ULS_face_vm_fy/gM, r = 0.2 m (kN/m2)                  this run       5.22637986   stored       5.22637986   rel. diff 0.0e+00
+  capacity S2+ ULS_face_compression_sigma_w, r = 0.2 m (kN/m2)       this run       3.93809433   stored       3.93809433   rel. diff 0.0e+00
+  capacity S2+ ULS_core_shear, r = 0.2 m (kN/m2)                     this run        12.655625   stored        12.655625   rel. diff 0.0e+00
+  capacity S2- SLS_deflection_span/200, r = 0 m (kN/m2)              this run       1.58459517   stored       1.58459517   rel. diff 0.0e+00
+  capacity S2- ULS_face_vm_fy/gM, r = 0 m (kN/m2)                    this run      0.298893924   stored      0.298893924   rel. diff 0.0e+00
+  capacity S2- ULS_face_compression_sigma_w, r = 0 m (kN/m2)         this run                0   stored                0   rel. diff 0.0e+00
+  capacity S2- ULS_core_shear, r = 0 m (kN/m2)                       this run      0.836051143   stored      0.836051143   rel. diff 0.0e+00
+  capacity S2- SLS_deflection_span/200, r = 0.05 m (kN/m2)           this run       1.58459517   stored       1.58459517   rel. diff 0.0e+00
+  capacity S2- ULS_face_vm_fy/gM, r = 0.05 m (kN/m2)                 this run       1.86308234   stored       1.86308234   rel. diff 0.0e+00
+  capacity S2- ULS_face_compression_sigma_w, r = 0.05 m (kN/m2)      this run      0.405752715   stored      0.405752715   rel. diff 0.0e+00
+  capacity S2- ULS_core_shear, r = 0.05 m (kN/m2)                    this run       2.15786237   stored       2.15786237   rel. diff 0.0e+00
+  capacity S2- SLS_deflection_span/200, r = 0.1 m (kN/m2)            this run       1.58459517   stored       1.58459517   rel. diff 0.0e+00
+  capacity S2- ULS_face_vm_fy/gM, r = 0.1 m (kN/m2)                  this run       2.15313583   stored       2.15313583   rel. diff 0.0e+00
+  capacity S2- ULS_face_compression_sigma_w, r = 0.1 m (kN/m2)       this run      0.503835203   stored      0.503835203   rel. diff 0.0e+00
+  capacity S2- ULS_core_shear, r = 0.1 m (kN/m2)                     this run       2.28467917   stored       2.28467917   rel. diff 0.0e+00
+  capacity S2- SLS_deflection_span/200, r = 0.15 m (kN/m2)           this run       1.58459517   stored       1.58459517   rel. diff 0.0e+00
+  capacity S2- ULS_face_vm_fy/gM, r = 0.15 m (kN/m2)                 this run       2.79659411   stored       2.79659411   rel. diff 0.0e+00
+  capacity S2- ULS_face_compression_sigma_w, r = 0.15 m (kN/m2)      this run      0.675997951   stored      0.675997951   rel. diff 0.0e+00
+  capacity S2- ULS_core_shear, r = 0.15 m (kN/m2)                    this run       2.40947938   stored       2.40947938   rel. diff 0.0e+00
+  capacity S2- SLS_deflection_span/200, r = 0.2 m (kN/m2)            this run       1.58459517   stored       1.58459517   rel. diff 0.0e+00
+  capacity S2- ULS_face_vm_fy/gM, r = 0.2 m (kN/m2)                  this run       5.22563123   stored       5.22563123   rel. diff 0.0e+00
+  capacity S2- ULS_face_compression_sigma_w, r = 0.2 m (kN/m2)       this run       3.93652891   stored       3.93652891   rel. diff 0.0e+00
+  capacity S2- ULS_core_shear, r = 0.2 m (kN/m2)                     this run        12.654132   stored        12.654132   rel. diff 0.0e+00
+  fe.py: SLS S1 largest vertical displacement (mm)                   this run        10.406783   stored        10.406783   rel. diff 0.0e+00
+  fe.py: SLS S1 largest total displacement (mm)                      this run       12.1856443   stored       12.1856443   rel. diff 0.0e+00
+  fe.py: capacity S1 SLS_deflection_span/200, r = 0.2 m (kN/m2)      this run       2.13614079   stored       2.13614079   rel. diff 0.0e+00
+  fe.py: capacity S1 ULS_face_vm_fy/gM, r = 0.2 m (kN/m2)            this run       6.61480515   stored       6.61480515   rel. diff 0.0e+00
+  fe.py: capacity S1 ULS_face_compression_sigma_w, r = 0.2 m (kN/m2) this run       7.25329524   stored       7.25329524   rel. diff 0.0e+00
+  fe.py: capacity S1 ULS_core_shear, r = 0.2 m (kN/m2)               this run       12.1916684   stored       12.1916684   rel. diff 0.0e+00
+  fe.py: SLS S2+ largest vertical displacement (mm)                  this run        13.263496   stored        13.263496   rel. diff 0.0e+00
+  fe.py: SLS S2+ largest total displacement (mm)                     this run       15.7096879   stored       15.7096879   rel. diff 0.0e+00
+  fe.py: capacity S2+ SLS_deflection_span/200, r = 0.2 m (kN/m2)     this run       1.58418996   stored       1.58418996   rel. diff 0.0e+00
+  fe.py: capacity S2+ ULS_face_vm_fy/gM, r = 0.2 m (kN/m2)           this run       5.22637986   stored       5.22637986   rel. diff 0.0e+00
+  fe.py: capacity S2+ ULS_face_compression_sigma_w, r = 0.2 m (kN/m2) this run       3.93809433   stored       3.93809433   rel. diff 0.0e+00
+  fe.py: capacity S2+ ULS_core_shear, r = 0.2 m (kN/m2)              this run        12.655625   stored        12.655625   rel. diff 0.0e+00
+  fe.py: SLS S2- largest vertical displacement (mm)                  this run        13.260289   stored        13.260289   rel. diff 0.0e+00
+  fe.py: SLS S2- largest total displacement (mm)                     this run       15.7044667   stored       15.7044667   rel. diff 0.0e+00
+  fe.py: capacity S2- SLS_deflection_span/200, r = 0.2 m (kN/m2)     this run       1.58459517   stored       1.58459517   rel. diff 0.0e+00
+  fe.py: capacity S2- ULS_face_vm_fy/gM, r = 0.2 m (kN/m2)           this run       5.22563123   stored       5.22563123   rel. diff 0.0e+00
+  fe.py: capacity S2- ULS_face_compression_sigma_w, r = 0.2 m (kN/m2) this run       3.93652891   stored       3.93652891   rel. diff 0.0e+00
+  fe.py: capacity S2- ULS_core_shear, r = 0.2 m (kN/m2)              this run        12.654132   stored        12.654132   rel. diff 0.0e+00
+113 quantities; largest relative difference 0.0e+00 (tolerance 1e-06): same

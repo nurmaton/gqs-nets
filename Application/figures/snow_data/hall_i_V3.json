@@ -1,0 +1,70 @@
+{
+ "span": 4.0,
+ "rise": 2.84,
+ "up": [
+  0.0,
+  0.0,
+  1.0
+ ],
+ "along": [
+  0.0,
+  1.0,
+  0.0
+ ],
+ "k": 12,
+ "tag": "hall_i_V3_k12_h8_11",
+ "json": "hall_i_V3_k12_h8_11.json",
+ "source": "hall_i_V3_k12_h8_11_fields.pkl",
+ "model": "full hall (i), 306 panels, faces 1 <= i <= 18, 2 <= j <= 18",
+ "sls_from": "G field + S1 field (linear combination)",
+ "case": "hall_i_V3",
+ "m": 18,
+ "n": 17,
+ "frame_R": [
+  [
+   1.0,
+   0.0,
+   0.0
+  ],
+  [
+   0.0,
+   1.0,
+   0.0
+  ],
+  [
+   0.0,
+   0.0,
+   1.0
+  ]
+ ],
+ "frame_O": [
+  2.000000000000001,
+  -10.552183065101703,
+  -0.019305897035009668
+ ],
+ "x_foot1": -2.1224400613539753,
+ "x_foot2": 2.1224400613539753,
+ "checks": {
+  "rebuild_vs_saved_xyz_max_m": 0.0,
+  "nodes_matched": 147186,
+  "nodes_model": 147186,
+  "u_vert_max_mm": 15.820936000000001,
+  "u_tot_max_mm": 25.210307757000823,
+  "json_SLS_S1_u_vert_max_mm": 15.820936000000001,
+  "json_SLS_S1_u_tot_max_mm": 25.210307757000823,
+  "u_vert_max_mm_SLS_S2+": 19.123835999999997,
+  "json_SLS_S2+_u_vert_max_mm": 19.123835999999997,
+  "u_vert_max_mm_SLS_S2-": 15.941334000000001,
+  "json_SLS_S2-_u_vert_max_mm": 15.941334000000001,
+  "capacity_SLS_total_check": 0.6452791277939243,
+  "capacity_SLS_vertical_check": 1.347141587407069,
+  "u_tot_G_max_mm": 10.532761322174258
+ },
+ "n_spindle": 1,
+ "n_latch": 1,
+ "latch": [
+  "h",
+  8,
+  11
+ ]
+}
