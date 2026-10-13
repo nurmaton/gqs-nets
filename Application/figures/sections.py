@@ -1,4 +1,4 @@
-# Section figures of the three halls, seen along the rows of blocks at one scale: the deployed positions (panels, the polylines
+# Section figures of the three halls, seen along the rows of blocks, the three halls of each figure at one scale: the deployed positions (panels, the polylines
 # of the vertices V_ij for each i, the midline with its ends on the foot lines, the knee walls, the widest floor strip with at
 # least 2.0 m of clear height, and the dimension lines of the span, the rise, H_c and W_20) and the transport positions (in
 # the well of the low-bed semi-trailer within the road limits for (i), within the minimum door opening of the 20-ft container
@@ -7,10 +7,10 @@
 # figures/label_sizes.json. Outputs (out/figures/): sections_deployed_base.pdf and sections_transport_base.pdf (geometry,
 # ticks, axis labels; 300 dpi PNG previews) and sections_deployed.tex, sections_transport.tex (TikZ: labels and dimension
 # lines over the base PDF, in metres of each panel; \input them with the base PDF on the graphics path, with the TikZ library
-# arrows.meta), and sections_values.json (every printed number and every end point of a dimension line). The frames are fitted
-# to the labels of a layout pass (two-line values); the printed layer keeps their places and sets the values of H_c and W_20 in
-# one line inside the green strip (see print_dep, print_tr).
-# usage: python3 figures/sections.py            requires numpy, scipy, matplotlib (about 30 s)
+# arrows.meta), and out/figure_sections.json (every printed number and every end point of a dimension line). The frames are
+# fitted to the labels of a layout pass (two-line values); the printed layer keeps their places and sets the values of H_c and
+# W_20 in one line inside the green strip (see print_dep, print_tr).
+# usage: python3 figures/sections.py            requires numpy, scipy, matplotlib (a few seconds)
 # Written with the assistance of the Claude models Opus 5.5, Fable 5, and Fable 5.1 (Anthropic); all code was checked by the authors.
 
 import os, sys, json, math, copy

@@ -13,7 +13,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(ROOT, 'data')
 OUT = os.environ.get('APP_OUT', os.path.join(ROOT, 'out'))
 GQS_PATH = os.environ.get('GQS_PY', os.path.join(ROOT, '..', 'gqs.py'))
-GQS_MD5 = '5b67bf1f19d85f93f47e72181c81955e'          # the gqs.py these scripts were run with
+GQS_MD5 = '6bb96fa70b663d6d995bf6eba5d7d96d'          # the gqs.py these scripts were run with
 HALL_KEYS = ('i', 'ii', 'iii')
 STATES = ('deployed', 'transport')
 

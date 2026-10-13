@@ -15,8 +15,8 @@ that builds and moves the flexible m × n nets, and the data and checks of three
 
 | File | Content |
 |---|---|
-| `helper.nb` | Mathematica notebook: verifies the symbolic computations of the proofs; each section names the result it is used for. |
-| `ehelper.nb` | Mathematica notebook: verifies the computations behind the construction of the m × n nets and their examples. |
+| `helper.nb` | Mathematica notebook: verifies the symbolic computations of the proofs; the paper cites each section where it is used. |
+| `ehelper.nb` | Mathematica notebook: verifies the computations behind the construction of the m × n nets and their examples; the paper cites each section where it is used. |
 | `gqs.py` | Python tool: assembles a flexible m × n net from 3 × 3 GQS-nets, shows its flexion with a slider, double-checks the proved properties numerically, tests the net for self-intersections, and exports pictures (PNG) and meshes (OBJ). |
 | `parameters.txt` | The settings of `gqs.py` for the nets shown in the paper (the digits 2026, the letters G, Q, S, and the animals) and how to reproduce each picture. |
 | `Application/` | Three transportable arch halls built from these nets: net data, checks of sizes, clear height, panels, mobility, and snow load (CalculiX), figures, and renderings; see [`Application/README.md`](Application/README.md). |
@@ -34,8 +34,9 @@ that builds and moves the flexible m × n nets, and the data and checks of three
   ```
   sh Application/run_quick.sh
   ```
-  runs all fast checks and prints PASS or FAIL for every checked quantity; versions, run times, and the longer runs are
-  described in [`Application/README.md`](Application/README.md).
+  runs all fast checks, writes PASS, FAIL, or SKIP for every checked quantity to `Application/out/compare.txt`, and
+  prints the failed and skipped quantities and the totals; versions, run times, and the longer runs are described in
+  [`Application/README.md`](Application/README.md).
 
 ## Note
 

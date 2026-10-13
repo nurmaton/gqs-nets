@@ -18,7 +18,7 @@
 # Requires numpy and matplotlib only.
 # Revised with the assistance of the Claude models Opus 5.5, Fable 5, and Fable 5.1 (Anthropic); all code was checked by the authors.
 
-import math, itertools, sys, json, re, textwrap, os, shutil, glob
+import math, itertools, sys, json, re, textwrap, os, shutil, glob, io
 import numpy as np
 import matplotlib
 def _version_tuple(v): return tuple(int(x) for x in re.findall(r'\d+', v)[:2])
@@ -54,14 +54,14 @@ ROW_TYPES = {1: 'c', 2: 'a', 3: 'b'}           # type ('a'..'d', see RELATION_TE
 SIGN_PATTERNS = ((1, -1, 1, -1), (1, -1, -1, 1))   # the two choices of the signs (e1, e2, e3, e4)
 SIGNS = (1, -1, 1, -1)                         # the signs of the flexion of every block (Params)
 E0 = 1                                         # the sign e0 = +1 or -1 of the base block (Params)
-BASE_EDGE = 1.0                                # length of the edge V_{kappa+1,nu} V_{kappa nu} of the base central face
+BASE_EDGE = 1.0                                # length of the edge V_{kappa_0+1,nu_0} V_{kappa_0 nu_0} of the base central face F_{kappa_0 nu_0}
 SHOW_SHADOW = True                             # soft ground shadow (button Shadow)
 LIGHT_FRAME = 'studio'                         # 'eye': a flashlight in the viewer's hand (shadow behind the net: floor from above, ceiling from below);
                                                # 'top': the sun at the top of the screen (shadow always straight below the net on the screen);
                                                # 'studio': the original setup (shading light attached to the viewer, shadow on the room's floor);
                                                # 'world': the sun at noon fixed in space (vertical footprint on the floor);
                                                # 'room': a photo studio: the lamps are fixed in the room and only the photographer moves; the net stands on
-                                               #         its base face F_kn on an invisible stand (see ROOM_*). Buttons Eye | Top | Studio | World | Room
+                                               #         its base face F_{kappa_0 nu_0} on an invisible stand (see ROOM_*). Buttons Eye | Top | Studio | World | Room
 ROOM_LAMP_VIEW = (30.0, -60.0)                 # 'room': the lamps are set up for this view (elev, azim) and stay there
 ROOM_CLEARANCE, ROOM_MIN_HEIGHT = 0.06, 0.25   # 'room': the stand keeps the floor this far under the deepest point of the whole flexion, at least this high (net sizes)
 FOCAL_LENGTH = 0.4                             # perspective strength (matplotlib focal length; smaller = stronger; None = orthographic)
@@ -173,7 +173,7 @@ def check_parameters(m, n, base_kn, row_types, verbose=True):
                                                                "(found %d x %d): a larger net takes minutes to start" % (MAX_MN, MAX_FACES, m, n))
     assert isinstance(base_kn, tuple) and len(base_kn) == 2 and all(map(whole, base_kn)), "BASE_KN must be a pair of whole numbers, like (2, 2) (found %r)" % (base_kn,)
     k0, n0 = base_kn
-    assert 1 <= k0 <= m - 2 and 1 <= n0 <= n - 2, "BASE_KN = (kappa, nu) must satisfy 1 <= kappa <= M_FACES-2 and 1 <= nu <= N_FACES-2"
+    assert 1 <= k0 <= m - 2 and 1 <= n0 <= n - 2, "BASE_KN = (kappa_0, nu_0) must satisfy 1 <= kappa_0 <= M_FACES-2 and 1 <= nu_0 <= N_FACES-2"
     assert isinstance(row_types, dict), "ROW_TYPES must be a dict {row: type}, like {1: 'c', 2: 'a', 3: 'b'} (found %r)" % (row_types,)
     assert n0 in row_types, "ROW_TYPES must contain the row of the base block"
     rows = dict(row_types)
@@ -330,7 +330,7 @@ def thmain_formulas(x1, x3, y1, y2, z1, z2, z3, u, eps, e, e0, t, root=None, lin
     given it replaces e0 sqrt(x1 D) (near a branch point, D ~ 0, r tells the configuration and t hardly does), and linear=True
     returns, instead of W2, U, W1, their coefficients (n0, n1, d): cot = (n0 + n1 r)/d.
     Where the formulas as written divide by zero they give the limit (see _flex_quotient): a pole is cot = +-inf (theta = 0, a
-    folded crease; case (c) at t = 0: theta_3 = 0), a removable 0/0 its value. For |t| > FLEX_T_INF, t = +-inf included (theta_1 = 0),
+    folded crease; theta_3 = 0 at t = 0 when u z2 z3 = 1 and e2 = e3, U ~ 1/t), a removable 0/0 its value. For |t| > FLEX_T_INF, t = +-inf included (theta_1 = 0),
     numerators and denominators are divided by t^2 and evaluated in s = 1/t (r then stands for e0 sqrt(x1 D)/t^2; no overflow in
     t^4 or D; the terms odd in t vanish in the limit, so t = +inf and t = -inf give the same angles for the same e0).
     At an end of the admissible set (D = 0, a branch point: both signs e0 give the same configuration) rounding can leave t just
@@ -358,12 +358,12 @@ def thmain_formulas(x1, x3, y1, y2, z1, z2, z3, u, eps, e, e0, t, root=None, lin
     if not linear:
         W2 = _flex_quotient(eps[1], A2 + B2, A2 - B2, abs(A2) + abs(B2), y2*u, dW2, dW2_terms, pW2, pW2_terms)
         W1 = _flex_quotient(eps[0], A1 - B1, A1 + B1, abs(A1) + abs(B1), y1*u, dW1, dW1_terms, pW1, pW1_terms)
-    if abs(u*z2*z3 - 1) > 1e-9:                                                                    # case (a)
+    if abs(u*z2*z3 - 1) > 1e-9:                                                                    # u z2 z3 != 1
         den = u*z2*z3 - 1
         H1 = (abs(z2)*rsqrt(z3*(1 + z3)*(1 + u*z3)) + e2*e3*abs(z3)*rsqrt(z2*(1 + z2)*(1 + u*z2)))/den
         H2 = (abs(z2*z3)*rsqrt((1 + u*z2)*(1 + u*z3)) + e2*e3*rsqrt(z2*z3*(1 + z2)*(1 + z3)))/den
         H3 = (u*rsqrt(z2*z3*(1 + z2)*(1 + z3))*sgn(z2*z3) + e2*e3*rsqrt((1 + u*z2)*(1 + u*z3)))/den
-        if e2 == -e3 and abs(den) < 1e-3:                                                           # near case (b): each H = (a - b)/den with a - b ~ den, so
+        if e2 == -e3 and abs(den) < 1e-3:                                                           # near u z2 z3 = 1 with e2 = -e3: each H = (a - b)/den with a - b ~ den, so
             p = z2*z3                                                                               # H = (a^2 - b^2)/((a + b) den), a^2 - b^2 = den*(...) cancelled
             a1, b1 = abs(z2)*rsqrt(z3*(1 + z3)*(1 + u*z3)), abs(z3)*rsqrt(z2*(1 + z2)*(1 + u*z2))
             a2, b2 = abs(p)*rsqrt((1 + u*z2)*(1 + u*z3)), rsqrt(p*(1 + z2)*(1 + z3))
@@ -371,10 +371,10 @@ def thmain_formulas(x1, x3, y1, y2, z1, z2, z3, u, eps, e, e0, t, root=None, lin
             if a1 + b1 > 0: H1 = p*(z3 - z2)/(a1 + b1)
             if a2 + b2 > 0: H2 = p*(z2 + z3 + 1 + u*p)/(a2 + b2)
             if a3 > 0: H3 = (u*(z2 + z3) + u*p + 1)/(a3 + b3)                                       # (a3 < 0: a3 - b3 does not cancel)
-    elif e2 == -e3:                                                                                 # case (b)
+    elif e2 == -e3:                                                                                 # u z2 z3 = 1, e2 = -e3
         rt = 2*rsqrt(z2*z3*(1 + z2)*(1 + z3))
         H1 = z2*z3*(z3 - z2)/rt; H2 = z2*z3*(z2 + z3 + 2)/rt; H3 = (z2 + z3 + 2*z2*z3)*sgn(z2*z3)/rt
-    else:                                                                                           # case (c): U = k/t
+    else:                                                                                           # u z2 z3 = 1, e2 = e3: U = k/t
         k = eps[1]*eps[2]*rsqrt(z2*z3/(x1*x3))*sgn(y2)
         if linear: return t, (eps[1]*A2, eps[1]*c2, y2*u*dW2), ((k*s, 0.0, 1.0) if far else (k, 0.0, t)), (eps[0]*A1, -eps[0]*c1, y1*u*dW1)
         if far: return _flex_checked(t, W2, k*s, W1)                                                 # U -> 0: theta_3 = pi
@@ -445,7 +445,7 @@ class Block:
         return Block._phase_cache[key]
 
     def lattice_string(self):
-        return r"$\{4K\,m + 2\mathrm{i}K'\,n\}$" if self.M < 1 else r"$\{4K\,m + (2K + 2\mathrm{i}K')\,n\}$"
+        return r"$4K\mathrm{\mathbb{Z}} + 2\mathrm{i}K'\mathrm{\mathbb{Z}}$" if self.M < 1 else r"$4K\mathrm{\mathbb{Z}} + (2K + 2\mathrm{i}K')\mathrm{\mathbb{Z}}$"   # (\mathrm: an upright Z, as in LaTeX; mathtext slants a bare \mathbb)
 
     def phase_string(self, i):
         t = self.t[i]
@@ -721,7 +721,7 @@ def inner_edge_lengths(ang, m, n, base_kn, a1=1.0):
     """strictly positive edge lengths for the edges of the central faces F_ij, 1 <= i <= m-2, 1 <= j <= n-2, that make every central
     face a closed planar quadrilateral with the prescribed angles (two linear closure equations per face). The solution space is a
     linear subspace; a positive point of it is found by alternating projections onto the subspace and onto {lengths >= 1};
-    the result is scaled so that the edge V_{k+1,n} V_{kn} of the base central face has length a1. None if no positive solution."""
+    the result is scaled so that the edge V_{kappa_0+1,nu_0} V_{kappa_0 nu_0} of the base central face has length a1. None if no positive solution."""
     faces = [(i, j) for i in range(1, m-1) for j in range(1, n-1)]
     def corners(f): i, j = f; return [(i, j), (i+1, j), (i+1, j+1), (i, j+1)]
     edges = sorted({frozenset((c[k], c[(k+1) % 4])) for f in faces for c in [corners(f)] for k in range(4)}, key=lambda e: sorted(e))
@@ -1092,7 +1092,7 @@ def edge_segments(ax, P, Q, PQ_faces, sf, nsamp=32):
     return segs
 
 def faces_intersect(A, B, tol=1e-9):
-    """True if the convex planar quadrilaterals A, B (4 x 3 arrays, no common vertex) intersect (penetrate each other)."""
+    """True if the convex planar quadrilaterals A, B (4 x 3 arrays, no common vertex) penetrate each other or touch along a segment (coplanar faces and a touch at one point are not counted)."""
     nB = np.cross(B[1] - B[0], B[3] - B[0]); nB /= np.linalg.norm(nB)
     dist = np.dot(A - B[0], nB)
     scale = max(np.linalg.norm(A[2] - A[0]), np.linalg.norm(B[2] - B[0]))
@@ -1126,7 +1126,7 @@ def corners_intersect(A, B, ka, kb, tol=1e-9):
     Each face lies in its corner at that vertex, so the two meet only on the line where their planes cross, along a segment from the
     vertex: they penetrate exactly when the corner of A crosses the plane of B (its two edges strictly on opposite sides) along a
     direction strictly inside the corner of B. tol is an angle (radians): faces that only touch (at the vertex, or along an edge lying
-    in the other's plane) or are coplanar are not counted, as in faces_intersect."""
+    in the other's plane) or are coplanar are not counted (faces_intersect counts a touch along a segment)."""
     V = A[ka]
     a1, a2 = unit(A[ka-1] - V), unit(A[(ka+1) % 4] - V); b1, b2 = unit(B[kb-1] - V), unit(B[(kb+1) % 4] - V)
     nB = unit(np.cross(b1, b2))
@@ -1136,7 +1136,8 @@ def corners_intersect(A, B, ka, kb, tol=1e-9):
     return np.dot(np.cross(b1, q), nB) > tol and np.dot(np.cross(q, b2), nB) > tol
 
 def self_intersections(pos, faces_all, corners):
-    """pairs of faces that penetrate each other. Faces with a common edge cannot (each lies on one side of the edge in its own
+    """pairs of faces that penetrate each other, and pairs of faces without a common vertex that touch along a segment
+    (faces_intersect). Faces with a common edge cannot penetrate (each lies on one side of the edge in its own
     plane); faces with a single common vertex (diagonal neighbours) can cut through each other along a segment from that vertex,
     so their corners at that vertex are tested (corners_intersect; the common vertex itself does not count)."""
     pairs = []
@@ -1760,7 +1761,7 @@ def _main():
         return "?" if b_ is None else ("%+d" % b_ if not tex else ("$+1$" if b_ > 0 else "$-1$"))
     def theta_regions(other=False):
         """the parts of the circle of theta_1 (degrees, t > 0 half) computed once per net: 'live' = the slider's range where the
-        whole net has a configuration, 'pen' = with penetrating faces, 'tail' = admissible beyond the slider's range (the
+        whole net has a configuration, 'pen' = with intersecting faces (self_intersections), 'tail' = admissible beyond the slider's range (the
         margins it keeps at an end where D = 0 and at theta_1 = 0; empty at a flat end, which the slider reaches), 'zeros' /
         'poles' = where a cotangent of the base block vanishes / is infinite, 'flat_ok' = the net exists at the flat end t = 0."""
         key_, conf_, e0_ = ('theta_regions_other', configuration_other, -E0) if other else ('theta_regions', configuration, E0)
@@ -1816,6 +1817,8 @@ def _main():
                         t_x = bisect((lambda t_: 1/cot_i(t_, i + 1)) if pole else (lambda t_: cot_i(t_, i + 1)), float(ts_[j]), float(ts_[j+1]))
                         (poles if pole else zeros).append(theta_of_t(t_x)); excl.append((t_x, theta_of_t(t_x), i + 1, 'pole' if pole else 'zero'))
             scan(np.linspace(th_b, th_a, 2001))                                       # the grid's range, evenly in the angle
+            if th_a > th_min: scan(np.linspace(th_a, th_min, 201)[:-1])              # the margin at theta_1 = 0 or at an end where D = 0 (that end excluded)
+            if not NB and th_max > th_b: scan(np.linspace(th_max, th_b, 201)[1:])    # the margin at the other end where D = 0 (that end excluded)
             if NB:
                 # the band, as finely, without t = 0 itself: a cotangent that vanishes there (another crease flat with the base
                 # edge, e.g. theta_3 when e2 = -e3 and z2 = z3) is part of the flat state, not an isolated parameter (its sign at
@@ -1823,7 +1826,7 @@ def _main():
                 scan(np.linspace(th_e, th_b, max(3, int(math.ceil(2000*(th_e - th_b)/(th_b - th_a))) + 1))[1:])
                 try: c0_ = B.cots(SIGNS, e0_, 0.0)
                 except (ValueError, ZeroDivisionError): c0_ = {}
-                for i_, c_ in sorted(c0_.items()):                                     # a cotangent infinite at t = 0 itself (theta_i = 0; case (c), U ~ 1/t): the
+                for i_, c_ in sorted(c0_.items()):                                     # a cotangent infinite at t = 0 itself (theta_i = 0; u z2 z3 = 1 and e2 = e3, U ~ 1/t): the
                     if math.isinf(c_): poles.append(180.0); excl.append((0.0, 180.0, i_, 'pole'))   # formulas give the limit; a red tick at the end, t = 0 excluded
             excl.sort(key=lambda e_: (round(e_[0], 9), e_[2], e_[3]))                # by t; coincident parameters (within rounding) by the index of the angle
             def ext(ia, ib):                                                           # a run of samples as an interval, half a sample wider on each side
@@ -1872,7 +1875,8 @@ def _main():
         the sign e0; t < 0 from the nets with the other sign, mirrored)"""
         # the sets of the flexion parameter and of theta_1 of the base block where the net has a configuration (the parts the
         # slider reaches, as a union of intervals), minus the isolated parameters where a cotangent of the base block has a
-        # pole (a denominator of the formulas vanishes, theta_i = 0) or a zero (theta_i = 180)
+        # pole (a denominator of the formulas vanishes, theta_i = 0); a zero (theta_i = 180, a flat crease) is a configuration
+        # and stays in the sets
         R, Ro = theta_regions(), theta_regions(other=True); out_ = []
         def set_lines(label, ivals, excl, fmt, unit):
             def num(v_): return "0" + unit if v_ == 0 else ("\u221e" if v_ == math.inf else ("180" + unit if v_ == 180.0 and unit else fmt % v_ + unit))
@@ -1886,9 +1890,9 @@ def _main():
                 else: cur += w_ + " "
             return "\n".join(lines_ + [cur.rstrip()])
         for R_, sg_t, sg_th in ((R, "$t$" if tex else "t", r"$\theta_1$" if tex else "theta_1"), (Ro, "$-t$" if tex else "-t", r"$-\theta_1$" if tex else "-theta_1")):
-            out_.append(set_lines(sg_t + " ∈", R_['real_t'], [(t_, i_, k_) for t_, th_, i_, k_ in R_['excl']], "%.4f", ""))
+            out_.append(set_lines(sg_t + " ∈", R_['real_t'], [(t_, i_, k_) for t_, th_, i_, k_ in R_['excl'] if k_ == 'pole'], "%.4f", ""))
         for R_, sg_t, sg_th in ((R, "", r"$\theta_1$" if tex else "theta_1"), (Ro, "", r"$-\theta_1$" if tex else "-theta_1")):
-            out_.append(set_lines(sg_th + " ∈", R_['real_th'], [(th_, i_, k_) for t_, th_, i_, k_ in sorted(R_['excl'], key=lambda e_: e_[1])], "%.1f", "\u00b0"))
+            out_.append(set_lines(sg_th + " ∈", R_['real_th'], [(th_, i_, k_) for t_, th_, i_, k_ in sorted(R_['excl'], key=lambda e_: e_[1]) if k_ == 'pole'], "%.1f", "\u00b0"))
         return "\n".join(out_)
     def check_values(pos, th):
         """the checks recomputed from the vertices of a net: the largest deviations of the edge lengths and the face angles from
@@ -2045,7 +2049,8 @@ def _main():
             "  for every pair of faces without a common edge, the\n"
             "  segment in which one face meets the plane of the other\n"
             "  is clipped by that other face; a nonempty result means\n"
-            "  the faces penetrate each other (drawn in red tones).\n"
+            "  the faces penetrate each other or touch along a segment\n"
+            "  (drawn in red tones).\n"
             "  Diagonal neighbours (one common vertex) are tested by\n"
             "  their corners at that vertex: they penetrate when the\n"
             "  corners overlap beyond the vertex itself.\n\n"
@@ -2074,7 +2079,7 @@ def _main():
                "  $t = 0$ is admissible it reaches the flat end $\\theta_1 = \\pm 180^\\circ$\n"
                "  ($t = \\pm 0$, the edge $A_1A_2$ flat), where its two halves meet\n"
                "  in the same net. The +/- buttons step $\\theta_1$ by one degree.\n") % (BASE_KN[0], BASE_KN[1], adm_txt) +
-            "  Colours: blue = the net can be built, rose = faces penetrate,\n"
+            "  Colours: blue = the net can be built, rose = faces intersect,\n"
             "  pale = admissible, in a margin the slider keeps out of,\n"
             "  grey = the net cannot be built (the picture stays),\n"
             "  ticks = a cotangent of the base block vanishes (grey, some\n"
@@ -2118,7 +2123,7 @@ def _main():
             "  save: SVG / PNG of the picture, OBJ (+ report) of the net\n"
             "  shown, Motion = an OBJ sequence spaced evenly in\n"
             "  theta_1 over the slider's range for t >= 0 (from the flat\n"
-            "  end where t = 0 is admissible), without the penetrating\n"
+            "  end where t = 0 is admissible), without the self-intersecting\n"
             "  ones (index.txt lists theta_1 and t of each frame). Render in\n"
             "  Blender exports the net shown and renders it in the\n"
             "  background with the built-in recipe (Blender is found\n"
@@ -2166,7 +2171,7 @@ def _main():
     inset = fig.add_axes([0.05, 0.16, 0.14, 0.20]); inset.set_visible(False)
     set_projection(ax)
     def room_height():
-        """height of the invisible stand of the photo studio (light 'room'): the base face F_kn stays at z = 0 and the rest of the
+        """height of the invisible stand of the photo studio (light 'room'): the base face F_{kappa_0 nu_0} stays at z = 0 and the rest of the
         net flexes about it, so the floor must stay clear of the deepest point of EVERY admissible configuration. Set once per net
         from a sample of the flexion range (the slider's whole range, evenly in theta_1, both halves):
         ROOM_CLEARANCE under that point, at least ROOM_MIN_HEIGHT (in net sizes)."""
@@ -2208,7 +2213,7 @@ def _main():
             L = unit(-0.5*u + 0.85*up + 0.3*w); Lsh = unit(np.array([0, 0, 1.0]) - 0.18*u - 0.10*w)
         elif mode == 'room':
             # the photo studio: the lamps are fixed in the room (set up once for the view ROOM_LAMP_VIEW) and only the photographer
-            # moves; the net stands on its base face F_kn on an invisible stand, the shadow falls on the studio's floor
+            # moves; the net stands on its base face F_{kappa_0 nu_0} on an invisible stand, the shadow falls on the studio's floor
             u0, up0, w0 = view_axes(*ROOM_LAMP_VIEW)
             L = unit(-0.5*u0 + 0.85*up0 + 0.3*w0); Lsh = unit(np.array([0, 0, 1.0]) - 0.45*u0 - 0.25*w0)
         else:
@@ -2647,7 +2652,7 @@ def _main():
     # t > 0 gives theta_1 in (0, 180); theta_1 < 0 is the mirror image of the net (reflected in the plane of its base face,
     # every dihedral angle negated); where t = 0 is admissible both halves reach the flat end theta_1 = +-180 (t = +0 / -0, the
     # same net). The track shows where a configuration exists (blue), the admissible margins the slider keeps out of (pale:
-    # 0.1 % at an end where D = 0, TH_EPS at theta_1 = 0), the penetrating parts (rose), the dead parts (grey), and the
+    # 0.1 % at an end where D = 0, TH_EPS at theta_1 = 0), the self-intersecting parts (rose), the dead parts (grey), and the
     # isolated parameters where a cotangent of the base block vanishes (theta_i = 180, grey tick) or has a pole (theta_i = 0,
     # a denominator of the formulas, red tick). Nothing moves while the handle is in a dead part.
     th_title2 = fig.text(0.918, 0.543, r'$t = \cot(\theta_1/2)$', ha='center', va='top', fontsize=8.5, color='#2c4a74'); reg('col', th_title2)   # under the theta_1 box
@@ -2752,7 +2757,7 @@ def _main():
     th_box.on_submit(th_submit)
     # beside the track: theta_1..theta_4 of the base block against theta_1 (theta_1 vertical, at the height of the track beside it:
     # the half t > 0, over the working range th_lo_w..th_hi_w; the angle horizontal) in the colours of the dihedral plots, and the
-    # parts with penetrating faces marked with the penetration tint
+    # parts with intersecting faces marked with the penetration tint
     ax_curve = fig.add_axes([0.942, 0.600, 0.046, 0.330]); ax_curve.set_axis_off(); ax_curve.set_navigate(False); ax_curve.set_facecolor('none')
     ax_curve.set_zorder(0); ax_curve.set_visible(SHOW_SLIDER_CURVE); reg('col', ax_curve)
     def draw_curve():
@@ -3434,7 +3439,8 @@ def _main():
     def place_view():
         """the view boxes over the blank columns of the view lines (the report is monospace: a column is the width of a line over its
         length; the rows are matplotlib's own layout of the text, exact also under lines with mathtext); sizes in the text's units"""
-        r_ = state.get('renderer') or fig.canvas.get_renderer()
+        r_ = state.get('renderer')
+        if r_ is None or getattr(r_, 'dpi', fig.dpi) != fig.dpi: r_ = fig.canvas.get_renderer()   # not the renderer of a picture saved at another dpi
         key = (report_text.get_text(), report_text.get_fontsize(), fig.dpi, getattr(r_, 'dpi', None))
         fs_ = report_text.get_fontsize()*fig.dpi/72
         if vcache.get('key') != key:
@@ -3451,7 +3457,7 @@ def _main():
     extent_cache = {}
     def measure(text):
         """window extent of a text with the best renderer at hand, never triggering a draw (a draw from inside a draw event freezes
-        the interface): the renderer of the last draw event, else the canvas renderer. A panel text that did not change is not
+        the interface): the renderer of the last draw event when it has the figure's dpi, else the canvas renderer. A panel text that did not change is not
         laid out again: its last extent is shifted to the new position (the wheel moves the long explanations many times)."""
         key = (id(text), text.get_text(), text.get_fontsize(), text.get_visible(), fig.dpi, tuple(fig.bbox.size))
         pos = text.get_position(); hit = extent_cache.get(key)
@@ -3459,6 +3465,7 @@ def _main():
             (px, py), bb0 = hit
             return bb0.translated((pos[0] - px)*fig.bbox.width, (pos[1] - py)*fig.bbox.height)
         r = state.get('renderer')
+        if r is not None and getattr(r, 'dpi', fig.dpi) != fig.dpi: r = fig.canvas.get_renderer()   # not the renderer of a picture saved at another dpi
         try: bb = text.get_window_extent(r) if r is not None else text.get_window_extent()
         except Exception:
             try: bb = text.get_window_extent(fig.canvas.get_renderer())
@@ -3614,7 +3621,7 @@ def _main():
                     fh.write("f %d %d %d %d\n" % tuple(idx[x] for x in [(a, b), (a+1, b), (a+1, b+1), (a, b+1)]))
     def save_motion(ev):
         """MOTION_FRAMES configurations over the slider's range for t >= 0 (from the flat end where t = 0 is admissible) as OBJ files. Every frame is checked from its vertices as the
-        drawn net is (check_values) and tested for penetrating faces; frames that fail are skipped. An index file lists the parameter
+        drawn net is (check_values) and tested for intersecting faces (self_intersections); frames that fail are skipped. An index file lists the parameter
         of each frame and ends with the largest deviations over all frames. Written to the folder gqs_net_MxN_motion next to the
         other saves; the frames and the index of an earlier Motion there are removed first (other files stay)."""
         folder = "gqs_net_%dx%d_motion" % (m, n); os.makedirs(folder, exist_ok=True)
@@ -3642,7 +3649,7 @@ def _main():
             fh.write("# checks of all frames, from their vertices (largest deviations): edge lengths vs. initial %.1e, face angles vs. "
                      "initial %.1e rad, flat angles vs. prescribed %.1e rad, planarity %.1e, dihedral angles vs. formulas %.1e rad; all faces "
                      "convex\n" % (worst['len'], worst['fa'], worst['flat'], worst['plan'], worst['dih']) if kept else "# no frame kept: nothing checked\n")
-        note = "%d frames skipped: %d penetration, %d no construction" % (pen + skipped, pen, skipped) + (", %d failed a check (up to %.0f times its tolerance)" % (failed, worst_failed) if failed else "")
+        note = "%d frames skipped: %d self-intersection, %d no construction" % (pen + skipped, pen, skipped) + (", %d failed a check (up to %.0f times its tolerance)" % (failed, worst_failed) if failed else "")
         state['report_str'] = state['report_str'].rstrip() + "\n  motion saved: %d OBJ files in %s (%s)" % (kept, folder, note)
         report_text.set_text(report_string()); layout_panels(); fig.canvas.draw_idle()
     def write_sidecar(fn_json):
@@ -3794,6 +3801,7 @@ def _main():
                 sl.eventson = False; sl.set_val(float(t)); sl.eventson = True; sync_t_box(); sync_theta(); b_info.set_on(k == 1)   # the sliders, their boxes and the (i) button follow the frame
             except Exception: pass
             redraw()
+            fig.savefig(io.BytesIO(), format="png", dpi=100)   # a first save at the frame's dpi: the panels of the real save are laid out with a renderer of that dpi
             fig.savefig("frame_%02d.png" % k, dpi=100)
         return
     # run the event loop as long as the main window exists: closing a secondary window (Dihedrals) must not end the program,
@@ -3934,7 +3942,7 @@ hi = Vector((max(p.x for p in pts), max(p.y for p in pts), max(p.z for p in pts)
 cen = (lo + hi)/2; size = max(max(hi - lo), 1e-9)
 floor_z = lo.z - 0.02*size
 if light_mode == 'room':
-    # the photo studio: the net stands on its base face F_kn (z = 0) on an invisible stand whose height the tool chose for the
+    # the photo studio: the net stands on its base face F_{kappa_0 nu_0} (z = 0) on an invisible stand whose height the tool chose for the
     # whole flexion (side-car floor_z). Without a side-car: the base plane when nothing hangs below it, else 12 % under the lowest point.
     n_base = sum(1 for v in net.data.vertices if abs((net.matrix_world @ v.co).z) < 1e-4*size)
     if meta.get("floor_z") is not None: floor_z = min(float(meta["floor_z"]), lo.z - 0.02*size)

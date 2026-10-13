@@ -2,13 +2,13 @@
 # and at the free edge of the weaker open end (the open end with the larger displacement with one spindle and one lock),
 # undeformed and deformed with the displacements scaled by 20; top row both feet anchored, bottom row foot 2 on rails with one
 # spindle and one locked hinge.
-# Inputs: figures/snow_data/hall_*_V1|V3.npz (FE vertex positions Vpos and displacements Vu, and per face a 13 x 13 grid of
-# points FX with displacements FU, at k = 12 for (i), (ii) and k = 8 for (iii)) with their .json (frame, feet), and the node
+# Inputs: figures/snow_data/hall_*_V1|V3.npz (FE vertex positions Vpos and displacements Vu, and per face a (k + 1) x (k + 1)
+# grid of points FX with displacements FU, k = 12 for (i), (ii) and 8 for (iii)) with their .json (frame, feet), and the node
 # sizes of figures/label_sizes.json. Mid-length profile: the undeformed surface cut by the plane y = c (c = middle of the hall
 # length, to 0.01 m), each cut point moved by its interpolated displacement; open-end profile: the vertices of the free edge.
-# Outputs (out/figures/): snow_profiles_base.pdf (+ 300 dpi PNG preview) and snow_profiles.tex (TikZ: panel titles and foot
-# labels over the base PDF), snow_profiles.json (sections and extents).
-# usage: python3 figures/snow.py              requires numpy, scipy, matplotlib (about 1 min)
+# Outputs (out/figures/): snow_profiles_base.pdf (+ 300 dpi PNG preview), snow_profiles.tex (TikZ: panel titles and foot
+# labels over the base PDF), and out/figure_snow.json (sections and extents).
+# usage: python3 figures/snow.py              requires numpy, scipy, matplotlib (a few seconds)
 # Written with the assistance of the Claude models Opus 5.5, Fable 5, and Fable 5.1 (Anthropic); all code was checked by the authors.
 
 import os, sys, json

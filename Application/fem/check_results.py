@@ -1,19 +1,22 @@
 # The numbers of the snow check, read from the stored results of the full CalculiX runs (fem/results), and the FE input
-# geometry compared with the stored positions. Quantities, per hall and support variant (V1 both feet anchored; V3 foot 2
-# on rails, one spindle, one locked hinge): the capacity s_k,max (smallest over the limits and the three snow cases, stresses
-# outside the radius r of every net vertex, r = 0.2 m for (i), (ii) and 0.15 m for (iii); for V3 of (i) also outside 0.15 m
-# of the latch) with the governing limit and snow case; lambda_1 (the lowest broad mode by rule A); the lowest local mode at
-# a support of (ii) and at the spindle end of (i); the wrinkling capacity of (i) with both feet anchored at r = 0.2, 0.15,
-# 0.1 m; the change of the capacities from k = 8 to k = 12; the spread of the rail foot of (ii) and (iii) under self-weight
-# and under snow, and that the largest displacement under snow is at the foot on the rails; the vertical displacement of (iii)
-# at k = 4, 6, 8 and its largest change from k = 6 to 8 over the stored series; the overhang of the open ends of (i) past the
-# last supported vertex; the place where the governing limit is reached (at the open end for (i) with both feet anchored, next
-# to a support for (ii), on a hinge line for (iii), on a hinge line on the side of the foot on the rails for (i) with spindle
-# and lock; for (ii) and (iii) from the fe.py reruns in results/reruns, which also equal the stored results); the capacity of
-# (i) with spindle and lock when the latch zone is not left out (the factored self-weight alone exceeds the wrinkling limit
-# there); the local buckling modes whose factors fall with the mesh (at a support of (ii), k = 4, 8, 12; at the end of the
-# spindle of (i), k = 8, 12); elements, element length and peak memory of ccx (the job ledgers give the maximum resident set
-# size in GiB = 2^30 bytes; GB = 10^9 bytes).
+# geometry compared with the stored positions. Quantities, per hall and support variant (V1 both feet anchored; V3 foot 2 on
+# rails, one spindle, one locked hinge): the capacity s_k,max (smallest over the limits and the three snow cases, stresses
+# outside the radius r of every net vertex, r = 0.2 m for (i), (ii) and 0.15 m for (iii); for V3 of (i) also outside 0.15 m of
+# the latch) with the governing limit and snow case; lambda_1 (the lowest broad mode by rule A); the lowest local mode at a
+# support of (ii) and at the spindle end of (i); the wrinkling capacity of (i) with both feet anchored at r = 0.2, 0.15, 0.1
+# m; the change of the capacities of (i) and (ii), both variants, from k = 8 to k = 12 (the stored k = 8 run of (ii) with
+# spindle and lock gives no total-displacement capacity; it follows from the largest total displacements under G + S and 1.35
+# G + 1.5 S, both at the same node of the rail foot); the spread of the rail foot of (ii) and (iii) under self-weight alone
+# and with snow, and that the largest displacement under self-weight and snow is at the foot on the rails; the vertical
+# displacement of (iii) at k = 4, 6, 8 and its largest change from k = 6 to 8 over the stored series; the overhang of the open
+# ends of (i) past the last supported vertex; the place where the governing limit is reached (at the open end for (i) with
+# both feet anchored, next to a support for (ii), on a hinge line for (iii), on a hinge line on the side of the foot on the
+# rails for (i) with spindle and lock; for (ii) and (iii) from the fe.py reruns in results/reruns, which also equal the stored
+# results); the capacity of (i) with spindle and lock when the latch zone is not left out (the factored self-weight alone
+# exceeds the wrinkling limit there); the local buckling modes whose factors fall with the mesh (at a support of (ii), k = 4,
+# 8, 12; at the end of the spindle of (i), k = 8, 12); elements per panel edge k and elements as the stored runs record them,
+# element length and peak memory of ccx (the job ledgers give the maximum resident set size in GiB = 2^30 bytes; GB = 10^9
+# bytes).
 # usage: python3 fem/check_results.py           output: out/check_fe_results.json
 # Written with the assistance of the Claude models Opus 5.5, Fable 5, and Fable 5.1 (Anthropic); all code was checked by the authors.
 
@@ -171,17 +174,46 @@ det['ii.V1_place'] = w2
 st1k8 = J('hall_ii', 'static_V1_k8.json')
 c1k8 = min((st1k8['capacity_kN_per_m2_by_vertex_radius'][c]['0.2']['s_k_max'], c) for c in CASES)
 ch_ii = 100 * (c1[0] / c1k8[0] - 1)
+# spindle and lock, k = 8: the stored run gives no capacity for the total displacement span/200. Its largest total
+# displacements under G + S and 1.35 G + 1.5 S lie at the same node of the rail foot, where the displacements under G and S
+# are collinear; there u_G = (1.5 u_SLS - u_ULS) / 0.15, and span/200 is reached at s_k = (span/200 - u_G) / (u_SLS - u_G).
+# Checks: the same node in both combinations, the same u_G from the three snow cases, and, applied to the stored k = 12
+# run, its stored u_G and capacity
+def sls_total_from_combos(stat):
+    out = {}
+    for c in CASES:
+        s_, u_ = stat['combos']['SLS_' + c], stat['combos']['ULS_' + c]
+        us, uu, lim = s_['u_tot_max'], u_['u_tot_max'], stat['span'] / 200
+        uG = (1.5 * us - uu) / 0.15
+        out[c] = dict(s_max_total=(lim - uG) / (us - uG), uG_mm=1e3 * uG, same_node=s_['u_tot_node'] == u_['u_tot_node'])
+    return out
+
+
+st3k8 = J('hall_ii', 'static_V3_k8.json')
+sl3 = {'k8': sls_total_from_combos(st3k8), 'k12': sls_total_from_combos(st3)}
+c3k8 = cap_ii(st3k8, sl3['k8'], '0.2')
+ch_ii3 = 100 * (c3[0] / c3k8[0] - 1)
+uG_spread = max(max(d[c]['uG_mm'] for c in CASES) - min(d[c]['uG_mm'] for c in CASES) for d in sl3.values())
+k12_diff = max(max(abs(sl3['k12'][c]['s_max_total'] / cu['V3'][c]['s_max_total'] - 1),
+                   abs(sl3['k12'][c]['uG_mm'] / cu['V3'][c]['uG_at_node_mm'] - 1)) for c in CASES)
+vals['ii.fe.capacity_V3_k8'] = c3k8[0]
+vals['ii.fe.capacity_V3_k8_from_rail_foot_valid'] = bool(all(d[c]['same_node'] for d in sl3.values() for c in CASES)
+                                                         and uG_spread < 1e-5 and k12_diff < 1e-6)
+det['ii.capacity_V3_k8'] = dict(capacity=c3k8, uG_spread_mm=uG_spread, k12_max_rel_diff=k12_diff, by_case=sl3)
 print('\nhall (ii), k = 12: capacity with both feet anchored %.4f (%s, %s), with spindle and lock %.4f (%s, %s)' % (c1 + c3))
 print('  lambda_1 (rule A): V1 %.4f (%s), V3 %.4f (%s); lowest local mode at a point support %.4f (%s, near vertex %s)'
       % (lam2['V1'][0], lam2['V1'][1], lam2['V3'][0], lam2['V3'][1], ls[0], ls[1], ls[2]))
-print('  rail foot (V3): %.1f mm under self-weight, up to %.1f mm under self-weight and snow; k = 8 -> 12: capacity V1 %.4f -> %.4f (%+.1f %%)'
-      % (vals['ii.fe.spread_G_mm'], vals['ii.fe.spread_snow_mm'], c1k8[0], c1[0], ch_ii))
-print('  rail foot (V3): the largest displacement under snow lies %s' % fe.describe(pl[0]))
+print('  rail foot (V3): %.1f mm under self-weight, up to %.1f mm under self-weight and snow; k = 8 -> 12: capacity V1 %.4f -> %.4f (%+.1f %%),'
+      ' V3 %.4f -> %.4f (%+.1f %%)' % (vals['ii.fe.spread_G_mm'], vals['ii.fe.spread_snow_mm'], c1k8[0], c1[0], ch_ii, c3k8[0], c3[0], ch_ii3))
+print('  V3, k = 8: capacity %.4f (%s, %s), u_G at the rail foot %.2f mm from each snow case (spread %.1e mm); at k = 12 the same rule '
+      'gives the stored capacity and u_G to %.1e' % (c3k8 + (sl3['k8'][c3k8[2]]['uG_mm'], uG_spread, k12_diff)))
+print('  rail foot (V3): the largest displacement under self-weight and snow lies %s' % fe.describe(pl[0]))
 print('  local mode at the support vertex %s (S2+): %.3f / %.3f / %.3f at k = 4 / 8 / 12 (MAC %.3f, %.3f)'
       % (tuple(tr['k12']['rows'][0]['peak_vertex']), f_sup['k4'], f_sup['k8'], f_sup['k12'], mac[1], mac[0]))
 print('  fe.py rerun, both feet anchored, k = 12: capacity %.4f (%s, %s), largest relative difference to the stored run %.1e; reached %s'
       % (rr2['capacity']['s_k_max'], rr2['capacity']['governing'], rr2['capacity']['case'], vals['ii.fe.rerun_V1_k12_max_rel_diff'], fe.describe(w2)))
-vals['fe.capacity_change_k8_k12_max_pct'] = max(abs(x) for x in list(ch_i.values()) + [ch_ii])
+det['fe.capacity_change_k8_k12_pct'] = {'i.V1': ch_i['V1'], 'i.V3': ch_i['V3'], 'ii.V1': ch_ii, 'ii.V3': ch_ii3}
+vals['fe.capacity_change_k8_k12_max_pct'] = max(abs(x) for x in det['fe.capacity_change_k8_k12_pct'].values())
 
 # ------------------------------------------------------------------ hall (iii), k = 8
 s1, s3 = J('hall_iii', 'static_V1_k8.json'), J('hall_iii', 'static_V3_k8.json')
@@ -213,7 +245,7 @@ vals['iii.fe.u_vert_change_k6_k8_max_pct'] = max(100 * abs(MS[s]['u_v']['k8'] / 
 print('\nhall (iii), k = 8: capacity with both feet anchored %.4f (%s, %s), with spindle and lock %.4f (%s, %s)' % (d1 + d3))
 print('  lambda_1 (rule A, load scaled by 0.5 so that factors down to about 0.26 are returned): V1 %.4f (%s), V3 %.4f (%s)'
       % (lam3['V1'][0], lam3['V1'][1], lam3['V3'][0], lam3['V3'][1]))
-print('  rail foot (V3): %.1f mm under self-weight, up to %.1f mm under self-weight and snow, the largest displacement under snow lying %s'
+print('  rail foot (V3): %.1f mm under self-weight, up to %.1f mm under self-weight and snow, the largest of them lying %s'
       % (vals['iii.fe.spread_G_mm'], vals['iii.fe.spread_snow_mm'], fe.describe(pl3[0])))
 print('  largest vertical displacement (V1, SLS S2+) at k = 4 / 6 / 8: %.2f / %.2f / %.2f mm; largest change from k = 6 to 8 over the %d series: %.2f %%'
       % (ser['k4'], ser['k6'], ser['k8'], len(MS), vals['iii.fe.u_vert_change_k6_k8_max_pct']))
@@ -225,10 +257,15 @@ vals['fe.all_lambda1_above_1'] = bool(min(vals[k_] for k_ in vals if '.lambda1_'
 vals['fe.capacity_V1_min'] = min(vals['%s.fe.capacity_V1' % h] for h in HL.HALL_KEYS)
 vals['fe.capacity_V1_max'] = max(vals['%s.fe.capacity_V1' % h] for h in HL.HALL_KEYS)
 vals['iii.fe.u_vert_grows_with_k'] = bool(ser['k4'] < ser['k6'] < ser['k8'])
-for h, k in (('i', 12), ('ii', 12), ('iii', 8)):
-    nf = len(HL.face_labels(h))
-    vals['%s.fe.elements' % h] = nf * k * k
-    vals['%s.fe.element_length_mm' % h] = 1e3 * HL.HALLS[h]['metres_per_unit'] / k
+# elements per panel edge k and elements as the stored static runs of both variants record them (a list, and the element
+# length nan, when the runs or the two directions of a face differ; the comparison then fails)
+info = lambda r_: r_.get('model_info') or r_['meta']
+for h, runs in (('i', (J('hall_i', 'static_V1_k12.json'), J('hall_i', 'static_V3_k12.json'))), ('ii', (st1, st3)), ('iii', (s1, s3))):
+    ks = sorted({k_ for r_ in runs for k_ in r_['k']})
+    ne = sorted({info(r_).get('elems', info(r_).get('n_elems')) for r_ in runs})
+    vals['%s.fe.elements_per_panel_edge' % h] = ks[0] if len(ks) == 1 else ks
+    vals['%s.fe.elements' % h] = ne[0] if len(ne) == 1 else ne
+    vals['%s.fe.element_length_mm' % h] = 1e3 * HL.HALLS[h]['metres_per_unit'] / ks[0] if len(ks) == 1 else float('nan')
 mem = []
 for f in glob.glob(os.path.join(R, 'jobs', '*.tsv')):
     for line in open(f):
@@ -240,9 +277,10 @@ mi = max(m_ for m_ in mem if 'hall_iii' in m_[1])[0]
 m1 = max(m_ for m_ in mem if 'hall_i.' in m_[1] or m_[1].endswith('hall_i.tsv'))[0]
 vals['iii.fe.peak_memory_GiB'] = mi; vals['iii.fe.peak_memory_GB'] = mi * GIB
 vals['i.fe.peak_memory_GiB'] = m1; vals['i.fe.peak_memory_GB'] = m1 * GIB
-print('\nelements: %s; element length on the typical edge: %s mm; peak memory of ccx: (iii) k = 8 %.2f GiB = %.2f GB, (i) k = 12 '
-      '%.2f GiB = %.2f GB' % ({h: vals['%s.fe.elements' % h] for h in HL.HALL_KEYS}, {h: round(vals['%s.fe.element_length_mm' % h], 1) for h in HL.HALL_KEYS},
-                              mi, mi * GIB, m1, m1 * GIB))
+print('\nelements per panel edge k (stored runs): %s; elements: %s; element length on the typical edge: %s mm; peak memory of ccx: '
+      '(iii) k = 8 %.2f GiB = %.2f GB, (i) k = 12 %.2f GiB = %.2f GB'
+      % ({h: vals['%s.fe.elements_per_panel_edge' % h] for h in HL.HALL_KEYS}, {h: vals['%s.fe.elements' % h] for h in HL.HALL_KEYS},
+         {h: round(vals['%s.fe.element_length_mm' % h], 1) for h in HL.HALL_KEYS}, mi, mi * GIB, m1, m1 * GIB))
 print('all lambda_1 > 1: %s; capacities with both feet anchored %.3f .. %.3f; largest change k = 8 -> 12: %.1f %%'
       % (vals['fe.all_lambda1_above_1'], vals['fe.capacity_V1_min'], vals['fe.capacity_V1_max'], vals['fe.capacity_change_k8_k12_max_pct']))
 # section and snow parameters used by the runs

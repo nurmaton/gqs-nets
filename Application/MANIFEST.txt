@@ -1,14 +1,14 @@
 # Application: every file with its size (bytes) and md5; 247 files, 77.7 MB in all (MANIFEST.txt itself not listed)
 # file                                                                bytes  md5
-README.md                                                             34466  1a9e47e47814b3c0859cd526f6004e85
+README.md                                                             36190  3fd68e6e2d4ede401c51be6698da15e2
 checks/check_clear_height.py                                           4366  35743d55e97ca4cf373a69d2289ddfb8
 checks/check_dimensions.py                                            11503  a4f6ea8a4fdb6c281c0e6213fc2993f0
 checks/check_exchange.py                                               3502  b8c286586b497e1f0735561840842008
 checks/check_mobility.py                                               8620  442659b6cbdc63aadc847a66aa4b4414
 checks/check_nets.py                                                   8941  e7a58ecc9c70856f7e5792f881284b54
 checks/check_panels.py                                                18672  c190d84e4196857a7dbe81801365f328
-checks/compare.py                                                      2888  d371ad2ce805bc58e04f455cf532379b
-clearheight.py                                                         3217  80bf09a818c584042023acb707b8e744
+checks/compare.py                                                      3196  9f74ac426b682fbb1be2527aaab9b40a
+clearheight.py                                                         3428  dfe55ecd3cc3755cc36d86ea7071d215
 data/hall_i_deployed_V.npy                                             8336  ee7adb403cac63fa80e03ee2f7e181a3
 data/hall_i_deployed_panels.npy                                       66224  7313d652b9c50e71db20e0cc4624f3ef
 data/hall_i_transport_V.npy                                            8336  f9339e20073be11958e53a829cfd531f
@@ -23,8 +23,8 @@ data/hall_iii_transport_V.npy                                         11984  d8f
 data/hall_iii_transport_panels.npy                                    86528  e92e22b8440db3b97052c0a2674eddcc
 data/halls.json                                                        4316  d92a86ff787645415d4e5975681c120a
 data/motion_t.json                                                    16354  eb192399dcedc7855d8946fbde911ef8
-expected_values.json                                                  54959  db6692da2b24e54fdcee2ae1a9417468
-fem/check_results.py                                                  19108  c4214718f74d7a7fdc54e2bc311d35a4
+expected_values.json                                                  56358  bcd4389bd111e434aab2b3577cfb3474
+fem/check_results.py                                                  22329  120229466ee34765caf048e452679418
 fem/classify.py                                                       12235  5d2f6e60e1b254f60cba15cb7fdd5503
 fem/compare_static.py                                                  4376  1db9cd5d9c479c489fadf5b4c16f917f
 fem/decks/MD5SUMS                                                      4724  e0b852346503284561f1cd9e2e4ee923
@@ -211,8 +211,8 @@ fem/results/reruns/hall_iii_V1_k8_static.log                           2664  ede
 fem/shellnet.py                                                      103616  e075e371b9e7bf6d522a176fb5590998
 fem/smoke_test.py                                                      1850  ab91bb2c809cb36ad57149660f27d260
 figures/label_sizes.json                                               6336  6f966b9c03aba9626399f05f3103a69a
-figures/sections.py                                                   33233  81e3d163ade6e55b718399cf17d98e12
-figures/snow.py                                                       15318  eb39a06d1bdfd4e3f44fd77efd361ba9
+figures/sections.py                                                   33272  bf4a0e4f210d645db3eb1b99fe8463b7
+figures/snow.py                                                       15326  865a1443dd72132051543460fa95a912
 figures/snow_data/hall_i_V1.json                                       1293  e4b81506385eb1452d8b47daf1622000
 figures/snow_data/hall_i_V1.npz                                     1837968  21657f688009a3d49346bd76b1c68a49
 figures/snow_data/hall_i_V3.json                                       1346  c3a04ea3c71bcf9c4a24335428cd92c2
@@ -226,14 +226,14 @@ figures/snow_data/hall_iii_V1.npz                                   1197034  c5b
 figures/snow_data/hall_iii_V3.json                                     1058  a1fed8416c1cec523a65adbd86e9c7bc
 figures/snow_data/hall_iii_V3.npz                                   1192889  f8fe8518ef94288982dd8f1381c7f78e
 figures/tikzlabels.py                                                  9032  1e8c318d401ddc077caa1c921ae3492a
-halls.py                                                               9361  0ec34f35f3ba0b319b52c3ed7c5b645f
+halls.py                                                               9361  836bbdd48c47c03f269d10a555516d1a
 renderings/anchors/hall_i_two.points.json                              8717  8f95d7b3ab3163e479ae6f168519dc38
 renderings/anchors/hall_ii_two.points.json                             8778  fc4e3ca7c55c2731bd01f49dbc65459b
 renderings/anchors/hall_iii_two.points.json                            8840  0132615aa8c94af8b06f0b56bdbec4db
 renderings/artifact_scan.py                                            3234  cc65deb7bd9b2503d6f3f619bd4ea372
 renderings/cameras.json                                                2134  6c3da25c2a9c83dd13fd23af4996372a
 renderings/constants.json                                              6977  995ece7d297ae0a4415abd393a9fe1d0
-renderings/coplanar_faces.py                                           4528  6bdaae17f0f4879b82427d2c4820a5eb
+renderings/coplanar_faces.py                                           4531  35df133aca37b1c54f5029cfee0d9920
 renderings/make_geo.py                                                 8899  f160b601975e14992388c1bbdccd5051
 renderings/props_ref.py                                                4422  2eba82ec6985543b439bf21e4a800eca
 renderings/reference/props_reference.npz                              50859  7c370338ee319e1f8f87078802bf3cc1
@@ -244,6 +244,6 @@ renderings/render.sh                                                   2861  801
 renderings/scene.py                                                   42170  3b61adabd372b49168057a32930b8385
 renderings/scene_ref.py                                                4237  d366ec6761c9bedcc2ecb1405525616c
 renderings/summary.py                                                  1556  d1b47edcb94a83db6ef645e13e551110
-renderings/test_scene.py                                              51743  1f25d320d6bb4cb7191f78fd34a14b8b
+renderings/test_scene.py                                              51749  7e8794b9133fd3d25b551b1508a126e7
 renderings/wallrange.py                                                1470  fe23374f024cad6cfeb0f903f429be91
-run_quick.sh                                                           3502  5e463b41f71909a9596d311c227ce418
+run_quick.sh                                                           4718  402f6cd5328c25ba85eed7e6dfc8e5ef
