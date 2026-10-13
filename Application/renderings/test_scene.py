@@ -21,13 +21,13 @@ PEN_TOL = 5e-6          # m: a ball of this radius inside both bodies counts as 
 CONTACT_TOL = 1e-4      # m: closer than this counts as contact
 
 
-# the parts of one schematic 20-ft container as built by bl_scene.build_container (every one must be present)
+# the parts of one schematic 20-ft container as built by build_container of scene.py (every one must be present)
 CONTAINER_PARTS = {'c_cast': 8, 'c_cross': 14, 'c_doorpost': 2, 'c_endrail': 2, 'c_floorplate': 1, 'c_header': 1, 'c_post': 4,
                    'c_roof': 1, 'c_siderail': 2, 'c_toprail_x': 2, 'c_toprail_y': 2, 'c_wall_l': 1, 'c_wall_r': 1, 'c_wall_rear': 1}
 
 
 TRUCK_PARTS = {'deck': 1, 'wellbeam': 2, 'wellfloor': 1, 'neck': 1, 'gooseneck': 1, 'kingpin': 1, 'rearstep': 1, 'reardeck': 1, 'tyre': 8, 'rim': 8, 'hanger': 4,
-               'axle': 2, 'leg': 2, 'leg_pad': 2, 'underrun': 1, 'underrun_strut': 2, 'rearbeam': 2, 'light': 2, 'mudflap': 2}   # bl_scene.build_truck (low-bed)
+               'axle': 2, 'leg': 2, 'leg_pad': 2, 'underrun': 1, 'underrun_strut': 2, 'rearbeam': 2, 'light': 2, 'mudflap': 2}   # build_truck of scene.py (low-bed)
 
 
 def closed_check(V, F):

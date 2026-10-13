@@ -1,4 +1,5 @@
-Settings of gqs.py for the pictures of the GQS-nets in the figures with the digits 2026, the letters G, Q, S and the animals
+Settings of gqs.py for the pictures of the nets assembled from GQS-nets in the figures with the digits 2026, the letters G, Q, S,
+and the animals
 
 Each net is shown at t1 (the digit, letter or animal) and at other positions of the same flexion (t2; for the animals
 t2, t3, t4), from the same view and at the same zoom.

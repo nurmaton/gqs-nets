@@ -7,7 +7,7 @@
 # Written with the assistance of the Claude models Opus 5.5, Fable 5, and Fable 5.1 (Anthropic); all code was checked by the authors.
 import numpy as np
 PLANE_TOL, AREA_TOL = 2e-4, 1e-5
-SKINS = {'c_wall_l': 'skin', 'c_wall_r': 'skin', 'c_wall_rear': 'skin', 'c_roof': 'roof'}   # translucent (bl_scene MAT_SKIN, MAT_ROOF)
+SKINS = {'c_wall_l': 'skin', 'c_wall_r': 'skin', 'c_wall_rear': 'skin', 'c_roof': 'roof'}   # translucent (MAT_SKIN, MAT_ROOF of scene.py)
 def material(name):
     b = name.split('.')[0]
     return SKINS.get(b, 'floor' if b == 'c_floorplate' else 'steel')

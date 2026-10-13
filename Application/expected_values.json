@@ -1582,6 +1582,46 @@
   },
   {
    "check": "check_fe_results",
+   "key": "ii.fe.elements",
+   "quantity": "S8R elements of (ii), k = 12",
+   "hall": "ii",
+   "rule": "equal",
+   "expected": 26928
+  },
+  {
+   "check": "check_fe_results",
+   "key": "iii.fe.elements",
+   "quantity": "S8R elements of (iii), k = 8",
+   "hall": "iii",
+   "rule": "equal",
+   "expected": 28800
+  },
+  {
+   "check": "check_fe_results",
+   "key": "i.fe.elements_per_panel_edge",
+   "quantity": "elements per panel edge k (stored static runs, both variants)",
+   "hall": "i",
+   "rule": "equal",
+   "expected": 12
+  },
+  {
+   "check": "check_fe_results",
+   "key": "ii.fe.elements_per_panel_edge",
+   "quantity": "elements per panel edge k (stored static runs, both variants)",
+   "hall": "ii",
+   "rule": "equal",
+   "expected": 12
+  },
+  {
+   "check": "check_fe_results",
+   "key": "iii.fe.elements_per_panel_edge",
+   "quantity": "elements per panel edge k (stored static runs, both variants)",
+   "hall": "iii",
+   "rule": "equal",
+   "expected": 8
+  },
+  {
+   "check": "check_fe_results",
    "key": "i.fe.governing_V1_is_sls_total_S1",
    "quantity": "(i) both feet anchored: governed by the total displacement under undrifted snow",
    "hall": "i",
@@ -1703,10 +1743,18 @@
   {
    "check": "check_fe_results",
    "key": "fe.capacity_change_k8_k12_max_pct",
-   "quantity": "largest change of the capacities of (i), (ii) from k = 8 to 12 (%)",
+   "quantity": "largest change of the capacities of (i), (ii), both variants, from k = 8 to 12 (%)",
    "hall": null,
    "rule": "round0",
    "expected": 10
+  },
+  {
+   "check": "check_fe_results",
+   "key": "ii.fe.capacity_V3_k8_from_rail_foot_valid",
+   "quantity": "(ii) spindle and lock, k = 8: total-displacement capacity from the rail-foot displacements (same node, same u_G from the three snow cases, stored k = 12 capacity reproduced)",
+   "hall": "ii",
+   "rule": "equal",
+   "expected": true
   },
   {
    "check": "check_fe_results",
@@ -1850,7 +1898,7 @@
   {
    "check": "check_fe_results",
    "key": "ii.fe.spread_snow_at_rail_foot",
-   "quantity": "(ii) spindle and lock: the largest displacement under snow is at the foot on the rails",
+   "quantity": "(ii) spindle and lock: the largest displacement under self-weight and snow is at the foot on the rails",
    "hall": "ii",
    "rule": "equal",
    "expected": true
@@ -1858,7 +1906,7 @@
   {
    "check": "check_fe_results",
    "key": "iii.fe.spread_snow_at_rail_foot",
-   "quantity": "(iii) spindle and lock: the largest displacement under snow is at the foot on the rails",
+   "quantity": "(iii) spindle and lock: the largest displacement under self-weight and snow is at the foot on the rails",
    "hall": "iii",
    "rule": "equal",
    "expected": true

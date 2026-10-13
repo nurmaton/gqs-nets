@@ -3,8 +3,9 @@
 This folder lets a reader rebuild the three arch halls (i), (ii) and (iii) and recheck every number and claim made about
 them: the net data and both positions, the sizes, the clear height, the panels and their collision check along the motion,
 the mobility counts, the period-two translation, the exchange of row types in (iii), the snow check with CalculiX, and the
-figures and renderings. `run_quick.sh` runs all fast checks and prints PASS or FAIL for every quantity against
-`expected_values.json`.
+figures and renderings. `run_quick.sh` runs all fast checks, writes PASS, FAIL, or SKIP for every quantity against
+`expected_values.json` to `out/compare.txt`, and prints the failed and skipped quantities, the totals, and the steps that
+ended with a nonzero exit code.
 
 Written with the assistance of the Claude models Opus 5.5, Fable 5, and Fable 5.1 (Anthropic); all code was checked by the
 authors. Every script carries this note in its header.
@@ -14,7 +15,7 @@ authors. Every script carries this note in its header.
 | what | version used | needed for |
 |---|---|---|
 | Python 3 with numpy, scipy, matplotlib | Python 3.11, numpy 2.3.4, scipy 1.16.3, matplotlib 3.10.7 | everything |
-| `../gqs.py` (the tool of this supplement) | md5 `5b67bf1f19d85f93f47e72181c81955e` | building the nets (checks/) |
+| `../gqs.py` (the tool of this supplement) | md5 `6bb96fa70b663d6d995bf6eba5d7d96d` | building the nets (checks/) |
 | CalculiX `ccx` 2.23 | 2.23 | FE runs (optional; the quick run uses one short run) |
 | Blender 5.x | 5.2.1 | renderings (optional; the quick run builds and tests the scenes only) |
 | pillow | any | the artefact scan of rendered images only |
@@ -28,18 +29,20 @@ label sizes of the figures are stored in `figures/label_sizes.json`.
 ## 2. How to run
 
 ```
-sh run_quick.sh                       # all fast checks and the comparison, about 13 min
-python3 checks/compare.py             # the comparison table again (out/compare.txt)
+sh run_quick.sh                               # all fast checks and the comparison, about 13 min
+python3 checks/compare.py > out/compare.txt   # the comparison table again
 ```
 
 Environment: `PYTHON` (default `python3`), `GQS_PY` (default `../gqs.py`), `CCX` (default `ccx`), `BLENDER` (default
 `blender`), `APP_OUT` (output folder, default `./out`), `SKIP_FE_SMOKE=1`, `SKIP_RENDER_TEST=1`. All outputs go to `out/`;
 nothing in the folder is changed. Output: `out/run_quick.log` (all messages), `out/compare.txt` (one line per quantity:
-PASS / FAIL / SKIP, key, hall, expected value and rule, measured value, quantity), `out/<check>.json` (the measured values).
-The comparison rules: `equal`; `roundN` (the measured value rounded to N decimals equals the printed value); `tol`; `max`;
-`range`. Items that need ccx or Blender are SKIPped when these are not found.
+PASS / FAIL / SKIP, key, hall, expected value and rule, measured value, quantity), `out/<check>.json` (the measured values),
+`out/skipped.txt` (the optional checks the run left out). The comparison rules: `equal`; `roundN` (the measured value
+rounded to N decimals equals the printed value); `tol`; `max`; `range`. Items that need ccx or Blender are SKIPped when these
+are not found or their step is left out (`SKIP_FE_SMOKE=1`, `SKIP_RENDER_TEST=1`). The quick run first removes the result
+files of an earlier run from `out/`, and a step that ends with a nonzero exit code makes it fail (exit code 1).
 
-Measured on a laptop (Apple M-series, 4 threads for ccx); a run from a fresh copy gave 266 PASS, 0 FAIL, 0 SKIP in 13.9 min:
+Measured on a laptop (Apple M-series, 4 threads for ccx); a run from a fresh copy gave 272 PASS, 0 FAIL, 0 SKIP in 13.2 min:
 
 | step | script | time |
 |---|---|---|
@@ -78,8 +81,8 @@ summary table (0.7265 and 1.4019) move them by up to 4.7e-4 m. `check_nets.py` r
 `halls.py` builds the hall faces of the m x n net with gqs.py at any t (`Net`), and defines the standing frame of a
 position: y along the period-two translation V_{i+2,j} - V_ij (the mean direction of the rows of blocks), x along the foot
 chord of the midline, z up; the midline is the mean of the polyline of the even-i vertices and that of the odd-i vertices,
-seen along y. Deployed: x = 0 midway between the feet, z = 0 on the foot line; transport: the box of vertices and panels
-centred, on z = 0.
+seen along y. Deployed: x = 0 midway between the feet, z = 0 on the foot line; transport: x = 0 in the middle and z = 0 at
+the bottom of the box of the vertices and panels; in both, y = 0 at the smallest y of the vertices and panels.
 
 ## 4. What each check reproduces
 
@@ -115,13 +118,13 @@ extended to 13.21 + 5.55 = 18.76 m, beyond 16.50 m and 12.00 m king pin to rear;
 2.286 x 2.261 m and L within the floor 5.867 m of the 20-ft container.
 
 ### checks/check_clear_height.py (and clearheight.py): clear height
-Inputs: `data/hall_*_deployed_panels.npy`, `data/halls.json`. The panels seen along the rows give, at every x (0.5 mm
-step), the lowest panel material above the floor; the feet stand 0.08, 0.30, 0.50 m above the floor; the plinths of (i) and
-the knee walls of (ii), (iii) are 80 mm thick, centred under the lowest panel corners. H_c, the largest clear height (2.74,
-2.71, 2.79 m); W_20, the width of the widest floor strip with at least 2.0 m of clear height (2.00, 2.29, 2.30 m; for (iii)
-all strips together are 2.33 m); for (i) the lowest height of the feet that gives W_20 >= 2.0 m (0.0775 m, hence 0.08 m);
-for (ii) the clear height under the flat part of the terraced crown (2.66 m), H_c being reached in the notches between the
-terraces.
+Inputs: `data/hall_*_deployed_V.npy`, `data/hall_*_deployed_panels.npy`, `data/halls.json`. The panels seen along the
+rows give, at every x (0.5 mm step), the lowest panel material above the floor; the feet stand 0.08, 0.30, 0.50 m above the
+floor; the plinths of (i) and the knee walls of (ii), (iii) are 80 mm thick, centred under the lowest panel corners. H_c,
+the largest clear height (2.74, 2.71, 2.79 m); W_20, the width of the widest floor strip with at least 2.0 m of clear height
+(2.00, 2.29, 2.30 m; for (iii) all strips together are 2.33 m); for (i) the lowest height of the feet that gives
+W_20 >= 2.0 m (0.0775 m, hence 0.08 m); for (ii) the clear height under the flat part of the terraced crown (2.66 m), H_c
+being reached in the notches between the terraces.
 
 ### checks/check_mobility.py: one degree of freedom, period two
 Inputs: `../gqs.py`, `data/halls.json`, `data/hall_*_V.npy`. The compatibility matrix of the rigid panels (unknowns: angular
@@ -129,8 +132,9 @@ and linear velocity of every panel; per hinge, equal velocity at its midpoint an
 normal to it; a locked hinge also none about the hinge) at 9 equally spaced values of t from the deployed to the transport
 position, both included: null space of dimension 7 (six rigid motions and one more), and 6 with one hinge locked (five
 hinges, each at the deployed position, the middle sample and the transport position), in each hall; for (iii),
-t = 1/sqrt(2) is left out of the samples and checked alone: null space 18, dihedral angle 0 at 204 of 857 hinges (the hinges
-whose angle changes sign there); the smallest |dihedral angle| at the samples (not 0); the
+t = 1/sqrt(2) is left out of the samples and checked alone: null space 18, the two faces coplanar (dihedral angle 0 between
+the face normals) at 204 of 857 hinges (the hinges whose angle changes sign there); the smallest |dihedral angle| at the
+samples (not 0); the
 period-two translation: shifting i by two moves every V_ij by one translation in both positions and at all samples (largest
 deviation about 1e-14 m); the length of that translation grows during folding by 3, 14 and 12 % (1.1144 -> 1.1482,
 0.8083 -> 0.9221, 0.5055 -> 0.5644 m).
@@ -139,21 +143,21 @@ deviation about 1e-14 m); the length of that translation grows during folding by
 Inputs: `../gqs.py`, `data/halls.json` (`rows_before_exchange`). The rows before the exchange differ from the final rows
 only by exchanges of the types a and c (gqs.py writes the types as 'a'..'d') in rows nu = 4, 8, 10, 12, 14, 16, 18, 22; both nets have the same profile in both positions (even-i
 and odd-i polylines and midline, to 3e-14 m); the skew in plan (spread of the mean position along the hall of the vertex
-columns) falls from 2.73 to 0.63 m (deployed) and from 2.45 to 0.57 m (transport). The rows before the exchange are those
+columns) falls from 2.73 to 0.63 m (deployed) and from 2.45 to 0.56 m (transport). The rows before the exchange are those
 of the search that produced (iii); the search itself is not part of this folder.
 
 ### checks/check_panels.py: panels and collisions along the motion
 Inputs: `../gqs.py`, `data/halls.json`, `data/motion_t.json` (the 365, 181 and 259 positions t of the motion),
-`data/hall_*_panels.npy`. Each face carries a rigid 80 mm panel on its inner side; the hinges are the outer edges; at each
-hinge both panels are bevelled by the bisector plane at the position of smallest inner angle. At every position all panel
-pairs whose boxes come within 0.30 m are tested (separating axes; exact distance of the closest pairs). Panels of (i) with a
-common vertex overlap: their corners are cut at 90 vertices (180 panels) by the plane through the vertex equidistant from
-the two face planes, at the position of deepest overlap, and the check is repeated. Results: no overlapping pair along the
-motion in any hall; the smallest separating-axis bound of the distance between panels without a common vertex (188 mm (i),
-19.8 mm (ii), 35 mm (iii), all at the transport position); this bound is a lower bound of every distance, and the exact
-distance of the pair with the smallest bound is 188, 22.8 and 35 mm, so the smallest distance of (ii) lies between 19.8 and
-22.8 mm; the panels built here equal the stored panels at both ends (to 1.4e-8 m for (i), whose stored
-transport position is at t = 0.3199999976, and exactly for (ii), (iii)).
+`data/hall_*_V.npy`, `data/hall_*_panels.npy`. Each face carries a rigid 80 mm panel on its inner side; the hinges are the
+outer edges; at each hinge both panels are bevelled by the bisector plane at the position of smallest inner angle. At every
+position all panel pairs whose boxes come within 0.30 m are tested (separating axes; exact distance of the closest pairs).
+Panels of (i) with a common vertex overlap: their corners are cut at 90 vertices (180 panels) by the plane through the
+vertex equidistant from the two face planes, at the position of deepest overlap, and the check is repeated. Results: no
+overlapping pair along the motion in any hall; the smallest separating-axis bound of the distance between panels without a
+common vertex (188 mm (i), 19.8 mm (ii), 35 mm (iii), all at the transport position); this bound is a lower bound of every
+distance, and the exact distance of the pair with the smallest bound is 188, 22.8 and 35 mm, so the smallest distance of
+(ii) lies between 19.8 and 22.8 mm; the panels built here equal the stored panels at both ends (to 1.4e-8 m for (i), whose
+stored transport position is at t = 0.3199999976, and exactly after rounding to 1e-9 m for (ii), (iii)).
 
 ### fem/: snow check with CalculiX
 - `shellnet.py`: the shell model (S8R elements, 80 mm steel/polyurethane sandwich as an equivalent shell with core shear,
@@ -174,12 +178,13 @@ transport position is at t = 0.3199999976, and exactly for (ii), (iii)).
 - `compare_static.py RUN.json`: compares a static run of fe.py with the stored result of the same hall, variant and k
   (`results/hall_*/static_V*_k*.json`): snow totals, self-weight, first frequency, the largest displacements and stresses
   of every load combination, the capacities per limit, snow case and radius, and the values fe.py computes itself (113
-  quantities); prints the largest relative difference.
+  quantities; 101 for (i) with spindle and lock, where fe.py leaves out the latch zone and its own capacities are not
+  compared); prints the largest relative difference.
 - `make_decks.py`: regenerates the input decks of the reported runs (no ccx) and compares their md5 (without the title line)
   with `decks/MD5SUMS`: 61 decks (statics and buckling of (i) at k = 8 and 12, of (ii) at k = 12, buckling of (iii) at k = 8
-  under 0.5 and 0.05 x ULS), all identical. The 16 decks that set a value of the summary table are shipped in `decks/` as
-  run (their title line keeps the internal name of the run); the static decks of (iii) were not kept from its runs and are
-  written by fe.py.
+  under 0.5 and 0.05 x ULS), all identical. Of these, 16 are shipped in `decks/` as run (their title line keeps the internal
+  name of the run): the static decks of (i) and (ii) at k = 12 and, for each lambda_1 of the summary table, one buckling deck
+  that gives it. The static decks of (iii), which set its capacities, were not kept from its runs and are written by fe.py.
 - `check_results.py`: reads the stored results of the full runs (`results/`) and gives every FE number: the capacities
   s_k,max with both feet anchored (0.60, 0.64, 0.68 kN/m2) and with spindle and lock (0.43, 0.04, 0.04) with the governing limit
   and snow case; where the governing limit is reached: for (i) with both feet anchored at a free edge of an open end (total
@@ -191,18 +196,22 @@ transport position is at t = 0.3199999976, and exactly for (ii), (iii)).
   same mode by MAC > 0.97; the lowest at the end of the spindle of (i): 0.87 at k = 8, 0.57 at k = 12); the wrinkling
   capacity of (i) at r = 0.2 / 0.15 / 0.1 m (0.82 / 0.69 / 0.58); for (i) with spindle and lock, the capacity 0 when the 0.15 m
   around the latch is not left out (the factored self-weight alone exceeds the wrinkling limit 0.025 m from the latch); the
-  change of the capacities from k = 8 to 12 (up to 10 %); the spread of the rail foot (19.6 and 17.7 mm under self-weight;
-  85.8 and 75.5 mm under snow, the largest displacement under snow being at the foot on the rails); the vertical displacement
-  of (iii) at k = 4 / 6 / 8 (12.66 / 13.03 / 13.26 mm) and its largest change from k = 6 to 8 over the four stored series
-  (2.43 %); the overhang of the open ends of (i) (1.64 m); elements and element lengths (51, 44, 41 mm); the peak memory of
-  ccx (the job ledgers give the maximum resident set size in GiB = 2^30 bytes in their column max_rss_GB: 13.4 GiB = 14.4 GB
-  for (iii) at k = 8, 14.7 GiB = 15.7 GB for (i) at k = 12); h/b and mu_3; the section values. The places for (ii) and (iii)
-  come from the reruns in `results/reruns`, the others from the stored results.
+  change of the capacities of (i) and (ii), both variants, from k = 8 to 12 (up to 10 %; for (ii) with spindle and lock at
+  k = 8, the capacity for the total displacement, which the stored run does not give, is computed from its largest total
+  displacements under G + S and 1.35 G + 1.5 S at the rail foot; the same rule gives the stored capacity at k = 12); the
+  spread of the rail foot (19.6 and 17.7 mm under self-weight; 85.8 and 75.5 mm under self-weight and snow, the largest
+  displacement being at the foot on the rails); the vertical displacement of (iii) at k = 4 / 6 / 8
+  (12.66 / 13.03 / 13.26 mm) and its largest change from k = 6 to 8 over the four stored series (2.43 %); the overhang of
+  the open ends of (i) (1.64 m); the elements per panel edge (12, 12, 8), the elements (44064, 26928, 28800), both as the
+  stored runs record them, and the element lengths (51, 44, 41 mm); the peak memory of ccx (the job ledgers give the maximum
+  resident set size in GiB = 2^30 bytes in their column max_rss_GB: 13.4 GiB = 14.4 GB for (iii) at k = 8,
+  14.7 GiB = 15.7 GB for (i) at k = 12); h/b and mu_3; the section values. The places for (ii) and (iii) come from the
+  reruns in `results/reruns`, the others from the stored results.
 - `smoke_test.py`: one short ccx run, (ii) with both feet anchored at k = 4 (1-2 min): compare_static.py finds the stored
   k = 4 results (113 quantities) reproduced to the last digit.
 - `results/`: per hall the module output and the post-processing of the static runs, the buckling summaries, every mode with
-  both rules (`modes/`), the buckling factors as written by ccx (`dat/`), mesh comparisons, and the job ledgers (wall time,
-  peak memory in GiB). The ccx result files (.frd, about 21 GB) are not included.
+  rule A, for (i) and (iii) also with rule B (`modes/`), the buckling factors as written by ccx (`dat/`), mesh comparisons,
+  and the job ledgers (wall time, peak memory in GiB). The ccx result files (.frd, about 21 GB) are not included.
 - `results/reruns/`: two static runs of fe.py made with this folder, both feet anchored, (ii) at k = 12 (7 min, peak memory
   7.7 GB) and (iii) at k = 8 (9 min, 14.0 GB; maximum resident set size by /usr/bin/time -l, 4 threads): the fe.py output,
   its console log and the comparison with the stored run by compare_static.py (113 quantities, identical).
@@ -212,12 +221,14 @@ Rerunning the full studies (one ccx job at a time): (i) k = 12, both variants wi
 `python3 fem/fe.py static ii V1 12`, `python3 fem/fe.py buckle ii V1 12 S2- 90`, `python3 fem/fe.py buckle iii V1 8 S2+ 30
 --scale 0.5`. A static run is compared with the stored one by `python3 fem/compare_static.py out/fe/<name>.json`; the
 buckling runs write their factors and mode classes in another form than `results/` and are compared by hand (factors in
-`results/hall_*/dat/`, classes in `results/hall_*/modes/`). ccx *BUCKLE returns the factors nearest to 1, not the lowest ones; the runs therefore ask for many modes (90 to
-250 for (i), (ii)) or scale the load (0.5 for (iii)), and the lowest local factors are upper bounds.
+`results/hall_*/dat/`, classes in `results/hall_*/modes/`). ccx *BUCKLE returns the factors nearest to 1, not the lowest
+ones; the runs therefore ask for many modes (90 to 250 for (i); 40 or 90 for (ii), after runs with 12 modes that gave only
+local modes) or scale the load (0.5 for (iii)), and the lowest local factors are upper bounds.
 
 ### figures/
-- `sections.py`: the section figures (deployed and transport positions at one scale, with span, rise, H_c, W_20, W and H)
-  from `data/` and `clearheight.py`: a base PDF per figure and a TikZ file with the labels and dimension lines in metres.
+- `sections.py`: the section figures (deployed and transport positions, the three halls of each figure at one scale, with
+  span, rise, H_c, W_20, W, and H) from `data/` and `clearheight.py`: a base PDF per figure and a TikZ file with the labels
+  and dimension lines in metres.
   The frames are fitted to the label boxes of a layout pass with two-line values; the printed layer keeps their places and
   dimension lines and sets H_c and W_20 in one line at 7 pt inside the green strip, with the H_c arrow interrupted behind
   them, all lines 0.6 pt and the extension lines dashed with a pattern fitted to each line (a dash of about 4 pt, a gap of
@@ -255,7 +266,7 @@ that produces or checks it.
   local search; (ii) and (iii): enumeration of the palindromic sequences, rho_nu = rho_{n-1-nu}. The searches are not part
   of this folder (section 7); `checks/check_nets.py` confirms rho_nu = rho_{n-1-nu} for (ii) and (iii).
 - Exchange in (iii): after its search, the types a and c were exchanged in the rows nu = 4, 8, 10, 12, 14, 16, 18, 22, which
-  reduces the skew in plan from 2.73 to 0.63 m (deployed) and from 2.45 to 0.57 m (transport) and leaves the profile unchanged
+  reduces the skew in plan from 2.73 to 0.63 m (deployed) and from 2.45 to 0.56 m (transport) and leaves the profile unchanged
   in both positions, to 3.1e-14 m (`checks/check_exchange.py`).
 - Panels: the 80 mm panels lie on the inner side of the faces; at each hinge both panels are bevelled by the bisector plane at
   the position of smallest inner angle; the corners of the panels of (i) are cut at 90 vertices, 180 panels
@@ -280,11 +291,12 @@ that produces or checks it.
   each hall; with one hinge locked, its dimension is 6 (five hinges, each at the deployed position, the middle sample and the
   transport position, in each hall) (`checks/check_mobility.py`).
 - Special position of (iii): t = 1/sqrt(2) = 0.7071, between its deployed (0.15) and transport (0.75) positions, so that its
-  motion passes through it. There the dihedral angle is 0 at 204 of its 857 hinges (the hinges whose angle changes sign
-  there; all others at least 70.53 deg), and the null space has dimension 18 (`checks/check_mobility.py`). Every hinge of a
-  hall is an edge of a central face of its net (`checks/check_nets.py`), at which the flexion in closed form has nonzero
-  dihedral angles; thus the closed form does not cover this position. Whether another motion branches off there, and whether
-  the drive with one spindle passes through it, were not examined. None of the 9 samples above lies within 0.001 of this t.
+  motion passes through it. There the two faces at each of 204 of its 857 hinges are coplanar (the hinges whose dihedral
+  angle changes sign there; at all others the face normals make at least 70.53 deg), and the null space has dimension 18
+  (`checks/check_mobility.py`). The closed form of the flexion excludes this t: there the denominators of the formulas for
+  cot(theta_2/2) and cot(theta_4/2) of the base block vanish (x_1 = -4 and z_1 = z_2 = 2, so that
+  z_2 + x_1 t^2 = z_1 + x_1 t^2 = 0; gqs.py `Block`). Whether another motion branches off there, and whether the drive with
+  one spindle passes through it, were not examined. None of the 9 samples above lies within 0.001 of this t.
 
 ### Drive
 - The rows of blocks lengthen during folding by 3, 14 and 12 % ((i), (ii), (iii)): the period-two translation
@@ -294,7 +306,9 @@ that produces or checks it.
 ### Snow check: model, loads and limits
 - Panel: steel face sheets 0.6 mm (E_f = 210 GPa, Poisson's ratio 0.3, 7850 kg/m3, yield stress 280 MPa), polyurethane core
   78.8 mm (E_c = 4 MPa, G_c = 3.5 MPa, 40 kg/m3, shear strength 0.10 MPa); mass 12.57 kg/m2; line hinges on the outer face
-  sheet, 40 mm from the mid-surface (`fem/shellnet.py`, `panel_section`; printed by `fem/check_results.py`).
+  sheet, 40 mm from the mid-surface (`fem/shellnet.py`, `panel_section`; printed by `fem/check_results.py`). The panel data
+  and the material factor 1.1 of the limits below are assumed values, typical of sandwich panels with steel face sheets and a
+  polyurethane core; they are not taken from a particular product.
 - Snow: EN 1991-1-3:2003, Section 5.3.5 (cylindrical roofs) with its Figures 5.5 and 5.6; s_k = 1.0 kN/m2, exposure and
   thermal coefficients 1, the recommended values, no National Annex. The snow acts vertically per unit plan area (EN
   1991-1-3, Section 5) on the parts where the smoothed roof slopes by at most 60 deg. Shape coefficient: 0.8 undrifted (S1);
@@ -365,14 +379,14 @@ that produces or checks it.
 - `fem/input/`: the deployed outer skin as the FE runs read it; (iii) is the 13-row sub-net of its runs extended by the exact
   two-row translation (equal to the gqs.py window to 1e-14 m).
 - `fem/results/reruns/`: the two fe.py static reruns (see fem/).
-- `expected_values.json`: every checked quantity with its printed value and rule (266 items).
+- `expected_values.json`: every checked quantity with its printed value and rule (272 items).
 
 ## 7. What is not recomputed here
 
-- The FE numbers come from the stored results of the full runs; the folder regenerates every input deck identically, the
-  quick run reruns one short model (k = 4), and two full static runs ((ii) at k = 12, (iii) at k = 8, both feet anchored) were
-  rerun with fe.py and equal the stored runs (`fem/results/reruns`); the other full studies, in particular the buckling runs,
-  are not rerun (hours, 9-16 GB).
+- The FE numbers come from the stored results of the full runs; the folder regenerates the 61 input decks of
+  `fem/decks/MD5SUMS` identically, the quick run reruns one short model (k = 4), and two full static runs ((ii) at k = 12,
+  (iii) at k = 8, both feet anchored) were rerun with fe.py and equal the stored runs (`fem/results/reruns`); the other full
+  studies, in particular the buckling runs, are not rerun (hours, 9-16 GB).
 - The vertical displacements of (iii) at k = 6 are read from the stored mesh-series results of a separate run of the same
   model; no deck of that run is kept.
 - The peak memory is read from the job ledgers of the runs (maximum resident set size in GiB, converted to GB).

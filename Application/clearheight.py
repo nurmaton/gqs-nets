@@ -70,8 +70,9 @@ def runs(ok):
 
 
 def strips(h, xg, level):
-    """width of the widest run with h >= level, the total width of all runs, and the x range of the widest"""
-    rr = runs(h >= level - 1e-12)
+    """width of the widest run with h >= level, the total width of all runs, and the x range of the widest; only where panel
+    material lies above the floor (h finite; the grid ends beyond the panels, outside the hall, have h = inf)"""
+    rr = runs(np.isfinite(h) & (h >= level - 1e-12))
     widths = [(b - a + 1) * DX for a, b in rr]
     if not widths: return 0.0, 0.0, None
     k = int(np.argmax(widths)); a, b = rr[k]
@@ -79,4 +80,5 @@ def strips(h, xg, level):
 
 
 def all_strips(h, xg, level):
-    return [(float(xg[a] - DX / 2), float(xg[b] + DX / 2)) for a, b in runs(h >= level - 1e-12)]
+    """x ranges of all the runs of strips"""
+    return [(float(xg[a] - DX / 2), float(xg[b] + DX / 2)) for a, b in runs(np.isfinite(h) & (h >= level - 1e-12))]
