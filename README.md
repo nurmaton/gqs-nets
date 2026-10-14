@@ -1,6 +1,6 @@
-# Generalized quasi-symmetric nets (GQS-nets): supplement
+# Generalized quasi-symmetric nets (GQS-nets): notebooks, code, and data
 
-Supplementary material for the paper *Generalized Quasi-Symmetric Nets: A Constructive Approach to the Equimodular
+For the paper *Generalized Quasi-Symmetric Nets: A Constructive Approach to the Equimodular
 Elliptic Type and to Flexible m × n Nets*: Mathematica notebooks that verify the symbolic computations, a Python tool
 that builds and moves the flexible m × n nets, and the data and checks of three transportable arch halls.
 
