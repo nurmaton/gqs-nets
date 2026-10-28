@@ -151,7 +151,7 @@ for h in HL.HALL_KEYS:
                                   min_abs_angle_of_others_deg=float(np.abs(th0[np.abs(th0) >= 1e-6]).min()),
                                   sign_changes_across=int(ch.sum()), sign_changing_equals_flat=bool(np.array_equal(ch, np.abs(th0) < 1e-6)))
         print('  t = 1/sqrt(2): null space %d (next singular value %.1e); dihedral angle 0 (|theta| < 1e-6 deg, largest %.1e deg) at %d of %d '
-              'hinges, the others >= %.2f deg; the same %d hinges change sign between t = 1/sqrt(2) -+ 0.001: %s'
+              'hinges, the others >= %.4f deg; the same %d hinges change sign between t = 1/sqrt(2) -+ 0.001: %s'
               % (z0, sv0[z0], det['iii.special']['max_abs_angle_of_flat_deg'], flat, nh, det['iii.special']['min_abs_angle_of_others_deg'],
                  int(ch.sum()), det['iii.special']['sign_changing_equals_flat']))
 path = HL.write_result('check_mobility', dict(values=vals, details=det, seconds=time.time() - T0))

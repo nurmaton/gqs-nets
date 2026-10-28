@@ -292,7 +292,7 @@ that produces or checks it.
   transport position, in each hall) (`checks/check_mobility.py`).
 - Special position of (iii): t = 1/sqrt(2) = 0.7071, between its deployed (0.15) and transport (0.75) positions, so that its
   motion passes through it. There the two faces at each of 204 of its 857 hinges are coplanar (the hinges whose dihedral
-  angle changes sign there; at all others the face normals make at least 70.53 deg), and the null space has dimension 18
+  angle changes sign there; at all others the face normals make at least 70.52 deg), and the null space has dimension 18
   (`checks/check_mobility.py`). The closed form of the flexion excludes this t: there the denominators of the formulas for
   cot(theta_2/2) and cot(theta_4/2) of the base block vanish (x_1 = -4 and z_1 = z_2 = 2, so that
   z_2 + x_1 t^2 = z_1 + x_1 t^2 = 0; gqs.py `Block`). Whether another motion branches off there, and whether the drive with
