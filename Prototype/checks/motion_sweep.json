@@ -1,0 +1,3583 @@
+{
+ "states": 181,
+ "step": 1,
+ "cut": 2.5,
+ "seconds": 3460.8,
+ "cpu_seconds": 27088.2,
+ "gates": {
+  "partner_ring_ring": 0.0,
+  "partner_ring_body_axial": 0.0,
+  "partner_ring_body_radial": 0.4,
+  "partner_body_body": 0.45,
+  "ring_other_hinge": 0.4,
+  "nonpartner": 0.45,
+  "pin": 0.3,
+  "closing_ring_ring": 0.06,
+  "closing_ring_band": 0.06,
+  "closing_ring_body_axial": 0.06,
+  "closing_ring_body_radial": 0.4
+ },
+ "minima": {
+  "closing_ring_band": {
+   "mm": 0.06,
+   "state": 150,
+   "th": 74.5,
+   "a": "9-1:body/body",
+   "b": "10-1:ring/knB",
+   "hinge": 299,
+   "gate": 0.06,
+   "passed": true
+  },
+  "closing_ring_body_radial": {
+   "mm": 0.4,
+   "state": 86,
+   "th": 90.5,
+   "a": "0-13:body/body",
+   "b": "1-13:ring/knB",
+   "hinge": 26,
+   "gate": 0.4,
+   "passed": true
+  },
+  "closing_ring_ring": {
+   "mm": 0.06,
+   "state": 20,
+   "th": 107.0,
+   "a": "9-1:ring/knA",
+   "b": "10-1:ring/knB",
+   "hinge": 299,
+   "gate": 0.06,
+   "passed": true
+  },
+  "nonpartner": {
+   "mm": 1.6683,
+   "state": 180,
+   "th": 71.0,
+   "a": "9-14:ring/knA",
+   "b": "10-13:body/foot",
+   "hinge": null,
+   "gate": 0.45,
+   "passed": true
+  },
+  "partner_body_body": {
+   "mm": 0.5091,
+   "state": 180,
+   "th": 71.0,
+   "a": "4-9:body/foot",
+   "b": "4-10:body/foot",
+   "hinge": 151,
+   "gate": 0.45,
+   "passed": true
+  },
+  "partner_ring_body_axial": {
+   "mm": 0.05,
+   "state": 103,
+   "th": 86.25,
+   "a": "10-8:ring/knA",
+   "b": "10-9:body/body",
+   "hinge": 338,
+   "gate": 0.0,
+   "passed": true
+  },
+  "partner_ring_body_radial": {
+   "mm": 0.4,
+   "state": 103,
+   "th": 86.25,
+   "a": "10-15:ring/knA",
+   "b": "10-16:body/body",
+   "hinge": 345,
+   "gate": 0.4,
+   "passed": true
+  },
+  "partner_ring_ring": {
+   "mm": 0.05,
+   "state": 103,
+   "th": 86.25,
+   "a": "10-8:ring/knA",
+   "b": "10-9:ring/knB",
+   "hinge": 338,
+   "gate": 0.0,
+   "passed": true
+  },
+  "pin": {
+   "mm": 0.3,
+   "state": 42,
+   "th": 101.5,
+   "a": "9-15:pin/head",
+   "b": "9-16:body/body",
+   "hinge": 328,
+   "gate": 0.3,
+   "passed": true
+  },
+  "pin_shank_partner": {
+   "mm": 0.25,
+   "state": 103,
+   "th": 86.25,
+   "a": "10-15:pin/shank",
+   "b": "10-16:body/body",
+   "hinge": 345,
+   "gate": null,
+   "passed": null
+  },
+  "ring_other_hinge": {
+   "mm": 1.6681,
+   "state": 180,
+   "th": 71.0,
+   "a": "1-6:ring/knA",
+   "b": "1-7:body/foot",
+   "hinge": 46,
+   "gate": 0.4,
+   "passed": true
+  }
+ },
+ "per_state": {
+  "0": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3006,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.5969,
+   "ring_other_hinge": 2.0079,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1334
+  },
+  "1": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3008,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6031,
+   "ring_other_hinge": 2.0061,
+   "partner_ring_body_radial": 0.4003,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1336
+  },
+  "2": {
+   "closing_ring_body_radial": 0.4001,
+   "pin": 0.301,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6091,
+   "ring_other_hinge": 2.0045,
+   "partner_ring_body_radial": 0.4003,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1336
+  },
+  "3": {
+   "closing_ring_body_radial": 0.4002,
+   "pin": 0.3009,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6151,
+   "ring_other_hinge": 2.003,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1336
+  },
+  "4": {
+   "closing_ring_body_radial": 0.4001,
+   "pin": 0.3007,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6209,
+   "ring_other_hinge": 2.0016,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "5": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3005,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6267,
+   "ring_other_hinge": 2.0004,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1333
+  },
+  "6": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3004,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6323,
+   "ring_other_hinge": 1.9992,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1332
+  },
+  "7": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3002,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6379,
+   "ring_other_hinge": 1.9981,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1328
+  },
+  "8": {
+   "closing_ring_body_radial": 0.4001,
+   "pin": 0.3002,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6434,
+   "ring_other_hinge": 1.9971,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1326
+  },
+  "9": {
+   "closing_ring_body_radial": 0.4002,
+   "pin": 0.3001,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6488,
+   "ring_other_hinge": 1.9961,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1325
+  },
+  "10": {
+   "closing_ring_body_radial": 0.4003,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6541,
+   "ring_other_hinge": 1.9952,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1327
+  },
+  "11": {
+   "closing_ring_body_radial": 0.4004,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6594,
+   "ring_other_hinge": 1.9943,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.133
+  },
+  "12": {
+   "closing_ring_body_radial": 0.4006,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6646,
+   "ring_other_hinge": 1.9935,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1333
+  },
+  "13": {
+   "closing_ring_body_radial": 0.4008,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6697,
+   "ring_other_hinge": 1.9927,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1334
+  },
+  "14": {
+   "closing_ring_body_radial": 0.4007,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6747,
+   "ring_other_hinge": 1.9919,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1333
+  },
+  "15": {
+   "closing_ring_body_radial": 0.4006,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3001,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6797,
+   "ring_other_hinge": 1.9912,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1331
+  },
+  "16": {
+   "closing_ring_body_radial": 0.4004,
+   "pin": 0.3002,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6846,
+   "ring_other_hinge": 1.9905,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1329
+  },
+  "17": {
+   "closing_ring_body_radial": 0.4003,
+   "pin": 0.3003,
+   "pin_shank_partner": 0.2502,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6894,
+   "ring_other_hinge": 1.9899,
+   "partner_ring_body_radial": 0.4004,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1329
+  },
+  "18": {
+   "closing_ring_body_radial": 0.4002,
+   "pin": 0.3004,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6942,
+   "ring_other_hinge": 1.9892,
+   "partner_ring_body_radial": 0.4005,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.133
+  },
+  "19": {
+   "closing_ring_body_radial": 0.4001,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3005,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.6989,
+   "ring_other_hinge": 1.9886,
+   "partner_ring_body_radial": 0.4006,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1332
+  },
+  "20": {
+   "closing_ring_body_radial": 0.4001,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3006,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.7036,
+   "ring_other_hinge": 1.9881,
+   "partner_ring_body_radial": 0.4005,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1334
+  },
+  "21": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3007,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.7261,
+   "ring_other_hinge": 1.9857,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1334
+  },
+  "22": {
+   "closing_ring_body_radial": 0.4002,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3001,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.7474,
+   "ring_other_hinge": 1.9839,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1326
+  },
+  "23": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.7676,
+   "ring_other_hinge": 1.9833,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "24": {
+   "closing_ring_body_radial": 0.4002,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3002,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.7869,
+   "ring_other_hinge": 1.9837,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1336
+  },
+  "25": {
+   "closing_ring_body_radial": 0.4003,
+   "pin": 0.3005,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.8053,
+   "ring_other_hinge": 1.9838,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "26": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3002,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.8229,
+   "ring_other_hinge": 1.9833,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "27": {
+   "closing_ring_body_radial": 0.4,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3002,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.8398,
+   "ring_other_hinge": 1.9836,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1328
+  },
+  "28": {
+   "closing_ring_body_radial": 0.4001,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.8561,
+   "ring_other_hinge": 1.9844,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1324
+  },
+  "29": {
+   "closing_ring_body_radial": 0.4004,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.8717,
+   "ring_other_hinge": 1.9846,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1334
+  },
+  "30": {
+   "closing_ring_body_radial": 0.4006,
+   "pin": 0.3003,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.8868,
+   "ring_other_hinge": 1.9844,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1332
+  },
+  "31": {
+   "closing_ring_body_radial": 0.4002,
+   "pin": 0.3001,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.9014,
+   "ring_other_hinge": 1.9837,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "32": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.9155,
+   "ring_other_hinge": 1.9833,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "33": {
+   "closing_ring_body_radial": 0.4001,
+   "pin": 0.3001,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.9291,
+   "ring_other_hinge": 1.9836,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1329
+  },
+  "34": {
+   "closing_ring_body_radial": 0.4002,
+   "pin": 0.3001,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.9424,
+   "ring_other_hinge": 1.9843,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1331
+  },
+  "35": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.9552,
+   "ring_other_hinge": 1.9846,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1323
+  },
+  "36": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3001,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.9676,
+   "ring_other_hinge": 1.9845,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1328
+  },
+  "37": {
+   "closing_ring_body_radial": 0.4001,
+   "pin": 0.3003,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.9797,
+   "ring_other_hinge": 1.9841,
+   "partner_ring_body_radial": 0.4004,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1332
+  },
+  "38": {
+   "closing_ring_body_radial": 0.4001,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 0.9914,
+   "ring_other_hinge": 1.9835,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1336
+  },
+  "39": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.0028,
+   "ring_other_hinge": 1.9833,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1334
+  },
+  "40": {
+   "closing_ring_body_radial": 0.4002,
+   "pin": 0.3,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.0139,
+   "ring_other_hinge": 1.9837,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1329
+  },
+  "41": {
+   "closing_ring_body_radial": 0.4005,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.0248,
+   "ring_other_hinge": 1.9843,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1331
+  },
+  "42": {
+   "closing_ring_body_radial": 0.401,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.0353,
+   "ring_other_hinge": 1.9846,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "43": {
+   "closing_ring_body_radial": 0.4006,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.0456,
+   "ring_other_hinge": 1.9846,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1332
+  },
+  "44": {
+   "closing_ring_body_radial": 0.4003,
+   "pin": 0.3003,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.0556,
+   "ring_other_hinge": 1.9843,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1329
+  },
+  "45": {
+   "closing_ring_body_radial": 0.4002,
+   "pin": 0.3001,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.0653,
+   "ring_other_hinge": 1.9837,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1334
+  },
+  "46": {
+   "closing_ring_body_radial": 0.4,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.0749,
+   "ring_other_hinge": 1.9833,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1336
+  },
+  "47": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.0842,
+   "ring_other_hinge": 1.9834,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1333
+  },
+  "48": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3002,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.0932,
+   "ring_other_hinge": 1.9839,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1328
+  },
+  "49": {
+   "closing_ring_body_radial": 0.4001,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1021,
+   "ring_other_hinge": 1.9844,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1325
+  },
+  "50": {
+   "closing_ring_body_radial": 0.4003,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1108,
+   "ring_other_hinge": 1.9846,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1328
+  },
+  "51": {
+   "closing_ring_body_radial": 0.4004,
+   "pin": 0.3001,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1193,
+   "ring_other_hinge": 1.9846,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1334
+  },
+  "52": {
+   "closing_ring_body_radial": 0.4006,
+   "pin": 0.3002,
+   "pin_shank_partner": 0.2502,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1275,
+   "ring_other_hinge": 1.9844,
+   "partner_ring_body_radial": 0.4003,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1331
+  },
+  "53": {
+   "closing_ring_body_radial": 0.4002,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3002,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1356,
+   "ring_other_hinge": 1.9839,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1332
+  },
+  "54": {
+   "closing_ring_body_radial": 0.4,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1436,
+   "ring_other_hinge": 1.9834,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1335
+  },
+  "55": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1513,
+   "ring_other_hinge": 1.9833,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "56": {
+   "closing_ring_body_radial": 0.4001,
+   "pin": 0.3001,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1589,
+   "ring_other_hinge": 1.9835,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1331
+  },
+  "57": {
+   "closing_ring_body_radial": 0.4003,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3002,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1663,
+   "ring_other_hinge": 1.9841,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1328
+  },
+  "58": {
+   "closing_ring_body_radial": 0.4004,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1736,
+   "ring_other_hinge": 1.9845,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1333
+  },
+  "59": {
+   "closing_ring_body_radial": 0.4003,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1807,
+   "ring_other_hinge": 1.9846,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1328
+  },
+  "60": {
+   "closing_ring_body_radial": 0.4001,
+   "pin": 0.3001,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1877,
+   "ring_other_hinge": 1.9846,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1325
+  },
+  "61": {
+   "closing_ring_body_radial": 0.4001,
+   "pin": 0.3002,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1945,
+   "ring_other_hinge": 1.9844,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1327
+  },
+  "62": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3002,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2012,
+   "ring_other_hinge": 1.9839,
+   "partner_ring_body_radial": 0.4003,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1332
+  },
+  "63": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3001,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2078,
+   "ring_other_hinge": 1.9835,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "64": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2142,
+   "ring_other_hinge": 1.9833,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "65": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2205,
+   "ring_other_hinge": 1.9834,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1333
+  },
+  "66": {
+   "closing_ring_body_radial": 0.4002,
+   "pin": 0.3,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2266,
+   "ring_other_hinge": 1.9838,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1328
+  },
+  "67": {
+   "closing_ring_body_radial": 0.4003,
+   "pin": 0.3001,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2327,
+   "ring_other_hinge": 1.9842,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1327
+  },
+  "68": {
+   "closing_ring_body_radial": 0.4004,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2386,
+   "ring_other_hinge": 1.9845,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.133
+  },
+  "69": {
+   "closing_ring_body_radial": 0.4006,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2444,
+   "ring_other_hinge": 1.9846,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1334
+  },
+  "70": {
+   "closing_ring_body_radial": 0.4007,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3001,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2501,
+   "ring_other_hinge": 1.9846,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1335
+  },
+  "71": {
+   "closing_ring_body_radial": 0.4006,
+   "pin": 0.3003,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2557,
+   "ring_other_hinge": 1.9843,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1332
+  },
+  "72": {
+   "closing_ring_body_radial": 0.4003,
+   "pin": 0.3002,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2612,
+   "ring_other_hinge": 1.9839,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1333
+  },
+  "73": {
+   "closing_ring_body_radial": 0.4001,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2665,
+   "ring_other_hinge": 1.9836,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1336
+  },
+  "74": {
+   "closing_ring_body_radial": 0.4,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2663,
+   "ring_other_hinge": 1.9835,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1336
+  },
+  "75": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2587,
+   "ring_other_hinge": 1.9836,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1333
+  },
+  "76": {
+   "closing_ring_body_radial": 0.4001,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2512,
+   "ring_other_hinge": 1.984,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1328
+  },
+  "77": {
+   "closing_ring_body_radial": 0.4004,
+   "pin": 0.3001,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2436,
+   "ring_other_hinge": 1.9846,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1328
+  },
+  "78": {
+   "closing_ring_body_radial": 0.4005,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.236,
+   "ring_other_hinge": 1.9853,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1333
+  },
+  "79": {
+   "closing_ring_body_radial": 0.4004,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2284,
+   "ring_other_hinge": 1.9862,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.133
+  },
+  "80": {
+   "closing_ring_body_radial": 0.4003,
+   "pin": 0.3001,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2208,
+   "ring_other_hinge": 1.9871,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1327
+  },
+  "81": {
+   "closing_ring_body_radial": 0.4002,
+   "pin": 0.3002,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2132,
+   "ring_other_hinge": 1.9881,
+   "partner_ring_body_radial": 0.4003,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1327
+  },
+  "82": {
+   "closing_ring_body_radial": 0.4001,
+   "pin": 0.3004,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.2056,
+   "ring_other_hinge": 1.9892,
+   "partner_ring_body_radial": 0.4005,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1331
+  },
+  "83": {
+   "closing_ring_body_radial": 0.4001,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3002,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.198,
+   "ring_other_hinge": 1.9903,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1334
+  },
+  "84": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3001,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1903,
+   "ring_other_hinge": 1.9916,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1336
+  },
+  "85": {
+   "closing_ring_body_radial": 0.4,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1827,
+   "ring_other_hinge": 1.9929,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "86": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1751,
+   "ring_other_hinge": 1.9943,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1332
+  },
+  "87": {
+   "closing_ring_body_radial": 0.4,
+   "pin": 0.3001,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1674,
+   "ring_other_hinge": 1.9957,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1328
+  },
+  "88": {
+   "closing_ring_body_radial": 0.4,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3002,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1598,
+   "ring_other_hinge": 1.9973,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1325
+  },
+  "89": {
+   "closing_ring_body_radial": 0.4001,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3002,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1521,
+   "ring_other_hinge": 1.9989,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1324
+  },
+  "90": {
+   "closing_ring_body_radial": 0.4001,
+   "pin": 0.3002,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1445,
+   "ring_other_hinge": 2.0007,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1326
+  },
+  "91": {
+   "closing_ring_body_radial": 0.4002,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3003,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "partner_body_body": 1.1368,
+   "ring_other_hinge": 2.0027,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1331
+  },
+  "92": {
+   "closing_ring_body_radial": 0.4002,
+   "pin": 0.3004,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "ring_other_hinge": 2.0049,
+   "partner_body_body": 1.1292,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1336
+  },
+  "93": {
+   "closing_ring_body_radial": 0.4003,
+   "pin": 0.3005,
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "ring_other_hinge": 2.0072,
+   "partner_body_body": 1.1215,
+   "partner_ring_body_radial": 0.4005,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1333
+  },
+  "94": {
+   "closing_ring_body_radial": 0.4004,
+   "pin": 0.3003,
+   "pin_shank_partner": 0.2502,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "ring_other_hinge": 2.0097,
+   "partner_body_body": 1.1138,
+   "partner_ring_body_radial": 0.4003,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "95": {
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3001,
+   "closing_ring_body_radial": 0.4002,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "ring_other_hinge": 2.0124,
+   "partner_body_body": 1.1061,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1336
+  },
+  "96": {
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_body_radial": 0.4,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "ring_other_hinge": 2.0152,
+   "partner_body_body": 1.0985,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1336
+  },
+  "97": {
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_body_radial": 0.4,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "ring_other_hinge": 2.0181,
+   "partner_body_body": 1.0908,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1334
+  },
+  "98": {
+   "pin": 0.3,
+   "pin_shank_partner": 0.25,
+   "closing_ring_body_radial": 0.4,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "ring_other_hinge": 2.021,
+   "partner_body_body": 1.0831,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.133
+  },
+  "99": {
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3001,
+   "closing_ring_body_radial": 0.4001,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "ring_other_hinge": 2.024,
+   "partner_body_body": 1.0754,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1326
+  },
+  "100": {
+   "pin": 0.3002,
+   "pin_shank_partner": 0.25,
+   "closing_ring_body_radial": 0.4003,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "ring_other_hinge": 2.027,
+   "partner_body_body": 1.0677,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1328
+  },
+  "101": {
+   "pin_shank_partner": 0.25,
+   "pin": 0.3004,
+   "closing_ring_body_radial": 0.4006,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "ring_other_hinge": 2.0301,
+   "partner_body_body": 1.0599,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1332
+  },
+  "102": {
+   "pin": 0.3007,
+   "pin_shank_partner": 0.25,
+   "closing_ring_body_radial": 0.4009,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "ring_other_hinge": 2.0332,
+   "partner_body_body": 1.0522,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "103": {
+   "pin": 0.301,
+   "pin_shank_partner": 0.25,
+   "closing_ring_body_radial": 0.4013,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "ring_other_hinge": 2.0364,
+   "partner_body_body": 1.0445,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1337
+  },
+  "104": {
+   "pin": 0.3008,
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "closing_ring_body_radial": 0.4011,
+   "ring_other_hinge": 2.0396,
+   "partner_body_body": 1.0368,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1337
+  },
+  "105": {
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3006,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "closing_ring_body_radial": 0.4008,
+   "ring_other_hinge": 2.0429,
+   "partner_body_body": 1.0291,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1335
+  },
+  "106": {
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3003,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "closing_ring_body_radial": 0.4005,
+   "ring_other_hinge": 2.0463,
+   "partner_body_body": 1.0213,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1336
+  },
+  "107": {
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3002,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 2.0497,
+   "partner_body_body": 1.0136,
+   "partner_ring_body_radial": 0.4004,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1337
+  },
+  "108": {
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "closing_ring_body_radial": 0.4001,
+   "ring_other_hinge": 2.0531,
+   "partner_body_body": 1.0058,
+   "partner_ring_body_radial": 0.4006,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1337
+  },
+  "109": {
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.0566,
+   "partner_body_body": 0.9981,
+   "partner_ring_body_radial": 0.4008,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1335
+  },
+  "110": {
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.0603,
+   "partner_body_body": 0.9903,
+   "partner_ring_body_radial": 0.4005,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1331
+  },
+  "111": {
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "closing_ring_body_radial": 0.4001,
+   "ring_other_hinge": 2.0641,
+   "partner_body_body": 0.9826,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1326
+  },
+  "112": {
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 2.0681,
+   "partner_body_body": 0.9748,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1326
+  },
+  "113": {
+   "pin_shank_partner": 0.25,
+   "pin": 0.3003,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "closing_ring_body_radial": 0.4004,
+   "ring_other_hinge": 2.0721,
+   "partner_body_body": 0.967,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.133
+  },
+  "114": {
+   "pin_shank_partner": 0.25,
+   "pin": 0.3005,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "closing_ring_body_radial": 0.4004,
+   "ring_other_hinge": 2.0763,
+   "partner_body_body": 0.9593,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.133
+  },
+  "115": {
+   "pin_shank_partner": 0.25,
+   "pin": 0.3007,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "closing_ring_body_radial": 0.4004,
+   "ring_other_hinge": 2.0806,
+   "partner_body_body": 0.9515,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1328
+  },
+  "116": {
+   "pin_shank_partner": 0.2501,
+   "pin": 0.301,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "closing_ring_body_radial": 0.4003,
+   "ring_other_hinge": 2.085,
+   "partner_body_body": 0.9437,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1328
+  },
+  "117": {
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin": 0.3008,
+   "closing_ring_body_radial": 0.4003,
+   "ring_other_hinge": 2.0895,
+   "partner_body_body": 0.9359,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1329
+  },
+  "118": {
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin": 0.3006,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 2.0941,
+   "partner_body_body": 0.9281,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1333
+  },
+  "119": {
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin": 0.3004,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 2.0987,
+   "partner_body_body": 0.9203,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1336
+  },
+  "120": {
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin": 0.3002,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 2.1033,
+   "partner_body_body": 0.9125,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1337
+  },
+  "121": {
+   "pin_shank_partner": 0.2501,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin": 0.3001,
+   "closing_ring_body_radial": 0.4001,
+   "ring_other_hinge": 2.108,
+   "partner_body_body": 0.9047,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1337
+  },
+  "122": {
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin": 0.3,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.1127,
+   "partner_body_body": 0.8969,
+   "partner_ring_body_radial": 0.4004,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "123": {
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin": 0.3,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.1174,
+   "partner_body_body": 0.8891,
+   "partner_ring_body_radial": 0.4004,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.133
+  },
+  "124": {
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin": 0.3,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.1222,
+   "partner_body_body": 0.8813,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1326
+  },
+  "125": {
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin": 0.3001,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.127,
+   "partner_body_body": 0.8735,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1325
+  },
+  "126": {
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin": 0.3002,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.1319,
+   "partner_body_body": 0.8657,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1324
+  },
+  "127": {
+   "pin_shank_partner": 0.25,
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin": 0.3004,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.1323,
+   "partner_body_body": 0.8579,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1323
+  },
+  "128": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3006,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.1323,
+   "partner_body_body": 0.85,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1324
+  },
+  "129": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3009,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.1323,
+   "partner_body_body": 0.8422,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1327
+  },
+  "130": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.301,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.1323,
+   "partner_body_body": 0.8344,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1331
+  },
+  "131": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3007,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.1323,
+   "partner_body_body": 0.8265,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1333
+  },
+  "132": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3005,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.1323,
+   "partner_body_body": 0.8187,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "133": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3003,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.1323,
+   "partner_body_body": 0.8108,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1336
+  },
+  "134": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3002,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.1323,
+   "partner_body_body": 0.803,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.1335
+  },
+  "135": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.1323,
+   "partner_body_body": 0.7951,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1333
+  },
+  "136": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.1192,
+   "partner_body_body": 0.7873,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.1213
+  },
+  "137": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.1026,
+   "partner_body_body": 0.7794,
+   "partner_ring_body_radial": 0.4003,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.104
+  },
+  "138": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.086,
+   "partner_body_body": 0.7715,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.0869
+  },
+  "139": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.0695,
+   "partner_body_body": 0.7637,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.0699
+  },
+  "140": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3002,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.053,
+   "partner_body_body": 0.7558,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 2.0531
+  },
+  "141": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3004,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 2.0365,
+   "partner_body_body": 0.7479,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.0365
+  },
+  "142": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3006,
+   "closing_ring_body_radial": 0.4001,
+   "ring_other_hinge": 2.0201,
+   "partner_body_body": 0.74,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.0201
+  },
+  "143": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3008,
+   "closing_ring_body_radial": 0.4001,
+   "ring_other_hinge": 2.0037,
+   "partner_body_body": 0.7322,
+   "partner_ring_body_radial": 0.4003,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 2.0038
+  },
+  "144": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.301,
+   "closing_ring_body_radial": 0.4001,
+   "ring_other_hinge": 1.9874,
+   "partner_body_body": 0.7243,
+   "partner_ring_body_radial": 0.4004,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 1.9876
+  },
+  "145": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3008,
+   "closing_ring_body_radial": 0.4001,
+   "ring_other_hinge": 1.9711,
+   "partner_body_body": 0.7164,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 1.9713
+  },
+  "146": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3005,
+   "closing_ring_body_radial": 0.4001,
+   "ring_other_hinge": 1.9548,
+   "partner_body_body": 0.7085,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.9549
+  },
+  "147": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3003,
+   "closing_ring_body_radial": 0.4001,
+   "ring_other_hinge": 1.9386,
+   "partner_body_body": 0.7006,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.9384
+  },
+  "148": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3002,
+   "closing_ring_body_radial": 0.4001,
+   "ring_other_hinge": 1.9225,
+   "partner_body_body": 0.6927,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 1.9221
+  },
+  "149": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_body_radial": 0.4001,
+   "ring_other_hinge": 1.9063,
+   "partner_body_body": 0.6848,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 1.9059
+  },
+  "150": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 1.8902,
+   "partner_body_body": 0.6769,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.89
+  },
+  "151": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 1.8742,
+   "partner_body_body": 0.669,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 1.8742
+  },
+  "152": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3,
+   "closing_ring_body_radial": 0.4,
+   "ring_other_hinge": 1.8581,
+   "partner_body_body": 0.6611,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.8583
+  },
+  "153": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_body_radial": 0.4001,
+   "ring_other_hinge": 1.8421,
+   "partner_body_body": 0.6532,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.8423
+  },
+  "154": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3002,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.8262,
+   "partner_body_body": 0.6453,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.8262
+  },
+  "155": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3003,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.8102,
+   "partner_body_body": 0.6374,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.8101
+  },
+  "156": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3005,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.7943,
+   "partner_body_body": 0.6294,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.7939
+  },
+  "157": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3007,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.7784,
+   "partner_body_body": 0.6215,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 1.7777
+  },
+  "158": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3009,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.7626,
+   "partner_body_body": 0.6131,
+   "partner_ring_body_radial": 0.4004,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.7617
+  },
+  "159": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3009,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.7467,
+   "partner_body_body": 0.5958,
+   "partner_ring_body_radial": 0.4004,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.7459
+  },
+  "160": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3007,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.7309,
+   "partner_body_body": 0.5784,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 1.7303
+  },
+  "161": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3006,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.7278,
+   "partner_body_body": 0.575,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.7272
+  },
+  "162": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3006,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.7246,
+   "partner_body_body": 0.5715,
+   "partner_ring_body_radial": 0.4002,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 1.7241
+  },
+  "163": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3005,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.7215,
+   "partner_body_body": 0.568,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 1.7211
+  },
+  "164": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3005,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.7183,
+   "partner_body_body": 0.5646,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.718
+  },
+  "165": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.2501,
+   "pin": 0.3005,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.7152,
+   "partner_body_body": 0.5611,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.7149
+  },
+  "166": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3004,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.712,
+   "partner_body_body": 0.5576,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.7118
+  },
+  "167": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3004,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.7089,
+   "partner_body_body": 0.5542,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 1.7087
+  },
+  "168": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3004,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.7057,
+   "partner_body_body": 0.5507,
+   "partner_ring_body_radial": 0.4001,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.7056
+  },
+  "169": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3003,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.7026,
+   "partner_body_body": 0.5472,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.7025
+  },
+  "170": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3003,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.6994,
+   "partner_body_body": 0.5438,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.6994
+  },
+  "171": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3003,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.6963,
+   "partner_body_body": 0.5403,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.6963
+  },
+  "172": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3002,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.6932,
+   "partner_body_body": 0.5368,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.6932
+  },
+  "173": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3002,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.69,
+   "partner_body_body": 0.5334,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.6901
+  },
+  "174": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3002,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.6869,
+   "partner_body_body": 0.5299,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.687
+  },
+  "175": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3002,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.6837,
+   "partner_body_body": 0.5264,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.6839
+  },
+  "176": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.6806,
+   "partner_body_body": 0.523,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.6808
+  },
+  "177": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_body_radial": 0.4002,
+   "ring_other_hinge": 1.6775,
+   "partner_body_body": 0.5195,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.6776
+  },
+  "178": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_body_radial": 0.4001,
+   "ring_other_hinge": 1.6743,
+   "partner_body_body": 0.516,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_body_axial": 0.05,
+   "partner_ring_ring": 0.05,
+   "nonpartner": 1.6745
+  },
+  "179": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_body_radial": 0.4001,
+   "ring_other_hinge": 1.6712,
+   "partner_body_body": 0.5126,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 1.6714
+  },
+  "180": {
+   "closing_ring_band": 0.06,
+   "closing_ring_ring": 0.06,
+   "pin_shank_partner": 0.25,
+   "pin": 0.3001,
+   "closing_ring_body_radial": 0.4001,
+   "ring_other_hinge": 1.6681,
+   "partner_body_body": 0.5091,
+   "partner_ring_body_radial": 0.4,
+   "partner_ring_ring": 0.05,
+   "partner_ring_body_axial": 0.05,
+   "nonpartner": 1.6683
+  }
+ },
+ "stats": {
+  "0": {
+   "pairs": 1329,
+   "evals": 35153,
+   "group_evals": 1515,
+   "s": 80.0
+  },
+  "1": {
+   "pairs": 1332,
+   "evals": 35220,
+   "group_evals": 1519,
+   "s": 80.7
+  },
+  "2": {
+   "pairs": 1332,
+   "evals": 112371,
+   "group_evals": 1427,
+   "s": 105.1
+  },
+  "3": {
+   "pairs": 1333,
+   "evals": 44662,
+   "group_evals": 1392,
+   "s": 83.1
+  },
+  "4": {
+   "pairs": 1334,
+   "evals": 33519,
+   "group_evals": 1529,
+   "s": 78.6
+  },
+  "5": {
+   "pairs": 1334,
+   "evals": 50535,
+   "group_evals": 2845,
+   "s": 92.5
+  },
+  "6": {
+   "pairs": 1334,
+   "evals": 51205,
+   "group_evals": 2844,
+   "s": 94.2
+  },
+  "7": {
+   "pairs": 1334,
+   "evals": 46550,
+   "group_evals": 2583,
+   "s": 90.9
+  },
+  "8": {
+   "pairs": 1334,
+   "evals": 45907,
+   "group_evals": 2542,
+   "s": 94.5
+  },
+  "9": {
+   "pairs": 1334,
+   "evals": 57822,
+   "group_evals": 2548,
+   "s": 98.7
+  },
+  "10": {
+   "pairs": 1332,
+   "evals": 114312,
+   "group_evals": 1588,
+   "s": 113.1
+  },
+  "11": {
+   "pairs": 1332,
+   "evals": 114388,
+   "group_evals": 1588,
+   "s": 112.7
+  },
+  "12": {
+   "pairs": 1332,
+   "evals": 653502,
+   "group_evals": 1665,
+   "s": 298.8
+  },
+  "13": {
+   "pairs": 1329,
+   "evals": 654078,
+   "group_evals": 1665,
+   "s": 297.2
+  },
+  "14": {
+   "pairs": 1329,
+   "evals": 42277,
+   "group_evals": 1352,
+   "s": 85.9
+  },
+  "15": {
+   "pairs": 1330,
+   "evals": 46073,
+   "group_evals": 2542,
+   "s": 95.3
+  },
+  "16": {
+   "pairs": 1327,
+   "evals": 32431,
+   "group_evals": 1543,
+   "s": 82.5
+  },
+  "17": {
+   "pairs": 1322,
+   "evals": 43067,
+   "group_evals": 1514,
+   "s": 86.1
+  },
+  "18": {
+   "pairs": 1308,
+   "evals": 657358,
+   "group_evals": 1823,
+   "s": 292.5
+  },
+  "19": {
+   "pairs": 1301,
+   "evals": 114330,
+   "group_evals": 1548,
+   "s": 110.9
+  },
+  "20": {
+   "pairs": 1297,
+   "evals": 114279,
+   "group_evals": 1548,
+   "s": 111.1
+  },
+  "21": {
+   "pairs": 1291,
+   "evals": 145412,
+   "group_evals": 9399,
+   "s": 172.7
+  },
+  "22": {
+   "pairs": 1283,
+   "evals": 52358,
+   "group_evals": 2805,
+   "s": 96.8
+  },
+  "23": {
+   "pairs": 1270,
+   "evals": 657937,
+   "group_evals": 1623,
+   "s": 285.9
+  },
+  "24": {
+   "pairs": 1270,
+   "evals": 42670,
+   "group_evals": 1473,
+   "s": 85.4
+  },
+  "25": {
+   "pairs": 1264,
+   "evals": 675319,
+   "group_evals": 2825,
+   "s": 295.3
+  },
+  "26": {
+   "pairs": 1247,
+   "evals": 145418,
+   "group_evals": 9410,
+   "s": 161.3
+  },
+  "27": {
+   "pairs": 1228,
+   "evals": 57013,
+   "group_evals": 2544,
+   "s": 90.1
+  },
+  "28": {
+   "pairs": 1225,
+   "evals": 131394,
+   "group_evals": 2569,
+   "s": 113.0
+  },
+  "29": {
+   "pairs": 1227,
+   "evals": 48482,
+   "group_evals": 2810,
+   "s": 88.3
+  },
+  "30": {
+   "pairs": 1230,
+   "evals": 661479,
+   "group_evals": 1795,
+   "s": 277.2
+  },
+  "31": {
+   "pairs": 1231,
+   "evals": 42537,
+   "group_evals": 1368,
+   "s": 80.3
+  },
+  "32": {
+   "pairs": 1235,
+   "evals": 49867,
+   "group_evals": 2797,
+   "s": 90.4
+  },
+  "33": {
+   "pairs": 1241,
+   "evals": 778124,
+   "group_evals": 9702,
+   "s": 362.6
+  },
+  "34": {
+   "pairs": 1235,
+   "evals": 664074,
+   "group_evals": 1629,
+   "s": 276.9
+  },
+  "35": {
+   "pairs": 1227,
+   "evals": 44916,
+   "group_evals": 2521,
+   "s": 86.1
+  },
+  "36": {
+   "pairs": 1224,
+   "evals": 108948,
+   "group_evals": 1508,
+   "s": 97.7
+  },
+  "37": {
+   "pairs": 1218,
+   "evals": 104584,
+   "group_evals": 1459,
+   "s": 95.1
+  },
+  "38": {
+   "pairs": 1221,
+   "evals": 49704,
+   "group_evals": 2885,
+   "s": 85.7
+  },
+  "39": {
+   "pairs": 1227,
+   "evals": 48101,
+   "group_evals": 2880,
+   "s": 84.9
+  },
+  "40": {
+   "pairs": 1238,
+   "evals": 676548,
+   "group_evals": 2685,
+   "s": 284.8
+  },
+  "41": {
+   "pairs": 1241,
+   "evals": 119007,
+   "group_evals": 2928,
+   "s": 109.3
+  },
+  "42": {
+   "pairs": 1239,
+   "evals": 145208,
+   "group_evals": 9469,
+   "s": 158.6
+  },
+  "43": {
+   "pairs": 1239,
+   "evals": 41777,
+   "group_evals": 1587,
+   "s": 75.6
+  },
+  "44": {
+   "pairs": 1243,
+   "evals": 667466,
+   "group_evals": 1896,
+   "s": 278.7
+  },
+  "45": {
+   "pairs": 1249,
+   "evals": 158946,
+   "group_evals": 9500,
+   "s": 161.8
+  },
+  "46": {
+   "pairs": 1249,
+   "evals": 40478,
+   "group_evals": 2317,
+   "s": 79.8
+  },
+  "47": {
+   "pairs": 1251,
+   "evals": 40286,
+   "group_evals": 2307,
+   "s": 80.3
+  },
+  "48": {
+   "pairs": 1253,
+   "evals": 200958,
+   "group_evals": 9538,
+   "s": 177.4
+  },
+  "49": {
+   "pairs": 1252,
+   "evals": 202159,
+   "group_evals": 9538,
+   "s": 178.2
+  },
+  "50": {
+   "pairs": 1252,
+   "evals": 59451,
+   "group_evals": 2937,
+   "s": 89.9
+  },
+  "51": {
+   "pairs": 1253,
+   "evals": 41700,
+   "group_evals": 1602,
+   "s": 76.7
+  },
+  "52": {
+   "pairs": 1257,
+   "evals": 669351,
+   "group_evals": 1909,
+   "s": 277.3
+  },
+  "53": {
+   "pairs": 1260,
+   "evals": 669213,
+   "group_evals": 1772,
+   "s": 274.4
+  },
+  "54": {
+   "pairs": 1262,
+   "evals": 48457,
+   "group_evals": 2904,
+   "s": 87.6
+  },
+  "55": {
+   "pairs": 1264,
+   "evals": 146311,
+   "group_evals": 9480,
+   "s": 156.7
+  },
+  "56": {
+   "pairs": 1267,
+   "evals": 48186,
+   "group_evals": 2908,
+   "s": 87.4
+  },
+  "57": {
+   "pairs": 1275,
+   "evals": 679326,
+   "group_evals": 2482,
+   "s": 276.6
+  },
+  "58": {
+   "pairs": 1278,
+   "evals": 788012,
+   "group_evals": 9784,
+   "s": 354.3
+  },
+  "59": {
+   "pairs": 1280,
+   "evals": 144775,
+   "group_evals": 9460,
+   "s": 154.9
+  },
+  "60": {
+   "pairs": 1280,
+   "evals": 41553,
+   "group_evals": 1568,
+   "s": 73.7
+  },
+  "61": {
+   "pairs": 1282,
+   "evals": 86370,
+   "group_evals": 1579,
+   "s": 88.4
+  },
+  "62": {
+   "pairs": 1286,
+   "evals": 85023,
+   "group_evals": 1464,
+   "s": 86.7
+  },
+  "63": {
+   "pairs": 1287,
+   "evals": 29434,
+   "group_evals": 1438,
+   "s": 69.0
+  },
+  "64": {
+   "pairs": 1292,
+   "evals": 146393,
+   "group_evals": 9479,
+   "s": 155.1
+  },
+  "65": {
+   "pairs": 1293,
+   "evals": 146687,
+   "group_evals": 9479,
+   "s": 153.9
+  },
+  "66": {
+   "pairs": 1293,
+   "evals": 159842,
+   "group_evals": 9486,
+   "s": 158.2
+  },
+  "67": {
+   "pairs": 1295,
+   "evals": 682563,
+   "group_evals": 2407,
+   "s": 275.9
+  },
+  "68": {
+   "pairs": 1300,
+   "evals": 670774,
+   "group_evals": 1637,
+   "s": 268.7
+  },
+  "69": {
+   "pairs": 1303,
+   "evals": 46835,
+   "group_evals": 2781,
+   "s": 83.0
+  },
+  "70": {
+   "pairs": 1304,
+   "evals": 42069,
+   "group_evals": 1456,
+   "s": 72.8
+  },
+  "71": {
+   "pairs": 1305,
+   "evals": 675877,
+   "group_evals": 1764,
+   "s": 274.8
+  },
+  "72": {
+   "pairs": 1309,
+   "evals": 694619,
+   "group_evals": 3124,
+   "s": 289.5
+  },
+  "73": {
+   "pairs": 1311,
+   "evals": 29865,
+   "group_evals": 1335,
+   "s": 67.9
+  },
+  "74": {
+   "pairs": 1314,
+   "evals": 144931,
+   "group_evals": 9376,
+   "s": 154.2
+  },
+  "75": {
+   "pairs": 1320,
+   "evals": 26734,
+   "group_evals": 1299,
+   "s": 66.7
+  },
+  "76": {
+   "pairs": 1321,
+   "evals": 693399,
+   "group_evals": 3100,
+   "s": 291.8
+  },
+  "77": {
+   "pairs": 1323,
+   "evals": 695403,
+   "group_evals": 3083,
+   "s": 294.5
+  },
+  "78": {
+   "pairs": 1325,
+   "evals": 85900,
+   "group_evals": 1308,
+   "s": 88.8
+  },
+  "79": {
+   "pairs": 1326,
+   "evals": 157710,
+   "group_evals": 9362,
+   "s": 165.8
+  },
+  "80": {
+   "pairs": 1329,
+   "evals": 26103,
+   "group_evals": 1280,
+   "s": 69.4
+  },
+  "81": {
+   "pairs": 1332,
+   "evals": 678290,
+   "group_evals": 1788,
+   "s": 281.6
+  },
+  "82": {
+   "pairs": 1334,
+   "evals": 28204,
+   "group_evals": 1469,
+   "s": 70.8
+  },
+  "83": {
+   "pairs": 1339,
+   "evals": 161495,
+   "group_evals": 9392,
+   "s": 163.6
+  },
+  "84": {
+   "pairs": 1342,
+   "evals": 28290,
+   "group_evals": 1336,
+   "s": 70.0
+  },
+  "85": {
+   "pairs": 1353,
+   "evals": 36208,
+   "group_evals": 2088,
+   "s": 77.0
+  },
+  "86": {
+   "pairs": 1357,
+   "evals": 37130,
+   "group_evals": 2088,
+   "s": 77.6
+  },
+  "87": {
+   "pairs": 1360,
+   "evals": 40482,
+   "group_evals": 2100,
+   "s": 77.8
+  },
+  "88": {
+   "pairs": 1365,
+   "evals": 159927,
+   "group_evals": 9392,
+   "s": 164.4
+  },
+  "89": {
+   "pairs": 1368,
+   "evals": 25801,
+   "group_evals": 1343,
+   "s": 68.9
+  },
+  "90": {
+   "pairs": 1371,
+   "evals": 40572,
+   "group_evals": 1350,
+   "s": 72.6
+  },
+  "91": {
+   "pairs": 1373,
+   "evals": 36887,
+   "group_evals": 2107,
+   "s": 76.8
+  },
+  "92": {
+   "pairs": 1372,
+   "evals": 29610,
+   "group_evals": 1484,
+   "s": 71.4
+  },
+  "93": {
+   "pairs": 1375,
+   "evals": 30322,
+   "group_evals": 1484,
+   "s": 71.5
+  },
+  "94": {
+   "pairs": 1375,
+   "evals": 46159,
+   "group_evals": 2814,
+   "s": 86.2
+  },
+  "95": {
+   "pairs": 1375,
+   "evals": 697857,
+   "group_evals": 3143,
+   "s": 297.9
+  },
+  "96": {
+   "pairs": 1383,
+   "evals": 47457,
+   "group_evals": 2803,
+   "s": 88.1
+  },
+  "97": {
+   "pairs": 1383,
+   "evals": 36035,
+   "group_evals": 2066,
+   "s": 77.7
+  },
+  "98": {
+   "pairs": 1384,
+   "evals": 36101,
+   "group_evals": 2065,
+   "s": 78.5
+  },
+  "99": {
+   "pairs": 1383,
+   "evals": 39473,
+   "group_evals": 2066,
+   "s": 78.5
+  },
+  "100": {
+   "pairs": 1387,
+   "evals": 36545,
+   "group_evals": 2065,
+   "s": 79.3
+  },
+  "101": {
+   "pairs": 1392,
+   "evals": 24862,
+   "group_evals": 1344,
+   "s": 66.7
+  },
+  "102": {
+   "pairs": 1394,
+   "evals": 84443,
+   "group_evals": 1372,
+   "s": 88.8
+  },
+  "103": {
+   "pairs": 1396,
+   "evals": 35792,
+   "group_evals": 2087,
+   "s": 77.3
+  },
+  "104": {
+   "pairs": 1396,
+   "evals": 28974,
+   "group_evals": 1483,
+   "s": 70.5
+  },
+  "105": {
+   "pairs": 1401,
+   "evals": 42176,
+   "group_evals": 1486,
+   "s": 76.5
+  },
+  "106": {
+   "pairs": 1406,
+   "evals": 27561,
+   "group_evals": 1482,
+   "s": 70.8
+  },
+  "107": {
+   "pairs": 1410,
+   "evals": 158721,
+   "group_evals": 9407,
+   "s": 161.7
+  },
+  "108": {
+   "pairs": 1412,
+   "evals": 48695,
+   "group_evals": 2840,
+   "s": 83.7
+  },
+  "109": {
+   "pairs": 1413,
+   "evals": 47789,
+   "group_evals": 2808,
+   "s": 84.2
+  },
+  "110": {
+   "pairs": 1414,
+   "evals": 45315,
+   "group_evals": 2807,
+   "s": 81.4
+  },
+  "111": {
+   "pairs": 1414,
+   "evals": 57445,
+   "group_evals": 2830,
+   "s": 84.8
+  },
+  "112": {
+   "pairs": 1415,
+   "evals": 59171,
+   "group_evals": 2861,
+   "s": 84.5
+  },
+  "113": {
+   "pairs": 1418,
+   "evals": 147346,
+   "group_evals": 9413,
+   "s": 150.8
+  },
+  "114": {
+   "pairs": 1426,
+   "evals": 675524,
+   "group_evals": 1656,
+   "s": 271.7
+  },
+  "115": {
+   "pairs": 1431,
+   "evals": 675532,
+   "group_evals": 1705,
+   "s": 270.7
+  },
+  "116": {
+   "pairs": 1432,
+   "evals": 145816,
+   "group_evals": 9430,
+   "s": 150.2
+  },
+  "117": {
+   "pairs": 1435,
+   "evals": 39851,
+   "group_evals": 1532,
+   "s": 69.8
+  },
+  "118": {
+   "pairs": 1447,
+   "evals": 676583,
+   "group_evals": 1829,
+   "s": 271.5
+  },
+  "119": {
+   "pairs": 1461,
+   "evals": 676250,
+   "group_evals": 1838,
+   "s": 271.4
+  },
+  "120": {
+   "pairs": 1467,
+   "evals": 796307,
+   "group_evals": 9750,
+   "s": 357.1
+  },
+  "121": {
+   "pairs": 1478,
+   "evals": 149095,
+   "group_evals": 9450,
+   "s": 154.8
+  },
+  "122": {
+   "pairs": 1487,
+   "evals": 146104,
+   "group_evals": 9463,
+   "s": 153.4
+  },
+  "123": {
+   "pairs": 1490,
+   "evals": 146233,
+   "group_evals": 9451,
+   "s": 153.4
+  },
+  "124": {
+   "pairs": 1498,
+   "evals": 145839,
+   "group_evals": 9464,
+   "s": 152.6
+  },
+  "125": {
+   "pairs": 1501,
+   "evals": 159802,
+   "group_evals": 9481,
+   "s": 155.9
+  },
+  "126": {
+   "pairs": 1510,
+   "evals": 205398,
+   "group_evals": 9504,
+   "s": 169.6
+  },
+  "127": {
+   "pairs": 1517,
+   "evals": 82970,
+   "group_evals": 1462,
+   "s": 81.2
+  },
+  "128": {
+   "pairs": 1525,
+   "evals": 82821,
+   "group_evals": 1463,
+   "s": 81.8
+  },
+  "129": {
+   "pairs": 1541,
+   "evals": 46617,
+   "group_evals": 2200,
+   "s": 75.0
+  },
+  "130": {
+   "pairs": 1549,
+   "evals": 34768,
+   "group_evals": 2190,
+   "s": 70.7
+  },
+  "131": {
+   "pairs": 1557,
+   "evals": 84339,
+   "group_evals": 1598,
+   "s": 82.2
+  },
+  "132": {
+   "pairs": 1566,
+   "evals": 84055,
+   "group_evals": 1604,
+   "s": 84.1
+  },
+  "133": {
+   "pairs": 1569,
+   "evals": 93183,
+   "group_evals": 2238,
+   "s": 90.3
+  },
+  "134": {
+   "pairs": 1577,
+   "evals": 203980,
+   "group_evals": 9527,
+   "s": 173.3
+  },
+  "135": {
+   "pairs": 1581,
+   "evals": 148260,
+   "group_evals": 9507,
+   "s": 156.0
+  },
+  "136": {
+   "pairs": 1595,
+   "evals": 146089,
+   "group_evals": 9514,
+   "s": 155.1
+  },
+  "137": {
+   "pairs": 1600,
+   "evals": 144657,
+   "group_evals": 9514,
+   "s": 153.7
+  },
+  "138": {
+   "pairs": 1608,
+   "evals": 144944,
+   "group_evals": 9514,
+   "s": 155.1
+  },
+  "139": {
+   "pairs": 1614,
+   "evals": 204179,
+   "group_evals": 9540,
+   "s": 173.8
+  },
+  "140": {
+   "pairs": 1622,
+   "evals": 203951,
+   "group_evals": 9551,
+   "s": 177.2
+  },
+  "141": {
+   "pairs": 1626,
+   "evals": 82102,
+   "group_evals": 1499,
+   "s": 80.6
+  },
+  "142": {
+   "pairs": 1633,
+   "evals": 81554,
+   "group_evals": 1450,
+   "s": 85.2
+  },
+  "143": {
+   "pairs": 1641,
+   "evals": 47335,
+   "group_evals": 2193,
+   "s": 76.8
+  },
+  "144": {
+   "pairs": 1648,
+   "evals": 33872,
+   "group_evals": 2186,
+   "s": 72.5
+  },
+  "145": {
+   "pairs": 1659,
+   "evals": 84231,
+   "group_evals": 1597,
+   "s": 85.4
+  },
+  "146": {
+   "pairs": 1667,
+   "evals": 84145,
+   "group_evals": 1598,
+   "s": 85.9
+  },
+  "147": {
+   "pairs": 1679,
+   "evals": 84194,
+   "group_evals": 1601,
+   "s": 85.4
+  },
+  "148": {
+   "pairs": 1684,
+   "evals": 680215,
+   "group_evals": 2513,
+   "s": 293.0
+  },
+  "149": {
+   "pairs": 1693,
+   "evals": 36711,
+   "group_evals": 2162,
+   "s": 70.8
+  },
+  "150": {
+   "pairs": 1695,
+   "evals": 34405,
+   "group_evals": 2146,
+   "s": 68.0
+  },
+  "151": {
+   "pairs": 1704,
+   "evals": 22789,
+   "group_evals": 1349,
+   "s": 61.1
+  },
+  "152": {
+   "pairs": 1712,
+   "evals": 33803,
+   "group_evals": 2122,
+   "s": 68.3
+  },
+  "153": {
+   "pairs": 1720,
+   "evals": 33756,
+   "group_evals": 2086,
+   "s": 67.2
+  },
+  "154": {
+   "pairs": 1732,
+   "evals": 684315,
+   "group_evals": 2411,
+   "s": 286.1
+  },
+  "155": {
+   "pairs": 1735,
+   "evals": 685197,
+   "group_evals": 2401,
+   "s": 284.7
+  },
+  "156": {
+   "pairs": 1742,
+   "evals": 672261,
+   "group_evals": 1606,
+   "s": 275.6
+  },
+  "157": {
+   "pairs": 1745,
+   "evals": 674249,
+   "group_evals": 1618,
+   "s": 276.6
+  },
+  "158": {
+   "pairs": 1756,
+   "evals": 33222,
+   "group_evals": 2046,
+   "s": 63.9
+  },
+  "159": {
+   "pairs": 1766,
+   "evals": 21552,
+   "group_evals": 1261,
+   "s": 58.7
+  },
+  "160": {
+   "pairs": 1774,
+   "evals": 678529,
+   "group_evals": 1712,
+   "s": 276.0
+  },
+  "161": {
+   "pairs": 1775,
+   "evals": 677928,
+   "group_evals": 1708,
+   "s": 270.6
+  },
+  "162": {
+   "pairs": 1778,
+   "evals": 678600,
+   "group_evals": 1708,
+   "s": 271.0
+  },
+  "163": {
+   "pairs": 1779,
+   "evals": 678402,
+   "group_evals": 1700,
+   "s": 265.6
+  },
+  "164": {
+   "pairs": 1780,
+   "evals": 678129,
+   "group_evals": 1700,
+   "s": 266.2
+  },
+  "165": {
+   "pairs": 1782,
+   "evals": 677552,
+   "group_evals": 1701,
+   "s": 266.2
+  },
+  "166": {
+   "pairs": 1788,
+   "evals": 677903,
+   "group_evals": 1696,
+   "s": 267.6
+  },
+  "167": {
+   "pairs": 1788,
+   "evals": 677415,
+   "group_evals": 1695,
+   "s": 266.0
+  },
+  "168": {
+   "pairs": 1790,
+   "evals": 677344,
+   "group_evals": 1699,
+   "s": 266.8
+  },
+  "169": {
+   "pairs": 1791,
+   "evals": 677781,
+   "group_evals": 1718,
+   "s": 268.8
+  },
+  "170": {
+   "pairs": 1798,
+   "evals": 686801,
+   "group_evals": 2327,
+   "s": 276.6
+  },
+  "171": {
+   "pairs": 1806,
+   "evals": 686033,
+   "group_evals": 2332,
+   "s": 274.3
+  },
+  "172": {
+   "pairs": 1810,
+   "evals": 685822,
+   "group_evals": 2332,
+   "s": 273.0
+  },
+  "173": {
+   "pairs": 1813,
+   "evals": 685819,
+   "group_evals": 2332,
+   "s": 271.6
+  },
+  "174": {
+   "pairs": 1817,
+   "evals": 685555,
+   "group_evals": 2330,
+   "s": 272.1
+  },
+  "175": {
+   "pairs": 1821,
+   "evals": 685634,
+   "group_evals": 2330,
+   "s": 271.7
+  },
+  "176": {
+   "pairs": 1824,
+   "evals": 685622,
+   "group_evals": 2330,
+   "s": 267.6
+  },
+  "177": {
+   "pairs": 1827,
+   "evals": 46485,
+   "group_evals": 2017,
+   "s": 64.6
+  },
+  "178": {
+   "pairs": 1828,
+   "evals": 35249,
+   "group_evals": 2014,
+   "s": 61.4
+  },
+  "179": {
+   "pairs": 1832,
+   "evals": 35235,
+   "group_evals": 2014,
+   "s": 60.9
+  },
+  "180": {
+   "pairs": 1839,
+   "evals": 32895,
+   "group_evals": 2003,
+   "s": 61.1
+  }
+ },
+ "curved_closing": {
+  "n": 160,
+  "gap": 0.06
+ },
+ "panels": 187,
+ "pins": 640,
+ "restricted_to": null,
+ "all_gates_passed": true
+}

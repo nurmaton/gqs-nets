@@ -20,6 +20,7 @@ that builds and moves the flexible m × n nets, and the data and checks of three
 | `gqs.py` | Python tool: assembles a flexible m × n net from 3 × 3 GQS-nets, shows its flexion with a slider, double-checks the proved properties numerically, tests the net for self-intersections, and exports pictures (PNG) and meshes (OBJ). |
 | `parameters.txt` | The settings of `gqs.py` for the nets shown in the paper (the digits 2026, the letters G, Q, S, and the animals) and how to reproduce each picture. |
 | `Application/` | Three transportable arch halls built from these nets: net data, checks of sizes, clear height, panels, mobility, and snow load (CalculiX), figures, and renderings; see [`Application/README.md`](Application/README.md). |
+| `Prototype/` | A 1:20 physical model of the arch hall (ii) that folds by hand: print files for the Bambu Lab H2C, a 3D assembly guide, and a collision check of the printed parts along the motion; see [`Prototype/README.md`](Prototype/README.md). |
 
 ## Requirements and use
 
