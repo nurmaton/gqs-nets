@@ -1,0 +1,12 @@
+closing_ring_band          min 0.0600 mm at state 150 (th 74.50) gate 0.06 PASS   9-1:body/body | 10-1:ring/knB  h299
+closing_ring_body_radial   min 0.4000 mm at state  86 (th 90.50) gate 0.4 PASS   0-13:body/body | 1-13:ring/knB  h26
+closing_ring_ring          min 0.0600 mm at state  20 (th 107.00) gate 0.06 PASS   9-1:ring/knA | 10-1:ring/knB  h299
+nonpartner                 min 1.6683 mm at state 180 (th 71.00) gate 0.45 PASS   9-14:ring/knA | 10-13:body/foot  hNone
+partner_body_body          min 0.5091 mm at state 180 (th 71.00) gate 0.45 PASS   4-9:body/foot | 4-10:body/foot  h151
+partner_ring_body_axial    min 0.0500 mm at state 103 (th 86.25) gate 0.0 PASS   10-8:ring/knA | 10-9:body/body  h338
+partner_ring_body_radial   min 0.4000 mm at state 103 (th 86.25) gate 0.4 PASS   10-15:ring/knA | 10-16:body/body  h345
+partner_ring_ring          min 0.0500 mm at state 103 (th 86.25) gate 0.0 PASS   10-8:ring/knA | 10-9:ring/knB  h338
+pin                        min 0.3000 mm at state  42 (th 101.50) gate 0.3 PASS   9-15:pin/head | 9-16:body/body  h328
+pin_shank_partner          min 0.2500 mm at state 103 (th 86.25) gate None info   10-15:pin/shank | 10-16:body/body  h345
+ring_other_hinge           min 1.6681 mm at state 180 (th 71.00) gate 0.4 PASS   1-6:ring/knA | 1-7:body/foot  h46
+all gates passed: True  states 181  3461 s wall, 27088 s CPU
