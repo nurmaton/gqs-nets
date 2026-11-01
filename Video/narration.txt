@@ -31,7 +31,7 @@ Now, let's discuss flexible m by n nets.
 To build one from three by three nets, neighbouring subnets must share flat angles, fit together, and move compatibly.
 The simplest GQS-nets we found overcome all three.
 They come in four kinds: the four flat angles at one vertex fix all sixteen, and every other angle equals one of them, or its complement to pi.
-Take any combination, one kind for each row, and you get flexible m by n nets of any size, with their whole motion in closed form.
+Take any combination, one kind for each row, and you get flexible m by n nets of any size, with their motion in closed form.
 As an example, let's build a six by six flexible net.
 Take kind (c) for the first row, (a) for the second, (d) for the third, and (b) for the fourth.
 Using the simplest GQS-nets, we build other examples: letters, from five by twelve nets, digits, from six by fourteen nets, and, from six by sixty nets, the approximate side silhouettes of the Stanford bunny and of Blub the fish.
