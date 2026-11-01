@@ -13,8 +13,8 @@ Constructive Approach to the Equimodular Elliptic Type and to Flexible m × n Ne
 
 | File | Content |
 |---|---|
-| [`helper.nb`](helper.nb) | Mathematica notebook that verifies the symbolic computations of the proofs |
-| [`ehelper.nb`](ehelper.nb) | Mathematica notebook that verifies the computations behind the $`m \times n`$ nets |
+| [`helper.nb`](helper.nb) ([PDF](helper.pdf)) | Mathematica notebook that verifies the symbolic computations of the proofs |
+| [`ehelper.nb`](ehelper.nb) ([PDF](ehelper.pdf)) | Mathematica notebook that verifies the computations behind the $`m \times n`$ nets |
 | [`gqs.py`](gqs.py) | Python tool that constructs $`m \times n`$ nets, shows their motion, and checks them numerically |
 | [`parameters.txt`](parameters.txt) | `gqs.py` settings for the digits, letters, and animals |
 | [`Application/`](Application/README.md) | Three transportable arch halls built from these nets |
@@ -23,7 +23,7 @@ Constructive Approach to the Equimodular Elliptic Type and to Flexible m × n Ne
 
 ## Requirements and use
 
-**Notebooks:** written with Mathematica 14.0.
+**Notebooks:** written with Mathematica 14.0; the PDF copies show them with their results.
 
 **gqs.py:** Python 3 with numpy 1.20 or newer and matplotlib 3.7 or newer.
 
