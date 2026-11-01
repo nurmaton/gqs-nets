@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use these files, please cite them as below."
+type: software
+title: "Generalized Quasi-Symmetric Nets: A Constructive Approach to the Equimodular Elliptic Type and to Flexible m × n Nets: Notebooks, code, data, and video"
+authors:
+  - family-names: Nurmatov
+    given-names: Abdukhomid
+  - family-names: Rist
+    given-names: Florian
+  - family-names: Klein
+    given-names: Jonathan
+  - family-names: Michels
+    given-names: Dominik L.
+license: MIT
+repository-code: "https://github.com/nurmaton/gqs-nets"
+version: "1.0"

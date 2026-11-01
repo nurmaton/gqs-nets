@@ -1,5 +1,7 @@
 # Generalized quasi-symmetric nets (GQS-nets): notebooks, code, data, and video
 
+A. Nurmatov, F. Rist, J. Klein, and D. L. Michels
+
 This repository holds the notebooks, code, data, and video of the paper *Generalized Quasi-Symmetric Nets: A
 Constructive Approach to the Equimodular Elliptic Type and to Flexible m × n Nets*.
 
@@ -39,14 +41,11 @@ sh Application/run_quick.sh
 
 ## AI assistance
 
-The code was written or revised with the assistance of the Claude models Opus 5.5, Fable 5, and Fable 5.1 (Anthropic).
+The code was written or revised with the assistance of the Claude models Opus 5, Opus 5.5, Fable 5, and Fable 5.1 (Anthropic).
 The files of `Prototype/` and the video were made with the assistance of the Claude model Opus 5.5 (Anthropic), and the
 narration of the video was generated with Gemini 3.8 Flash TTS (Google). The authors checked all files.
 
 ## License
 
-The repository is licensed under the MIT License; see [`LICENSE`](LICENSE).
-
-## Citation
-
-*To be added after publication.*
+The repository is licensed under the MIT License; see [`LICENSE`](LICENSE). The third-party material in the video (clips,
+images, and the KAUST symbol) keeps its own terms, as credited in the video.
