@@ -1,6 +1,6 @@
 # Application: every file with its size (bytes) and md5; 247 files, 77.7 MB in all (MANIFEST.txt itself not listed)
 # file                                                                bytes  md5
-README.md                                                              9664  f23c30d4e59f0228fa5cd97997ade65f
+README.md                                                              9664  63bc92e7307a23d7278bd90868988380
 checks/check_clear_height.py                                           4366  35743d55e97ca4cf373a69d2289ddfb8
 checks/check_dimensions.py                                            11503  a4f6ea8a4fdb6c281c0e6213fc2993f0
 checks/check_exchange.py                                               3502  b8c286586b497e1f0735561840842008
@@ -226,7 +226,7 @@ figures/snow_data/hall_iii_V1.npz                                   1197034  c5b
 figures/snow_data/hall_iii_V3.json                                     1058  a1fed8416c1cec523a65adbd86e9c7bc
 figures/snow_data/hall_iii_V3.npz                                   1192889  f8fe8518ef94288982dd8f1381c7f78e
 figures/tikzlabels.py                                                  9032  1e8c318d401ddc077caa1c921ae3492a
-halls.py                                                               9361  836bbdd48c47c03f269d10a555516d1a
+halls.py                                                               9361  95f891b722c53106df716ea70be69742
 renderings/anchors/hall_i_two.points.json                              8717  8f95d7b3ab3163e479ae6f168519dc38
 renderings/anchors/hall_ii_two.points.json                             8778  fc4e3ca7c55c2731bd01f49dbc65459b
 renderings/anchors/hall_iii_two.points.json                            8840  0132615aa8c94af8b06f0b56bdbec4db

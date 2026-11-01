@@ -8,7 +8,7 @@ values in the paper. `MANIFEST.txt` lists every file with its size and md5.
 | Requirement | Version used | Needed for |
 |---|---|---|
 | Python 3 with numpy, scipy, matplotlib | Python 3.11, numpy 2.3.4, scipy 1.16.3, matplotlib 3.10.7 | Everything |
-| `../gqs.py` | md5 `6bb96fa70b663d6d995bf6eba5d7d96d` | Building the nets (`checks/`) |
+| `../gqs.py` | md5 `8f4661f1c6e4529e2c6cb6f6588e6b85` | Building the nets (`checks/`) |
 | CalculiX `ccx` 2.23 | 2.23 | FE runs (optional) |
 | Blender 5.x | 5.2.1 | Renderings (optional) |
 | pillow | Any | The artefact scan of rendered images |
