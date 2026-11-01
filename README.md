@@ -13,13 +13,13 @@ Constructive Approach to the Equimodular Elliptic Type and to Flexible m × n Ne
 
 | File | Content |
 |---|---|
-| `helper.nb` | Mathematica notebook that verifies the symbolic computations of the proofs |
-| `ehelper.nb` | Mathematica notebook that verifies the computations behind the $`m \times n`$ nets |
-| `gqs.py` | Python tool that constructs $`m \times n`$ nets, shows their motion, and checks them numerically |
-| `parameters.txt` | `gqs.py` settings for the digits, letters, and animals |
+| [`helper.nb`](helper.nb) | Mathematica notebook that verifies the symbolic computations of the proofs |
+| [`ehelper.nb`](ehelper.nb) | Mathematica notebook that verifies the computations behind the $`m \times n`$ nets |
+| [`gqs.py`](gqs.py) | Python tool that constructs $`m \times n`$ nets, shows their motion, and checks them numerically |
+| [`parameters.txt`](parameters.txt) | `gqs.py` settings for the digits, letters, and animals |
 | [`Application/`](Application/README.md) | Three transportable arch halls built from these nets |
 | [`Prototype/`](Prototype/README.md) | A 1:20 physical model of the arch hall (ii) that folds by hand |
-| `Video/` | The video (`gqs.mp4`) and its narration (`narration.txt`) |
+| [`Video/`](Video/README.md) | The video (`gqs.mp4`) and its narration (`narration.txt`) |
 
 ## Requirements and use
 
@@ -47,5 +47,5 @@ narration of the video was generated with Gemini 3.8 Flash TTS (Google). The aut
 
 ## License
 
-The repository is licensed under the MIT License; see [`LICENSE`](LICENSE). The third-party material in the video (clips,
-images, and the KAUST symbol) keeps its own terms, as credited in the video.
+The repository is licensed under the MIT License; see [`LICENSE`](LICENSE). The third-party material in the video keeps its own
+terms; see [`Video/README.md`](Video/README.md).

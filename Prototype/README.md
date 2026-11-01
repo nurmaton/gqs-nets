@@ -8,8 +8,8 @@ and the drive of the hall.
 
 | File | Content |
 |---|---|
-| `assembly_guide.html` | The 3D assembly guide |
-| `print_files/` | 17 print files for the Bambu Lab H2C |
+| [`assembly_guide.html`](https://nurmaton.github.io/gqs-nets/Prototype/assembly_guide.html) | The 3D assembly guide |
+| [`print_files/`](print_files/) | 17 print files for the Bambu Lab H2C |
 | [`checks/`](checks/README.md) | The collision check of the printed parts along the motion |
 
 ## Printing
