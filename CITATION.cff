@@ -14,6 +14,7 @@ authors:
 license: MIT
 repository-code: "https://github.com/nurmaton/gqs-nets"
 version: "1.0"
+doi: 10.5281/zenodo.23862766
 date-released: "2026-11-01"
 abstract: >-
   The notebooks, code, data, and video of the paper "Generalized Quasi-Symmetric Nets: A Constructive Approach

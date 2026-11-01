@@ -2,6 +2,8 @@
 
 A. Nurmatov, F. Rist, J. Klein, and D. L. Michels
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23862766.svg)](https://doi.org/10.5281/zenodo.23862766)
+
 This repository holds the notebooks, code, data, and video of the paper *Generalized Quasi-Symmetric Nets: A
 Constructive Approach to the Equimodular Elliptic Type and to Flexible m × n Nets*.
 
