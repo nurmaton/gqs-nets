@@ -1,0 +1,44 @@
+Generalized quasi-symmetric nets.
+Solar arrays that unfold in space, origami that folds, metamaterials that change their shape, and many other examples: all move while their faces stay rigid, and are useful in transformable architecture, rigid-foldable origami, and mechanical metamaterials.
+Consider an m by n mesh, which we call an m by n net.
+It turns out that an m by n net with no two coplanar adjacent faces is flexible if all of its three by three subnets are flexible.
+For example, this seven by five net has fifteen of them.
+So the three by three subnets are the building elements of flexible nets.
+Take one of them.
+Its four corner points do not affect flexibility, so we leave them out.
+What remains is called a Kokotsakis polyhedron with a quadrangular base.
+It is made of a central quadrilateral, the base, one quadrilateral attached to each of its sides, and one triangle between every two neighbouring quadrilaterals.
+Now look at its sixteen flat angles, the face angles at the four base vertices.
+Izmestiev classified the flexible ones into eight classes.
+The classes split further into subclasses, given by equations on these angles; the equimodular class, for example, into elliptic and conic.
+In this paper, we study the equimodular elliptic type.
+Izmestiev's classification, though, leaves three questions open.
+First, does every subclass really contain a flexible polyhedron?
+Second, do its flat angles always give a real polyhedron that flexes?
+And third, does it contain polyhedra without self-intersections?
+For this type, Nurmatov and colleagues answered the first one, with a flexible example that belongs exclusively to it.
+We answer the second: any flat angles of this type give a flexible polyhedron, with its flexion in closed form.
+For the third, our Python tool checks numerically that the examples we provide move without self-intersections; however, a rigorous mathematical proof is still to be worked out.
+Izmestiev defines the type by three conditions on the flat angles whose signed sums at each vertex are not zero modulo two pi.
+Conditions are: equal moduli, matching amplitudes, and a condition on phase shifts, written with Jacobi elliptic functions.
+In this paper, we rewrite all three in equivalent forms: the equations of the first two are replaced with simpler ones, and the third becomes a single algebraic condition, free of elliptic functions.
+So now, elementary algebra alone decides whether given flat angles have the type.
+The algebraic form of the third condition also shows where new polyhedra of this type come from.
+If the flat angles satisfy certain simple relations, the third condition is satisfied automatically.
+We call these polyhedra generalized quasi-symmetric nets, or GQS-nets.
+They all have the equimodular elliptic type, and the elliptic quasi-symmetric nets are among them.
+Now, let's discuss flexible m by n nets.
+To build one from three by three nets, neighbouring subnets must share flat angles, fit together, and move compatibly.
+The simplest GQS-nets we found overcome all three.
+They come in four kinds: the four flat angles at one vertex fix all sixteen, and every other angle equals one of them, or its complement to pi.
+Take any combination, one kind for each row, and you get flexible m by n nets of any size, with their whole motion in closed form.
+As an example, let's build a six by six flexible net.
+Take kind (c) for the first row, (a) for the second, (d) for the third, and (b) for the fourth.
+Using the simplest GQS-nets, we build other examples: letters, from five by twelve nets, digits, from six by fourteen nets, and, from six by sixty nets, the approximate side silhouettes of the Stanford bunny and of Blub the fish.
+As an application, we design three transportable arch halls.
+Each is shipped narrow, in a container or on a low trailer, and expanded on site.
+We also printed a one to twenty model of the second hall: one hundred and eighty-seven faces, joined by six hundred and forty printed pins.
+It folds by hand into a nearly closed loop, like the transport position, and opens again.
+Generalized quasi-symmetric nets.
+From just four flat angles to flexible m by n nets.
+Thank you for watching.

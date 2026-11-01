@@ -1,15 +1,16 @@
-# Generalized quasi-symmetric nets (GQS-nets): notebooks, code, and data
+# Generalized quasi-symmetric nets (GQS-nets): notebooks, code, data, and video
 
 For the paper *Generalized Quasi-Symmetric Nets: A Constructive Approach to the Equimodular
 Elliptic Type and to Flexible m × n Nets*: Mathematica notebooks that verify the symbolic computations, a Python tool
-that builds and moves the flexible m × n nets, and the data and checks of three transportable arch halls.
+that builds and moves the flexible m × n nets, the data and checks of three transportable arch halls, and a short video
+that summarizes the paper.
 
 ## Video
 
-*Coming soon.*
+[![Video](Video/thumbnail.png)](https://nurmaton.github.io/gqs-nets/Video/gqs.mp4)
 
-<!-- Placeholder for the video: replace the line above, for example by a thumbnail linked to the video:
-[![Video](video-thumbnail.png)](https://VIDEO-LINK) -->
+A 4:50 video that summarizes the paper and shows the nets and the physical model in motion
+([`Video/gqs.mp4`](Video/gqs.mp4)); its narration as text: [`Video/narration.txt`](Video/narration.txt).
 
 ## Contents
 
@@ -21,6 +22,7 @@ that builds and moves the flexible m × n nets, and the data and checks of three
 | `parameters.txt` | The settings of `gqs.py` for the nets shown in the paper (the digits 2026, the letters G, Q, S, and the animals) and how to reproduce each picture. |
 | `Application/` | Three transportable arch halls built from these nets: net data, checks of sizes, clear height, panels, mobility, and snow load (CalculiX), figures, and renderings; see [`Application/README.md`](Application/README.md). |
 | `Prototype/` | A 1:20 physical model of the arch hall (ii) that folds by hand: print files for the Bambu Lab H2C, a 3D assembly guide, and a collision check of the printed parts along the motion; see [`Prototype/README.md`](Prototype/README.md). |
+| `Video/` | A 4:50 video that summarizes the paper and shows the nets and the physical model in motion (`gqs.mp4`, 42 MB), and its narration as text (`narration.txt`). |
 
 ## Requirements and use
 
