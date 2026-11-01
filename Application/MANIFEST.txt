@@ -1,10 +1,10 @@
 # Application: every file with its size (bytes) and md5; 247 files, 77.7 MB in all (MANIFEST.txt itself not listed)
 # file                                                                bytes  md5
-README.md                                                             36190  3fd68e6e2d4ede401c51be6698da15e2
+README.md                                                              9664  f23c30d4e59f0228fa5cd97997ade65f
 checks/check_clear_height.py                                           4366  35743d55e97ca4cf373a69d2289ddfb8
 checks/check_dimensions.py                                            11503  a4f6ea8a4fdb6c281c0e6213fc2993f0
 checks/check_exchange.py                                               3502  b8c286586b497e1f0735561840842008
-checks/check_mobility.py                                               8620  442659b6cbdc63aadc847a66aa4b4414
+checks/check_mobility.py                                               8620  9cd6ec8f4c2c98c5f41ddddefcc7c4bc
 checks/check_nets.py                                                   8941  e7a58ecc9c70856f7e5792f881284b54
 checks/check_panels.py                                                18672  c190d84e4196857a7dbe81801365f328
 checks/compare.py                                                      3196  9f74ac426b682fbb1be2527aaab9b40a

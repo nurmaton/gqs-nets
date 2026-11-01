@@ -1,50 +1,51 @@
 # Generalized quasi-symmetric nets (GQS-nets): notebooks, code, data, and video
 
-For the paper *Generalized Quasi-Symmetric Nets: A Constructive Approach to the Equimodular
-Elliptic Type and to Flexible m × n Nets*: Mathematica notebooks that verify the symbolic computations, a Python tool
-that builds and moves the flexible m × n nets, the data and checks of three transportable arch halls, and a short video
-that summarizes the paper.
+This repository holds the notebooks, code, data, and video of the paper *Generalized Quasi-Symmetric Nets: A
+Constructive Approach to the Equimodular Elliptic Type and to Flexible m × n Nets*.
 
 ## Video
 
 [![Video](Video/thumbnail.png)](https://nurmaton.github.io/gqs-nets/Video/gqs.mp4)
 
-A 4:50 video that summarizes the paper and shows the nets and the physical model in motion
-([`Video/gqs.mp4`](Video/gqs.mp4)); its narration as text: [`Video/narration.txt`](Video/narration.txt).
-
 ## Contents
 
 | File | Content |
 |---|---|
-| `helper.nb` | Mathematica notebook: verifies the symbolic computations of the proofs; the paper cites each section where it is used. |
-| `ehelper.nb` | Mathematica notebook: verifies the computations behind the construction of the m × n nets and their examples; the paper cites each section where it is used. |
-| `gqs.py` | Python tool: assembles a flexible m × n net from 3 × 3 GQS-nets, shows its flexion with a slider, double-checks the proved properties numerically, tests the net for self-intersections, and exports pictures (PNG) and meshes (OBJ). |
-| `parameters.txt` | The settings of `gqs.py` for the nets shown in the paper (the digits 2026, the letters G, Q, S, and the animals) and how to reproduce each picture. |
-| `Application/` | Three transportable arch halls built from these nets: net data, checks of sizes, clear height, panels, mobility, and snow load (CalculiX), figures, and renderings; see [`Application/README.md`](Application/README.md). |
-| `Prototype/` | A 1:20 physical model of the arch hall (ii) that folds by hand: print files for the Bambu Lab H2C, a 3D assembly guide, and a collision check of the printed parts along the motion; see [`Prototype/README.md`](Prototype/README.md). |
-| `Video/` | A 4:50 video that summarizes the paper and shows the nets and the physical model in motion (`gqs.mp4`, 42 MB), and its narration as text (`narration.txt`). |
+| `helper.nb` | Mathematica notebook that verifies the symbolic computations of the proofs |
+| `ehelper.nb` | Mathematica notebook that verifies the computations behind the $`m \times n`$ nets |
+| `gqs.py` | Python tool that constructs $`m \times n`$ nets, shows their motion, and checks them numerically |
+| `parameters.txt` | `gqs.py` settings for the digits, letters, and animals |
+| [`Application/`](Application/README.md) | Three transportable arch halls built from these nets |
+| [`Prototype/`](Prototype/README.md) | A 1:20 physical model of the arch hall (ii) that folds by hand |
+| `Video/` | The video (`gqs.mp4`) and its narration (`narration.txt`) |
 
 ## Requirements and use
 
-- **Notebooks:** written with Mathematica 14.0; open a notebook and evaluate it.
-- **gqs.py:** Python 3 with numpy 1.20 or newer and matplotlib 3.7 or newer.
-  ```
-  python3 gqs.py
-  ```
-  opens the interactive window; `python3 gqs.py --frames` saves six frames of the flexion without a window, and
-  `python3 gqs.py --help` lists the options.
-- **Application:** Python 3 with numpy, scipy, and matplotlib; CalculiX and Blender for some of the checks.
-  ```
-  sh Application/run_quick.sh
-  ```
-  runs all fast checks, writes PASS, FAIL, or SKIP for every checked quantity to `Application/out/compare.txt`, and
-  prints the failed and skipped quantities and the totals; versions, run times, and the longer runs are described in
-  [`Application/README.md`](Application/README.md).
+**Notebooks:** written with Mathematica 14.0.
 
-## Note
+**gqs.py:** Python 3 with numpy 1.20 or newer and matplotlib 3.7 or newer.
 
-The code was written or revised with the assistance of the Claude models Opus 5.5, Fable 5, and Fable 5.1 (Anthropic);
-all code was checked by the authors.
+```
+python3 gqs.py            # opens the interactive window
+python3 gqs.py --frames   # saves six frames of the flexion without a window
+python3 gqs.py --help     # lists the options
+```
+
+**Application:** Python 3 with numpy, scipy, and matplotlib; optionally CalculiX and Blender.
+
+```
+sh Application/run_quick.sh
+```
+
+## AI assistance
+
+The code was written or revised with the assistance of the Claude models Opus 5.5, Fable 5, and Fable 5.1 (Anthropic).
+The files of `Prototype/` and the video were made with the assistance of the Claude model Opus 5.5 (Anthropic), and the
+narration of the video was generated with Gemini 3.8 Flash TTS (Google). The authors checked all files.
+
+## License
+
+The repository is licensed under the MIT License; see [`LICENSE`](LICENSE).
 
 ## Citation
 
