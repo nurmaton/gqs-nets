@@ -14,3 +14,10 @@ authors:
 license: MIT
 repository-code: "https://github.com/nurmaton/gqs-nets"
 version: "1.0"
+date-released: "2026-11-01"
+abstract: >-
+  The notebooks, code, data, and video of the paper "Generalized Quasi-Symmetric Nets: A Constructive Approach
+  to the Equimodular Elliptic Type and to Flexible m × n Nets": Mathematica notebooks that verify its
+  computations; the Python tool gqs.py that constructs m × n nets, shows their motion, and checks them
+  numerically; three transportable arch halls built from these nets; a 1:20 physical model of one of them; and a
+  short video.
